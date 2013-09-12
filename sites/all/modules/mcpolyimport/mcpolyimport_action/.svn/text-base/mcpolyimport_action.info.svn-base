@@ -1,6 +1,0 @@
-name = Import action
-description = Provide actions for Import.
-dependencies[] = mcpolyimport
-dependencies[] = trigger
-package = Import
-core = 7.x

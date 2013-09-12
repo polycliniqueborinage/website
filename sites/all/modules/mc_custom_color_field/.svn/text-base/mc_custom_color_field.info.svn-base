@@ -1,5 +1,0 @@
-name = MC Field Color
-description = MC Field Color
-package = MC Custom
-core = 7.x
-files[] = mc_custom_color_field.test

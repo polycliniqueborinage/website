@@ -1,9 +1,0 @@
-.reminder-full {
-	
-}
-
-.reminder-full div {
-    float: left;
-    clear: none!important;
-    padding: 0 10px;
-}
