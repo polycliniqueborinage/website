@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/commerce_epayment
+END
+LICENSE.txt
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/commerce_epayment/LICENSE.txt
+END
+commerce_epayment.module
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/commerce_epayment/commerce_epayment.module
+END
+commerce_epayment.install
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/commerce_epayment/commerce_epayment.install
+END
+commerce_epayment.hash.inc
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/commerce_epayment/commerce_epayment.hash.inc
+END
+commerce_epayment.info
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/commerce_epayment/commerce_epayment.info
+END
+commerce_epayment.api.php
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/commerce_epayment/commerce_epayment.api.php
+END
+README.txt
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/commerce_epayment/README.txt
+END

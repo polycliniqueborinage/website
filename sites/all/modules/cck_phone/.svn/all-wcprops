@@ -1,0 +1,65 @@
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/cck_phone
+END
+LICENSE.txt
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/cck_phone/LICENSE.txt
+END
+cck_phone.css
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/cck_phone/cck_phone.css
+END
+cck_phone.token.inc
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/cck_phone/cck_phone.token.inc
+END
+cck_phone_countrycodes.inc
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/cck_phone/cck_phone_countrycodes.inc
+END
+cck_phone.info
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/cck_phone/cck_phone.info
+END
+README.int.txt
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/cck_phone/README.int.txt
+END
+cck_phone.js
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/cck_phone/cck_phone.js
+END
+README.txt
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/cck_phone/README.txt
+END
+cck_phone.module
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/cck_phone/cck_phone.module
+END
+cck_phone.install
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/cck_phone/cck_phone.install
+END

@@ -1,0 +1,77 @@
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/twilio/OpenVBX/views/layout/dialer
+END
+content_main.php
+K 25
+svn:wc:ra_dav:version-url
+V 136
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/twilio/OpenVBX/views/layout/dialer/content_main.php
+END
+footer.php
+K 25
+svn:wc:ra_dav:version-url
+V 130
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/twilio/OpenVBX/views/layout/dialer/footer.php
+END
+wrapper_footer.php
+K 25
+svn:wc:ra_dav:version-url
+V 138
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/twilio/OpenVBX/views/layout/dialer/wrapper_footer.php
+END
+content_header.php
+K 25
+svn:wc:ra_dav:version-url
+V 138
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/twilio/OpenVBX/views/layout/dialer/content_header.php
+END
+content_sidebar.php
+K 25
+svn:wc:ra_dav:version-url
+V 139
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/twilio/OpenVBX/views/layout/dialer/content_sidebar.php
+END
+analytics.php
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/twilio/OpenVBX/views/layout/dialer/analytics.php
+END
+utility_menu.php
+K 25
+svn:wc:ra_dav:version-url
+V 136
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/twilio/OpenVBX/views/layout/dialer/utility_menu.php
+END
+content_footer.php
+K 25
+svn:wc:ra_dav:version-url
+V 138
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/twilio/OpenVBX/views/layout/dialer/content_footer.php
+END
+context_menu.php
+K 25
+svn:wc:ra_dav:version-url
+V 136
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/twilio/OpenVBX/views/layout/dialer/context_menu.php
+END
+error_dialog.php
+K 25
+svn:wc:ra_dav:version-url
+V 136
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/twilio/OpenVBX/views/layout/dialer/error_dialog.php
+END
+header.php
+K 25
+svn:wc:ra_dav:version-url
+V 130
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/twilio/OpenVBX/views/layout/dialer/header.php
+END
+wrapper_header.php
+K 25
+svn:wc:ra_dav:version-url
+V 138
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/twilio/OpenVBX/views/layout/dialer/wrapper_header.php
+END

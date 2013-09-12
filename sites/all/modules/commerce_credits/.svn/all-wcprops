@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/commerce_credits
+END
+LICENSE.txt
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/commerce_credits/LICENSE.txt
+END
+commerce_credits.info
+K 25
+svn:wc:ra_dav:version-url
+V 123
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/commerce_credits/commerce_credits.info
+END
+commerce_credits.admin.inc
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/commerce_credits/commerce_credits.admin.inc
+END
+commerce_credits.rules.inc
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/commerce_credits/commerce_credits.rules.inc
+END
+commerce_credits.module
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/commerce_credits/commerce_credits.module
+END
+commerce_credits.install
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/commerce_credits/commerce_credits.install
+END
+commerce_credits.user.inc
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/commerce_credits/commerce_credits.user.inc
+END
+commerce_credits.pages.inc
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/commerce_credits/commerce_credits.pages.inc
+END

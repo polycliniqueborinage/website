@@ -1,0 +1,113 @@
+<div<?php print $attributes; ?>>
+  <div<?php print $content_attributes; ?>>
+    
+    <nav class="navigation">
+  		
+  		<ul id="top-menu">
+  			<li class="phone"><span>+32 (0)65 663989</span></li>
+  			<li class="mail"><a href="#" class="contact">Contact</a></li>
+  			<li class="appointement"><a href="#" class="online">Rendez-vous</a></li>
+  			<li class="computer"><a href="#" class="intranet">Intranet</a></li>
+     	</ul>
+     	
+    </nav>
+  
+    <nav class="navigation">
+    
+		<ul id="menu">
+    	
+			<li class="menu_right"><a href="/doctors-list" class="drop">Nos Sp&eacute;cialistes</a>
+			</li>
+
+			<li class="menu_right"><a href="#" class="drop">Contacts</a>
+				<div class="dropdown_1column align_right">
+        	        <div class="col_1">
+            	        <ul class="simple">
+                	        <li><a href="#">Information utiles</a></li>
+                    	</ul>   
+                   	</div>
+				</div>
+        	</li>
+        	
+        	<li class="menu_right"><a href="/node/30" class="drop">Services</a>
+            	<div class="dropdown_4columns align_right"><!-- Begin 3 columns container -->
+                	<div class="col_4">
+                      <h2>Nos services</h2>
+                  	</div>
+                  	<div class="col_1">
+                      	<ul class="greybox">
+                          <li><a href="/node/33">Dentisterie</a></li>
+                      	</ul>   
+                  	</div>
+                  	<div class="col_1">
+                      	<ul class="greybox">
+                          <li><a href="#">Radiologie</a></li>
+                      	</ul>   
+                  	</div>
+                  	<div class="col_1">
+                      	<ul class="greybox">
+                          <li><a href="#">Cardiologie</a></li>
+                      	</ul>   
+                  	</div>
+                  	<div class="col_1">
+                      	<ul class="greybox">
+                          <li><a href="#">Pneumologie</a></li>
+                      	</ul>   
+                  	</div>
+            	</div>
+          	</li>
+		    
+		    <li><a href="#" class="drop">Patients</a><!-- Begin 4 columns Item -->
+				<div class="dropdown_3columns"><!-- Begin 4 columns container -->
+            		<div class="col_3">
+                		<h2>Information Utiles</h2>
+            		</div>
+            		<div class="col_1">
+						<h3>Preparations</h3>
+                		<ul>
+                    		<li><a href="#">1</a></li>
+                		</ul>   
+                 	</div>
+    				<div class="col_1">
+                		<h3>Durant votre visite</h3>
+               	 	<ul>
+                    	<li><a href="#">2</a></li>
+                	</ul>   
+            		</div>
+    				<div class="col_1">
+            			<h3>Apres votre visite</h3>
+						<ul>
+                    		<li><a href="#">3</a></li>
+                		</ul>   
+                 	</div>
+    			</div><!-- End 4 columns container -->
+    		</li><!-- End 4 columns Item -->
+
+			<li><a href="#" class="drop">Votre Polyclinique</a><!-- Begin 5 columns Item -->
+        		<div class="dropdown_5columns"><!-- Begin 5 columns container -->
+                  	<div class="col_5">
+                    	<h2>Votre Polyclinique</h2>
+                  	</div>
+                    <div class="col_2">
+                		<ul>
+                    		<li><a href="#">1</a></li>
+                		</ul>   
+                		<ul>
+                    		<li><a href="#">1</a></li>
+                		</ul>   
+                		<ul>
+                    		<li><a href="#">1</a></li>
+                		</ul>   
+                    </div>
+                    <div class="col_3">
+                        <p class="black_box">This is a black box, you can use it to highligh some content. Sed sed lacus nulla, et lacinia risus. Phasellus vitae sapien ac leo mollis porta quis sit amet nisi. Mauris hendrerit, metus cursus accumsan tincidunt.Quisque vestibulum nisi non nunc blandit placerat. Mauris facilisis, risus ut lobortis posuere, diam lacus congue lorem, ut condimentum ligula est vel orci. Donec interdum lacus at velit varius gravida. Nulla ipsum risus.</p>
+                    </div>
+        		</div><!-- End 5 columns container -->
+			</li><!-- End 5 columns Item -->        	
+
+		</ul>
+    </nav>
+    
+    <?php print $content; ?>
+  </div>
+</div>

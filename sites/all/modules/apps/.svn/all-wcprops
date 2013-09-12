@@ -1,0 +1,65 @@
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/apps
+END
+LICENSE.txt
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/apps/LICENSE.txt
+END
+apps.manifest.inc
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/apps/apps.manifest.inc
+END
+apps.api.php
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/apps/apps.api.php
+END
+apps.test
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/apps/apps.test
+END
+apps.installer.inc
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/apps/apps.installer.inc
+END
+apps.module
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/apps/apps.module
+END
+apps.pages.inc
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/apps/apps.pages.inc
+END
+apps.info
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/apps/apps.info
+END
+apps.register.inc
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/apps/apps.register.inc
+END
+apps.updater.inc
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/apps/apps.updater.inc
+END

@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 123
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/smsframework/modules/sms_email_gateway
+END
+sms_email_gateway.info
+K 25
+svn:wc:ra_dav:version-url
+V 146
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/smsframework/modules/sms_email_gateway/sms_email_gateway.info
+END
+sms_email_gateway.module
+K 25
+svn:wc:ra_dav:version-url
+V 148
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/smsframework/modules/sms_email_gateway/sms_email_gateway.module
+END

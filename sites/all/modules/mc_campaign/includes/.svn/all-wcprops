@@ -1,0 +1,161 @@
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/mc_campaign/includes
+END
+mc_campaign.list.inc
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/mc_campaign/includes/mc_campaign.list.inc
+END
+mc_campaign.admin.notification.inc
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/mc_campaign/includes/mc_campaign.admin.notification.inc
+END
+mc_campaign.online_calendar.inc
+K 25
+svn:wc:ra_dav:version-url
+V 137
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/mc_campaign/includes/mc_campaign.online_calendar.inc
+END
+mc_campaign.admin.dashboard.inc
+K 25
+svn:wc:ra_dav:version-url
+V 137
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/mc_campaign/includes/mc_campaign.admin.dashboard.inc
+END
+mc_campaign.user.inc
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/mc_campaign/includes/mc_campaign.user.inc
+END
+mc_campaign.billing.inc
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/mc_campaign/includes/mc_campaign.billing.inc
+END
+mc_campaign.mail.inc
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/mc_campaign/includes/mc_campaign.mail.inc
+END
+mc_campaign.admin.letter.inc
+K 25
+svn:wc:ra_dav:version-url
+V 134
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/mc_campaign/includes/mc_campaign.admin.letter.inc
+END
+mc_campaign.notification.inc
+K 25
+svn:wc:ra_dav:version-url
+V 134
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/mc_campaign/includes/mc_campaign.notification.inc
+END
+mc_campaign.api.php
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/mc_campaign/includes/mc_campaign.api.php
+END
+mc_campaign.dashboard.inc
+K 25
+svn:wc:ra_dav:version-url
+V 131
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/mc_campaign/includes/mc_campaign.dashboard.inc
+END
+mc_campaign.admin.sms.inc
+K 25
+svn:wc:ra_dav:version-url
+V 131
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/mc_campaign/includes/mc_campaign.admin.sms.inc
+END
+mc_campaign.admin.subscriber.inc
+K 25
+svn:wc:ra_dav:version-url
+V 138
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/mc_campaign/includes/mc_campaign.admin.subscriber.inc
+END
+mc_campaign.admin.config.inc
+K 25
+svn:wc:ra_dav:version-url
+V 134
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/mc_campaign/includes/mc_campaign.admin.config.inc
+END
+mc_campaign.admin.calendar.inc
+K 25
+svn:wc:ra_dav:version-url
+V 136
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/mc_campaign/includes/mc_campaign.admin.calendar.inc
+END
+mc_campaign.admin.credit.inc
+K 25
+svn:wc:ra_dav:version-url
+V 134
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/mc_campaign/includes/mc_campaign.admin.credit.inc
+END
+mc_campaign.admin.template.inc
+K 25
+svn:wc:ra_dav:version-url
+V 136
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/mc_campaign/includes/mc_campaign.admin.template.inc
+END
+mc_campaign.admin.list.inc
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/mc_campaign/includes/mc_campaign.admin.list.inc
+END
+mc_campaign.admin.quick.inc
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/mc_campaign/includes/mc_campaign.admin.quick.inc
+END
+mc_campaign.subscriber.inc
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/mc_campaign/includes/mc_campaign.subscriber.inc
+END
+mc_campaign.admin.user.inc
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/mc_campaign/includes/mc_campaign.admin.user.inc
+END
+mc_campaign.reminder.inc
+K 25
+svn:wc:ra_dav:version-url
+V 130
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/mc_campaign/includes/mc_campaign.reminder.inc
+END
+mc_campaign.admin.campaign.inc
+K 25
+svn:wc:ra_dav:version-url
+V 136
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/mc_campaign/includes/mc_campaign.admin.campaign.inc
+END
+mc_campaign.functions.inc
+K 25
+svn:wc:ra_dav:version-url
+V 131
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/mc_campaign/includes/mc_campaign.functions.inc
+END
+mc_campaign.admin.mail.inc
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/mc_campaign/includes/mc_campaign.admin.mail.inc
+END
+mc_campaign.calendar.inc
+K 25
+svn:wc:ra_dav:version-url
+V 130
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/mc_campaign/includes/mc_campaign.calendar.inc
+END

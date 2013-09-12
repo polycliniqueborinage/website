@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/notifications/tests
+END
+notifications_anonymous.test
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/notifications/tests/notifications_anonymous.test
+END
+notifications_api.test
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/notifications/tests/notifications_api.test
+END
+notifications_content.test
+K 25
+svn:wc:ra_dav:version-url
+V 131
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/notifications/tests/notifications_content.test
+END
+notifications_custom.test
+K 25
+svn:wc:ra_dav:version-url
+V 130
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/notifications/tests/notifications_custom.test
+END
+notifications_lite.test
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/notifications/tests/notifications_lite.test
+END
+notifications_templates.test
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/notifications/tests/notifications_templates.test
+END
+notifications_test_case.inc
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/notifications/tests/notifications_test_case.inc
+END

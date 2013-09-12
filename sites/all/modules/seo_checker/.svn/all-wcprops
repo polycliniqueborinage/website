@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/seo_checker
+END
+seo_checker.install
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/seo_checker/seo_checker.install
+END
+LICENSE.txt
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/seo_checker/LICENSE.txt
+END
+README_INSTALL.txt
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/seo_checker/README_INSTALL.txt
+END
+seo_checker.info
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/seo_checker/seo_checker.info
+END
+.gitignore
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/seo_checker/.gitignore
+END
+README_FOR_DEVELOPERS.txt
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/seo_checker/README_FOR_DEVELOPERS.txt
+END
+seo_checker.module
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/seo_checker/seo_checker.module
+END

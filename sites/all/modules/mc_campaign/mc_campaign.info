@@ -1,0 +1,14 @@
+name = Campaign
+description = Campaign Monitor Made by MariqueCalcus
+package = Campaign
+core = 7.x
+
+dependencies[] = token
+dependencies[] = libraries
+dependencies[] = date_popup
+
+files[] = mc_campaign.module
+files[] = mc_campaign.admin.inc
+
+configure = admin/campaign/config
+

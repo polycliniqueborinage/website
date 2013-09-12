@@ -1,0 +1,65 @@
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/openlayers/modules/openlayers_views/views
+END
+openlayers_views_style_data.inc
+K 25
+svn:wc:ra_dav:version-url
+V 158
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/openlayers/modules/openlayers_views/views/openlayers_views_style_data.inc
+END
+openlayers_views.views.inc
+K 25
+svn:wc:ra_dav:version-url
+V 153
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/openlayers/modules/openlayers_views/views/openlayers_views.views.inc
+END
+openlayers-row-geometry.tpl.php
+K 25
+svn:wc:ra_dav:version-url
+V 158
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/openlayers/modules/openlayers_views/views/openlayers-row-geometry.tpl.php
+END
+openlayers_views.views.theme.inc
+K 25
+svn:wc:ra_dav:version-url
+V 159
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/openlayers/modules/openlayers_views/views/openlayers_views.views.theme.inc
+END
+openlayers_views_style_map.inc
+K 25
+svn:wc:ra_dav:version-url
+V 157
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/openlayers/modules/openlayers_views/views/openlayers_views_style_map.inc
+END
+openlayers_views_plugin_row_point.inc
+K 25
+svn:wc:ra_dav:version-url
+V 164
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/openlayers/modules/openlayers_views/views/openlayers_views_plugin_row_point.inc
+END
+openlayers_views_plugin_row_geometry.inc
+K 25
+svn:wc:ra_dav:version-url
+V 167
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/openlayers/modules/openlayers_views/views/openlayers_views_plugin_row_geometry.inc
+END
+openlayers_views_plugin_row_bounding_box.inc
+K 25
+svn:wc:ra_dav:version-url
+V 171
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/openlayers/modules/openlayers_views/views/openlayers_views_plugin_row_bounding_box.inc
+END
+openlayers_views_plugin_display_openlayers.inc
+K 25
+svn:wc:ra_dav:version-url
+V 173
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/openlayers/modules/openlayers_views/views/openlayers_views_plugin_display_openlayers.inc
+END
+openlayers-views-map.tpl.php
+K 25
+svn:wc:ra_dav:version-url
+V 155
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/openlayers/modules/openlayers_views/views/openlayers-views-map.tpl.php
+END

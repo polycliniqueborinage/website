@@ -1,0 +1,31 @@
+<?php
+
+class StormknowledgebaseTestCase extends DrupalWebTestCase {
+
+  public static function getInfo() {
+    return array(
+      'name' => 'Storm Knowledge Base functionality',
+      'description' => 'Test the functionality of the Storm 
+Knowledge Base module',
+      'group' => 'Storm',
+    );
+  }
+
+  public function setUp() {
+    parent::setUp('storm', 'stormknowledgebase');
+    $privileged_user = $this->drupalCreateUser(array('create stormknowledgebase content'));
+    $this->drupalLogin($privileged_user);
+  }
+
+  public function testStormknowledgebaseCreate() {
+    $langcode = FIELD_LANGUAGE_NONE;
+    $body_key = "body[$langcode][0][value]";
+    
+    $edit = array(
+      'title' => $this->randomName(8),
+      $body_key => $this->randomName(16),
+    );
+    $this->drupalPost('node/add/stormknowledgebase', $edit, t('Save'));
+    $this->assertText(t('Knowledge base @title has been created.', array('@title' => $edit['title'])));
+  }
+}

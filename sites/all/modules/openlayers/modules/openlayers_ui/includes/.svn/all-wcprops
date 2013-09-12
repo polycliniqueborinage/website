@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/openlayers/modules/openlayers_ui/includes
+END
+openlayers_ui.layers.inc
+K 25
+svn:wc:ra_dav:version-url
+V 151
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/openlayers/modules/openlayers_ui/includes/openlayers_ui.layers.inc
+END
+openlayers_ui.theme.inc
+K 25
+svn:wc:ra_dav:version-url
+V 150
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/openlayers/modules/openlayers_ui/includes/openlayers_ui.theme.inc
+END
+openlayers_ui.styles.inc
+K 25
+svn:wc:ra_dav:version-url
+V 151
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/openlayers/modules/openlayers_ui/includes/openlayers_ui.styles.inc
+END
+openlayers_ui.presets.inc
+K 25
+svn:wc:ra_dav:version-url
+V 152
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/openlayers/modules/openlayers_ui/includes/openlayers_ui.presets.inc
+END
+openlayers_ui.admin.inc
+K 25
+svn:wc:ra_dav:version-url
+V 150
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/openlayers/modules/openlayers_ui/includes/openlayers_ui.admin.inc
+END

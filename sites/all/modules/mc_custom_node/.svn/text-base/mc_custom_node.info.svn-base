@@ -1,0 +1,7 @@
+name = MC Custom Node
+description = Custom Node + Rule Support
+package = MC Custom
+core = 7.x
+dependencies[] = rules
+files[] = mc_custom_node.inc
+files[] = mc_custom_node.rules.inc

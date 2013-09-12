@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/schema
+END
+LICENSE.txt
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/schema/LICENSE.txt
+END
+schema.module
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/schema/schema.module
+END
+schema.install
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/schema/schema.install
+END
+schema.info
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/schema/schema.info
+END
+README.txt
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/schema/README.txt
+END
+schema.drush.inc
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/schema/schema.drush.inc
+END

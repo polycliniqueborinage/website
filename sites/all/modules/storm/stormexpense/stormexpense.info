@@ -1,0 +1,22 @@
+name = Storm Expense
+description = "Allows recording of expenses based on organizations, projects, tasks and tickets."
+package = Storm
+core = 7.x
+
+dependencies[] = storm
+dependencies[] = stormorganization
+dependencies[] = stormproject
+dependencies[] = stormtask
+dependencies[] = stormticket
+
+files[] = stormexpense.admin.inc
+files[] = stormexpense.install
+files[] = stormexpense.module
+files[] = stormexpense.theme.inc
+
+; Information added by drupal.org packaging script on 2011-02-25
+version = "7.x-1.x-dev"
+core = "7.x"
+project = "storm"
+datestamp = "1298620277"
+

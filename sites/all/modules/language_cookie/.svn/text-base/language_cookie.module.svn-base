@@ -1,0 +1,84 @@
+<?php
+
+/**
+ * The language is set based on the cookie parameters.
+ */
+define('LANGUAGE_COOKIE_NEGOTIATION', 'language_cookie');
+
+/**
+ * Implements hook_init().
+ */
+function language_cookie_init() {
+  $param = variable_get('language_cookie_param', 'language');
+  if (!isset($_COOKIE[$param]) && language_negotiation_get_any(LANGUAGE_COOKIE_NEGOTIATION)) {
+    language_cookie_set();
+  }
+}
+
+/**
+ * Implements hook_menu().
+ */
+function language_cookie_menu() {
+  $items = array();
+
+  $items['admin/config/regional/language/configure/cookie'] = array(
+    'title' => 'Cookie language detection configuration',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('language_cookie_admin_form'),
+    'access arguments' => array('administer languages'),
+    'file' => 'language_cookie.admin.inc',
+    'type' => MENU_VISIBLE_IN_BREADCRUMB,
+  );
+
+  return $items;
+}
+
+/**
+ * Implements hook_language_negotiation_info().
+ */
+function language_cookie_language_negotiation_info() {
+  return array(
+    'language_cookie' => array(
+      'callbacks' => array(
+        'language' => 'language_cookie_language',
+      ),
+      'weight' => -5,
+      'name' => t('Cookie'),
+      'description' => t('Determine the language from a cookie'),
+      'config' => 'admin/config/regional/language/configure/cookie',
+    ),
+  );
+}
+
+/**
+ * Set cookie for current language
+ * If no parameter is passed the current language is used
+ *
+ * @param string $lang
+ */
+function language_cookie_set($lang = NULL) {
+  if (!$lang) {
+    global $language;
+    $lang = $language->language;
+  }
+
+  $param = variable_get('language_cookie_param', 'language');
+  $time = variable_get('language_cookie_time', 31536000);
+  setrawcookie($param, rawurlencode($lang), REQUEST_TIME + $time, '/');
+}
+
+/**
+ * Identify language from a cookie parameter.
+ *
+ * @param $languages
+ *   An array of valid language objects.
+ *
+ * @return
+ *   A valid language code on success, FALSE otherwise.
+ */
+function language_cookie_language($languages) {
+  $param = variable_get('language_cookie_param', 'language');
+  return (isset($_COOKIE[$param]) && in_array($_COOKIE[$param], array_keys($languages)))
+    ? $_COOKIE[$param]
+    : NULL;
+}

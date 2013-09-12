@@ -1,0 +1,19 @@
+name = Storm Project
+description = "Allows recording of projects based on Storm Organizations"
+package = Storm
+core = 7.x
+
+dependencies[] = storm 
+dependencies[] = stormorganization
+dependencies[] = views
+
+files[] = stormproject.install
+files[] = stormproject.module
+files[] = stormproject.theme.inc
+
+; Information added by drupal.org packaging script on 2011-02-25
+version = "7.x-1.x-dev"
+core = "7.x"
+project = "storm"
+datestamp = "1298620277"
+

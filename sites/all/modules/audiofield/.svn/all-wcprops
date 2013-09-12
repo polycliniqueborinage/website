@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/audiofield
+END
+audiofield.info
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/audiofield/audiofield.info
+END
+LICENSE.txt
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/audiofield/LICENSE.txt
+END
+audiofield_formatter.inc
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/audiofield/audiofield_formatter.inc
+END
+audiofield.module
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/audiofield/audiofield.module
+END
+README.txt
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/audiofield/README.txt
+END
+audio.field.inc
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/audiofield/audio.field.inc
+END

@@ -1,0 +1,222 @@
+<?php
+/**
+ * Implementation of hook_init().
+ *
+ * Load required includes.
+ */
+ module_load_include('inc', 'audiorecorderfield', 'audiorecorderfield_widget');
+function audiorecorderfield_init() {
+  module_load_include('inc', 'audiorecorderfield', 'sources/recorder');
+  // Add Javascript settings
+  drupal_add_js(array('audiorecorderfield_path' =>  drupal_get_path('module', 'audiorecorderfield')), 'setting');
+}
+
+/**
+ * Implementation of hook_menu().
+ */
+function audiorecorderfield_menu() {
+  $items['nanogong_file_receive'] = array(
+    'title' => 'nanogong_file_receive',
+    'description' => '',
+    'page callback' => 'audiorecorderfield_nanogong_file_receive',
+    'type' => MENU_CALLBACK,
+    'access callback' => TRUE,
+   );
+   
+   $items['nanogong_preview'] = array(
+    'title' => 'nanogong_preview',
+    'description' => '',
+    'page callback' => 'audiorecorderfield_nanogong_preview',
+    'type' => MENU_CALLBACK,
+    'access callback' => TRUE,
+   );
+   
+   return $items;
+}
+
+/*
+ * Nanogong recorder applet callback. This is what happens when 
+ * 'upload' is pressed in the applet
+ */
+function audiorecorderfield_nanogong_file_receive() {
+  header("Cache-control: private");
+  header("Content-Type: text/plain");
+    
+  $field_id = $_GET['field_id'];
+    
+  //TODO save duration in field
+  //$duration = strip_tags($_POST['duration']);
+  $tmp_name = $_FILES['voicefile']['tmp_name'];
+  $upload_dir =  variable_get('file_public_path', conf_path() . '/files') ;
+  $upload_dir_stream = file_default_scheme() . '://' ;
+  // TODO: get file extension from real file type
+  $new_name = file_create_filename(time() . '.wav', $upload_dir);
+  //$new_path = $upload_dir . $new_name;
+    
+  if ($_FILES['voicefile']['error']>0) {
+    watchdog('audiorecorder_field', "ERROR - error code: " . $_FILES['voicefile']['error']);
+    $fid = "NULL";
+  }
+  else {
+    $_FILES['files'] = $_FILES['voicefile'];
+    $_FILES['files']['name'] = $new_name;
+    foreach ($_FILES['files'] as $key => $value) {
+      $_FILES['files'][$key] = array(0 => $value);
+    }
+    $validators['file_validate_extensions']=array('wav');
+    if (!$file = file_save_upload(0, $validators, $upload_dir_stream)) {
+      watchdog('audiorecorder_field', "ERROR - file_save_upload failed", array(), WATCHDOG_ERROR);
+      $fid = "NULL";
+    } 
+    else {
+      $fid = $file->fid;
+    }
+  }
+  //Return fid to javascript
+  print("$fid"); 
+}
+
+/*Ajax callback function that creates file preview of uploaded file*/
+function audiorecorderfield_nanogong_preview() {
+    $fid=$_GET['fid'];
+    
+    //$file=db_query("SELECT * FROM {files} WHERE fid=:fid", array('fid'=>$fid));
+    $file = file_load($fid);
+    //$preview=theme('filefield_widget_preview', $file);
+    $preview=theme('file_link', array('file'=>$file)).' <span class="file-size">(' . format_size($file->filesize) . ')</span> ';
+    $nanogong_path=base_path() . drupal_get_path('module', 'audiorecorderfield') . '/recorders/nanogong.jar';
+    $audiofile=file_create_url($file->uri);
+    
+    $nanogong_id = "nanogong-" . $_GET['field_id'];
+    $nanogong = audiorecorderfield_nanogong_player($nanogong_path, $audiofile, $nanogong_id);
+    
+    return drupal_json_output(array('preview' => $preview, 'nanogong' => $nanogong));
+    exit();
+}
+
+
+
+/**
+ * Implementation of hook_filefield_sources_widgets().
+ *
+ * This returns a list of widgets that are compatible with FileField Sources.
+ TODO: Check D7 version of filefield_sources
+ */
+function audiorecorderfield_filefield_sources_widgets() {
+  return array('audiorecorderfield_widget');
+}
+
+/**
+ * Implementation of hook_filefield_sources_info().
+ */
+function audiorecorderfield_filefield_sources_info() {
+  $params = array();
+  $return = array();
+  
+    $function = 'filefield_source_recorder_info';
+    if (function_exists($function)) {
+      $result = call_user_func_array($function, $params);
+      if (isset($result) && is_array($result)) {
+        $return = array_merge_recursive($return, $result);
+      }
+      elseif (isset($result)) {
+        $return[] = $result;
+      }
+    }
+  
+  return $return;
+}
+
+/**
+ * Implementation of hook_theme().
+ */
+function audiorecorderfield_theme() {
+  $theme= array(
+      'audiorecorderfield_widget' => array(
+        'render element' => 'element',
+        'file' => 'audiorecorderfield_widget.inc',
+      ),
+       //Theme for recorder filefield source
+       'filefield_source_recorder_element' => array(
+         'render element' => 'element',
+         'file' => 'sources/recorder.inc',
+      ),
+  );
+
+  return $theme;
+}
+
+
+/**
+ * Implementation of hook_form_[form_id]_alter().
+ *
+ * Modify the add new field form to change the default formatter.
+ */
+function audiorecorderfield_form_field_ui_field_settings_form_alter(&$form, &$form_state) {
+  $form['#submit'][] = 'audiorecorderfield_form_content_field_overview_submit';
+}
+
+/**
+ * Submit handler to set a new field's formatter to "audiofield_embedded".
+ */
+function audiorecorderfield_form_content_field_overview_submit(&$form, &$form_state) {
+
+  $entity_type = 'node';
+  $field_name = $form_state['values']['field']['field_name'];
+  $bundle =  $form_state['complete form']['#bundle'];
+  $instance = field_read_instance($entity_type, $field_name, $bundle);
+
+  if ($instance['widget']['module'] == 'audiorecorderfield') {
+    foreach ($instance['display'] as $display_type => $display_settings) {
+        if ($instance['display'][$display_type]['type'] == 'file_default') {
+          $instance['display'][$display_type]['type'] = 'audiofield_embedded';
+        }
+    }
+     field_update_instance($instance);
+  }   
+}
+
+
+/**
+ * Implementation of hook_audiofield_players().
+ */
+function audiorecorderfield_audiofield_players() {
+    $players['nanogong']=array(
+      'path' => drupal_get_path('module', 'audiorecorderfield') . '/recorders/nanogong.jar',
+      'name' => 'Nanogong',
+      'download_link' => 'http://gong.ust.hk/nanogong/downloads_form.html',
+      'filetypes' => array('wav'),
+      'callback' => 'audiorecorderfield_nanogong_player',
+    );
+
+    return $players;
+}
+
+function audiorecorderfield_nanogong_player($player_path, $audio_file, $id="nanogong") {
+    //Add css
+    drupal_add_css(drupal_get_path('module', 'audiorecorderfield') . '/css/audiorecorderfield.css');
+    $config = '<param name="ShowSaveButton" value="false" />'; //Disable Save button
+    $config .= '<param name="ShowTime" value="true" /> '; //Show Time
+    $config .= '<param name="ShowRecordButton" value="false" /> '; //Disable Record button
+    $config .= '<param name="ShowSpeedButton" value="false" /> '; //Disable speed button
+    $output='<div class="nanogong-player" id="' . $id . '-wrapper"><applet id="' . $id . '" archive="' . $player_path . '" code="gong.NanoGong" width="82" height="40">  
+            ' . $config . '<param name="SoundFileURL" value="' . $audio_file . '"/> </applet></div>';
+
+    return $output;
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function audiorecorderfield_form_field_ui_field_edit_form_alter(&$form, &$form_state) {
+  $instance = $form['#instance'];
+  if ($instance['widget']['type'] == 'audiorecorderfield_widget') {
+    $form['instance']['settings']['file_extensions']['#default_value'] = 'wav mp3';
+  }
+}
+
+function audiorecorderfield_field_create_field($field) {
+  // @todo Needs function body.
+  //var_dump($field);die();
+}
+

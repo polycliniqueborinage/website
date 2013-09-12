@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/registration_check
+END
+LICENSE.txt
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/registration_check/LICENSE.txt
+END
+registration_check.info
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/registration_check/registration_check.info
+END
+registration_check.js
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/registration_check/registration_check.js
+END
+registration_check.unique.inc
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/registration_check/registration_check.unique.inc
+END
+registration_check.admin.inc
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/registration_check/registration_check.admin.inc
+END
+registration_check.module
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/registration_check/registration_check.module
+END
+registration_check.css
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/registration_check/registration_check.css
+END

@@ -1,0 +1,1169 @@
+<?php
+
+/**
+ * @file
+ *   Defines menu items for campaign administration,
+ *   permissions and basic drupal hooks.
+ */
+
+// Loads functions needed. Used seperate files for organization purposes.
+require_once 'includes/mc_campaign.functions.inc';
+
+
+
+/**
+ * Implements hook_permission().
+ */
+function mc_campaign_permission() {
+  return array(
+    'view any calendar' => array(
+      'title' => t('View Any Calendar'),
+      'description' => t('Allow user to access any calender'),
+    ),
+    'view campaign' => array(
+      'title' => t('View Campain'),
+      'description' => t('Allow users to access campaign'),
+    ),
+    'edit campaign' => array(
+      'title' => t('Edit Campain'),
+      'description' => t('Allow users to edit campaign'),
+    ),
+    'delete campaign' => array(
+      'title' => t('Delete Campain'),
+      'description' => t('Allow users to view campaign'),
+    ),
+    'administer campaign' => array(
+      'title' => t('Administer Campain'),
+      'description' => t('Allow users to administer campaign'),
+    ),
+    'administer campaign config' => array(
+      'title' => t('Administer Campain Config'),
+      'description' => t('Allow users to admin the campaign config'),
+    ),
+    'administer campaign credit' => array(
+      'title' => t('Administer Campain Credit'),
+      'description' => t('Allow users to admin the campaign credit'),
+    ),
+  );
+}
+
+
+/**
+ * Implements hook_theme().
+ */
+function mc_campaign_theme() {
+  return array(
+  	'mc_campaign_dashboard' => array(
+      'template' => 'templates/mc_campaign_dashboard',
+      'variables' => array(
+      	'title' => NULL,
+      	'data' => NULL,
+      	'notifications' => NULL,
+      ),
+    ),
+  	'mc_campaign_calendar' => array(
+      'template' => 'templates/mc_campaign_calendar',
+      'variables' => array(
+      	'title' => NULL,
+      	'calendars' => NULL,
+      ),
+    ),
+  	'mc_campaign_online_calendar' => array(
+      'template' => 'templates/mc_campaign_online_calendar',
+      'variables' => array(
+      	'title' => NULL,
+      	'calendars' => NULL,
+      ),
+    ),
+    'mc_campaign_admin_dashboard' => array(
+      'template' => 'templates/mc_campaign_admin_dashboard',
+      'variables' => array(
+      	'title' => NULL,
+      	'data' => NULL,
+      ),
+    ),
+    'mc_campaign_list_detail' => array(
+      'template' => 'templates/mc_campaign_list_detail',
+      'variables' => array(
+        'fields' => NULL,
+      ),
+    ),
+  	'mc_campaign_campaign_detail' => array(
+      'template' => 'templates/mc_campaign_campaign_detail',
+      'variables' => array(
+        'fields' => NULL,
+      ),
+    ),
+    'mc_campaign_subscriber_detail' => array(
+      'template' => 'templates/mc_campaign_subscriber_detail',
+      'variables' => array(
+        'fields' => NULL,
+        'lists' => NULL,
+      ),
+    ),
+    'mc_campaign_graphe' => array(
+      'template' => 'templates/mc_campaign_graphe',
+      'variables' => array(
+      	'settings' => NULL,
+      ),
+    ),
+    'mc_campaign_report' => array(
+      	'template' => 'mc_campaign_report',
+  		'variables' => array(1),
+    ),
+    'mc_campaign_analitycs' => array(
+      	'template' => 'mc_campaign_analitycs',
+      'variables' => array(
+      	'title' => NULL,
+      ),
+    ),
+  );
+}
+
+
+/**
+ * Implements hook_menu().
+ */
+function mc_campaign_menu() {
+	
+  $items['account'] = array(
+    'title' => 'Dashboard',
+    'page callback' => 'mc_campaign_admin_dashboad',
+    'access callback' => 'user_is_logged_in',
+    'type' => MENU_NORMAL_ITEM,
+  	'weight' => 1,
+  	'menu_name' => 'main-menu',
+    'file' => 'includes/mc_campaign.dashboard.inc',
+  );
+  $items['account/users'] = array(
+    'title' => 'Users',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('mc_campaign_user_list'),
+    'access arguments' => array('view campaign'),
+    'type' => MENU_NORMAL_ITEM,
+  	'weight' => 2,
+  	'menu_name' => 'main-menu',
+    'file' => 'includes/mc_campaign.user.inc',
+  );
+  $items['account/users/add'] = array(
+	'title' => 'Add users',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('mc_campaign_user_add'),
+    'access arguments' => array('view campaign'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/mc_campaign.user.inc',
+  );
+  $items['account/users/edit/%'] = array(
+	'title' => 'List detail',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('mc_campaign_user_edit' , 3),
+    'access arguments' => array('view campaign'),
+    'file' => 'includes/mc_campaign.user.inc',
+  );
+  $items['account/users/delete/%'] = array(
+	'title' => 'List detail',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('mc_campaign_user_delete' , 3),
+    'access arguments' => array('view campaign'),
+    'type' => MENU_NORMAL_ITEM,
+  	'weight' => 3,
+  	'menu_name' => 'main-menu',
+    'file' => 'includes/mc_campaign.user.inc',
+  );
+  
+  $items['account/lists'] = array(
+    'title' => 'Lists',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('mc_campaign_list_list'),
+    'access arguments' => array('view campaign'),
+    'type' => MENU_NORMAL_ITEM,
+  	'weight' => 2,
+  	'menu_name' => 'main-menu',
+    'file' => 'includes/mc_campaign.list.inc',
+  );
+  $items['account/lists/add'] = array(
+	'title' => 'Create list',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('mc_campaign_list_add'),
+    'access arguments' => array('view campaign'),
+    'type' => MENU_NORMAL_ITEM,
+  	'weight' => 3,
+  	'menu_name' => 'main-menu',
+    'file' => 'includes/mc_campaign.list.inc',
+  );
+  $items['account/lists/edit/%'] = array(
+	'title' => 'List detail',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('mc_campaign_list_edit' , 3),
+    'access arguments' => array('view campaign'),
+    'file' => 'includes/mc_campaign.list.inc',
+  );
+  $items['account/lists/delete/%'] = array(
+	'title' => 'List detail',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('mc_campaign_list_delete' , 3),
+    'access arguments' => array('view campaign'),
+    'type' => MENU_NORMAL_ITEM,
+  	'weight' => 3,
+  	'menu_name' => 'main-menu',
+    'file' => 'includes/mc_campaign.list.inc',
+  );
+  /*subscribers*/
+  $items['account/subscribers'] = array(
+    'title' => 'Contacts',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('mc_campaign_subscriber_list'),
+    'access arguments' => array('view campaign'),
+    'type' => MENU_NORMAL_ITEM,
+  	'weight' => 3,
+  	'menu_name' => 'main-menu',
+    'file' => 'includes/mc_campaign.subscriber.inc',
+  );
+  $items['account/subscribers/addsubscribers'] = array(
+    'title' => 'Create contact',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('mc_campaign_subscriber_add'),
+    'access arguments' => array('view campaign'),
+    'type' => MENU_NORMAL_ITEM,
+  	'weight' => 1,
+  	'menu_name' => 'main-menu',
+    'file' => 'includes/mc_campaign.subscriber.inc',
+  );
+  /*
+  $items['account/subscribers/importsubscribers'] = array(
+    'title' => 'Manual Import',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('mc_campaign_subscriber_add_mass'),
+    'access arguments' => array('view campaign'),
+    'type' => MENU_NORMAL_ITEM,
+  	'weight' => 2,
+  	'menu_name' => 'main-menu',
+    'file' => 'includes/mc_campaign.subscriber.inc',
+  );
+  */
+  /*
+  $items['account/subscribers/importemailprovider'] = array(
+    'title' => 'Email Provider Import',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('mc_campaign_subscriber_import_email_provider'),
+    'access arguments' => array('view campaign'),
+    'type' => MENU_NORMAL_ITEM,
+  	'weight' => 3,
+  	'menu_name' => 'main-menu',
+    'file' => 'includes/mc_campaign.subscriber.inc',
+  );*/
+  /*
+  $items['account/subscribers/importsocialnetwork'] = array(
+    'title' => 'Social Network Import',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('mc_campaign_subscriber_import_social_network'),
+    'access arguments' => array('view campaign'),
+    'type' => MENU_NORMAL_ITEM,
+  	'weight' => 4,
+  	'menu_name' => 'main-menu',
+    'file' => 'includes/mc_campaign.subscriber.inc',
+  );*/
+  $items['account/subscribers/edit/%'] = array(
+    'title' => '',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('mc_campaign_subscriber_edit', 3),
+    'access arguments' => array('view campaign'),
+    'type' => MENU_CALLBACK,
+  	'weight' => 4,
+  	'menu_name' => 'main-menu',
+    'file' => 'includes/mc_campaign.subscriber.inc',
+  );
+  $items['account/subscribers/delete/%'] = array(
+    'title' => '',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('mc_campaign_subscriber_delete', 3),
+    'access arguments' => array('view campaign'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/mc_campaign.subscriber.inc',
+  );
+  $items['account/subscribers/view/%'] = array(
+    'title' => '',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('mc_campaign_subscriber_view', 3),
+    'access arguments' => array('view campaign'),
+    'type' => MENU_NORMAL_ITEM,
+  	'weight' => 4,
+  	'menu_name' => 'main-menu',
+    'file' => 'includes/mc_campaign.subscriber.inc',
+  );
+  /*REMINDER*/
+  $items['account/reminders'] = array(
+    'title' => 'Reminders',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('mc_campaign_reminder_list'),
+    'access arguments' => array('view campaign'),
+    'type' => MENU_NORMAL_ITEM,
+  	'weight' => 4,
+  	'menu_name' => 'main-menu',
+    'file' => 'includes/mc_campaign.reminder.inc',
+  );
+  $items['account/reminders/add'] = array(
+    'title' => 'Create reminders',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('mc_campaign_reminder_add'),
+    'access arguments' => array('view campaign'),
+    'type' => MENU_NORMAL_ITEM,
+  	'weight' => 1,
+  	'menu_name' => 'main-menu',
+    'file' => 'includes/mc_campaign.reminder.inc',
+  );
+  $items['account/reminders/list'] = array(
+    'title' => 'Sent',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('mc_campaign_reminder_list', TRUE),
+    'access arguments' => array('view campaign'),
+    'type' => MENU_NORMAL_ITEM,
+  	'weight' => 4,
+  	'menu_name' => 'main-menu',
+    'file' => 'includes/mc_campaign.reminder.inc',
+  );
+  $items['account/reminders/autocomplete/%'] = array(
+    'title' => 'Auto complete',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('mc_campaign_reminder_autocomplete', 3),
+    'access arguments' => array('view campaign'),
+    'type' => MENU_CALLBACK,
+  	'weight' => 1,
+    'file' => 'includes/mc_campaign.reminder.inc',
+  );
+  /*CALENDAR*/
+  $items['account/calendars'] = array(
+    'title' => 'Dashboard',
+    'page callback' => 'mc_campaign_calendar_calendar',
+    'page arguments' => array(2),
+    'access callback' => 'user_is_logged_in',
+    'type' => MENU_NORMAL_ITEM,
+  	'weight' => 1,
+  	'menu_name' => 'main-menu',
+    'file' => 'includes/mc_campaign.calendar.inc',
+  );
+  $items['account/calendars/list'] = array(
+    'title' => 'Calendars',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('mc_campaign_calendar_list'),
+    'access arguments' => array('view campaign'),
+    'type' => MENU_NORMAL_ITEM,
+  	'weight' => 5,
+  	'menu_name' => 'main-menu',
+    'file' => 'includes/mc_campaign.calendar.inc',
+  );
+  $items['account/calendars/externe'] = array(
+    'title' => 'Externe Calendars',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('mc_campaign_calendar_externe'),
+    'access arguments' => array('view campaign'),
+    'type' => MENU_NORMAL_ITEM,
+  	'weight' => 5,
+  	'menu_name' => 'main-menu',
+    'file' => 'includes/mc_campaign.calendar.inc',
+  );  
+  $items['account/calendars/reminders'] = array(
+    'title' => 'Reminders',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('mc_campaign_calendar_reminder'),
+    'access arguments' => array('view campaign'),
+    'type' => MENU_NORMAL_ITEM,
+  	'weight' => 5,
+  	'menu_name' => 'main-menu',
+    'file' => 'includes/mc_campaign.calendar.inc',
+  );
+  $items['account/calendars/add'] = array(
+    'page callback' => 'mc_campaign_calendar_add',
+    'access arguments' => array('view campaign'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/mc_campaign.calendar.inc',
+  );
+  $items['account/calendars/udpate/%'] = array(
+    'page callback' => 'mc_campaign_calendar_update',
+    'page arguments' => array(3),
+    'access arguments' => array('view campaign'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/mc_campaign.calendar.inc',
+  );
+  $items['account/calendars/delete/%'] = array(
+    'page callback' => 'mc_campaign_calendar_delete',
+    'page arguments' => array(3),
+    'access arguments' => array('view campaign'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/mc_campaign.calendar.inc',
+  );
+  $items['account/calendars/json'] = array(
+    'title' => 'Json',
+    'page callback' => 'mc_campaign_calendar_json',
+    'page arguments' => array(3),
+    'access arguments' => array('view campaign'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/mc_campaign.calendar.inc',
+  );
+  $items['account/calendars/disable'] = array(
+    'title' => 'Disable',
+    'page callback' => 'mc_campaign_calendar_disable',
+    'page arguments' => array(3),
+    'access arguments' => array('view campaign'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/mc_campaign.calendar.inc',
+  );
+  $items['account/calendars/enable'] = array(
+    'title' => 'Disable',
+    'page callback' => 'mc_campaign_calendar_enable',
+    'page arguments' => array(3),
+    'access arguments' => array('view campaign'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/mc_campaign.calendar.inc',
+  );
+  /*ONLINE CALENDAR*/
+  $items['online/calendars'] = array(
+    'title' => 'Dashboard',
+    'page callback' => 'mc_campaign_calendar_calendar',
+    'page arguments' => array(2),
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/mc_campaign.online_calendar.inc',
+  );
+  $items['online/calendars/udpate'] = array(
+    'page callback' => 'mc_campaign_calendar_update',
+    'access arguments' => array('view campaign'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/mc_campaign.online_calendar.inc',
+  );
+  $items['online/calendars/confirm'] = array(
+    'title' => 'Confirm',
+    'page callback' => 'mc_campaign_calendar_confirm',
+    'page arguments' => array(3),
+    'access arguments' => array('view campaign'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/mc_campaign.online_calendar.inc',
+  );
+  $items['online/calendars/delete'] = array(
+    'title' => 'Confirm',
+    'page callback' => 'mc_campaign_calendar_delete',
+    'page arguments' => array(3),
+    'access arguments' => array('view campaign'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/mc_campaign.online_calendar.inc',
+  );
+  $items['online/calendars/json'] = array(
+    'title' => 'Json',
+    'page callback' => 'mc_campaign_calendar_json',
+    'page arguments' => array(3),
+    'access arguments' => array('view campaign'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/mc_campaign.online_calendar.inc',
+  );
+  $items['online/calendars/disable'] = array(
+    'title' => 'Disable',
+    'page callback' => 'mc_campaign_calendar_disable',
+    'page arguments' => array(3),
+    'access arguments' => array('view campaign'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/mc_campaign.online_calendar.inc',
+  );
+  $items['online/calendars/enable'] = array(
+    'title' => 'Disable',
+    'page callback' => 'mc_campaign_calendar_enable',
+    'page arguments' => array(3),
+    'access arguments' => array('view campaign'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/mc_campaign.online_calendar.inc',
+  );  
+  
+  $items['account/notifications'] = array(
+    'title' => 'Notifications',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('mc_campaign_notification_list'),
+    'access arguments' => array('view campaign'),
+    'type' => MENU_NORMAL_ITEM,
+  	'weight' => 6,
+  	'menu_name' => 'main-menu',
+    'file' => 'includes/mc_campaign.notification.inc',
+  );
+  $items['account/billings'] = array(
+    'title' => 'Credits',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('mc_campaign_credit_list'),
+    'access arguments' => array('view campaign'),
+    'type' => MENU_NORMAL_ITEM,
+  	'weight' => 7,
+  	'menu_name' => 'main-menu',
+    'file' => 'includes/mc_campaign.billing.inc',
+  );
+  
+  /*CONFIG*/
+  $items['admin/mctimetracker/config'] = array(
+    'title' => 'Config',
+    'description' => 'Config',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('mc_campaign_config'),
+    'access arguments' => array('administer campaign config'),
+  	'weight' => 12,
+    'file' => 'includes/mc_campaign.admin.config.inc',
+    'type' => MENU_LOCAL_TASK,
+  );
+  
+  $items['admin/campaign'] = array(
+    'title' => 'Campaign',
+    'description' => 'Manage campaign',
+    'page callback' => 'mc_campaign_admin_dashboad',
+    'access arguments' => array('administer campaign'),
+    'position' => 'left',
+    'type' => MENU_NORMAL_ITEM,
+  	'weight' => 1,
+    'file' => 'includes/mc_campaign.admin.dashboard.inc',
+  );
+  
+  /* DASHBOARD */
+  $items['admin/campaign/dashboard'] = array(
+    'title' => 'Detail',
+    'description' => 'Global View',
+    'access arguments' => array('administer campaign'),
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+    'weight' => 1,
+    'file' => 'includes/mc_campaign.admin.dashboard.inc',
+  );
+  
+  
+  /* SUBSCRIBER / LIST */
+  $items['admin/campaign/lists'] = array(
+    'title' => 'Lists/Subscribers',
+    'description' => 'Find and manage subscriber and lists.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('mc_campaign_list_list'),
+    'access arguments' => array('administer campaign'),
+    'file' => 'includes/mc_campaign.admin.list.inc',
+    'type' => MENU_LOCAL_TASK,
+    'weight' => 2,
+  );
+  $items['admin/campaign/lists/list'] = array(
+    'title' => 'Lists',
+    'description' => 'Find and manage campaign lists.',
+    'access arguments' => array('administer campaign'),
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+    'weight' => 2,
+  );
+  $items['admin/campaign/lists/list/add'] = array(
+    'title' => 'Create list',
+    'description' => 'Add a new list',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('mc_campaign_list_add'),
+    'access arguments' => array('administer campaign'),
+    'type' => MENU_LOCAL_ACTION,
+    'file' => 'includes/mc_campaign.admin.list.inc',
+    'weight' => 1,
+  );
+  $items['admin/campaign/lists/list/delete/%'] = array(
+    'title' => 'Delete List',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('mc_campaign_list_delete', 5),
+    'access arguments' => array('administer campaign'),
+    'file' => 'includes/mc_campaign.admin.list.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['admin/campaign/lists/list/edit/%'] = array(
+    'title' => 'Edit List',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('mc_campaign_list_edit', 5),
+    'access arguments' => array('administer campaign'),
+    'file' => 'includes/mc_campaign.admin.list.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['admin/campaign/lists/list/view/%'] = array(
+    'title callback' => 'mc_campaign_list_view_title',
+    'title arguments' => array(t('Detail of '), 5),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('mc_campaign_list_view', 5),
+    'access arguments' => array('administer campaign'),
+    'file' => 'includes/mc_campaign.admin.list.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['admin/campaign/lists/list/view/graphe/%'] = array(
+    'page callback' => 'mc_campaign_list_graphe',
+    'access arguments' => array('administer campaign'),
+    'page arguments' => array(6),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/mc_campaign.admin.list.inc',
+  );
+  
+  
+  // SUBSCRIBERS
+  $items['admin/campaign/lists/subscribers'] = array(
+    'title' => 'Subscribers',
+    'description' => 'List subscribers.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('mc_campaign_subscriber_list'),
+    'access arguments' => array('administer campaign'),
+    'file' => 'includes/mc_campaign.admin.subscriber.inc',
+    'type' => MENU_LOCAL_TASK,
+    'weight' => 1,
+  );
+  $items['admin/campaign/lists/subscribers/add'] = array(
+    'title' => 'Add New Subscriber',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('mc_campaign_subscriber_add'),
+    'description' => 'Add new list subscriber.',
+    'access arguments' => array('administer campaign'),
+    'type' => MENU_LOCAL_ACTION,
+    'file' => 'includes/mc_campaign.admin.subscriber.inc',
+    'weight' => 2,
+  );
+  $items['admin/campaign/lists/subscribers/add-mass'] = array(
+    'title' => 'Add Subscribers (Mass)',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('mc_campaign_subscriber_add_mass'),
+    'description' => 'Add subscribers.',
+    'access arguments' => array('administer campaign'),
+    'type' => MENU_LOCAL_ACTION,
+    'file' => 'includes/mc_campaign.admin.subscriber.inc',
+    'weight' => 3,
+  );
+  $items['admin/campaign/lists/subscribers/delete/%'] = array(
+    'title' => 'Delete Subscriber',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('mc_campaign_subscriber_delete', 5),
+    'access arguments' => array('administer campaign'),
+    'file' => 'includes/mc_campaign.admin.subscriber.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['admin/campaign/lists/subscribers/view/%'] = array(
+    'title' => 'Delete Subscriber',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('mc_campaign_subscriber_view', 5),
+    'access arguments' => array('administer campaign'),
+    'file' => 'includes/mc_campaign.admin.subscriber.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['admin/campaign/lists/subscribers/edit/%'] = array(
+    'title' => 'Edit Subscriber',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('mc_campaign_subscriber_edit', 5),
+    'access arguments' => array('administer campaign'),
+    'file' => 'includes/mc_campaign.admin.subscriber.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['admin/autocomplete/subscribers'] = array(
+    'title' => 'Edit Subscriber',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('mc_campaign_subscriber_edit', 5),
+    'access arguments' => array('administer campaign'),
+    'file' => 'includes/mc_campaign.admin.subscriber.inc',
+    'type' => MENU_CALLBACK,
+  );
+  
+  
+  
+  /* TEMPLATE LIST */
+  $items['admin/campaign/templates'] = array(
+    'title' => 'Templates',
+    'description' => 'Administer newsletter templates.',
+    'access arguments' => array('administer campaign'),
+    'type' => MENU_LOCAL_TASK,
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('mc_campaign_template_list', 'mail'),
+    'file' => 'includes/mc_campaign.admin.template.inc',
+    'weight' => 3,
+  );
+  $items['admin/campaign/templates/mail'] = array(
+    'title' => 'Mail Templates',
+    'description' => 'Administer mail templates.',
+    'access arguments' => array('administer campaign'),
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+    'weight' => 3,
+  );
+  $items['admin/campaign/templates/mail/add'] = array(
+    'title' => 'Add New Mail Template',
+    'description' => 'Add Mail templates.',
+    'access arguments' => array('administer campaign'),
+    'type' => MENU_LOCAL_ACTION,
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('mc_campaign_template_add', 'mail'),
+    'file' => 'includes/mc_campaign.admin.template.inc',
+    'weight' => 1,
+  );
+  $items['admin/campaign/templates/sms'] = array(
+    'title' => 'SMS Templates',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('mc_campaign_template_list', 'sms'),
+    'access arguments' => array('administer campaign'),
+    'file' => 'includes/mc_campaign.admin.template.inc',
+    'type' => MENU_LOCAL_TASK,
+    'weight' => 2,
+  );
+  $items['admin/campaign/templates/sms/add'] = array(
+    'title' => 'Add New SMS Template',
+    'description' => 'Administer SMS templates.',
+    'access arguments' => array('administer campaign'),
+    'type' => MENU_LOCAL_ACTION,
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('mc_campaign_template_add', 'sms'),
+    'file' => 'includes/mc_campaign.admin.template.inc',
+    'weight' => 1,
+  );
+  $items['admin/campaign/templates/%/delete/%'] = array(
+    'title' => 'Delete Templates',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('mc_campaign_template_delete', 3, 5),
+    'access arguments' => array('administer campaign'),
+    'file' => 'includes/mc_campaign.admin.template.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['admin/campaign/templates/%/edit/%'] = array(
+    'title' => 'Edit Templates',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('mc_campaign_template_edit', 3, 5),
+    'access arguments' => array('administer campaign'),
+    'file' => 'includes/mc_campaign.admin.template.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['admin/campaign/templates/json/%'] = array(
+    'page callback' => 'mc_campaign_template_json',
+    'access arguments' => array('administer campaign'),
+    'page arguments' => array(4),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/mc_campaign.admin.template.inc',
+  );
+  
+  /* CAMPAIGN LIST */
+  $items['admin/campaign/campaign'] = array(
+    'title' => 'Campaign',
+    'description' => 'Manage Campaign',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('mc_campaign_campaign_list'),
+    'access arguments' => array('administer campaign'),
+    'weight' => 4,
+    'file' => 'includes/mc_campaign.admin.campaign.inc',
+    'type' => MENU_LOCAL_TASK,
+  );
+  $items['admin/campaign/campaign/list'] = array(
+    'title' => 'List',
+    'description' => 'List Campaign',
+    'access arguments' => array('administer campaign'),
+    'weight' => 2,
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+  );
+  $items['admin/campaign/campaign/list/add'] = array(
+    'title' => 'Create Campaign',
+    'description' => 'Add Campaign',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('mc_campaign_campaign_add'),
+    'access arguments' => array('administer campaign'),
+    'weight' => 1,
+    'file' => 'includes/mc_campaign.admin.campaign.inc',
+    'type' => MENU_LOCAL_ACTION,
+  );
+  $items['admin/campaign/campaign/view/%'] = array(
+    'title' => 'View',
+    'description' => 'Add Campaign',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('mc_campaign_campaign_view', 4),
+    'access arguments' => array('administer campaign'),
+    'weight' => 2,
+    'file' => 'includes/mc_campaign.admin.campaign.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['admin/campaign/campaign/view/graphe/%'] = array(
+    'page callback' => 'mc_campaign_campaign_graphe',
+    'access arguments' => array('administer campaign'),
+    'page arguments' => array(4),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/mc_campaign.admin.campaign.inc',
+  );
+  $items['admin/campaign/campaign/edit/%'] = array(
+    'title' => 'Update',
+    'description' => 'Add Campaign',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('mc_campaign_campaign_edit', 4),
+    'access arguments' => array('administer campaign'),
+    'weight' => 2,
+    'file' => 'includes/mc_campaign.admin.campaign.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['admin/campaign/campaign/delete/%'] = array(
+    'title' => 'Update',
+    'description' => 'Add Campaign',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('mc_campaign_campaign_delete', 4),
+    'access arguments' => array('administer campaign'),
+    'weight' => 2,
+    'file' => 'includes/mc_campaign.admin.campaign.inc',
+    'type' => MENU_CALLBACK,
+  );
+  
+  
+  /* NOTIFICATION LIST */
+  $items['admin/campaign/notification'] = array(
+    'title' => 'Notification',
+    'description' => 'Manage Notification',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('mc_campaign_notification_list'),
+    'access arguments' => array('administer campaign'),
+    'weight' => 5,
+    'file' => 'includes/mc_campaign.admin.notification.inc',
+    'type' => MENU_LOCAL_TASK,
+  );
+  $items['admin/campaign/notification/list'] = array(
+    'title' => 'List',
+    'description' => 'Manage Notification',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('mc_campaign_notification_list'),
+    'access arguments' => array('administer campaign'),
+    'weight' => 2,
+    'file' => 'includes/mc_campaign.admin.notification.inc',
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+  );
+  $items['admin/campaign/notification/analytics'] = array(
+    'title' => 'Analytics',
+    'description' => 'Analytics',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('mc_campaign_analytics'),
+    'access arguments' => array('administer campaign'),
+    'weight' => 1,
+    'file' => 'includes/mc_campaign.admin.notification.inc',
+    'type' => MENU_LOCAL_TASK,
+  );
+  $items['admin/campaign/notification/graphe'] = array(
+    'page callback' => 'mc_campaign_graphe',
+    'access arguments' => array('administer campaign'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/mc_campaign.admin.notification.inc',
+  );
+  
+  
+  /* MAIL */
+  $items['admin/campaign/mail'] = array(
+    'title' => 'Mail',
+    'description' => 'Manage Mail',
+    'page callback' => 'mc_campaign_mail_list',
+    'access arguments' => array('administer campaign'),
+    'weight' => 6,
+    'file' => 'includes/mc_campaign.admin.mail.inc',
+    'type' => MENU_LOCAL_TASK,
+  );
+
+  $items['admin/campaign/mail/list'] = array(
+    'title' => 'Mail',
+    'description' => 'List Campaign',
+    'page callback' => 'mc_campaign_mail_list',
+    'page arguments' => array('list'),
+    'access arguments' => array('administer campaign'),
+    'weight' => 1,
+    'file' => 'includes/mc_campaign.admin.mail.inc',
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+  );
+  
+  $items['admin/campaign/mail/analytics'] = array(
+    'title' => 'Analytics',
+    'description' => 'Analytics Mail',
+    'page arguments' => array('mail'),
+  	'page callback' => 'mc_campaign_mail_analitycs',
+    'access arguments' => array('administer campaign'),
+    'weight' => 2,
+    'file' => 'includes/mc_campaign.admin.mail.inc',
+    'type' => MENU_LOCAL_TASK,
+  );
+    
+  /* SMS */
+  $items['admin/campaign/sms'] = array(
+    'title' => 'SMS',
+    'description' => 'Manage SMS',
+    'page callback' => 'mc_campaign_sms_list',
+    'access arguments' => array('administer campaign'),
+    'weight' => 7,
+    'file' => 'includes/mc_campaign.admin.sms.inc',
+    'type' => MENU_LOCAL_TASK,
+  );
+
+  /* LETTER */
+  /*
+  $items['admin/campaign/letter'] = array(
+    'title' => 'Letter',
+    'description' => 'Manage Letter',
+    'page callback' => 'mc_campaign_admin_letter_list',
+    'access arguments' => array('administer campaign'),
+    'weight' => 8,
+    'file' => 'mc_campaign.admin.letter.inc',
+    'type' => MENU_LOCAL_TASK,
+  );
+  */
+  
+  /* USER */
+  /*$items['admin/campaign/user'] = array(
+    'title' => 'User',
+    'description' => 'Manage User',
+    'page callback' => 'mc_campaign_admin_user',
+    'page arguments' => array('list'),
+    'access arguments' => array('administer campaign'),
+    'weight' => 9,
+    'file' => 'campaign.admin.user.inc',
+    'type' => MENU_LOCAL_TASK,
+  );*/
+  
+  /* CONFIG */
+  $items['admin/campaign/config'] = array(
+    'title' => 'Config',
+    'description' => 'Config',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('mc_campaign_config'),
+    'access arguments' => array('administer campaign config'),
+  	'weight' => 12,
+    'file' => 'includes/mc_campaign.admin.config.inc',
+    'type' => MENU_LOCAL_TASK,
+  );
+  
+  
+  return $items;
+
+}
+
+
+
+
+
+/**
+ * Implements hook_token_info().
+ */
+function mc_campaign_token_info() {
+  $type = array(
+    'name' => t('Campaign'),
+    'description' => t('Tokens related to newsletters.'),
+    'needs-data' => 'campaign',
+  );
+  $campaign['subscriber_email'] = array(
+    'name' => t("Subscriber's E-mail"),
+    'description' => t("Subscriber's e-mail"),
+  );
+  $campaign['subscriber_mobile'] = array(
+    'name' => t("Subscriber's Mobile"),
+    'description' => t("Subscriber's mobile"),
+  );
+  $campaign['subscriber_firstname'] = array(
+    'name' => t("Subscriber's First Name"),
+    'description' => t('You need to have this required in the personal info form, in order to use it efficiently'),
+  );
+  $campaign['subscriber_lastname'] = array(
+    'name' => t("Subscriber's Last Name"),
+    'description' => t('You need to have this required in the personal info form, in order to use it efficiently'),
+  );
+  $campaign['subscriber_info1'] = array(
+    'name' => t("Subscriber's info1"),
+    'description' => t(''),
+  );
+  $campaign['subscriber_info2'] = array(
+    'name' => t("Subscriber's info2"),
+    'description' => t(''),
+  );
+  $campaign['subscriber_info3'] = array(
+    'name' => t("Subscriber's info3"),
+    'description' => t(''),
+  );
+  $campaign['subscriber_info4'] = array(
+    'name' => t("Subscriber's info4"),
+    'description' => t(''),
+  );
+  $campaign['subscriber_info5'] = array(
+    'name' => t("Subscriber's info5"),
+    'description' => t(''),
+  );
+  $campaign['subscriber_info6'] = array(
+    'name' => t("Subscriber's info6"),
+    'description' => t(''),
+  );
+  $campaign['subscriber_info7'] = array(
+    'name' => t("Subscriber's info7"),
+    'description' => t(''),
+  );
+  $campaign['subscriber_info8'] = array(
+    'name' => t("Subscriber's info8"),
+    'description' => t(''),
+  );
+  $campaign['subscriber_info9'] = array(
+    'name' => t("Subscriber's info9"),
+    'description' => t(''),
+  );
+  $campaign['subscriber_info10'] = array(
+    'name' => t("Subscriber's info10"),
+    'description' => t(''),
+  );
+  $campaign['subscriber_sent_time'] = array(
+    'name' => t("Subscriber's Sent Time"),
+    'description' => t(''),
+  );
+  $campaign['subscriber_eid'] = array(
+    'name' => t("Subscriber's EID"),
+    'description' => t(''),
+  );
+  $campaign['subscription_time'] = array(
+    'name' => t('Subscription Time'),
+    'description' => t('The date this subscriber subscribed to your list'),
+  );
+  return array(
+    'types' => array('campaign' => $type),
+    'tokens' => array('campaign' => $campaign),
+  );
+}
+
+/**
+ * Implements hook_tokens().
+ */
+function mc_campaign_tokens($type, $tokens, array $data = array(), array $options = array()) {
+  $sanitize = !empty($options['sanitize']);
+  $replacements = array();
+  if ($type == 'campaign' && isset($data['campaign_list'])) {
+    foreach ($tokens as $name => $original) {
+      switch ($name) {
+        case 'list_name':
+          $replacements[$original] = $sanitize ? filter_xss($data['campaign_list']->title) : $data['campaign_list']->title;
+          break;
+      }
+    }
+  }
+  if ($type == 'campaign' && isset($data['campaign_subscriber'])) {
+    foreach ($tokens as $name => $original) {
+      switch ($name) {
+        case 'subscriber_email':
+          $replacements[$original] = $sanitize ? filter_xss($data['campaign_subscriber']->email) : $data['campaign_subscriber']->email;
+          break;
+        case 'subscriber_mobile':
+          $replacements[$original] = $sanitize ? filter_xss($data['campaign_mobile']->mobile) : $data['campaign_mobile']->mobile;
+          break;
+        case 'subscriber_firstname':
+          $replacements[$original] = $sanitize ? filter_xss($data['campaign_subscriber']->firstname) : $data['campaign_subscriber']->firstname;
+          break;
+        case 'subscriber_lastname':
+          $replacements[$original] = $sanitize ? filter_xss($data['campaign_subscriber']->lastname) : $data['campaign_subscriber']->lastname;
+          break;
+        case 'subscriber_info1':
+          $replacements[$original] = $sanitize ? filter_xss($data['campaign_subscriber']->info1) : $data['campaign_subscriber']->info1;
+          break;
+        case 'subscriber_info2':
+          $replacements[$original] = $sanitize ? filter_xss($data['campaign_subscriber']->info2) : $data['campaign_subscriber']->info2;
+          break;
+        case 'subscriber_info3':
+          $replacements[$original] = $sanitize ? filter_xss($data['campaign_subscriber']->info3) : $data['campaign_subscriber']->info3;
+          break;
+        case 'subscriber_info4':
+          $replacements[$original] = $sanitize ? filter_xss($data['campaign_subscriber']->info4) : $data['campaign_subscriber']->info4;
+          break;
+        case 'subscriber_info5':
+          $replacements[$original] = $sanitize ? filter_xss($data['campaign_subscriber']->info5) : $data['campaign_subscriber']->info5;
+          break;
+        case 'subscriber_info6':
+          $replacements[$original] = $sanitize ? filter_xss($data['campaign_subscriber']->info6) : $data['campaign_subscriber']->info6;
+          break;
+        case 'subscriber_info7':
+          $replacements[$original] = $sanitize ? filter_xss($data['campaign_subscriber']->info7) : $data['campaign_subscriber']->info7;
+          break;
+        case 'subscriber_info8':
+          $replacements[$original] = $sanitize ? filter_xss($data['campaign_subscriber']->info8) : $data['campaign_subscriber']->info8;
+          break;
+        case 'subscriber_info9':
+          $replacements[$original] = $sanitize ? filter_xss($data['campaign_subscriber']->info9) : $data['campaign_subscriber']->info9;
+          break;
+        case 'subscriber_info10':
+          $replacements[$original] = $sanitize ? filter_xss($data['campaign_subscriber']->info10) : $data['campaign_subscriber']->info10;
+          break;
+        case 'subscriber_sent_time':
+          $replacements[$original] = $sanitize ? filter_xss($data['campaign_subscriber']->eid) : $data['campaign_subscriber']->eid;
+          break;
+        case 'subscriber_eid':
+          $replacements[$original] = $sanitize ? filter_xss($data['campaign_subscriber']->sent_time) : $data['campaign_subscriber']->sent_time;
+          break;
+        case 'subscription_time':
+          $replacements[$original] = format_date($data['campaign_subscriber']->created, 'long');
+          break;
+      }
+    }
+  }
+
+  return $replacements;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+ * HELPER POUR CREDIT ADD
+ *
+ */
+function mc_campaign_insert_cost($did,$cost,$description = '') {
+    $id = db_insert('mc_campaign_credits')
+    ->fields(array(
+      'did' => $did,
+      'amount' => (int) $cost,
+      'description' => $description,
+      'created' => REQUEST_TIME,
+      'updated' => REQUEST_TIME,
+    ))
+    ->execute();
+}
+
+/**
+ * HELPER POUR CREDIT ADD
+ *
+ */
+function mc_campaign_empty_cost($did) {
+    $id = db_delete('mc_campaign_credits')
+    ->fields(array(
+      'did' => $did
+    ))
+    ->execute();
+}
+
+
+
+/**
+ * Title callback to rewrite the 'admin/campaign/lists/list/view/%' menu link.
+ *
+ * @param $base_string
+ *   string to be prepended to current user's name.
+ */
+function mc_campaign_list_view_title($base_string, $arg1 = NULL) {
+  $list = db_select('mc_campaign_lists','list')
+    ->condition('lid',$arg1)
+    ->fields('list',array('title'))
+    ->execute()
+    ->fetchAssoc();
+  
+  return $base_string . ' ' . $list['title'] ;
+}

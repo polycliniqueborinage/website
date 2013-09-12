@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/audiorecorderfield
+END
+audiorecorderfield.module
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/audiorecorderfield/audiorecorderfield.module
+END
+LICENSE.txt
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/audiorecorderfield/LICENSE.txt
+END
+audiorecorderfield.install
+K 25
+svn:wc:ra_dav:version-url
+V 130
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/audiorecorderfield/audiorecorderfield.install
+END
+.gitignore
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/audiorecorderfield/.gitignore
+END
+audiorecorderfield.info
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/audiorecorderfield/audiorecorderfield.info
+END
+audiorecorderfield_widget.inc
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/audiorecorderfield/audiorecorderfield_widget.inc
+END
+README.txt
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/audiorecorderfield/README.txt
+END

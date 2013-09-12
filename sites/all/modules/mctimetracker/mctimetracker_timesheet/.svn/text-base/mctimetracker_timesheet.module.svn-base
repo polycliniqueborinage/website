@@ -1,0 +1,166 @@
+<?php
+
+/**
+ * Implements hook_help().
+ */
+/*function mctimetracker_timsheet_help($path, $arg) {
+  	$output = 'help';
+	return $output;
+}*/
+
+
+/**
+ * Implements hook_permission().
+ */
+function mctimetracker_timsheet_permission() {
+  return array(
+    'view any timsheet' => array(
+      'title' => t('View Any timsheet'),
+      'description' => t('Allow users to access any timsheet'),
+    ),
+    'view own timsheet' => array(
+      'title' => t('View Own timsheet'),
+      'description' => t('Allow users to access own timsheet'),
+    ),
+    'access timsheet' => array(
+      'title' => t('Access timsheet'),
+      'description' => t('Allow users to access timsheet'),
+    ),
+    'administer timsheet' => array(
+      'title' => t('Administer timsheet'),
+      'description' => t('Allow users to access campaign'),
+    ),
+  );
+}
+
+
+/**
+ * Implements hook_theme().
+ */
+function mctimetracker_timsheet_theme() {
+  return array(
+  	'campaign_full' => array(
+      'template' => 'mctimetracker_timsheet_full',
+      'variables' => array(
+      	'west' => NULL,
+      	'east' => NULL,
+      ),
+    ),
+  	'campaign_dashboard' => array(
+      'template' => 'mctimetracker_timsheet_dashboard',
+      'variables' => array(
+      	'west' => NULL,
+      	'east' => NULL,
+      ),
+    ),
+  );
+}
+
+
+/** 
+ * Implements hook_init(). 
+ */
+function mctimetracker_timsheet_init() {
+
+	drupal_add_css(drupal_get_path('module', 'mctimetracker_timsheet') . '/css/jquery.weektimsheet.css');
+	drupal_add_css(drupal_get_path('module', 'mctimetracker_timsheet') . '/css/demo.css');
+	drupal_add_css(drupal_get_path('module', 'mctimetracker_timsheet') . '/css/smoothness/jquery-ui-1.8.11.custom.css');
+	
+	drupal_add_js(drupal_get_path('module', 'mctimetracker_timsheet') . '/js/jquery.layout-latest.js');
+	drupal_add_js(drupal_get_path('module', 'mctimetracker_timsheet') . '/js/jquery-ui-1.8.11.custom.min.js');
+	drupal_add_js(drupal_get_path('module', 'mctimetracker_timsheet') . '/js/jquery.weektimsheet.js');
+	drupal_add_js(drupal_get_path('module', 'mctimetracker_timsheet') . '/js/setup.js');
+	
+}
+
+
+/**
+ * Implementatation of hook_menu().
+ */
+function mctimetracker_timsheet_menu() {
+
+  // The simplest kind of menu: A simple call to a function with a menu entry.
+  // The key of the menu item (mctimetracker_timsheet/simplest) is the path that defines
+  // the menu router entry.
+  $items['mctimetracker_timsheet'] = array(
+  
+    // The menu type is not required, as we're using the default.
+    // 'type' => MENU_NORMAL_ITEM,
+
+    // The title - do NOT use t() as t() is called automatically.
+    'title' => 'timsheet',
+
+    // Description (hover flyover for menu link). Does NOT use t(), which is
+    // called automatically.
+    'description' => 'timsheet Description',
+
+    // Function to be called when this path is accessed.
+    'page callback' => 'mctimetracker_timsheet_full',
+
+    // Arguments to the page callback. Here's we'll use them just to provide
+    // content for our page.
+    'page arguments' => array(t('This page is displayed by the simplest (and base) menu example. Note that the title of the page is the same as the link title. You can also <a href="!link">visit a similar page with no menu link</a>', array('!link' => url('mctimetracker_timsheet/path_only')))),
+
+    // This is to be accessible to all users, so 'access callback' can be set
+    // to TRUE, meaning that we should bypass all access checks.
+    'access arguments' => array('access timsheet'),
+
+    // If the page callback is located in another file, specify it here and
+    // that file will be automatically loaded when needed.
+    // 'file' => 'mctimetracker_timsheet.module',
+
+    // We can choose which menu gets the link. The default is 'navigation'.
+    'menu_name' => 'main-menu',
+
+    // Show the menu link as expanded.
+    'expanded' => TRUE,
+  
+    // The optional weight element tells how to order the submenu items.
+    // Higher weights are "heavier", dropping to the bottom of the menu.
+    'weight' => 10,
+  
+  );
+  
+  $items['mctimetracker_timsheet/getevent'] = array(
+    	'type' => MENU_CALLBACK,  
+    	'page callback' => 'mctimetracker_timsheet_get_event',
+    	'access arguments' => array('access content'),
+    	'file' => 'mctimetracker_timsheet.event.inc',
+  );
+  
+  $items['admin/config/mctimetracker'] = array(
+  		'title' => 'mctimetracker',
+    	'description' => 'General mctimetracker related configuration.',
+    	'position' => 'right',
+    	'weight' => -20,
+    	'page callback' => 'mctimetracker_admin_menu_block_page',
+    	'access arguments' => array('access administration pages'),
+    	'file' => 'system.admin.inc',
+  );
+  
+  $items['admin/config/mctimetracker/mctimetracker_timsheet'] = array(
+    	'title' => 'mctimetracker_timsheet',
+    	'description' => 'Configure the mctimetracker_timsheet modules.',
+    	'page callback' => 'drupal_get_form',
+    	'page arguments' => array('mctimetracker_timsheet_admin_settings'),
+    	'access arguments' => array('mctimetracker_timsheet: access administration pages'),
+    	'type' => MENU_NORMAL_ITEM,
+  );
+  
+  return $items;
+}
+
+
+function mctimetracker_timsheet_full() {
+	
+  $build['timsheet'] = array(
+    '#theme' => 'campaign_full',
+    '#west' => 'West',
+    '#east' => 'East',
+  );
+  
+  $output = drupal_render($build);
+  
+  return $output;
+  
+}

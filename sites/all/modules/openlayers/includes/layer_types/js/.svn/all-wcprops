@@ -1,0 +1,77 @@
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/openlayers/includes/layer_types/js
+END
+wms.js
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/openlayers/includes/layer_types/js/wms.js
+END
+raw.js
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/openlayers/includes/layer_types/js/raw.js
+END
+virtualearth.js
+K 25
+svn:wc:ra_dav:version-url
+V 135
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/openlayers/includes/layer_types/js/virtualearth.js
+END
+xyz.js
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/openlayers/includes/layer_types/js/xyz.js
+END
+google.js
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/openlayers/includes/layer_types/js/google.js
+END
+cloudmade.js
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/openlayers/includes/layer_types/js/cloudmade.js
+END
+maptiler.js
+K 25
+svn:wc:ra_dav:version-url
+V 131
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/openlayers/includes/layer_types/js/maptiler.js
+END
+osm.js
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/openlayers/includes/layer_types/js/osm.js
+END
+yahoo.js
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/openlayers/includes/layer_types/js/yahoo.js
+END
+vector.js
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/openlayers/includes/layer_types/js/vector.js
+END
+kml.js
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/openlayers/includes/layer_types/js/kml.js
+END
+tms.js
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/openlayers/includes/layer_types/js/tms.js
+END

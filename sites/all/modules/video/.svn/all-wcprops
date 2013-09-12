@@ -1,0 +1,89 @@
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/video
+END
+video.theme.inc
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/video/video.theme.inc
+END
+video.utility.inc
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/video/video.utility.inc
+END
+video.info
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/video/video.info
+END
+LICENSE.txt
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/video/LICENSE.txt
+END
+video.field.inc
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/video/video.field.inc
+END
+video.drush.inc
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/video/video.drush.inc
+END
+INSTALL.txt
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/video/INSTALL.txt
+END
+video.filters.inc
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/video/video.filters.inc
+END
+video.rules.inc
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/video/video.rules.inc
+END
+video_scheduler.php
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/video/video_scheduler.php
+END
+video.module
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/video/video.module
+END
+video.features.inc
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/video/video.features.inc
+END
+README.txt
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/video/README.txt
+END
+video.install
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/video/video.install
+END

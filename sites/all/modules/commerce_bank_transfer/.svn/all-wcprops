@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/commerce_bank_transfer
+END
+LICENSE.txt
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/commerce_bank_transfer/LICENSE.txt
+END
+commerce_bank_transfer.info
+K 25
+svn:wc:ra_dav:version-url
+V 135
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/commerce_bank_transfer/commerce_bank_transfer.info
+END
+README.txt
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/commerce_bank_transfer/README.txt
+END
+commerce_bank_transfer.module
+K 25
+svn:wc:ra_dav:version-url
+V 137
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/commerce_bank_transfer/commerce_bank_transfer.module
+END
+commerce_bank_transfer.install
+K 25
+svn:wc:ra_dav:version-url
+V 138
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/commerce_bank_transfer/commerce_bank_transfer.install
+END

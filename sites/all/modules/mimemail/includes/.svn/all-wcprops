@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/mimemail/includes
+END
+mimemail.mail.inc
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/mimemail/includes/mimemail.mail.inc
+END
+mimemail.incoming.inc
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/mimemail/includes/mimemail.incoming.inc
+END
+mimemail.admin.inc
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/mimemail/includes/mimemail.admin.inc
+END
+mimemail.rules.inc
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/mimemail/includes/mimemail.rules.inc
+END

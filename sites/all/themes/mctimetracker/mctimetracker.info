@@ -1,0 +1,56 @@
+
+name = MC TIME TRACKER
+description = A flexible, recolorable theme with many regions.
+package = Core
+version = VERSION
+core = 7.x
+
+; OPTIONAL STYLESHEETS
+stylesheets[all][] = css/layout.css
+stylesheets[all][] = css/style.css
+stylesheets[all][] = css/colors.css
+stylesheets[all][] = css/nivo-slider.css
+;stylesheets[all][] = css/jquery.qtip.css
+stylesheets[print][] = css/print.css
+
+; OPTIONAL JAVASCRIPT
+scripts[] = js/jquery.nivo.slider.pack.js
+scripts[] = js/home.js
+scripts[] = js/jquery.qtip.js
+
+; FONT
+scripts[] = js/cufon-yui.js
+scripts[] = js/cursive.cufonfonts.js
+
+regions[header] = Header
+regions[help] = Help
+regions[page_top] = Page top
+regions[page_bottom] = Page bottom
+regions[mainmenu] = Main menu
+regions[highlighted] = Highlighted
+
+regions[featured] = Featured
+regions[content] = Content
+regions[sidebar_first] = Sidebar first
+regions[sidebar_second] = Sidebar second
+
+regions[triptych_first] = Triptych first
+regions[triptych_middle] = Triptych middle
+regions[triptych_last] = Triptych last
+
+regions[footer_firstcolumn] = Footer first column
+regions[footer_secondcolumn] = Footer second column
+regions[footer_thirdcolumn] = Footer third column
+regions[footer_fourthcolumn] = Footer fourth column
+regions[footer] = Footer
+
+regions[homepage_intro] = homepage_intro
+regions[homepage_what] = homepage_what
+regions[homepage_why] = homepage_why
+
+regions[homepage_calendar] = homepage_calendar
+regions[homepage_reminder] = homepage_reminder
+regions[homepage_call] = homepage_call
+regions[homepage_online] = homepage_online
+
+settings[shortcut_module_link] = 0

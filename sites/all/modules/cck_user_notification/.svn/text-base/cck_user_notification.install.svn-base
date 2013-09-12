@@ -1,0 +1,32 @@
+<?php
+
+/**
+ * Implements hook_field_schema().
+ */
+function cck_user_notification_field_schema($field) {
+  return array (
+    'columns' => array (
+      'user' => array (
+          'description' => 'The User',
+          'type' => 'varchar',
+          'length' => 32,
+          'not null' => TRUE,
+      ),
+      'daily_notification' => array (
+          'description' => 'daily_notification',
+          'type' => 'int',
+          'not null' => TRUE,
+          'default' => 1,
+      ),
+      'requested_notification' => array (
+          'description' => 'requested_notification',
+          'type' => 'int',
+          'not null' => TRUE,
+          'default' => 1,
+      ),
+    ),
+    'indexes' => array (
+      'user_notification' => array('user', 'daily_notification', 'requested_notification'),
+    ),
+  );
+}

@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/twilio/plugins/standard/applets/conference
+END
+twiml.php
+K 25
+svn:wc:ra_dav:version-url
+V 137
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/twilio/plugins/standard/applets/conference/twiml.php
+END
+ui.php
+K 25
+svn:wc:ra_dav:version-url
+V 134
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/twilio/plugins/standard/applets/conference/ui.php
+END
+icon.png
+K 25
+svn:wc:ra_dav:version-url
+V 136
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/twilio/plugins/standard/applets/conference/icon.png
+END
+applet.json
+K 25
+svn:wc:ra_dav:version-url
+V 139
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/twilio/plugins/standard/applets/conference/applet.json
+END

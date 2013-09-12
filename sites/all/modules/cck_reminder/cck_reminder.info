@@ -1,0 +1,5 @@
+name = CCK Reminder
+description = CCK Reminder
+package = Fields
+dependencies[] = field
+core = 7.x

@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/mc_custom_color_field
+END
+mc_custom_color_field.install
+K 25
+svn:wc:ra_dav:version-url
+V 136
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/mc_custom_color_field/mc_custom_color_field.install
+END
+mc_custom_color_field.css
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/mc_custom_color_field/mc_custom_color_field.css
+END
+colorpicker.css
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/mc_custom_color_field/colorpicker.css
+END
+mc_custom_color_field.info
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/mc_custom_color_field/mc_custom_color_field.info
+END
+colorpicker.jquery.js
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/mc_custom_color_field/colorpicker.jquery.js
+END
+mc_custom_color_field.js
+K 25
+svn:wc:ra_dav:version-url
+V 131
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/mc_custom_color_field/mc_custom_color_field.js
+END
+colorpicker.js
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/mc_custom_color_field/colorpicker.js
+END
+mc_custom_color_field.test
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/mc_custom_color_field/mc_custom_color_field.test
+END
+mc_custom_color_field.module
+K 25
+svn:wc:ra_dav:version-url
+V 135
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/mc_custom_color_field/mc_custom_color_field.module
+END

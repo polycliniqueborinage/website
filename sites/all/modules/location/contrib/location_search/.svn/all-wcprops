@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/location/contrib/location_search
+END
+search_result_location.tpl.php
+K 25
+svn:wc:ra_dav:version-url
+V 148
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/location/contrib/location_search/search_result_location.tpl.php
+END
+location_search.module
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/location/contrib/location_search/location_search.module
+END
+location_search.install
+K 25
+svn:wc:ra_dav:version-url
+V 141
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/location/contrib/location_search/location_search.install
+END
+API.txt
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/location/contrib/location_search/API.txt
+END
+location_search.info
+K 25
+svn:wc:ra_dav:version-url
+V 138
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/location/contrib/location_search/location_search.info
+END
+location_search.admin.inc
+K 25
+svn:wc:ra_dav:version-url
+V 143
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/location/contrib/location_search/location_search.admin.inc
+END

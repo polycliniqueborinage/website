@@ -1,0 +1,11 @@
+
+/* Creates two columns, each 50% of page width */
+
+#stormdashboard {
+width: 100%
+}
+
+div.stormdashboard {
+float: left;
+width: 50%;
+}

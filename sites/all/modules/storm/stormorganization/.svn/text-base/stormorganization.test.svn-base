@@ -1,0 +1,30 @@
+<?php
+
+class StormorganisationTestCase extends DrupalWebTestCase {
+
+  public static function getInfo() {
+    return array(
+      'name' => 'Storm Organization functionality',
+      'description' => 'Test the functionality of the Storm Organization module',
+      'group' => 'Storm',
+    );
+  }
+
+  public function setUp() {
+    parent::setUp('storm', 'stormorganization');
+  }
+
+  public function testStormorganizationCreate() {
+    // Create and login user.
+    $account = $this->drupalCreateUser(array('access content'));//, 'create stormorganization content'));
+    $this->drupalLogin($account);
+    
+    // Create a new node.
+    /*$edit = array(
+      'title' => $this->randomName(8),
+    );*/
+    //$this->drupalPost('node/add/stormorganization', $edit, t('Save'));
+    //$this->assertText(t('Organization @title has been created.', array('@title' => $edit['title'])));
+  }
+
+}

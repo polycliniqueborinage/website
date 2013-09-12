@@ -1,0 +1,56 @@
+
+.full_widget {
+    background: none repeat scroll 0 0 transparent !important;
+    border: 0 none #FFFFFF !important;
+    padding: 30px 0 !important;
+}
+
+.full_widget .connect_top {
+    background: none repeat scroll 0 0 transparent!important;
+}
+
+.full_widget .profileimage {
+    display: none;
+    float: left;
+    height: 40px;
+    margin: 0 0 4px;
+    padding: 0 10px 0 0;
+    width: 40px;
+}
+
+.full_widget .connect_action {
+    padding: 0 0 0 185px;
+}
+
+.full_widget .connect_action .name_block {
+    display: none;
+}
+
+.full_widget .connect_widget {
+    background-color: transparent!important;
+    position: absolute!important;
+    top: 0px!important;
+}
+
+.fan_box .connections_grid .grid_item {
+    padding: 0 0 10px 2px !important;
+    width: 80px !important;
+    text-align: center !important;
+}
+
+.full_widget .connections_grid .grid_item .name {
+    color: #FFFFFF!important;
+    font-size: 12px!important;
+    overflow: hidden;
+    padding-top: 2px;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.fan_box .connections {
+    border-top: none 0!important;
+}
+
+.fan_box .connections .connections_grid {
+    padding-top: 10px!important;
+}

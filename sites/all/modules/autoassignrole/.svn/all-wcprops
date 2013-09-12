@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/autoassignrole
+END
+LICENSE.txt
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/autoassignrole/LICENSE.txt
+END
+autoassignrole.module
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/autoassignrole/autoassignrole.module
+END
+autoassignrole.install
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/autoassignrole/autoassignrole.install
+END
+CHANGELOG.txt
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/autoassignrole/CHANGELOG.txt
+END
+autoassignrole.info
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/autoassignrole/autoassignrole.info
+END
+README.txt
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/autoassignrole/README.txt
+END
+autoassignrole.test
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/autoassignrole/autoassignrole.test
+END
+autoassignrole.admin.inc
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/autoassignrole/autoassignrole.admin.inc
+END

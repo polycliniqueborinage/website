@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/date_ical/theme
+END
+date-ical-vcalendar.tpl.php
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/date_ical/theme/date-ical-vcalendar.tpl.php
+END
+date-ical-valarm.tpl.php
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/date_ical/theme/date-ical-valarm.tpl.php
+END
+theme.inc
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/date_ical/theme/theme.inc
+END
+date-ical-vevent.tpl.php
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/date_ical/theme/date-ical-vevent.tpl.php
+END

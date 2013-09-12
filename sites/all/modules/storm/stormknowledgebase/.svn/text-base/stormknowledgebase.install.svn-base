@@ -1,0 +1,87 @@
+<?php
+
+/**
+ * @file
+ */
+
+function stormknowledgebase_install() {
+  // Default to not published to front page
+  variable_set('node_options_stormknowledgebase', array('status'));
+  // Stop node module from setting Storm permissions
+  variable_set('node_permissions_stormknowledgebase', 0);
+  
+  // Create fields
+  $field = array(
+    'field_name' => 'stormknowledgebase_topic',
+    'type' => 'list_text',
+  );
+  field_create_field($field);
+  
+  $instance = array(
+    'field_name' => 'stormknowledgebase_topic',
+    'object_type' => 'node',
+    'bundle' => 'stormknowledgebase',
+    'label' => t('Topic'),
+    'widget' => array(
+      'type' => 'options_select',
+      'weight' => 0,
+    ),
+  );
+  field_create_instance($instance);
+}
+
+function stormknowledgebase_disable() {
+  drupal_set_message(t('Nodes of type "Knowledgebase" have not been deleted on disabling Storm Knowledgebase. Please note that they will now have reduced functionality, and will not be protected by Storm Knowledgebase access controls.'), 'warning');
+}
+
+function stormknowledgebase_uninstall() {
+  field_delete_field('stormknowledgebase_topic');
+  
+  drupal_uninstall_schema('stormknowledgebase');
+}
+
+function stormknowledgebase_schema() {
+  $schema['stormknowledgebase'] = array(
+    'fields' => array(
+      'vid' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
+      'nid' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
+      'topic' => array('type' => 'varchar', 'length' => 20),
+    ),
+    'primary key' => array('vid', 'nid'),
+  );
+
+  return $schema;
+}
+
+/*
+ * @function
+ * Upgrade to Drupal 7
+ */
+/*function stormknowledebase_update_7100() {
+  // Stop node module from setting Storm permissions
+  variable_set('node_permissions_stormknowledgebase', 0);
+  
+  // Create fields
+  $field = array(
+    'field_name' => 'stormknowledgebase_topic',
+    'type' => 'text',
+    'settings' => array(
+      'allowed_values' => 'OS|Operating systems',
+    ),
+  );
+  field_create_field($field);
+  
+  $instance = array(
+    'field_name' => 'stormknowledgebase_topic',
+    'object_type' => 'node',
+    'bundle' => 'stormknowledgebase',
+    'label' => t('Topic'),
+    //'description' => t('You can enter your last name here.'),
+    'widget' => array(
+      'type' => 'options_select',
+      'weight' => 0,
+    ),
+  );
+  field_create_instance($instance);
+
+}*/

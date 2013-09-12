@@ -1,0 +1,5 @@
+name = MC Custom Block
+description = MC Custom Block
+package = MC Custom
+core = 7.x
+dependencies[] = block

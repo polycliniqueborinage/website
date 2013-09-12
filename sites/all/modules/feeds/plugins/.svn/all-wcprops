@@ -1,0 +1,89 @@
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/feeds/plugins
+END
+FeedsFetcher.inc
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/feeds/plugins/FeedsFetcher.inc
+END
+FeedsFileFetcher.inc
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/feeds/plugins/FeedsFileFetcher.inc
+END
+FeedsHTTPFetcher.inc
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/feeds/plugins/FeedsHTTPFetcher.inc
+END
+FeedsSyndicationParser.inc
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/feeds/plugins/FeedsSyndicationParser.inc
+END
+FeedsOPMLParser.inc
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/feeds/plugins/FeedsOPMLParser.inc
+END
+FeedsSimplePieParser.inc
+K 25
+svn:wc:ra_dav:version-url
+V 123
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/feeds/plugins/FeedsSimplePieParser.inc
+END
+FeedsNodeProcessor.inc
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/feeds/plugins/FeedsNodeProcessor.inc
+END
+FeedsTermProcessor.inc
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/feeds/plugins/FeedsTermProcessor.inc
+END
+FeedsCSVParser.inc
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/feeds/plugins/FeedsCSVParser.inc
+END
+FeedsParser.inc
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/feeds/plugins/FeedsParser.inc
+END
+FeedsPlugin.inc
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/feeds/plugins/FeedsPlugin.inc
+END
+FeedsUserProcessor.inc
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/feeds/plugins/FeedsUserProcessor.inc
+END
+FeedsProcessor.inc
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/feeds/plugins/FeedsProcessor.inc
+END
+FeedsSitemapParser.inc
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/feeds/plugins/FeedsSitemapParser.inc
+END

@@ -1,0 +1,137 @@
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/twilio/OpenVBX/views
+END
+connect.php
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/twilio/OpenVBX/views/connect.php
+END
+view_policy.php
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/twilio/OpenVBX/views/view_policy.php
+END
+flows.php
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/twilio/OpenVBX/views/flows.php
+END
+set-password.php
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/twilio/OpenVBX/views/set-password.php
+END
+account.php
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/twilio/OpenVBX/views/account.php
+END
+user_group_dialogs.php
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/twilio/OpenVBX/views/user_group_dialogs.php
+END
+iframe.php
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/twilio/OpenVBX/views/iframe.php
+END
+bug-banners.php
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/twilio/OpenVBX/views/bug-banners.php
+END
+client-first-run.php
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/twilio/OpenVBX/views/client-first-run.php
+END
+flow.php
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/twilio/OpenVBX/views/flow.php
+END
+login.php
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/twilio/OpenVBX/views/login.php
+END
+view_openid.php
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/twilio/OpenVBX/views/view_openid.php
+END
+voicemail.php
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/twilio/OpenVBX/views/voicemail.php
+END
+client_js.php
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/twilio/OpenVBX/views/client_js.php
+END
+numbers.php
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/twilio/OpenVBX/views/numbers.php
+END
+call.php
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/twilio/OpenVBX/views/call.php
+END
+js-init.php
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/twilio/OpenVBX/views/js-init.php
+END
+accounts.php
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/twilio/OpenVBX/views/accounts.php
+END
+unit.php
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/twilio/OpenVBX/views/unit.php
+END
+devices.php
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/twilio/OpenVBX/views/devices.php
+END
+reset.php
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/twilio/OpenVBX/views/reset.php
+END
+index.html
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/twilio/OpenVBX/views/index.html
+END

@@ -1,0 +1,23 @@
+name = Storm Organization
+description = "Allows storing of organizations for use within Storm"
+package = Storm
+core = 7.x
+configure = admin/configure/system/storm/organization
+
+; dependencies
+dependencies[] = storm
+dependencies[] = views
+
+; files
+files[] = stormorganization.install
+files[] = stormorganization.module
+files[] = stormorganization.test
+files[] = stormorganization.theme.inc
+files[] = stormorganization.views_default.inc
+
+; Information added by drupal.org packaging script on 2011-02-25
+version = "7.x-1.x-dev"
+core = "7.x"
+project = "storm"
+datestamp = "1298620277"
+

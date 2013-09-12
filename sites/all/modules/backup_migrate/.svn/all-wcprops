@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/backup_migrate
+END
+LICENSE.txt
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/backup_migrate/LICENSE.txt
+END
+backup_migrate.module
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/backup_migrate/backup_migrate.module
+END
+backup_migrate.install
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/backup_migrate/backup_migrate.install
+END
+backup_migrate.css
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/backup_migrate/backup_migrate.css
+END
+backup_migrate.info
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/backup_migrate/backup_migrate.info
+END
+backup_migrate.js
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/backup_migrate/backup_migrate.js
+END
+README.txt
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/backup_migrate/README.txt
+END

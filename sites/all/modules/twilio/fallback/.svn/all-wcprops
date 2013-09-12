@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/twilio/fallback
+END
+rewrite.php
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/twilio/fallback/rewrite.php
+END
+sms.php
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/twilio/fallback/sms.php
+END
+voice.php
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/twilio/fallback/voice.php
+END

@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/twilio/plugins/standard/applets/dial
+END
+script.js
+K 25
+svn:wc:ra_dav:version-url
+V 131
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/twilio/plugins/standard/applets/dial/script.js
+END
+twiml.php
+K 25
+svn:wc:ra_dav:version-url
+V 131
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/twilio/plugins/standard/applets/dial/twiml.php
+END
+ui.php
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/twilio/plugins/standard/applets/dial/ui.php
+END
+style.css
+K 25
+svn:wc:ra_dav:version-url
+V 131
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/twilio/plugins/standard/applets/dial/style.css
+END
+icon.png
+K 25
+svn:wc:ra_dav:version-url
+V 130
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/twilio/plugins/standard/applets/dial/icon.png
+END
+TwimlDial.php
+K 25
+svn:wc:ra_dav:version-url
+V 135
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/twilio/plugins/standard/applets/dial/TwimlDial.php
+END
+applet.json
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/twilio/plugins/standard/applets/dial/applet.json
+END

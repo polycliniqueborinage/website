@@ -1,0 +1,95 @@
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/location/handlers
+END
+location_handler_filter_location_province.inc
+K 25
+svn:wc:ra_dav:version-url
+V 148
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/location/handlers/location_handler_filter_location_province.inc
+END
+location_handler_field_location_distance.inc
+K 25
+svn:wc:ra_dav:version-url
+V 147
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/location/handlers/location_handler_field_location_distance.inc
+END
+location_views_handler_filter_proximity.inc
+K 25
+svn:wc:ra_dav:version-url
+V 146
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/location/handlers/location_views_handler_filter_proximity.inc
+END
+location_handler_sort_location_distance.inc
+K 25
+svn:wc:ra_dav:version-url
+V 146
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/location/handlers/location_handler_sort_location_distance.inc
+END
+location_views_handler_field_coordinates.inc
+K 25
+svn:wc:ra_dav:version-url
+V 147
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/location/handlers/location_views_handler_field_coordinates.inc
+END
+location_views_handler_field_latitude.inc
+K 25
+svn:wc:ra_dav:version-url
+V 144
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/location/handlers/location_views_handler_field_latitude.inc
+END
+location_handler_argument_location_country.inc
+K 25
+svn:wc:ra_dav:version-url
+V 149
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/location/handlers/location_handler_argument_location_country.inc
+END
+location_handler_field_location_country.inc
+K 25
+svn:wc:ra_dav:version-url
+V 146
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/location/handlers/location_handler_field_location_country.inc
+END
+location_handler_argument_location_proximity.inc
+K 25
+svn:wc:ra_dav:version-url
+V 151
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/location/handlers/location_handler_argument_location_proximity.inc
+END
+location_handler_filter_location_country.inc
+K 25
+svn:wc:ra_dav:version-url
+V 147
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/location/handlers/location_handler_filter_location_country.inc
+END
+location_handler_field_location_street.inc
+K 25
+svn:wc:ra_dav:version-url
+V 145
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/location/handlers/location_handler_field_location_street.inc
+END
+location_views_handler_field_longitude.inc
+K 25
+svn:wc:ra_dav:version-url
+V 145
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/location/handlers/location_views_handler_field_longitude.inc
+END
+location_handler_argument_location_province.inc
+K 25
+svn:wc:ra_dav:version-url
+V 150
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/location/handlers/location_handler_argument_location_province.inc
+END
+location_handler_field_location_province.inc
+K 25
+svn:wc:ra_dav:version-url
+V 147
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/location/handlers/location_handler_field_location_province.inc
+END
+location_handler_field_location_address.inc
+K 25
+svn:wc:ra_dav:version-url
+V 146
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/location/handlers/location_handler_field_location_address.inc
+END

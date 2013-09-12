@@ -1,0 +1,457 @@
+<?php
+
+/**
+ * @file
+ * Schema for FileMaker module.
+ */
+
+
+
+
+
+/**
+ * Implementation of hook_requirements().
+ *
+ * Uses the Libraries module to provide a message about
+ * the status of the FileMaker API in status report.
+ */
+function filemaker_requirements($phase) {
+
+  if ($phase == "runtime") {
+
+    // Try to load the API.
+    filemaker_load_api();
+    $requirements['filemaker']['title'] = t('FileMaker');
+    
+    // Is API available?
+    if (class_exists('FileMaker')) {
+      $requirements['filemaker']['value'] = 'FileMaker API is installed correctly';
+      $requirements['filemaker']['severity'] = REQUIREMENT_OK;
+    }
+
+    // Required API wasn't found.
+    else {
+      $requirements['filemaker']['value'] = t('FileMaker API was not found');
+
+      // Provide instructions on installing the FileMaker API for PHP.
+      $requirements['filemaker']['description'] = t('The FileMaker API for PHP is required for this module. The API comes with your copy of FileMaker server and should be placed in sites/all/libraries/filemakerapi.');
+      $requirements['filemaker']['severity'] = REQUIREMENT_ERROR;
+    }
+  }
+
+  return $requirements;
+}
+
+
+
+
+
+/**
+ * Implementation of hook_install().
+ */
+function filemaker_install() {
+  drupal_install_schema('filemaker');
+}
+
+
+
+
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function filemaker_uninstall() {
+  drupal_uninstall_schema('filemaker');
+}
+
+
+
+
+
+/**
+ * Implementation of hook_schema().
+ */
+function filemaker_schema() {
+
+  $schema['filemaker'] = array(
+    'description' => t("Node type that can interact with a FileMaker layout."),
+    'fields' => array(
+      'nid' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+        'description' => t("The FileMaker node's {fmwebform}.nid"),
+      ),
+      'vid' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+        'description' => t("The FileMaker node's {node_revisions}.vid"),
+      ),
+      'fmcid' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+        'description' => t("The FileMaker connection's {filemaker_connection}.fmcid"),
+      ),
+      'layout' => array(
+        'type' => 'text',
+        'not null' => TRUE,
+        'description' => t("The name of the FileMaker layout that this webform will interact with."),
+      ),
+      'fmview' => array(
+        'type' => 'text',
+        'not null' => TRUE,
+        'description' => t("The FileMaker feature to include on the standard Drupal view."),
+      ),
+      'fm_show_record_number' => array(
+        'type' => 'int', 
+        'unsigned' => TRUE, 
+        'not null' => FALSE, 
+        'default' => 1, 
+        'description' => t("The FileMaker node's \"Show Record #\" setting")
+      ),
+    ),
+    'primary key' => array('nid', 'vid'),
+    'unique keys' => array(
+      'vid' => array('vid')
+    ),
+    'indexes' => array(
+      'nid' => array('nid')
+    ),
+  );
+
+  $schema['filemaker_connection'] = array(
+    'description' => t('Stores information to connect to a FileMaker database.'),
+    'fields' => array(
+      'fmcid' => array(
+        'description' => t('Unique auto incrementing id.'),
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'fmhostname' => array(
+        'description' => t('FileMaker host name.'),
+        'type' => 'varchar',
+        'length' => '255',
+        'not null' => FALSE,
+      ),
+      'fmdatabase' => array(
+        'description' => t('FileMaker database name.'),
+        'type' => 'varchar',
+        'length' => '255',
+        'not null' => FALSE,
+      ),
+      'fmusername' => array(
+        'description' => t('FileMaker username.'),
+        'type' => 'varchar',
+        'length' => '255',
+        'not null' => FALSE,
+      ),
+      'fmpassword' => array(
+        'description' => t('FileMaker password.'),
+        'type' => 'varchar',
+        'length' => '255',
+        'not null' => FALSE,
+      ),
+    ),
+    'primary key' => array('fmcid'),
+  );
+
+  $schema['filemaker_field'] = array(
+    'description' => t('An instance of a FileMaker field. Attaches to a FileMaker webform node.'),
+    'fields' => array(
+      'fmfid' => array(
+        'description' => t('Unique auto incrementing id.'),
+        'type' => 'serial',
+        'not null' => TRUE,
+      ),
+      'nid' => array(
+        'description' => t("The {filemaker}.nid"),
+        'type' => 'int',
+        'not null' => FALSE,
+      ),
+      'name' => array(
+        'description' => t("The FileMaker field's name"),
+        'type' => 'varchar',
+        'length' => '128',
+        'not null' => FALSE,
+      ),
+      'label' => array(
+        'description' => t("The FileMaker field's label"),
+        'type' => 'text',
+        'not null' => FALSE,
+      ),
+      'weight' => array(
+        'description' => t("The FileMaker field's weight; used to determine sort order"),
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'type' => array(
+        'description' => t('FileMaker field type, not MySQL or widget type.'),
+        'type' => 'varchar',
+        'length' => '20',
+        'not null' => FALSE,
+      ),
+      'widget' => array(
+        'description' => t('Name of widget to use on webform. Used for the #type variable in the field array.'),
+        'type' => 'varchar',
+        'length' => '20',
+        'not null' => FALSE,
+      ),
+      'default_value' => array(
+        'description' => t('Default value for the field.'),
+        'type' => 'text',
+        'not null' => FALSE,
+      ),
+      'default_find_value' => array(
+        'description' => t('Default value for the field in find mode.'),
+        'type' => 'varchar',
+        'length' => '20',
+        'not null' => FALSE,
+      ),
+      'default_create_value' => array(
+        'description' => t('Default value for the field in create mode.'),
+        'type' => 'varchar',
+        'length' => '20',
+        'not null' => FALSE,
+      ),
+      'required' => array(
+        'description' => t('Contains the number 1 if the field is required.'),
+        'type' => 'int',
+        'not null' => FALSE,
+      ),
+    ),
+    'primary key' => array('fmfid'),
+  );
+
+  $schema['filemaker_portal'] = array(
+    'description' => t('An instance of a FileMaker portal to appear on a FileMaker node'),
+    'fields' => array(
+      'fmpid' => array(
+        'description' => t('Unique auto incrementing id.'),
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'nid' => array(
+        'description' => t('The {filemaker}.nid'),
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'name' => array(
+        'description' => t('The name of the portal, as saved in FileMaker.'),
+        'type' => 'varchar',
+        'length' => '100',
+        'not null' => TRUE,
+      ),
+      'weight' => array(
+        'description' => t('The weight is used to determine sort order.'),
+        'type' => 'int',
+        'not null' => FALSE,
+        'default' => 0,
+      ),
+    ),
+    'primary key' => array('fmpid'),
+  );
+
+
+  $schema['filemaker_script'] = array(
+    'description' => t('An instance of a FileMaker script, which can be called from a node or via cron.'),
+    'fields' => array(
+      'fmsid' => array(
+        'description' => t('Unique auto incrementing id.'),
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'fmcid' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+        'description' => t("The FileMaker connection's {filemaker_connection}.fmcid"),
+      ),
+      'nid' => array(
+        'description' => t('The {filemaker}.nid. If this field is empty, the script gets called via cron.'),
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'layout' => array(
+        'type' => 'text',
+        'not null' => TRUE,
+        'description' => t("The name of the FileMaker layout that this script will interact with."),
+      ),
+      'name' => array(
+        'description' => t('The name of the script, as saved in FileMaker.'),
+        'type' => 'varchar',
+        'length' => '100',
+        'not null' => TRUE,
+      ),
+      'parameter' => array(
+        'description' => t('The script parameter.'),
+        'type' => 'varchar',
+        'length' => '100',
+        'not null' => TRUE,
+      ),
+      'button' => array(
+        'description' => t('The text of a button, which will call the script.'),
+        'type' => 'varchar',
+        'length' => '100',
+        'not null' => TRUE,
+      ),
+      'weight' => array(
+        'description' => t('The weight is used to determine the order the scripts are called in (if cron) or the order the buttons appear in (if a button).'),
+        'type' => 'int',
+        'not null' => FALSE,
+        'default' => 0,
+      ),
+    ),
+    'primary key' => array('fmsid'),
+  );
+
+  return $schema;
+}
+
+
+
+// Long story why there is no 6101. Doesn't need to be told.
+
+
+/**
+ * Add "show record #" flag field to the FileMaker node. 
+ */
+function filemaker_update_6102() {
+
+  $ret = array();
+
+  if (db_column_exists('filemaker', 'fm_show_record_number')) {
+    return $ret;
+  }
+
+  db_add_field($ret, 'filemaker', 'fm_show_record_number', array(
+    'type' => 'int', 
+    'unsigned' => TRUE, 
+    'not null' => FALSE, 
+    'default' => 1, 
+    'description' => t("The FileMaker node's \"Show Record #\" setting")
+ ));
+
+  return $ret;
+}
+
+
+
+
+
+
+// This should have been 6200, instead of 6103. Oops.
+
+
+/**
+ * Add "default find value" and "default create value" to the FileMaker field. 
+ *
+ * This allows the web administrator to use the Drupal username or uid as the default
+ *  value for a FileMaker field.
+ */
+function filemaker_update_6103() {
+
+  $ret = array();
+
+  if (db_column_exists('filemaker_field', 'default_find_value')) {
+    return $ret;
+  }
+
+  db_add_field($ret, 'filemaker_field', 'default_find_value', array(
+        'description' => t('Default value for the field in find mode.'),
+        'type' => 'varchar',
+        'length' => '20',
+        'not null' => FALSE,
+  ));
+
+  db_add_field($ret, 'filemaker_field', 'default_create_value', array(
+        'description' => t('Default value for the field in create mode.'),
+        'type' => 'varchar',
+        'length' => '20',
+        'not null' => FALSE,
+  ));
+
+  return $ret;
+}
+
+
+
+
+/**
+ * Add table of scripts. Each (FileMaker) script can be attached to a node
+ * or called as a cron job.
+ */
+function filemaker_update_6300() {
+
+  $ret = array();
+
+  $schema['filemaker_script'] = array(
+    'description' => t('An instance of a FileMaker script, which can be called from a node or via cron'),
+    'fields' => array(
+      'fmsid' => array(
+        'description' => t('Unique auto incrementing id.'),
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'fmcid' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+        'description' => t("The FileMaker connection's {filemaker_connection}.fmcid"),
+      ),
+      'nid' => array(
+        'description' => t('The {filemaker}.nid. If this field is empty, the script gets called via cron.'),
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'layout' => array(
+        'type' => 'text',
+        'not null' => TRUE,
+        'description' => t("The name of the FileMaker layout that this script will interact with."),
+      ),
+      'name' => array(
+        'description' => t('The name of the script, as saved in FileMaker.'),
+        'type' => 'varchar',
+        'length' => '100',
+        'not null' => TRUE,
+      ),
+      'parameter' => array(
+        'description' => t('The script parameter.'),
+        'type' => 'varchar',
+        'length' => '100',
+        'not null' => TRUE,
+      ),
+      'button' => array(
+        'description' => t('The text of a button, which will call the script.'),
+        'type' => 'varchar',
+        'length' => '100',
+        'not null' => TRUE,
+      ),
+      'weight' => array(
+        'description' => t('The weight is used to determine the order the scripts are called in (if cron) or the order the buttons appear in (if a button).'),
+        'type' => 'int',
+        'not null' => FALSE,
+        'default' => 0,
+      ),
+    ),
+    'primary key' => array('fmsid'),
+  );
+
+  db_create_table($ret, 'filemaker_script', $schema['filemaker_script']);
+
+  return $ret;
+}

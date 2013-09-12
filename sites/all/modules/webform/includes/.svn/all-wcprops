@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/webform/includes
+END
+webform.admin.inc
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/webform/includes/webform.admin.inc
+END
+webform.emails.inc
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/webform/includes/webform.emails.inc
+END
+webform.options.inc
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/webform/includes/webform.options.inc
+END
+webform.report.inc
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/webform/includes/webform.report.inc
+END
+webform.submissions.inc
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/webform/includes/webform.submissions.inc
+END
+webform.pages.inc
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/webform/includes/webform.pages.inc
+END
+webform.export.inc
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/webform/includes/webform.export.inc
+END
+webform.components.inc
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/webform/includes/webform.components.inc
+END

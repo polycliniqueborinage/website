@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/mctimetracker/mctimetracker_calendar
+END
+mctimetracker_calendar.calendar.inc
+K 25
+svn:wc:ra_dav:version-url
+V 157
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/mctimetracker/mctimetracker_calendar/mctimetracker_calendar.calendar.inc
+END
+mctimetracker_calendar.week.inc
+K 25
+svn:wc:ra_dav:version-url
+V 153
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/mctimetracker/mctimetracker_calendar/mctimetracker_calendar.week.inc
+END
+mctimetracker_calendar.module
+K 25
+svn:wc:ra_dav:version-url
+V 151
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/mctimetracker/mctimetracker_calendar/mctimetracker_calendar.module
+END
+mctimetracker_calendar.install
+K 25
+svn:wc:ra_dav:version-url
+V 152
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/mctimetracker/mctimetracker_calendar/mctimetracker_calendar.install
+END
+mctimetracker_calendar.pages.inc
+K 25
+svn:wc:ra_dav:version-url
+V 154
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/mctimetracker/mctimetracker_calendar/mctimetracker_calendar.pages.inc
+END
+mctimetracker_calendar_full.tpl.php
+K 25
+svn:wc:ra_dav:version-url
+V 157
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/mctimetracker/mctimetracker_calendar/mctimetracker_calendar_full.tpl.php
+END
+mctimetracker_calendar.event.inc
+K 25
+svn:wc:ra_dav:version-url
+V 154
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/mctimetracker/mctimetracker_calendar/mctimetracker_calendar.event.inc
+END
+mctimetracker_calendar.info
+K 25
+svn:wc:ra_dav:version-url
+V 149
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/mctimetracker/mctimetracker_calendar/mctimetracker_calendar.info
+END
+mctimetracker_calendar_dashboard.tpl.php
+K 25
+svn:wc:ra_dav:version-url
+V 162
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/mctimetracker/mctimetracker_calendar/mctimetracker_calendar_dashboard.tpl.php
+END

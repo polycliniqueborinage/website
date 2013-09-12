@@ -1,0 +1,15 @@
+<?php
+
+function mc_custom_mail_mail_alter(&$message) {
+	
+  $domain = domain_get_domain();
+  
+  if($domain['domain_id'] == 2) {
+  	$message['params']['logo'] = 'http://portal.vsi.tv/sites/all/themes/custom/aradco/images/html_header.jpg';
+    $message['params']['company'] = 'ARADCO';
+  } else {
+  	$message['params']['logo'] = 'http://portal.vsi.tv/sites/all/themes/custom/vsi/images/html_header.jpg';
+    $message['params']['company'] = 'VSI';
+  };
+  
+}

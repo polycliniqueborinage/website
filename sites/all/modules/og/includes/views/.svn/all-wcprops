@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/og/includes/views
+END
+og_handler_field_user_roles.inc
+K 25
+svn:wc:ra_dav:version-url
+V 134
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/og/includes/views/og_handler_field_user_roles.inc
+END
+og_plugin_argument_validate_group.inc
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/og/includes/views/og_plugin_argument_validate_group.inc
+END
+og_handler_field_group_permissions.inc
+K 25
+svn:wc:ra_dav:version-url
+V 141
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/og/includes/views/og_handler_field_group_permissions.inc
+END
+og_handler_field_group_audience_state.inc
+K 25
+svn:wc:ra_dav:version-url
+V 144
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/og/includes/views/og_handler_field_group_audience_state.inc
+END
+og_handler_argument_group_audience_gid.inc
+K 25
+svn:wc:ra_dav:version-url
+V 145
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/og/includes/views/og_handler_argument_group_audience_gid.inc
+END
+og_handler_filter_group_audience_state.inc
+K 25
+svn:wc:ra_dav:version-url
+V 145
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/og/includes/views/og_handler_filter_group_audience_state.inc
+END
+og_handler_filter_group_state.inc
+K 25
+svn:wc:ra_dav:version-url
+V 136
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/og/includes/views/og_handler_filter_group_state.inc
+END
+og_handler_relationship.inc
+K 25
+svn:wc:ra_dav:version-url
+V 130
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/og/includes/views/og_handler_relationship.inc
+END
+og_handler_field_prerender_list.inc
+K 25
+svn:wc:ra_dav:version-url
+V 138
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/og/includes/views/og_handler_field_prerender_list.inc
+END

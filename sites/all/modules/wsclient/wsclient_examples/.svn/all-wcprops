@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/wsclient/wsclient_examples
+END
+wsclient_examples.info
+K 25
+svn:wc:ra_dav:version-url
+V 134
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/wsclient/wsclient_examples/wsclient_examples.info
+END
+wsclient_examples.test
+K 25
+svn:wc:ra_dav:version-url
+V 134
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/wsclient/wsclient_examples/wsclient_examples.test
+END
+wsclient_examples.module
+K 25
+svn:wc:ra_dav:version-url
+V 136
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/wsclient/wsclient_examples/wsclient_examples.module
+END

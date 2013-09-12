@@ -1,0 +1,7 @@
+name = MC Custom User
+description = Custom Registration + Rule Support
+package = MC Custom
+core = 7.x
+dependencies[] = rules
+files[] = mc_custom_user.inc
+files[] = mc_custom_user.rules.inc

@@ -1,0 +1,77 @@
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/og
+END
+og.field.inc
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/og/og.field.inc
+END
+og.info
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/og/og.info
+END
+LICENSE.txt
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/og/LICENSE.txt
+END
+og.test
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/og/og.test
+END
+og.api.php
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/og/og.api.php
+END
+og.devel_generate.inc
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/og/og.devel_generate.inc
+END
+og.rules.inc
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/og/og.rules.inc
+END
+og.module
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/og/og.module
+END
+og.install
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/og/og.install
+END
+README.txt
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/og/README.txt
+END
+og.rules_defaults.inc
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/og/og.rules_defaults.inc
+END
+.cvsignore
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/og/.cvsignore
+END

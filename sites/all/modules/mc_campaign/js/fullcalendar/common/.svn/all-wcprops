@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/mc_campaign/js/fullcalendar/common
+END
+common.css
+K 25
+svn:wc:ra_dav:version-url
+V 130
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/mc_campaign/js/fullcalendar/common/common.css
+END
+DayEventRenderer.js
+K 25
+svn:wc:ra_dav:version-url
+V 139
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/mc_campaign/js/fullcalendar/common/DayEventRenderer.js
+END
+print.css
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/mc_campaign/js/fullcalendar/common/print.css
+END
+HoverListener.js
+K 25
+svn:wc:ra_dav:version-url
+V 136
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/mc_campaign/js/fullcalendar/common/HoverListener.js
+END
+View.js
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/mc_campaign/js/fullcalendar/common/View.js
+END
+OverlayManager.js
+K 25
+svn:wc:ra_dav:version-url
+V 137
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/mc_campaign/js/fullcalendar/common/OverlayManager.js
+END
+CoordinateGrid.js
+K 25
+svn:wc:ra_dav:version-url
+V 137
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/mc_campaign/js/fullcalendar/common/CoordinateGrid.js
+END
+SelectionManager.js
+K 25
+svn:wc:ra_dav:version-url
+V 139
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/mc_campaign/js/fullcalendar/common/SelectionManager.js
+END
+HorizontalPositionCache.js
+K 25
+svn:wc:ra_dav:version-url
+V 146
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/mc_campaign/js/fullcalendar/common/HorizontalPositionCache.js
+END

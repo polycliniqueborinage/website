@@ -1,0 +1,235 @@
+<?php
+
+function mc_custom_user_menu() {
+	
+  $items['user/domain/reminder'] = array(
+    'title' => 'Domain Reminder',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('mc_custom_user_domain_reminder'),
+    'access callback' => TRUE,
+    'type' => MENU_NORMAL_ITEM,
+  	'weight' => 1,
+  );
+  
+  return $items;
+
+}
+
+function mc_custom_user_user_delete($account) {
+	
+  // DELETE DOMAIN
+  //domain_delete($account->domain_user);
+  
+  // DELETE CREDIT
+  //mc_campaign_empty_cost($account->domain_user);
+  
+  // REBUILD PERMISSION
+  //node_access_rebuild(TRUE);
+  
+}
+
+
+// Perform your own validation
+function mc_custom_user_user_register_validate($form, &$form_state) {
+	
+  $domain = $form_state['values']['field_domain']['und'][0]['value'];
+  if ($domain == '') {
+    form_set_error('field_domain', t('Secure website field is required.'));
+  } else {
+  	// CHECK IF DOMAIN IS ONLY CHAR
+    if (ctype_alnum($domain)&&ctype_lower($domain)) {
+  	  // CHECK IF DOMAIN IS UNIQUE
+      $subdomain = $domain.'mctimetracker.com';
+      $did = db_query("SELECT domain_id FROM {domain} WHERE LOWER(subdomain) = LOWER(:subdomain)", array(':subdomain' => $subdomain))->fetchField();
+      if ($did) {
+        form_set_error('field_domain', t('Secure website is already in use.'));
+      }
+    } else {
+      form_set_error('field_domain', t('Secure website may only contain letter in lower case and number.'));
+    }
+  }
+  
+  $mobile = $form_state['values']['field_mobile']['und'][0]['number'];
+  if ($mobile == '') {
+    form_set_error('field_mobile', t('Mobile field is required.'));
+  } else {
+  	//field_revision_field_mobile
+  	// TODO CHECK IF PHONE NUMBER IS UNIQUE
+  }
+  
+  drupal_add_js('jQuery(document).ready(function () {
+      
+      jQuery("#edit-field-domain-und-0-value").before("http://");
+      jQuery("#edit-field-domain-und-0-value").after(".mctimetracker.com");
+      
+	  jQuery("#edit-field-site-name-und-0-value").keyup(
+	  
+	  function() {
+	    var value = jQuery(this).val();
+		var regex=/([a-zA-Z]+)/;
+		var secure = value.match(regex);
+		if (secure) {
+		  jQuery("#edit-field-domain-und-0-value").val(secure[0]);
+  		} else {
+  		  jQuery("#edit-field-domain-und-0-value").val("");
+  		}
+      }
+    		  
+	  );
+  });', 'inline');
+  
+}
+
+
+
+function mc_custom_user_form_alter(&$form, &$form_state, $form_id) {
+	
+  switch ($form_id) {
+  	
+    case 'user_profile_form':
+    	
+      global $user;
+      $roles = $user->roles;
+      if (isset($roles[6])){
+        unset($form['field_activation_code']);
+        unset($form['field_activation_code_resent']);
+        unset($form['field_mobile']);
+      }    	
+      // hide code and activation code if egal
+      //dpm($form['field_domain']);  	
+
+      // hide activation code
+      unset($form['field_activation_code_hidden']);
+      unset($form['field_domain']);
+      
+      // remove contact
+      unset($form['contact']);
+      
+      break;
+
+    case 'user_register_form':
+      
+      unset($form['account']['name']['#description']);
+      unset($form['account']['mail']['#description']);
+      unset($form['account']['pass']['#description']);
+      // hide activation code
+      unset($form['field_activation_code_hidden']);
+      
+      // add validate function
+      $form['#validate'][] = 'mc_custom_user_user_register_validate';
+      
+      drupal_set_title('');
+      
+      $form['markup'] = array(
+        '#weight' => -1,
+        '#markup' => '<div id="welcomePanel">'. t('Thank you for choosing') . '<br/>' . t('MC TIME Tracker.') .'</div>',
+	  );
+	  
+      drupal_add_js('jQuery(document).ready(function () {
+      
+      jQuery("#edit-field-domain-und-0-value").before("http://");
+      jQuery("#edit-field-domain-und-0-value").after(".mctimetracker.com");
+      
+	  jQuery("#edit-field-site-name-und-0-value").keyup(
+	  
+	  function() {
+	    var value = jQuery(this).val();
+		var regex=/([a-zA-Z]+)/;
+		var secure = value.match(regex);
+		if (secure) {
+		  jQuery("#edit-field-domain-und-0-value").val(secure[0]);
+  		} else {
+  		  jQuery("#edit-field-domain-und-0-value").val("");
+  		}
+      }
+    		  
+	  );
+      });', 'inline');
+      
+      break;
+
+    case 'user_login':
+    	
+      drupal_set_title('');
+      $form['markup'] = array(
+        '#weight' => -1,
+        '#markup' => '<div id="welcomePanel">'.t('Welcome back') .'<br/>'. t('We have been missing you!').'</div>',
+	  );
+      break;
+      
+    case 'user_pass':
+      drupal_set_title('');
+      $form['markup'] = array(
+        '#weight' => -1,
+  	    '#markup' => '<div id="welcomePanel">'.t('Are you kidding me ?') . '<br/>' . t('Lost your password again ?').'</div>',
+	  );
+      break;
+      
+  
+  }
+
+}
+
+
+
+
+
+
+function mc_custom_user_domain_reminder($form, &$form_state) {
+	
+  drupal_set_title('');
+  $form['markup'] = array(
+        '#weight' => -1,
+        '#markup' => '<div id="welcomePanel">'.t('How to Sign In to MC TIME Tracker') .'</div>',
+  );
+	
+  $form['markup2'] = array(
+        '#markup' => '<p>' . t('When you signed up for MC TIME Tracker, we sent you an email with your Secure Site.') . '</p>'
+  					 .'<p>' . t('You can sign in from your Secure Site, which looks like this :') . '</p>'
+  					 .'<p>http://<b>COMPANYNAME</b>.mctimetracker.com</p>'
+  					 .'<p>' . t('...or you can use the form below to be redirected to your Secure Site.'). '</p>',
+  );
+  
+  $form['reminder'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Reminder'),
+  );
+	
+  $form['reminder']['email'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Email'),
+    '#required' => TRUE,
+    '#description' => t('Forget your Secure Site?')
+  );
+	
+  $form['submitnew'] = array(
+      '#type' => 'submit',
+      '#value' => t('Go to my Secure Site'),
+  );
+  
+  return $form;
+  
+}
+
+function mc_custom_user_domain_reminder_validate($form, $form_state) {
+	
+  $form_values = $form_state['values'];
+  if ($form_values['email'] != '' && !valid_email_address($form_values['email'])) {
+    form_set_error('email', t('Enter a valid email address'));
+  }
+  // check if email exist
+  $mail = db_query("SELECT COUNT(u.name) count FROM {users} u WHERE LOWER(u.mail) = LOWER(:mail)", array(':mail' => $form_values['email']))->fetchField();
+  if($mail == 0) {
+  	form_set_error('email', t('Email address unknow'));
+  }
+  
+}
+
+function mc_custom_user_domain_reminder_submit($form, &$form_state) {
+	
+  $subdomain = db_query("SELECT d.subdomain count FROM {users} u, {domain_editor} du, {domain} d WHERE u.uid = du.uid AND du.domain_id = d.domain_id AND LOWER(u.mail) = LOWER(:mail)", array(':mail' => $form_state['values']['email']))->fetchField();
+  if($subdomain) {
+    drupal_goto('http://'.$subdomain.'/user/login');
+  }
+  
+}

@@ -1,0 +1,350 @@
+<?php
+
+function mc_custom_node_node_presave($node) {
+  switch ($node->type) {
+    case 'agenda':
+      $node->field_agenda_uid[LANGUAGE_NONE][0]['value'] = mc_campaign_action_uuid_generate_php();
+      break;
+    case 'event':
+      $node->field_event_uid[LANGUAGE_NONE][0]['value'] = mc_campaign_action_uuid_generate_php();
+      break;
+  }
+}
+
+
+function mc_custom_node_node_insert($node) {
+  mc_custom_node_node_update($node);
+}
+
+
+function mc_custom_node_node_update($node) {
+  
+  switch ($node->type) {
+    
+    case 'event':
+      
+      // Get default value.
+      $domain = domain_get_domain();
+      $did = $domain['domain_id'];
+      $cid = 0;
+      $lid = 0;
+      $id = $node->nid;
+      $module = 'calendar';
+      
+      // Delete old notifications.
+      // Do not delete already sent notification.
+      $num_deleted = db_delete('mc_campaign_notifications')
+        ->condition('id', $node->nid)
+        ->condition('module', 'calendar')
+        ->condition('sent', '0', '=')
+        ->execute();
+        
+      // Prepare data.
+      $startdate = $node->field_event_date['und'][0]['value'];
+      $enddate = $node->field_event_date['und'][0]['value2'];
+      
+      // get calendar info
+      $calendar = $node->field_event_agenda['und'][0]['mc_custom_list'];
+      if (isset($calendar)) {
+        $calendar = node_load($calendar);
+        $agenda_mail_reminder = $calendar->field_agenda_reminder_mail_text[LANGUAGE_NONE][0]['value'];
+        $agenda_sms_reminder = $calendar->field_agenda_reminder_sms_text[LANGUAGE_NONE][0]['value'];
+        $agenda_mobile_reminder = $calendar->field_agenda_reminder_mobile_txt[LANGUAGE_NONE][0]['value'];
+        $agenda_fixedline_reminder = $calendar->field_agenda_reminder_fixedline_txt[LANGUAGE_NONE][0]['value'];
+      }
+  
+      // Get all subscribers.
+      $subscribers = array();
+      $users = explode(',', $node->field_event_subscriber[LANGUAGE_NONE][0]['key']);
+      foreach($users as $user){
+        $type = substr($user, 0, 3);
+    	$uid = (int) substr($user, 4);
+    	
+    	if ($type == 'sid') {
+    	  $subscriber = mc_campaign_get_subscriber($uid);
+    	  $subscribers[$subscriber->sid] = $subscriber;
+        }
+    	
+        if ($type == 'lid') {
+    	  $subscriberarray = mc_campaign_get_subscriber_from_list($uid);
+    	  foreach($subscriberarray as $subscriber){
+    	    $subscribers[$subscriber->sid] = $subscriber;
+    	  }
+        }
+      }
+      
+      // For each reminder.
+      if (!empty($node->field_event_reminder['und']) && $node->field_event_status[LANGUAGE_NONE][0]['value'] == 'confirmed') {
+        
+        foreach($node->field_event_reminder['und'] as $reminder) {
+          
+    	  $number = $reminder['number'];
+    	  $unit = $reminder['unit'];
+    	  $estimate_sent = $startdate - ($number * $unit);
+    	  $media = $reminder['media'];
+          
+          // For each subscriber.
+          foreach($subscribers as $subscriber_id => $subscriber){
+          
+            $sid = $subscriber_id;
+    	    switch($media) {
+          	  case 'mobile':
+          	    $contact = $subscriber->mobile;
+          	  	$message = $agenda_sms_reminder;
+          	  	break;
+          	  case 'sms':
+          	    $contact = $subscriber->mobile;
+          	  	$message = $agenda_sms_reminder;
+          	  	break;
+              case 'fixedline':
+                $contact = $subscriber->fixedline;
+          	  	$message = $agenda_sms_reminder;
+          	  	break;
+          	  case 'mail':
+          	    $contact = $subscriber->email;
+          	  	$message = $agenda_mail_reminder;
+          	  break;
+            }
+
+            // Replace.
+            $replacements['[firstname]'] = $subscriber->firstname;
+            $replacements['[lastname]'] = $subscriber->lastname;
+            $replacements['[fullname]'] = $subscriber->firstname . ' ' .$subscriber->lastname;
+            $replacements['[starttime]'] = date('d/m/Y', $startdate);
+            $replacements['[startdate]'] = date('H:i', $startdate);
+            $replacements['[endtime]'] = date('d/m/Y', $enddate);
+            $replacements['[enddate]'] = date('H:i', $enddate);
+            $tokens = array_keys($replacements);
+            $values = array_values($replacements);
+            $message = str_replace($tokens, $values, $message);
+            
+            $uuid = mc_campaign_action_uuid_generate_php();
+            if ($contact != '') {
+              campaign_action_add_message($did,$id,$uuid,$cid,$lid,$sid,$module,$media,$contact,$message,$estimate_sent);
+            }
+          
+          }
+        
+        }
+      
+      }
+      
+      // NEW NOTIFICATION MAIL
+      if ($node->field_event_status[LANGUAGE_NONE][0]['value'] == 'confirmed' && $node->changed > (REQUEST_TIME - 1800) && $calendar->field_agenda_notification_new[LANGUAGE_NONE][0]['value'] == 'email') {
+        foreach($subscribers as $subscriber_id => $subscriber){
+          $sid = $subscriber_id;
+          $contact = $subscriber->email;
+          $media = 'mail';
+          $message = 'Event Confirmation - A new appoitment has been registered';
+          // tokenize
+          //$message = token_replace($campaign->mail_body, array());
+          $estimate_sent = REQUEST_TIME + 1800;
+          $uuid = mc_campaign_action_uuid_generate_php();
+          if ($contact != '') {
+            campaign_action_add_message($did,$id,$uuid,$cid,$lid,$sid,$module,$media,$contact,$message,$estimate_sent);
+          }
+        }      
+      }
+      
+      // NEW NOTIFICATION SMS
+      if ($node->field_event_status[LANGUAGE_NONE][0]['value'] == 'confirmed' && $node->changed > (REQUEST_TIME - 1800) && $calendar->field_agenda_notification_new[LANGUAGE_NONE][1]['value'] == 'sms') {
+        foreach($subscribers as $subscriber_id => $subscriber){
+          $sid = $subscriber_id;
+          $contact = $subscriber->mobile;
+          $media = 'sms';
+          $message = 'Event Confirmation - A new appoitment has been registered';
+          // tokenize
+          //$message = token_replace($campaign->mail_body, array());
+          $estimate_sent = REQUEST_TIME + 1800;
+          $uuid = mc_campaign_action_uuid_generate_php();
+          if ($contact != '') {
+            campaign_action_add_message($did,$id,$uuid,$cid,$lid,$sid,$module,$media,$contact,$message,$estimate_sent);
+          }
+        }      
+      }
+
+      // UPDATE NOTIFICATION MAIL
+      if ($node->field_event_status[LANGUAGE_NONE][0]['value'] == 'confirmed' && $node->changed < (REQUEST_TIME - 1800) && $calendar->field_agenda_notification_update[LANGUAGE_NONE][0]['value'] == 'email') {
+        foreach($subscribers as $subscriber_id => $subscriber){
+          $sid = $subscriber_id;
+          $contact = $subscriber->email;
+          $media = 'mail';
+          $message = 'Event Update - Your appoitment has been updated';
+          // tokenize
+          //$message = token_replace($campaign->mail_body, array());
+          $estimate_sent = REQUEST_TIME + 1800;
+          $uuid = mc_campaign_action_uuid_generate_php();
+          if ($contact != '') {
+            campaign_action_add_message($did,$id,$uuid,$cid,$lid,$sid,$module,$media,$contact,$message,$estimate_sent);
+          }
+        }      
+      }
+      
+      // UPDATE NOTIFICATION SMS
+      if ($node->field_event_status[LANGUAGE_NONE][0]['value'] == 'confirmed' && $node->changed < (REQUEST_TIME - 1800) && $calendar->field_agenda_notification_update[LANGUAGE_NONE][1]['value'] == 'sms') {
+        foreach($subscribers as $subscriber_id => $subscriber){
+          $sid = $subscriber_id;
+          $contact = $subscriber->mobile;
+          $media = 'sms';
+          $message = 'Event Update - Your appoitment has been updated';
+          // tokenize
+          //$message = token_replace($campaign->mail_body, array());
+          $estimate_sent = REQUEST_TIME + 1800;
+          $uuid = mc_campaign_action_uuid_generate_php();
+          if ($contact != '') {
+            campaign_action_add_message($did,$id,$uuid,$cid,$lid,$sid,$module,$media,$contact,$message,$estimate_sent);
+          }
+        }      
+      }
+      
+      break;
+      
+    case 'agenda':
+      
+      break;
+      
+  }
+
+}
+
+function mc_custom_node_node_delete($node) {
+  
+  $domain = domain_get_domain();
+  
+  switch ($node->type) {
+    
+    case 'event':
+      
+      $num_deleted = db_delete('mc_campaign_notifications')
+        ->condition('id', $node->nid)
+        ->condition('module', 'calendar')
+        ->condition('sent', '0', '=')
+        ->condition('did',$domain['domain_id'])
+        ->execute();
+        
+      // Send delele notification
+      $calendar = $node->field_event_agenda['und'][0]['mc_custom_list'];
+      if (isset($calendar)) {
+        $calendar = node_load($calendar);
+      }
+      
+      if ($node->created < (REQUEST_TIME - 1800) && $calendar->field_agenda_notification_delete[LANGUAGE_NONE][0]['value'] == 'email') {
+        foreach($subscribers as $subscriber_id => $subscriber){
+          $sid = $subscriber_id;
+          $contact = $subscriber->email;
+          $media = 'mail';
+          $message = 'Event Deleted - Your appoitment has been deleted';
+          // tokenize
+          //$message = token_replace($campaign->mail_body, array());
+          $estimate_sent = REQUEST_TIME + 1800;
+          $uuid = mc_campaign_action_uuid_generate_php();
+          if ($contact != '') {
+            campaign_action_add_message($did,$id,$uuid,$cid,$lid,$sid,$module,$media,$contact,$message,$estimate_sent);
+          }
+        }      
+      }
+      
+      if ($node->created < (REQUEST_TIME - 1800) && $calendar->field_agenda_notification_delete[LANGUAGE_NONE][1]['value'] == 'sms') {
+        foreach($subscribers as $subscriber_id => $subscriber){
+          $sid = $subscriber_id;
+          $contact = $subscriber->mobile;
+          $media = 'mail';
+          $message = 'Event Deleted - Your appoitment has been deleted';
+          // tokenize
+          //$message = token_replace($campaign->mail_body, array());
+          $estimate_sent = REQUEST_TIME + 1800;
+          $uuid = mc_campaign_action_uuid_generate_php();
+          if ($contact != '') {
+            campaign_action_add_message($did,$id,$uuid,$cid,$lid,$sid,$module,$media,$contact,$message,$estimate_sent);
+          }
+        }      
+      }
+        
+      //drupal_goto('account/calendars');  
+      break;
+  }
+  
+}
+
+
+
+
+
+
+
+
+
+/**
+* Implementation of hook_form_alter().
+*/
+function mc_custom_node_form_alter(&$form, &$form_state, $form_id) {
+  
+  //dpm($form_id);
+  //user_profile_form
+  //dpm($form);
+  
+  switch ($form_id) {
+    
+  	case 'event_node_form':
+  	  
+      unset($form['field_event_uid']);
+  	  unset ($form['field_event_subscriber']['und']['#autocomplete_options']);
+  	  unset($form['field_event_parent']);
+  	  $form['field_event_subscriber']['und']['#autocomplete_deluxe_path'] = '/account/reminders/autocomplete'; 
+  	  $form['field_event_subscriber']['und']['#multiple'] = TRUE;
+  	  $form['actions']['submit']['#submit'][]='mc_custom_node_submit';
+  	  $form['#validate'][] = mc_custom_node_event_node_validate;
+  	  
+  	  $form['field_event_slot_type']['#states'] = array(
+  	    'visible' => array(
+          ':input[name="field_event_status[und]"]' => array('value' => 'provisional'),
+        ),
+      );
+      
+      $form['field_event_slot_minutes']['#states'] = array(
+  	    'visible' => array(
+          ':input[name="field_event_status[und]"]' => array('value' => 'provisional'),
+          ':input[name="field_event_slot_type[und]"]' => array('value' => 'multiple'),
+        ),
+      );
+  	  
+  	  break;
+  	  
+  	case 'agenda_node_form':
+  	  
+      unset($form['field_agenda_uid']);
+  	  $form['field_agenda_reminder_mail_text'][LANGUAGE_NONE][0]['#prefix'] = '<div>Token : [firstname][lastname][fullname][starttime][startdate][endtime][enddate]<br/></div>'; 
+  	  $form['actions']['submit']['#submit'][]='mc_custom_node_submit';
+
+  	  break;
+  	  
+  	case 'commerce_checkout_form_checkout':
+  	  
+  	  global $user;
+      $acc = user_load($user->uid);
+      if(isset($acc->field_site_name[LANGUAGE_NONE][0]['value'])) {
+        $form['customer_profile_billing']['commerce_customer_address'][LANGUAGE_NONE][0]['#address']['name_line'] = $acc->field_site_name[LANGUAGE_NONE][0]['value'];
+      }
+      $form['customer_profile_billing']['commerce_customer_address'][LANGUAGE_NONE][0]['#address']['premise'] = 'premise';
+      $form['customer_profile_billing']['commerce_customer_address'][LANGUAGE_NONE][0]['#address']['thoroughfare'] = 'thoroughfare';
+      $form['customer_profile_billing']['commerce_customer_address'][LANGUAGE_NONE][0]['#address']['locality'] = 'locality';
+      $form['customer_profile_billing']['commerce_customer_address'][LANGUAGE_NONE][0]['#address']['administrative_area'] = 'administrative_area';
+      $form['customer_profile_billing']['commerce_customer_address'][LANGUAGE_NONE][0]['#address']['postal_code'] = 'postal_code';
+      
+      break;
+  	  
+  	default:
+  }
+}
+
+function mc_custom_node_submit($form, &$form_state) {
+  $form_state['redirect'] = 'account/calendars';
+}
+
+
+
+function mc_custom_node_event_node_validate ($form, $form_state)  {
+  if ($form_state['values']['field_event_date'][LANGUAGE_NONE][0]['value'] === $form_state['values']['field_event_date'][LANGUAGE_NONE][0]['value2']) {
+    form_set_error('field_event_date', t('Your start and end date can not be egal'));
+  }
+}

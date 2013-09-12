@@ -1,0 +1,22 @@
+name = Storm Invoice
+description = "Allows invoices to be created based on organizations and projects."
+package = Storm
+core = 7.x
+configure = admin/config/system/storm/invoice
+
+dependencies[] = storm
+dependencies[] = stormorganization
+dependencies[] = stormproject
+
+files[] = storminvoice.admin.inc
+files[] = storminvoice.auto_add.inc
+files[] = storminvoice.install
+files[] = storminvoice.module
+files[] = storminvoice.theme.inc
+
+; Information added by drupal.org packaging script on 2011-02-25
+version = "7.x-1.x-dev"
+core = "7.x"
+project = "storm"
+datestamp = "1298620277"
+

@@ -1,0 +1,98 @@
+<?php
+
+/**
+ * @file
+ * Install Commerce Credits module
+ */
+
+/**
+ * Implements hook_schema()
+ */
+function commerce_credits_schema() {
+  $schema['commerce_credits_types'] = array(
+    'description' => 'Defines all possible credit types',
+    'fields' => array(
+      'group_label' => array(
+        'description' => 'The group for this credit type.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE
+      ),
+      'name' => array(
+        'description' => 'The name of the credit type.',
+        'type' => 'varchar',
+        'length' => '255',
+        'not null' => FALSE,
+      ),
+      'description' => array(
+        'description' => 'A description of the credit type.',
+        'type' => 'varchar',
+        'length' => '255',
+        'not null' => FALSE,
+      ),
+      'duration' => array(
+        'description' => 'Duration in minutes before credits of this type expire.',
+        'type' => 'int',
+        'default' => 0,
+      ),
+    ),
+    'unique keys' => array('name' => array('name'))
+  );
+  // Associate credits to entities
+  $schema['commerce_credits_entities'] = array(
+    'fields' => array(
+      'cid' => array(
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'description' => 'Primary Key: Unique credit ID.',
+      ),
+      'entity_type' => array(
+        'type' => 'varchar',
+        'length' => 32,
+        'not null' => TRUE,
+        'default' => ''
+      ),
+      'bundle' => array(
+        'type' => 'varchar',
+        'length' => 128,
+        'not null' => TRUE,
+        'default' => ''
+      ),
+      'entity_id' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'description' => 'The identifier of the entity attached to these credits',
+      ),
+      'credit_type' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => ''
+      ),
+      'credit_expiration_date' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => FALSE,
+        'description' => 'The credit expiration date'
+      ),
+      'credit_number' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'description' => 'Number of credits associated to this entity'
+      )
+    ),
+    'primary key' => array('cid'),
+    'indexes' => array(
+      'entity' => array('entity_type', 'bundle', 'entity_id'),
+    ),
+  );
+  return $schema;
+}
+
+        
+
+
+

@@ -1,0 +1,25 @@
+name = Storm Timetracking
+description = "Allows recording of times worked based on project, task and/or ticket"
+package = Storm
+core = 7.x
+configure = admin/config/system/storm/timetracking
+
+; Dependencies
+dependencies[] = storm
+dependencies[] = stormorganization
+dependencies[] = stormproject
+dependencies[] = stormtask
+dependencies[] = stormticket
+
+; Files registry
+files[] = stormtimetracking.admin.inc
+files[] = stormtimetracking.install
+files[] = stormtimetracking.module
+files[] = stormtimetracking.theme.inc
+
+; Information added by drupal.org packaging script on 2011-02-25
+version = "7.x-1.x-dev"
+core = "7.x"
+project = "storm"
+datestamp = "1298620277"
+

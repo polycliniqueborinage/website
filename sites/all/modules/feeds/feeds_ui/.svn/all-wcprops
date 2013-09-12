@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/feeds/feeds_ui
+END
+feeds_ui.test
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/feeds/feeds_ui/feeds_ui.test
+END
+feeds_ui.admin.inc
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/feeds/feeds_ui/feeds_ui.admin.inc
+END
+feeds_ui.module
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/feeds/feeds_ui/feeds_ui.module
+END
+feeds_ui.css
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/feeds/feeds_ui/feeds_ui.css
+END
+feeds_ui.info
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/feeds/feeds_ui/feeds_ui.info
+END
+feeds_ui.js
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/feeds/feeds_ui/feeds_ui.js
+END

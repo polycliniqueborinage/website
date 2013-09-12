@@ -1,0 +1,65 @@
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/video/theme
+END
+video-play-flv.tpl.php
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/video/theme/video-play-flv.tpl.php
+END
+video-play-dcr.tpl.php
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/video/theme/video-play-dcr.tpl.php
+END
+video-play-html5.tpl.php
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/video/theme/video-play-html5.tpl.php
+END
+video-play-divx.tpl.php
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/video/theme/video-play-divx.tpl.php
+END
+video-play-windowsmedia.tpl.php
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/video/theme/video-play-windowsmedia.tpl.php
+END
+video-play-quicktime.tpl.php
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/video/theme/video-play-quicktime.tpl.php
+END
+video-play-flash.tpl.php
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/video/theme/video-play-flash.tpl.php
+END
+.cvsignore
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/video/theme/.cvsignore
+END
+video-play-theora.tpl.php
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/video/theme/video-play-theora.tpl.php
+END
+video-play-realmedia.tpl.php
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/video/theme/video-play-realmedia.tpl.php
+END

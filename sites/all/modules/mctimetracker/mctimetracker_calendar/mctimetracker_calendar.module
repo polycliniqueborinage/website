@@ -1,0 +1,446 @@
+<?php
+
+
+/**
+ * Status constant for unselected calendar.
+ */
+define('MCTIMETRACKERCALENDAR_UNSELECT', 0);
+/**
+ * Status constant for selected calendar.
+ */
+define('MCTIMETRACKERCALENDAR_SELECT', 1);
+
+
+/**
+ * Implements hook_help().
+ */
+/*function mctimetracker_calendar_help($path, $arg) {
+  	$output = 'help';
+	return $output;
+}*/
+
+
+/**
+ * Implements hook_permission().
+ */
+function mctimetracker_calendar_permission() {
+  return array(
+    'view any event' => array(
+      'title' => t('View Any Event'),
+      'description' => t('Allow users to view any event'),
+    ),
+    'view own event' => array(
+      'title' => t('View Own Event'),
+      'description' => t('Allow users to view own event'),
+    ),
+    'edit any event' => array(
+      'title' => t('Edit Any Event'),
+      'description' => t('Allow users to edit any event'),
+    ),
+    'edit own event' => array(
+      'title' => t('Edit Own Event'),
+      'description' => t('Allow users to edit own event'),
+    ),
+    'delete any event' => array(
+      'title' => t('Delete Any Event'),
+      'description' => t('Allow users to delete any event'),
+    ),
+    'delete own event' => array(
+      'title' => t('Delete Own Event'),
+      'description' => t('Allow users to delete own event'),
+    ),
+    'create calendar' => array(
+      'title' => t('Create Calendar'),
+      'description' => t('Allow users to create calendar'),
+    ),
+    'access calendar' => array(
+      'title' => t('Access Calendar'),
+      'description' => t('Allow users to access calendar'),
+    ),
+    'administer calendar' => array(
+      'title' => t('Administer Calendar'),
+      'description' => t('Allow users to admin they calendar campaign'),
+    ),
+  );
+}
+
+
+/**
+ * Implements hook_theme().
+ */
+function mctimetracker_calendar_theme() {
+  return array(
+  	'mctimetracker_calendar_full' => array(
+      'template' => 'mctimetracker_calendar_full',
+      'variables' => array(
+      	'mycalendar' => NULL,
+      	'addcalendar' => NULL,
+      ),
+    ),
+  	'mctimetracker_calendar_dashboard' => array(
+      'template' => 'mctimetracker_calendar_dashboard',
+      'variables' => array(
+      	'mycalendar' => NULL,
+      ),
+    ),
+  );
+}
+
+
+/** 
+ * Implements hook_init(). 
+ */
+function mctimetracker_calendar_init() {
+
+	drupal_add_css(drupal_get_path('module', 'mctimetracker_calendar') . '/css/jquery.weekcalendar.css');
+	drupal_add_css(drupal_get_path('module', 'mctimetracker_calendar') . '/css/demo.css');
+	drupal_add_css(drupal_get_path('module', 'mctimetracker_calendar') . '/css/smoothness/jquery-ui-1.8.11.custom.css');
+	
+	drupal_add_js(drupal_get_path('module', 'mctimetracker_calendar') . '/js/jquery.layout-latest.js');
+	drupal_add_js(drupal_get_path('module', 'mctimetracker_calendar') . '/js/jquery-ui-1.8.11.custom.min.js');
+	drupal_add_js(drupal_get_path('module', 'mctimetracker_calendar') . '/js/jquery.weekcalendar.js');
+	drupal_add_js(drupal_get_path('module', 'mctimetracker_calendar') . '/js/setup1.js');
+
+	//drupal_add_css(drupal_get_path('module', 'mctimetracker_calendar') . '/css/smoothness/jquery-ui-1.8.11.custom.css');
+	//drupal_add_css(drupal_get_path('module', 'mctimetracker_calendar') . '/css/fullcalendar.css');
+	//drupal_add_css(drupal_get_path('module', 'mctimetracker_calendar') . '/css/fullcalendar.print.css');
+	
+	//drupal_add_js(drupal_get_path('module', 'mctimetracker_calendar') . '/js/jquery.layout-latest.js');
+	//drupal_add_js(drupal_get_path('module', 'mctimetracker_calendar') . '/js/jquery-ui-1.8.11.custom.min.js');
+	//drupal_add_js(drupal_get_path('module', 'mctimetracker_calendar') . '/js/fullcalendar.js');
+	//drupal_add_js(drupal_get_path('module', 'mctimetracker_calendar') . '/js/setup.js');
+	
+}
+
+
+/**
+ * Implementatation of hook_menu().
+ */
+function mctimetracker_calendar_menu() {
+
+  $items['mctimetracker_calendar'] = array(
+    'title' => 'Calendars',
+    'description' => 'Calendar Description',
+    'page callback' => 'mctimetracker_calendar_full',
+    'file'             => 'mctimetracker_calendar.week.inc',
+    'access arguments' => array('access calendar'),
+    'menu_name' => 'main-menu',
+    'expanded' => TRUE,
+    'weight' => 2,
+  );
+
+  $items['mctimetracker_calendar/week'] = array(
+    'title' => 'Week',
+    'description' => 'Week Description',
+    'page callback' => 'mctimetracker_calendar_full',
+    'file'             => 'mctimetracker_calendar.week.inc',
+    'access arguments' => array('access calendar'),
+    'menu_name' => 'main-menu',
+    'expanded' => TRUE,
+    'weight' => 0,
+    'type'             => MENU_DEFAULT_LOCAL_TASK,
+  );
+
+  $items['mctimetracker_calendar/list'] = array(
+    'title' => 'Calendar List',
+    'description' => 'Calendar Description',
+    'page callback'    => 'mctimetracker_calendar',
+    'page arguments'   => array('list'),
+    'file'             => 'mctimetracker_calendar.calendar.inc',
+    'access arguments' => array('access calendar'),
+    'menu_name' => 'main-menu',
+    'expanded' => TRUE,
+    'weight' => 1,
+    'type'             => MENU_LOCAL_TASK,
+  );
+  
+  $items['mctimetracker_calendar/add'] = array(
+    'title' => 'Add Calendar',
+    'description' => 'Calendar Description',
+    'page callback' => 'mctimetracker_calendar',
+    'page arguments'   => array('add'),
+    'file'             => 'mctimetracker_calendar.calendar.inc',
+  	'access arguments' => array('administer calendar'),
+    'menu_name' => 'main-menu',
+    'expanded' => TRUE,
+    'weight' => 2,
+    'type'             => MENU_LOCAL_TASK,
+  );
+  
+  $items['mctimetracker_calendar/update/%'] = array(
+    'title' => 'Update Calendar',
+    'description' => 'Calendar Description',
+    'page callback' => 'mctimetracker_calendar',
+    'page arguments'   => array('update',2),
+    'file'             => 'mctimetracker_calendar.calendar.inc',
+  	'access arguments' => array('administer calendar'),
+    'menu_name' => 'main-menu',
+    'expanded' => TRUE,
+    'weight' => 3,
+    'type'             => MENU_CALLBACK,
+  );
+
+  $items['mctimetracker_calendar/deleted'] = array(
+    	'type' => MENU_CALLBACK,  
+    	'page callback' => 'mctimetracker_calendar_select_calendar',
+    	'access arguments' => array('administer calendar'),
+    	'file' => 'mctimetracker_calendar.calendar.inc',
+  );
+  
+  $items['mctimetracker_calendar/selectcalendar'] = array(
+    	'type' => MENU_CALLBACK,  
+    	'page callback' => 'mctimetracker_calendar_select_calendar',
+    	'access arguments' => array('access calendar'),
+    	'file' => 'mctimetracker_calendar.calendar.inc',
+  );
+  
+  $items['mctimetracker_calendar/getevent1'] = array(
+    	'type' => MENU_CALLBACK,  
+    	'page callback' => 'mctimetracker_calendar_get_event1',
+    	'access arguments' => array('access calendar'),
+    	'file' => 'mctimetracker_calendar.event.inc',
+  );
+
+  $items['mctimetracker_calendar/getevent2'] = array(
+    	'type' => MENU_CALLBACK,  
+    	'page callback' => 'mctimetracker_calendar_get_event2',
+    	'access arguments' => array('access calendar'),
+    	'file' => 'mctimetracker_calendar.event.inc',
+  );
+  
+  $items['mctimetracker_calendar/addevent'] = array(
+    	'type' => MENU_CALLBACK,  
+    	'page callback' => 'mctimetracker_calendar_add_event',
+    	'access arguments' => array('access calendar'),
+    	'file' => 'mctimetracker_calendar.event.inc',
+  );
+
+  $items['mctimetracker_calendar/updateevent'] = array(
+    	'type' => MENU_CALLBACK,  
+    	'page callback' => 'mctimetracker_calendar_update_event',
+    	'access arguments' => array('access calendar'),
+    	'file' => 'mctimetracker_calendar.event.inc',
+  );
+  
+  $items['mctimetracker_calendar/deleteevent'] = array(
+    	'type' => MENU_CALLBACK,  
+    	'page callback' => 'mctimetracker_calendar_delete_event',
+    	'access arguments' => array('access calendar'),
+    	'file' => 'mctimetracker_calendar.event.inc',
+  );
+  
+  $items['admin/config/mctimetracker'] = array(
+  		'title' => 'mctimetracker',
+    	'description' => 'General mctimetracker related configuration.',
+    	'position' => 'right',
+    	'weight' => -20,
+    	'page callback' => 'mctimetracker_admin_menu_block_page',
+    	'access arguments' => array('access administration pages'),
+    	'file' => 'system.admin.inc',
+  );
+  
+  $items['admin/config/mctimetracker/mctimetracker_calendar'] = array(
+    	'title' => 'mctimetracker_calendar',
+    	'description' => 'Configure the mctimetracker_calendar modules.',
+    	'page callback' => 'drupal_get_form',
+    	'page arguments' => array('mctimetracker_calendar_admin_settings'),
+    	'access arguments' => array('mctimetracker_calendar: access administration pages'),
+    	'type' => MENU_NORMAL_ITEM,
+  );
+  
+  return $items;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+ * CALENDAR FUNCTION
+ * 
+ */
+function mctimetracker_calendar_entry_load($entry = array()) {
+  
+	
+  	$select = db_select('mctimetracker_calendar', 'mctc');
+  	$select->leftJoin('mctimetracker_calendar_selection', 'mctcs', 'mctcs.cid = mctc.cid');
+  	$select->fields('mctc',array('cid','name','locked'));
+  	$select->fields('mctcs',array('sid'));
+    $select->condition('mctc.deleted', 0);
+  	
+  	// Add each field and value as a condition to this query.
+  	foreach ($entry as $field => $value) {
+    	$select->condition($field, $value);
+  	}
+  	// Return the result in object format.
+  	return $select->execute()->fetchAll();
+
+}
+
+function mctimetracker_calendar_entry_insert($entry) {
+	$return_value = NULL;
+  	try {
+    	$return_value = db_insert('mctimetracker_calendar')
+                    ->fields($entry)
+                    ->execute();
+  	}
+  	catch (Exception $e) {
+    	drupal_set_message(t('db_insert failed. Message = %message, query= %query',array('%message' => $e->getMessage(), '%query' => $e->query_string)), 'error');
+  	}
+  	return $return_value;
+}
+
+
+function mctimetracker_calendar_entry_update($entry) {
+	try {
+    $count = db_update('mctimetracker_calendar')
+              ->fields($entry)
+              ->condition('cid', $entry['cid'])
+              ->execute();
+  	}
+  	catch (Exception $e) {
+    	drupal_set_message(t('db_update failed. Message = %message, query= %query',array('%message' => $e->getMessage(), '%query' => $e->query_string)), 'error');
+  	}
+	return $count;
+}
+
+
+function mctimetracker_calendar_entry_delete($entry) {
+	db_delete('mctimetracker_calendar')
+    ->condition('cid', $entry['cid'])
+    ->execute();
+}
+/*
+ * CALENDAR FUNCTION
+ * 
+ */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function mctimetracker_calendar_operations() {
+  $operations = array(
+    'select' => array(
+      'label' => t('Select calendar'),
+      'callback' => 'mctimetracker_calendar_operations_selectable',
+      'callback arguments' => array('status' => MCTIMETRACKERCALENDAR_UNSELECT),
+    ),
+    'unselect' => array(
+      'label' => t('Unselect calendar'),
+      'callback' => 'mctimetracker_calendar_operations_selectable',
+      'callback arguments' => array('status' => MCTIMETRACKERCALENDAR_SELECT),
+    ),
+  );
+  if (privatemsg_user_access('delete privatemsg')) {
+    $operations['delete'] = array(
+      'label' => t('Delete'),
+      'callback' => 'privatemsg_thread_change_delete',
+      'callback arguments' => array('delete' => 1),
+      'undo callback' => 'privatemsg_thread_change_delete',
+      'undo callback arguments' => array('delete' => 0),
+      'button' => TRUE,
+    );
+  }
+  return $operations;
+}
+
+
+function _mctimetracker_calendar_get($uid, $locked = '') {
+	
+	dpm($locked);
+	dpm($locked == '');
+	dpm($locked != '');
+	
+  $calendars = array();
+  
+  $query = db_select('mctimetracker_calendar', 'mctc');
+  $query->leftJoin('mctimetracker_calendar_selection', 'mctcs', 'mctcs.cid = mctc.cid');
+  $query->fields('mctc',array('cid','name'));
+  $query->fields('mctcs',array('sid'));
+  $query->condition('mctc.uid', $uid);
+  if ($locked != '') {
+  	$query->condition('mctc.locked', $locked);
+  	dpm($locked);
+  }
+  
+  $result = $query->execute();
+  
+  foreach ($result as $record) {
+  	if ($record->sid) {
+	  	$calendars['span'][$record->cid] = "<span class='calendar selected' id='".$record->cid."'>".$record->name."</span>";
+  	} else {
+	  	$calendars['span'][$record->cid] = "<span class='calendar' id='".$record->cid."'>".$record->name."</span>";
+  	}
+  }
+
+  return $calendars;
+}
+
+
+
+
+
+
+
+/**
+ * Generates a query based on a query id.
+ *
+ * @param $query
+ *   Either be a string ('some_id') or an array('group_name', 'query_id'),
+ *   if a string is supplied, group_name defaults to 'privatemsg'.
+ *
+ * @return SelectQuery
+ *    Array with the keys query and count. count can be used to count the
+ *    elements which would be returned by query. count can be used together
+ *    with pager_query().
+ *
+ * @ingroup sql
+ */
+function _mctimetracker_calendar_assemble_query($uid) {
+	
+  $query = db_select('mctimetracker_calendar', 'mctc');
+  $query->leftJoin('mctimetracker_calendar_selection', 'mctcs', 'mctcs.cid = mctc.cid');
+  $query->fields('mctc',array('cid','name'));
+  $query->fields('mctcs',array('sid'));
+  $query->condition('mctc.uid', $uid);
+
+  return $query;
+}
+
+

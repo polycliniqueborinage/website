@@ -1,0 +1,71 @@
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/openlayers/includes/layer_types
+END
+raw.inc
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/openlayers/includes/layer_types/raw.inc
+END
+virtualearth.inc
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/openlayers/includes/layer_types/virtualearth.inc
+END
+xyz.inc
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/openlayers/includes/layer_types/xyz.inc
+END
+google.inc
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/openlayers/includes/layer_types/google.inc
+END
+cloudmade.inc
+K 25
+svn:wc:ra_dav:version-url
+V 130
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/openlayers/includes/layer_types/cloudmade.inc
+END
+maptiler.inc
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/openlayers/includes/layer_types/maptiler.inc
+END
+osm.inc
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/openlayers/includes/layer_types/osm.inc
+END
+yahoo.inc
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/openlayers/includes/layer_types/yahoo.inc
+END
+kml.inc
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/openlayers/includes/layer_types/kml.inc
+END
+tms.inc
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/openlayers/includes/layer_types/tms.inc
+END
+wms.inc
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/openlayers/includes/layer_types/wms.inc
+END

@@ -1,0 +1,125 @@
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/themes/poly/templates
+END
+page--front-.tpl.php
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/themes/poly/templates/page--front-.tpl.php
+END
+region--resume.tpl.php
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/themes/poly/templates/region--resume.tpl.php
+END
+zone--content.tpl.php
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/themes/poly/templates/zone--content.tpl.php
+END
+region--sidebar_second.tpl.php
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/themes/poly/templates/region--sidebar_second.tpl.php
+END
+region--menu.tpl.php
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/themes/poly/templates/region--menu.tpl.php
+END
+comment.tpl.php
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/themes/poly/templates/comment.tpl.php
+END
+html.tpl.php
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/themes/poly/templates/html.tpl.php
+END
+section.tpl.php
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/themes/poly/templates/section.tpl.php
+END
+section--header.tpl.php
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/themes/poly/templates/section--header.tpl.php
+END
+region--content.tpl.php
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/themes/poly/templates/region--content.tpl.php
+END
+views-view-fields--news-list.tpl.php
+K 25
+svn:wc:ra_dav:version-url
+V 135
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/themes/poly/templates/views-view-fields--news-list.tpl.php
+END
+section--footer.tpl.php
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/themes/poly/templates/section--footer.tpl.php
+END
+region--sidebar_first.tpl.php
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/themes/poly/templates/region--sidebar_first.tpl.php
+END
+region--slider.tpl.php
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/themes/poly/templates/region--slider.tpl.php
+END
+region--branding.tpl.php
+K 25
+svn:wc:ra_dav:version-url
+V 123
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/themes/poly/templates/region--branding.tpl.php
+END
+region.tpl.php
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/themes/poly/templates/region.tpl.php
+END
+node.tpl.php
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/themes/poly/templates/node.tpl.php
+END
+htmlmail--user--register_no_approval_required.tpl.php .php
+K 25
+svn:wc:ra_dav:version-url
+V 159
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/themes/poly/templates/htmlmail--user--register_no_approval_required.tpl.php%20.php
+END
+htmlmail--htmlmail.tpl.php
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/themes/poly/templates/htmlmail--htmlmail.tpl.php
+END
+block.tpl.php
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/themes/poly/templates/block.tpl.php
+END

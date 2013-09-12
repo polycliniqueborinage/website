@@ -1,0 +1,5 @@
+name = MCTIMETRACKER Timesheet
+description = Timesheet
+package = MC Time Tracker
+core = 7.x
+files[]=mctimetracker_timesheet.module

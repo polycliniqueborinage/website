@@ -1,0 +1,83 @@
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/faq/includes
+END
+faq-hide-answer.tpl.php
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/faq/includes/faq-hide-answer.tpl.php
+END
+faq-questions-inline.tpl.php
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/faq/includes/faq-questions-inline.tpl.php
+END
+faq-questions-top.tpl.php
+K 25
+svn:wc:ra_dav:version-url
+V 123
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/faq/includes/faq-questions-top.tpl.php
+END
+faq.new_page.inc
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/faq/includes/faq.new_page.inc
+END
+faq.hide_answer.inc
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/faq/includes/faq.hide_answer.inc
+END
+faq.questions_inline.inc
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/faq/includes/faq.questions_inline.inc
+END
+faq-category-new-page.tpl.php
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/faq/includes/faq-category-new-page.tpl.php
+END
+faq-category-hide-answer.tpl.php
+K 25
+svn:wc:ra_dav:version-url
+V 130
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/faq/includes/faq-category-hide-answer.tpl.php
+END
+faq-category-questions-inline.tpl.php
+K 25
+svn:wc:ra_dav:version-url
+V 135
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/faq/includes/faq-category-questions-inline.tpl.php
+END
+faq.questions_top.inc
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/faq/includes/faq.questions_top.inc
+END
+faq-new-page.tpl.php
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/faq/includes/faq-new-page.tpl.php
+END
+faq-category-questions-top-answers.tpl.php
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/faq/includes/faq-category-questions-top-answers.tpl.php
+END
+faq-category-questions-top.tpl.php
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/faq/includes/faq-category-questions-top.tpl.php
+END

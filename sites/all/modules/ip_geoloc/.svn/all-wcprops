@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/ip_geoloc
+END
+ip_geoloc.admin.inc
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/ip_geoloc/ip_geoloc.admin.inc
+END
+LICENSE.txt
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/ip_geoloc/LICENSE.txt
+END
+ip_geoloc_api.inc
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/ip_geoloc/ip_geoloc_api.inc
+END
+ip_geoloc.module
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/ip_geoloc/ip_geoloc.module
+END
+ip_geoloc.install
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/ip_geoloc/ip_geoloc.install
+END
+ip_geoloc_blocks.inc
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/ip_geoloc/ip_geoloc_blocks.inc
+END
+ip_geoloc.info
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/ip_geoloc/ip_geoloc.info
+END
+README.txt
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/ip_geoloc/README.txt
+END

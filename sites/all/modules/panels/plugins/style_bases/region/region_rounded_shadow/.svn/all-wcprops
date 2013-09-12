@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/panels/plugins/style_bases/region/region_rounded_shadow
+END
+region_rounded_shadow.inc
+K 25
+svn:wc:ra_dav:version-url
+V 166
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/panels/plugins/style_bases/region/region_rounded_shadow/region_rounded_shadow.inc
+END
+box-color.png
+K 25
+svn:wc:ra_dav:version-url
+V 154
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/panels/plugins/style_bases/region/region_rounded_shadow/box-color.png
+END
+region-rounded-shadow.tpl.php
+K 25
+svn:wc:ra_dav:version-url
+V 170
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/panels/plugins/style_bases/region/region_rounded_shadow/region-rounded-shadow.tpl.php
+END
+icon.png
+K 25
+svn:wc:ra_dav:version-url
+V 149
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/panels/plugins/style_bases/region/region_rounded_shadow/icon.png
+END
+region-rounded-shadow.css
+K 25
+svn:wc:ra_dav:version-url
+V 166
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/panels/plugins/style_bases/region/region_rounded_shadow/region-rounded-shadow.css
+END
+box-shadow.png
+K 25
+svn:wc:ra_dav:version-url
+V 155
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/panels/plugins/style_bases/region/region_rounded_shadow/box-shadow.png
+END

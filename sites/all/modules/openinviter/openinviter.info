@@ -1,0 +1,5 @@
+; $Id$
+name = OpenInviter
+description = OpenInviter plugin for Drupal.
+core = 7.x
+php = 5.1

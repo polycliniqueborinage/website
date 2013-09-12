@@ -1,0 +1,4 @@
+7.x-1.0 (2011-08-02)
+--------------------------
+- Changed project name capitalization [#1221666]
+- Standardized admin description

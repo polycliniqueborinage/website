@@ -1,0 +1,18 @@
+name = Storm Person
+description = "Allows storage of people within organizations, and linking of these to Drupal user accounts."
+dependencies[] = storm 
+dependencies[] = stormorganization
+package = Storm
+core = 7.x
+
+files[] = stormperson.admin.inc
+files[] = stormperson.install
+files[] = stormperson.module
+files[] = stormperson.theme.inc
+
+; Information added by drupal.org packaging script on 2011-02-25
+version = "7.x-1.x-dev"
+core = "7.x"
+project = "storm"
+datestamp = "1298620277"
+

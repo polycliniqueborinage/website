@@ -1,0 +1,101 @@
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/ds
+END
+ds.fields.inc
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/ds/ds.fields.inc
+END
+ds.ds_fields_info.inc
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/ds/ds.ds_fields_info.inc
+END
+ds.registry.inc
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/ds/ds.registry.inc
+END
+ds.module
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/ds/ds.module
+END
+ds.layout.inc
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/ds/ds.layout.inc
+END
+ds.field_ui.inc
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/ds/ds.field_ui.inc
+END
+ds.styles.inc
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/ds/ds.styles.inc
+END
+ds.info
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/ds/ds.info
+END
+LICENSE.txt
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/ds/LICENSE.txt
+END
+ds.drush.inc
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/ds/ds.drush.inc
+END
+ds.api.php
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/ds/ds.api.php
+END
+CHANGELOG.txt
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/ds/CHANGELOG.txt
+END
+ds.views.inc
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/ds/ds.views.inc
+END
+README.txt
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/ds/README.txt
+END
+ds.install
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/ds/ds.install
+END
+ds.view_modes.inc
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/ds/ds.view_modes.inc
+END

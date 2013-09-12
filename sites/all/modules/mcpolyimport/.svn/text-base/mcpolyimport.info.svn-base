@@ -1,0 +1,4 @@
+name = Import
+description = Import from external data base
+package = Import
+core = 7.x

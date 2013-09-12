@@ -1,0 +1,5 @@
+name = Domain Bonus: Login restict
+description = Restrict login users by domain.
+dependencies[] = domain
+package = Domain Access
+core = 7.x

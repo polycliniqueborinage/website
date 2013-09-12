@@ -1,0 +1,5 @@
+name = MCTIMETRACKER Calendar
+description = Calendar
+package = MC Time Tracker
+core = 7.x
+files[]=mctimetracker_calendar.module

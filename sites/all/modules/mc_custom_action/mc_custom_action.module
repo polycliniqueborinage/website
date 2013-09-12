@@ -1,0 +1,39 @@
+<?php
+
+function mc_custom_action_rules_action_info() {
+  $items['mc_custom_action_add_credit'] = array(
+    'label' => t('mc_custom_action_add_credit'),
+    'base' => 'mc_custom_action_add_credit',
+    'parameter' => array(
+      'value' => array('type' => 'unknown', 'label' => t('Order')),
+    ),
+  );
+  return $items;
+}
+
+function mc_custom_action_add_credit($items) {
+  
+  // TODO serach domain base on user id
+  $domain = 1;
+  
+  foreach ($items as $item){
+    
+    $quantity = (float) $item->quantity;
+    $commerce_product = $item->commerce_product;
+    // TODO improve
+    switch ($commerce_product[und][0][product_id]) {
+      case 3:
+       dpm(4);
+        break;
+      case 4:
+       dpm(5);
+        break;
+    }
+    $credits = $quantity * 100;
+    // Add credits
+    mc_campaign_insert_cost($domain, $credits,'Add '.$credits.' Credits');
+    
+  }
+}
+
+

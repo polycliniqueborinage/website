@@ -1,0 +1,49 @@
+10
+
+dir
+307
+https://subversion.assembla.com/svn/mariquecalcus/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/location/contrib
+https://subversion.assembla.com/svn/mariquecalcus
+
+
+
+2012-04-06T17:37:41.078989Z
+307
+mariquecalcus
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+5a860af0-2493-426d-afd3-cb5763a8fbe2
+
+location_addanother
+dir
+
+location_phone
+dir
+
+location_generate
+dir
+
+location_fax
+dir
+
+location_taxonomy
+dir
+
+location_cck
+dir
+
+location_search
+dir
+

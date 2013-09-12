@@ -1,0 +1,23 @@
+
+; Basic information
+name = Storm Knowledge Base
+description = "Provides means of storing and categorising knowledge."
+core = 7.x
+package = Storm
+
+; Dependencies
+dependencies[] = storm
+dependencies[] = views
+
+; Files registry
+files[] = stormknowledgebase.install
+files[] = stormknowledgebase.module
+files[] = stormknowledgebase.theme.inc
+files[] = stormknowledgebase.views_default.inc
+
+; Information added by drupal.org packaging script on 2011-02-25
+version = "7.x-1.x-dev"
+core = "7.x"
+project = "storm"
+datestamp = "1298620277"
+

@@ -1,0 +1,1082 @@
+<?php
+
+
+/**
+ * Implements hook_menu().
+ */
+function mc_campaign_action_menu() {
+
+  $items['admin/campaign/config/listcron'] = array(
+    	'title' => 'List Cron',
+  		'page callback' => 'mc_campaign_action_listcron',
+    	'access arguments' => array('administer campaign'),
+  		'weight' => 1,
+    	'type' => MENU_LOCAL_ACTION,
+  );
+
+  $items['admin/campaign/config/campaigncron'] = array(
+    	'title' => 'Campaign Cron',
+  		'page callback' => 'mc_campaign_action_campaigncron',
+    	'access arguments' => array('administer campaign'),
+  		'weight' => 2,
+    	'type' => MENU_LOCAL_ACTION,
+  );
+	
+  $items['admin/campaign/config/sms_pool'] = array(
+    	'title' => 'Pool SMS',
+    	'description' => 'Send Pending SMS',
+  		'page callback' => 'campaign_action_sms_pool',
+    	'access arguments' => array('administer campaign'),
+    	'weight' => 3,
+    	'type' => MENU_LOCAL_ACTION,
+  );
+	
+  $items['admin/campaign/config/mail_pool'] = array(
+    	'title' => 'Pool Email',
+    	'description' => 'Send Pending Email',
+  		'page callback' => 'campaign_action_mail_pool',
+    	'access arguments' => array('administer campaign'),
+  		'weight' => 4,
+    	'type' => MENU_LOCAL_ACTION,
+  );
+  	
+  $items['admin/campaign/config/call_pool'] = array(
+    	'title' => 'Pool Call',
+    	'description' => 'Send Pending Call',
+  		'page callback' => 'campaign_action_call_pool',
+    	'access arguments' => array('administer campaign'),
+  		'weight' => 5,
+    	'type' => MENU_LOCAL_ACTION,
+  );
+
+  $items['admin/campaign/config/delete_provisional'] = array(
+    	'title' => 'Delete Provisional',
+    	'description' => 'Delete Provisional',
+  		'page callback' => 'campaign_action_delete_provisional',
+    	'access arguments' => array('administer campaign'),
+  		'weight' => 6,
+    	'type' => MENU_LOCAL_ACTION,
+  );
+  
+  $items['admin/campaign/tracker/sms'] = array(
+    	'title' => 'SMS TRACKER',
+  		'page callback' => 'mc_campaign_action_tracker_sms',
+    	'access callback' => TRUE,
+    	'type' => MENU_CALLBACK,
+  );
+  	
+  $items['admin/campaign/tracker/mail/image.jpeg'] = array(
+    'title' => 'Update',
+    'description' => 'Add Campaign',
+  	'page callback' => 'mc_campaign_action_mail_image',
+    'access callback' => TRUE,
+    'weight' => 2,
+    'type' => MENU_CALLBACK,
+  );
+	
+  $items['admin/campaign/tracker/mail/iframe.php'] = array(
+    'title' => 'Update',
+    'description' => 'Add Campaign',
+  	'page callback' => 'mc_campaign_action_tracker_iframe',
+    'access callback' => TRUE,
+    'weight' => 2,
+    'type' => MENU_CALLBACK,
+  );
+
+  $items['admin/campaign/tracker/mail/css.css'] = array(
+    'title' => 'Update',
+    'description' => 'Add Campaign',
+  	'page callback' => 'mc_campaign_action_tracker_css',
+    'access callback' => TRUE,
+  	'weight' => 2,
+    'type' => MENU_CALLBACK,
+  );
+  
+  return $items;
+
+}
+
+
+
+function mc_campaign_action_cron() {
+	
+  $croninrpogress = variable_get('mc_campaign_action_cron', '');
+
+  if($croninrpogress) {
+		
+	//SEMAPHORE
+	variable_set('mc_campaign_action_cron', FALSE);
+		
+	// LIST CRON
+	if (variable_get('list_cron_enable', 0)){
+	  //drupal_set_message(t('Cron List Update run'), 'status');
+	  mc_campaign_action_listcron();
+	  //drupal_set_message(t('Cron List Update run'), 'status');
+	}
+		
+	// CAMPAIGN CRON
+	if (variable_get('campaign_cron_enable', 0)){
+	  //drupal_set_message(t('Cron Campaign Update run'), 'status');
+	  mc_campaign_action_campaigncron();
+	  //drupal_set_message(t('Cron Campaign Update run'), 'status');
+	}
+		
+	// SMS CRON
+	if (variable_get('campaign_enable_sms', 0)){
+	  //drupal_set_message(t('Cron SMS run'), 'status');
+	  campaign_action_sms_pool();
+	  //drupal_set_message(t('Cron SMS run'), 'status');
+	}
+		
+	// MAIL CRON
+	if (variable_get('campaign_enable_mail', 0)){
+	  //drupal_set_message(t('Cron MAIL run'), 'status');
+		campaign_action_mail_pool();
+		  //drupal_set_message(t('Cron MAIL run'), 'status');
+	}
+	
+	// CALL CRON
+	if (variable_get('campaign_enable_call', 0)){
+	  //campaign_action_call_pool();
+	}
+	
+  };
+	
+	variable_set('mc_campaign_action_cron', TRUE);
+	
+}
+	
+
+function campaign_action_delete_provisional() {
+  
+  $nodes = db_query("SELECT node.nid, node.created
+  FROM 
+  node
+  LEFT JOIN field_data_field_event_status ON node.nid = field_data_field_event_status.entity_id
+  LEFT JOIN field_data_field_event_parent ON node.nid = field_data_field_event_parent.entity_id
+  WHERE node.status = '1' 
+  AND node.type IN  ('event')
+  AND node.created < :time
+  AND field_data_field_event_status.field_event_status_value IN  ('provisional')
+  AND field_data_field_event_parent.field_event_parent_value IS NOT NULL
+  ",array(':time' => REQUEST_TIME - 18000))->fetchAll();
+  
+  foreach ($nodes as $node) {
+    node_delete($node->nid);  
+  }
+  
+  return '';
+  
+}
+
+
+function mc_campaign_action_listcron() {
+	
+  $currentTime = REQUEST_TIME - mktime (0,0,0,date("n"),date("j"),date("Y"));
+	
+  $query = db_select('mc_campaign_lists', 'list');
+  $query->fields('list');
+  $query->condition('type', 'request');
+  $query->condition('request_next_reload', REQUEST_TIME ,'<');
+  $query->condition('active', 1);
+  
+  $lists = $query->execute()->fetchAll();
+  
+  // FOR EACH ACTIVE LIST ADD SUBSCRIBER IN POOL
+  foreach ($lists as $list) {
+  	
+  	$compteur = 0;
+  	$size = 0;
+  	
+  	// EXECUTE QUERY
+  	db_set_active($list->request_database);
+	$result = db_query($list->request_sql);
+	$size = $result->rowCount();
+	db_set_active('default');
+	
+	// MARK ALL NOT DELETED SUBSCRIBERS AS IN PROCESS
+ 	db_update('mc_campaign_lists_subscribers')
+      ->fields(array(
+      'semaphore' => 1,
+    ))
+    ->condition('lid', $list->lid ,'=')
+    ->condition('deleted', 0 )
+    ->execute();
+	
+	// FOR EACH NEW ENTRY	
+    foreach ($result as $record) {
+    	
+      // IF LIMIT NOT REACH 
+      if ($compteur < $list->request_limit) {
+      	
+      	// CREATE TEMP SUBSCRIBER
+        $subscriber = new stdClass();
+        
+        // Add match field
+        $subscriber->did = $list->did;
+        $subscriber->seid = empty($record->sid) ? NULL : $record->sid;
+        $subscriber->email = empty($record->email) ? NULL : $record->email;
+        $subscriber->mobile = empty($record->mobile) ? NULL : $record->mobile;
+        $subscriber->fixedline = empty($record->fixedline) ? NULL : $record->fixedline;
+        
+        // Try to match any existing subscriber
+        // in order to get the sid
+  		if (mc_campaign_is_subscribed($subscriber)) {
+  			drupal_set_message(t('Subscriber already exist'), 'status');
+  		} else {
+  			drupal_set_message(t('Subscriber does not exist'), 'status');
+  		}
+  		
+		$subscriber->did = $list->did;
+        $subscriber->seid = empty($record->sid) ? NULL : $record->sid;
+  		$subscriber->email = valid_email_address($subscriber->email) ? $subscriber->email : "";
+  		$subscriber->mobile = mc_clean_mobile_number($subscriber->mobile);
+  		$subscriber->fixedline = mc_clean_fixedline_number($subscriber->fixedline);
+          		  		
+        $subscriber->lid = $list->lid;
+        $subscriber->sent_time = empty($record->sent_time) ? NULL : $record->sent_time;
+        $subscriber->leid = isset($record->lid) ? $record->lid : NULL;
+        
+        $subscriber->firstname = empty($record->firstname) ? NULL : $record->firstname;
+        $subscriber->lastname = empty($record->lastname) ? NULL : $record->lastname;
+        $subscriber->im = empty($record->im) ? NULL : $record->im;
+        $subscriber->skype = empty($record->skype) ? NULL : $record->skype;
+        $subscriber->twitter = empty($record->twitter) ? NULL : $record->twitter;
+        $subscriber->facebook = empty($record->facebook) ? NULL : $record->facebook;
+        $subscriber->info1 = empty($record->info1) ? NULL : $record->info1;
+        $subscriber->info2 = empty($record->info2) ? NULL : $record->info2;
+        $subscriber->info3 = empty($record->info3) ? NULL : $record->info3;
+        $subscriber->info4 = empty($record->info4) ? NULL : $record->info4;
+        $subscriber->info5 = empty($record->info5) ? NULL : $record->info5;
+        $subscriber->info6 = empty($record->info6) ? NULL : $record->info6;
+        $subscriber->info7 = empty($record->info7) ? NULL : $record->info7;
+        $subscriber->info8 = empty($record->info8) ? NULL : $record->info8;
+        $subscriber->info9 = empty($record->info9) ? NULL : $record->info9;
+        $subscriber->info10 = empty($record->info10) ? NULL : $record->info10;
+  		
+        // Save or Update
+  		if (isset($subscriber->sid)) {
+    		mc_campaign_update_subscriber($subscriber);
+  		} else {
+  			mc_campaign_save_subscriber($subscriber);
+  		}
+  		
+        // TODO if two entries for same subscriber only one will be added
+        // CHECK IF SUBSCRIBER ALREADY LINKED TO LISTS
+  	    if (mc_campaign_imc_campaign_is_subscribed_to_list($subscriber)) {
+  	      drupal_set_message(t('Subscriber already linked to this list'), 'status');
+  	      // we save as value may have changed
+  	      mc_campaign_update_subscriber_to_list($subscriber);
+  	    } else {
+  	      drupal_set_message(t('Subscriber not already linked to this list'), 'status');
+  	  	  mc_campaign_save_subscriber_to_list($subscriber);
+  	  	  $compteur++;
+  	    };
+  	  
+      }
+      
+	}
+	
+	// UPDATE NEXT_RELOAD AND MAX SUBSCRIBER
+	db_update('mc_campaign_lists')
+    ->fields(array(
+      'request_next_reload' => $list->request_next_reload + $list->request_frequency,
+      'request_last_reload' => REQUEST_TIME,
+      'size' => $size,
+    ))
+    ->condition('lid', $list->lid ,'=')
+    ->execute();
+    
+    // DELETE SUBSCRIBER NON LONGER VALID
+	db_update('mc_campaign_lists_subscribers')
+        ->fields(array(
+        'deleted' => 1,
+    ))
+    ->condition('lid', $list->lid ,'=')
+    ->condition('semaphore', 1 )
+    ->execute();
+  
+  }
+  
+  return '';
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function mc_campaign_action_campaigncron() {
+	
+  $currentTime = REQUEST_TIME - mktime (0,0,0,date("n"),date("j"),date("Y"));
+  
+  // FOR EACH ONCE CAMPAIGN
+  $campaigns = db_query("SELECT * FROM {mc_campaign_campaigns} where type='Once' AND active = 1 AND last_execution is null")->fetchAll();
+  foreach ($campaigns as $campaign) {
+  	campaign_action_process_campaign($campaign);
+  }
+    
+  // FIRST
+  // CHECK ALL ACTIVE CAMPAIGN
+  // FOR EACH RESULT ADD TO NOTIFICATION
+  $select = db_select('mc_campaign_campaigns','campaign');
+  $select->fields('campaign');
+  $select->condition('deleted', 0);
+  $select->condition('weekday', "%".date('N')."%", 'like');
+  $select->condition('start_time', $currentTime ,'<');
+  $select->condition('end_time', $currentTime ,'>');
+  $select->condition('start_date', REQUEST_TIME ,'<');
+  $select->condition('end_date', REQUEST_TIME ,'>');
+  $select->condition('next_execution', REQUEST_TIME ,'<');
+  $select->condition('active', 1);
+  
+  $campaigns = $select->execute()->fetchAll();
+  
+  // FOR EACH ACTIVE CAMPAIGN ADD NOTIFICATION IN POOL
+  foreach ($campaigns as $campaign) {
+  	campaign_action_process_campaign($campaign);
+  }
+	
+  return '';
+  
+}
+
+function campaign_action_process_campaign($campaign) {
+	
+  $keep = array(0);
+  	
+  // GET ALL NOTIFICATIONS FOR THIS CAMPAIGN THAT ARE STILL RELEVANT	
+  $ids = db_query('SELECT id
+      FROM {mc_campaign_notifications} lists
+      WHERE cid = :cid AND deleted = 0',
+      array(':cid' => $campaign->cid))
+      ->fetchCol();
+	
+  $select = db_select('mc_campaign_subscribers','subscribers');
+  $select->join('mc_campaign_lists_subscribers', 'lists', 'lists.sid = subscribers.sid'); //JOIN node with users
+  $select->join('mc_campaign_campaigns_lists', 'campaign', 'campaign.lid = lists.lid'); //JOIN node with users
+  $select->fields('subscribers',array('sid','firstname','lastname','email','mobile'));
+  $select->fields('lists');
+  $select->condition('cid', $campaign->cid );
+  $select->condition('deleted', 0 );
+  $select->orderBy('id');
+  
+  $subscribers = $select->execute()->fetchAll();
+  
+  foreach ($subscribers as $subscriber) {
+  	
+  	// collect all id
+  	$keep[] = $subscriber->id;
+  	
+  	if (!in_array($subscriber->id, $ids)) {
+
+  	  $subscriber->uuid = mc_campaign_action_uuid_generate_php();
+  	
+  	  switch ($campaign->media) {
+        case 'SMS':
+          $options = array('clear' => FALSE);
+          $message = token_replace($campaign->sms_body, array());
+          $message = token_replace($message, array('campaign_subscriber' => $subscriber), $options);
+          $estimate_sent = ($subscriber->sent_time) ? $subscriber->sent_time : REQUEST_TIME;
+          if ($subscriber->mobile != '') campaign_action_add_message($campaign->did, $subscriber->id, $subscriber->uuid, $campaign->cid, $subscriber->lid, $subscriber->sid,'campaign','sms', $subscriber->mobile, $message, $estimate_sent);
+        break;
+        case 'Mail':
+          $options = array('clear' => FALSE);
+          $message = token_replace($campaign->mail_body, array());
+          $message = token_replace($message, array('campaign_subscriber' => $subscriber), $options);
+          $estimate_sent = ($subscriber->sent_time) ? $subscriber->sent_time : REQUEST_TIME;
+          if ($subscriber->email != '') campaign_action_add_message($campaign->did, $subscriber->id, $subscriber->uuid, $campaign->cid, $subscriber->lid, $subscriber->sid,'campaign','mail', $subscriber->email, $message, $estimate_sent);
+        break;
+        case 'Mail&SMS':
+          $options = array('clear' => FALSE);
+          $message = token_replace($campaign->mail_body, array());
+          $message = token_replace($message, array('campaign_subscriber' => $subscriber), $options);
+          $estimate_sent = ($subscriber->sent_time) ? $subscriber->sent_time : REQUEST_TIME;
+          if ($subscriber->email != '') campaign_action_add_message($campaign->did, $subscriber->id, $subscriber->uuid, $campaign->cid, $subscriber->lid, $subscriber->sid,'campaign','mail', $subscriber->email, $message, $estimate_sent);
+          $message = token_replace($campaign->sms_body, array());
+          $message = token_replace($message, array('campaign_subscriber' => $subscriber), $options);
+          $estimate_sent = ($subscriber->sent_time) ? $subscriber->sent_time : REQUEST_TIME;
+          if ($subscriber->mobile != '') campaign_action_add_message($campaign->did, $subscriber->id, $subscriber->uuid, $campaign->cid, $subscriber->lid, $subscriber->sid,'campaign','sms', $subscriber->mobile, $message, $estimate_sent);
+        break;
+        case 'SSSOrMail':
+          $message = token_replace($campaign->sms_body, array());
+          $message = token_replace($message, array('campaign_subscriber' => $subscriber), $options);
+          $estimate_sent = ($subscriber->sent_time) ? $subscriber->sent_time : REQUEST_TIME;
+          if ($subscriber->mobile != '') campaign_action_add_message($campaign->did, $subscriber->id, $subscriber->uuid, $campaign->cid, $subscriber->lid, $subscriber->sid,'campaign','sms', $subscriber->mobile, $message, $estimate_sent);
+          $options = array('clear' => FALSE);
+          $message = token_replace($campaign->mail_body, array());
+          $message = token_replace($message, array('campaign_subscriber' => $subscriber), $options);
+          $estimate_sent = ($subscriber->sent_time) ? $subscriber->sent_time : REQUEST_TIME;
+          if ($subscriber->mobile == '' && $subscriber->email != '') campaign_action_add_message($campaign->did, $subscriber->id, $subscriber->uuid, $campaign->cid, $subscriber->lid, $subscriber->sid,'campaign','mail', $subscriber->email, $message, $estimate_sent);
+        break;
+        case 'MailOrSMS':
+          $options = array('clear' => FALSE);
+          $message = token_replace($campaign->mail_body, array());
+          $message = token_replace($message, array('campaign_subscriber' => $subscriber), $options);
+          $estimate_sent = ($subscriber->sent_time) ? $subscriber->sent_time : REQUEST_TIME;
+          if ($subscriber->email != '') campaign_action_add_message($campaign->did, $subscriber->id, $subscriber->uuid, $campaign->cid, $subscriber->lid, $subscriber->sid,'campaign','mail', $subscriber->email, $message, $estimate_sent);
+          $message = token_replace($campaign->sms_body, array());
+          $message = token_replace($message, array('campaign_subscriber' => $subscriber), $options);
+          $estimate_sent = ($subscriber->sent_time) ? $subscriber->sent_time : REQUEST_TIME;
+          if ($subscriber->email == '' && $subscriber->mobile != '') campaign_action_add_message($campaign->did, $subscriber->id, $subscriber->uuid, $campaign->cid, $subscriber->lid, $subscriber->sid,'campaign','sms', $subscriber->mobile, $message, $estimate_sent);
+        break;
+      }
+    
+  	}
+  
+  }
+  
+  // DELETE OLD NOTIFICATION NOT SENT 
+  $result = db_query("UPDATE {mc_campaign_notifications} SET deleted = 1 WHERE cid = :cid AND id NOT IN (:old) AND sent = 0", array(':cid' => $campaign->cid,':old' => $keep));
+    
+  // UPDATE CAMPAIGN 
+  db_update('mc_campaign_campaigns')
+    ->fields(array(
+      'next_execution' => ($campaign->type != 'Once') ? REQUEST_TIME + $campaign->frequency : null,
+      'last_execution' => REQUEST_TIME,
+    ))
+    ->condition('cid', $campaign->cid ,'=')
+    ->execute();
+    
+  return '';
+    
+  	
+}
+
+
+
+function campaign_action_add_message($did,$id,$uuid,$cid,$lid,$sid,$module,$media,$contact,$message,$estimate_sent) {
+  $id = db_insert('mc_campaign_notifications')
+    ->fields(array(
+      'did' => $did,
+      'id' => $id,
+      'uuid' => $uuid,
+      'cid' => $cid,
+      'lid' => $lid,
+      'sid' => $sid,
+      'module' => $module,
+      'media' => $media,
+      'contact' => $contact,
+      'message' => $message,
+      'estimate_sent' => $estimate_sent,
+      'created' => REQUEST_TIME,
+      'updated' => REQUEST_TIME,
+    ))
+    ->execute();
+}
+
+	
+
+
+
+
+function campaign_action_call_pool() {
+  
+  $languages = array('en'=>'Elizabeth','fr'=>'Florence','nl'=>'Saskia');
+  
+  $select = db_select('mc_campaign_notifications','n');
+  $select->leftjoin('mc_campaign_campaigns', 'c', 'c.cid = n.cid');
+  $select->condition('n.deleted', 0);
+  $select->condition('n.media', 'call_fixedline');
+  $select->condition('n.estimate_sent', REQUEST_TIME, '<');
+  $select->condition('n.sent', 0);
+  //$select->condition('n.compt', 3 ,'<');
+  $select->fields('n',array('module','nid', 'contact', 'message','uuid'));
+  $select->fields('c');
+  $select->orderBy('n.estimate_sent','DESC');
+  $select->range(0, 10);
+  	
+  $notifications = $select->execute()->fetchAll();
+  
+  foreach ($notifications as $notification) {
+    
+    // SELECT USER LANGUAGE
+  	$result = db_query("SELECT uid FROM {domain_editor} WHERE domain_id = :domain_id", array(':domain_id' => $notification->did))->fetchObject();
+  	$account = user_load($result->uid);
+  	$language = user_preferred_language($account);
+
+  	$options['langcode'] = $languages[$language->language];
+  	$options['message'] = $notification->message;
+  	$options['number'] = $notification->contact;
+  	$options['timeout'] = 10;
+    $options['uuid'] = $notification->uuid;
+    $options['token'] = '0a9ad3bb5302874a821c1feb8a1679e426cf652dc746db8a5d10265a9a2140e596807c559c2e5232049153ad';
+    
+  	dpm($options);
+  	
+    tropo_launchapp($options);
+  		
+  }
+  	
+  	return t('');
+  	
+}
+
+
+
+
+
+function campaign_action_mail_pool() {
+  
+  // GET CREDITS
+  $credits = db_query("SELECT did, SUM(amount) FROM {mc_campaign_credits} WHERE deleted = 0 GROUP BY did")->fetchAllKeyed();
+  $costs = array();
+  
+  $select = db_select('mc_campaign_notifications','n');
+  $select->leftjoin('mc_campaign_campaigns', 'c', 'c.cid = n.cid');
+  $select->condition('n.deleted', 0);
+  $select->condition('n.media', 'mail');
+  $select->condition('n.estimate_sent', REQUEST_TIME, '<');
+  $select->condition('n.sent', 0);
+  $select->condition('n.compt', 3 ,'<');
+  $select->fields('n',array('did','module','nid', 'contact', 'message','uuid'));
+  $select->fields('c');
+  $select->orderBy('n.estimate_sent','DESC');
+  $select->range(0, 50);
+  	
+  $notifications = $select->execute()->fetchAll();
+  	
+  foreach ($notifications as $notification) {
+    
+    if ($credits[$notification->did] && $credits[$notification->did] > 1) {
+      
+      $params = array();
+      $options = array(); 
+  	  $from = '';
+  	    
+  	  // SELECT USER LANGUAGE
+  	  $result = db_query("SELECT uid FROM {domain_editor} WHERE domain_id = :domain_id", array(':domain_id' => $notification->did))->fetchObject();
+  	  $account = user_load($result->uid);
+  	  //dpm($account);
+  	  $language = user_preferred_language($account);
+  	  $options['langcode'] = $language->language;
+  	  
+  	  switch($notification->module) {
+  	    case 'reminder':
+  	  	  $subject = $account->name . ' ' . t('Reminder',array(), $options);
+  		  $from = 'info@mctimetracker.com';
+  		break;
+  	    default :
+  		  $subject = $notification->mail_suject;
+  		  $from = $notification->mail_from_name;
+  		break;
+  	  }
+  		
+      $module = 'mc_campaign';
+      $key = $notification->module;
+      $params['params']['uuid'] = $notification->uuid;
+      $params['params']['langcode'] = $language->language;
+      $params['params']['logo'] = (isset($account->field_logo)) ? str_replace(" ", "%", $account->field_logo['und'][0]['filename']) : 'mctimetracker_logo.jpg';
+      $params['params']['site_name'] = $account->field_site_name['und'][0]['value'];
+      
+      $from = $from;
+      $send = FALSE;
+      $email = $notification->contact;
+      $message = drupal_mail($module, $key, $email, $language, $params, $from, $send);
+      
+      $message['subject'] = $subject;
+      $message['body'] = array();
+      $message['body'][] = $notification->message;
+      
+      // TRACKER
+  	  $message['body'][] = "<img src='".url('<front>', array('absolute' => TRUE))."/admin/campaign/tracker/mail/image.jpeg?uuid=".$notification->uuid."' />";
+  	  $message['body'][] = "<iframe src='".url('<front>', array('absolute' => TRUE))."/admin/campaign/tracker/mail/iframe.php?uuid=".$notification->uuid."' width='1' height='1' frameborder='0'></iframe>";
+  	  $message['body'][] = "<link rel='stylesheet' type='text/css' href='".url('<front>', array('absolute' => TRUE))."/admin/campaign/tracker/mail/css.css?uuid=".$notification->uuid."'>";
+      
+      // Retrieve the responsible implementation for this message.
+      $system = drupal_mail_system($module, $key);
+      
+      // Format the message body.
+      $message = $system->format($message);
+
+      // Send e-mail.
+      $message['result'] = $system->mail($message);
+    	
+      // Update sent time + cost
+      if($message['result']) {
+	    $id = db_update('mc_campaign_notifications')
+		  ->fields(array(
+		    'sent' => REQUEST_TIME,
+		    'cost' => 1,
+		    'credit' => 1,
+		  ))
+		  ->condition('nid', $notification->nid)
+		  ->execute();
+		
+		$mail_number[$notification->did] = @$mail_number[$notification->did] + 1;
+		$credits[$notification->did] = @$credits[$notification->did] - 1;
+		$costs[$notification->did] = @$costs[$notification->did] - 1;
+		
+      } else {
+	    $id = db_update('mc_campaign_notifications')
+    	   ->expression('compt', 'compt + :compt', array(':compt' => 1))
+    	   ->condition('nid', $notification->nid)
+		   ->execute();
+      }
+      
+    } else {
+        
+	  	// NOT ENOUGH CREDIT
+	  	 $id = db_update('mc_campaign_notifications')
+    	   ->expression('compt', 'compt + :compt', array(':compt' => 1))
+    	   ->condition('nid', $notification->nid)
+		   ->execute();
+      
+    }
+    
+ } // FOR EACH NOTIFICATION
+  	
+  	foreach ($costs  as $domain=>$cost) {
+      mc_campaign_insert_cost($domain, $cost,'Sent '.$mail_number[$domain].' Mails');
+    }
+  	
+  	return t('');
+  	
+}
+
+
+
+
+
+function campaign_action_sms_pool() {
+  
+  // GET CREDITS
+  $credits = db_query("SELECT did, SUM(amount) FROM {mc_campaign_credits} WHERE deleted = 0 GROUP BY did")->fetchAllKeyed();
+  $costs = array();
+
+  $select = db_select('mc_campaign_notifications','n');
+  $select->leftjoin('mc_campaign_campaigns', 'c', 'c.cid = n.cid');
+  $select->condition('n.deleted', 0);
+  $select->condition('n.media', 'sms');
+  $select->condition('n.estimate_sent', REQUEST_TIME, '<');
+  $select->condition('n.sent', 0);
+  $select->condition('n.compt', 3 ,'<');
+  $select->fields('n',array('did','nid', 'contact', 'message','uuid','module','estimate_sent'));
+  $select->fields('c',array('title'));
+  $select->orderBy('n.estimate_sent','DESC');
+  $select->range(0, 50);
+  
+  $notifications = $select->execute()->fetchAll();
+  
+  // CONNECTION TO SMS SUPPLIER (clickatell);
+  // enable TROPO
+  $result = sms_clickatell_command('auth');
+  
+  if ($result['status'] == TRUE) {
+    
+    // SEND EACH MESSAGE
+	foreach ($notifications as $notification) {
+	  
+	  if ($credits[$notification->did] > 10) {
+	    // ENOUGH CREDIT
+	    $data['number'] = $notification->contact;
+	    $data['message'] = $notification->message;
+	    // BUILD SESSION
+	    $data['sid'] = $result['sid'];
+	    // BUILD CONFIG
+	    $data['options'] = array();
+	    //$data['options']['delaymins'] = $compt++;
+	    //$data['options']['priority']
+	    $data['options']['expiremins'] = 180; // 3 hours
+	    $data['options']['reference'] = $notification->uuid;
+	    //$data['options']['expectreply']
+	    $sms = sms_clickatell_command('sendmsg', $data);
+	    
+	  	if ($sms['status'] == TRUE) {
+	  	  // SMS SENT	
+	  	  $id = db_update('mc_campaign_notifications')
+		    ->fields(array('sent' => REQUEST_TIME , 'cost' => $sms['cost'] , 'credit' => $sms['cost'] , 'status' => '000'))
+		    ->condition('nid', $notification->nid)
+			->execute();
+			$sms_number[$notification->did] = @$sms_number[$notification->did] + 1;
+			$credits[$notification->did] = @$credits[$notification->did] - 10 * $sms['cost'];
+			$costs[$notification->did] = @$costs[$notification->did] - 10 * $sms['cost'];
+	    } else {
+	      // SMS NOT SENT
+	      $id = db_update('mc_campaign_notifications')
+    	    ->expression('compt', 'compt + :compt', array(':compt' => 1))
+    	    ->fields(array('status' => $sms['message']))
+    	    ->condition('nid', $notification->nid)
+		    ->execute();
+ 	    }
+ 	  
+	  } else {
+	  	
+	  	// NOT ENOUGH CREDIT
+	  	 $id = db_update('mc_campaign_notifications')
+    	   ->expression('compt', 'compt + :compt', array(':compt' => 1))
+    	   ->condition('nid', $notification->nid)
+		   ->execute();
+	  
+	  }
+	  
+	  		
+    } // FOR EACH NOTIFICATION
+    
+    foreach ($costs  as $domain=>$cost) {
+      mc_campaign_insert_cost($domain, $cost,'Sent '.$sms_number[$domain].' SMS');
+    }
+	  	
+	  	
+  } else {
+  		
+    	// NO AUTH
+    
+  }
+	
+  return t('');
+  		
+}
+
+
+
+function mc_campaign_action_tracker_sms($config = NULL) {
+	
+  $status = isset($_GET['status']) ? $_GET['status'] : false;
+  $cost = isset($_GET['charge']) ? $_GET['charge'] : false;
+  $cliMsgId = isset($_GET['cliMsgId']) ? $_GET['cliMsgId'] : false;
+  
+  //http://new.polycliniqueborinage.org/admin/campaign/tracker/
+  //sms?api_id=3320797
+  //apiMsgId=d7e1326317921f191c3aa26d83c0993f
+  //cliMsgId=999999
+  //timestamp=1318974159&to=447548589864&from=32494317897
+  //status=004
+  //charge=1.500000
+  
+  $id = db_update('mc_campaign_notifications')
+    ->fields(array(
+	  'updated' => REQUEST_TIME,
+	  'received' => ($status == '004') ? REQUEST_TIME : 0,
+	  'status' => $status,
+      'credit' => ceil($cost)
+    ))
+	->condition('uuid', $cliMsgId)
+	->execute();
+	
+  //watchdog('tracker_sms', serialize($_GET).serialize($_POST));
+	
+  return '';
+	
+}
+
+
+
+
+function mc_campaign_action_mail_image() {
+	
+	$uuid = isset($_GET['uuid']) ? $_GET['uuid'] : false;
+	
+	watchdog('campaign_mail_tracker_image', $uuid);
+	
+	if ($uuid) {
+
+		try {
+		  $id = db_update('mc_campaign_notifications')
+		    ->fields(array(
+			  'updated' => REQUEST_TIME,
+			  'received' =>  REQUEST_TIME,
+			  'status' => '004',
+		      'credit' => ceil($cost)
+		    ))
+			->condition('uuid', $uuid)
+			->execute();
+	  	}
+	  	catch (Exception $e) {
+	    	drupal_set_message(t('db_update failed. Message = %message, query= %query',array('%message' => $e->getMessage(), '%query' => $e->query_string)), 'error');
+	  	}
+	  	
+		$im = imagecreatetruecolor(1, 1);
+		
+		header('Content-Type: image/jpeg');
+
+		imagejpeg($im);
+
+		imagedestroy($im);
+	  	
+	  	die();
+	  	
+	} else {
+		
+		return t('');
+	
+	}
+	
+}
+
+
+function mc_campaign_action_mail_iframe() {
+	
+	$uuid = isset($_GET['uuid']) ? $_GET['uuid'] : false;
+	
+	watchdog('campaign_mail_tracker_iframe', $uuid);
+	
+	if ($uuid) {
+
+		$entry['received'] 	= REQUEST_TIME;
+		
+		try {
+	    	$count = db_update('mccampaign_notification')
+	              ->fields($entry)
+	              ->condition('uuid', $uuid)
+	              ->execute();
+	  	}
+	  	catch (Exception $e) {
+	    	drupal_set_message(t('db_update failed. Message = %message, query= %query',array('%message' => $e->getMessage(), '%query' => $e->query_string)), 'error');
+	  	}
+	  	
+	  	return t('t :uid',array(':uid' => $uuid));		
+		
+	} else {
+		
+		return t('');
+	
+	}
+	
+}
+
+
+function mc_campaign_action_mail_css() {
+	
+	$uuid = isset($_GET['uuid']) ? $_GET['uuid'] : false;
+	
+	watchdog('campaign_mail_tracker_css', $uuid);
+	
+	if ($uuid) {
+
+		$entry['received'] 	= REQUEST_TIME;
+		
+		try {
+	    	$count = db_update('mccampaign_notification')
+	              ->fields($entry)
+	              ->condition('uuid', $uuid)
+	              ->execute();
+	  	}
+	  	catch (Exception $e) {
+	    	drupal_set_message(t('db_update failed. Message = %message, query= %query',array('%message' => $e->getMessage(), '%query' => $e->query_string)), 'error');
+	  	}
+	  	
+	  	return t('t :uid',array(':uid' => $uuid));		
+		
+	} else {
+		
+		return t('');
+	
+	}
+	
+}
+
+
+/**
+ * Executes a command using the Clickatell API
+ *
+ * data array fields:
+ * <ul>
+ *   <li>number - MSISDN of message recipient. Purely numeric and must begin with intl prefix, eg. 4477121231234.</li>
+ *   <li>message - Message text. Max 459 chars (3x SMS). Use %n for newline.</li>
+ *   <li>options - Array of additional options, as below.</li>
+ * </ul>
+ *
+ * data['options'] array fields:
+ * <ul>
+ *   <li>sender - Optional: Sender ID may be an MSISDN (max 16 chars) or an alphanumeric string (max 11 chars). See note about Approved Sender IDs in the header of this file. Clickatell param: 'from'</li>
+ *   <li>reference - Optional: Reference tag to apply to message. Will appear on any receipt. No spaces. Clickatell param: 'cliMsgId'</li>
+ *   <li>delaymins - Optional: Delay message sending by N minutes. Clickatell param: 'deliv_time'</li>
+ *   <li>expiremins - Optional: The message send will abort if not sent within N minutes. Clickatell param: 'validity'</li>
+ *   <li>priority - Optional: Queue priority to apply to the message. Can be 1, 2 or 3, where 1 is high priority. Clickatell param: 'queue'</li>
+ *   <li>expectreply - Optional: Route the message properly so that the user can reply. Clickatell param: 'mo'</li>
+ * </ul>
+ *
+ * @param str $command One of 'auth', 'sendmsg' or 'getbalance'.
+ * @param array $data All data required to perform the command.
+ * @param array $config Gateway configuration parameters.
+ * @return bool Whether the command succeeded or not.
+ */
+function sms_clickatell_command($command = 'auth', $data = array(), $config = NULL) {
+
+	// TODO config 
+    $config['sms_clickatell_callback'] 	= variable_get('sms_clickatell_callback', '');
+    $config['sms_clickatell_from'] 		= variable_get('sms_clickatell_from', '');
+    $config['sms_clickatell_api_id'] 	= variable_get('sms_clickatell_api_id', ''); //'3320797'; //DCM389
+    $config['sms_clickatell_user'] 		= variable_get('sms_clickatell_user', ''); //'mariquecalcus';
+    $config['sms_clickatell_password'] 	= variable_get('sms_clickatell_password', ''); //'azerty2007-89';
+	$config['sms_clickatell_ssl'] 		= TRUE;
+	
+  	if ($config['sms_clickatell_ssl']) {
+    	$scheme = 'https';
+  	} else {
+    	$scheme = 'http';
+  	}
+  
+  	switch ($command) {
+    
+  		case 'auth':
+  			
+  			$query = 'api_id='. $config['sms_clickatell_api_id'] .'&user='. $config['sms_clickatell_user'] .'&password='. $config['sms_clickatell_password'];
+      	
+  			break;
+    
+      	case 'sendmsg':
+      
+			$message = utf8_decode($data['message']);
+      		$message = drupal_encode_path($message);
+        	$query = 'session_id='. $data['sid'] .'&to='. $data['number'] .'&text='. $message;
+        	
+      		// Check if the message requires concatenation (long messages)
+      		// Note: concatenation over multiple messages reduces each SMS message length by 7 chars.
+      		$concat = 1;
+      		if (strlen($data['message']) > 160) {
+        		$concat = 2;
+        		if (strlen($data['message']) > 306) {
+        	  $concat = 3;
+        		}
+      		}
+      		$query .= '&concat=' . $concat;
+
+      		// Add any optional arguments
+      		if (isset($data) && array_key_exists('options', $data)) {
+        		
+      			// sender (Clickatell: from)
+        		if (array_key_exists('sender', $data['options'])) {
+          			$query .= '&from=' . $data['options']['sender'];
+          			$sender_set = TRUE;
+        		}
+        
+        		// delaymins (Clickatell: deliv_time)
+        		if (array_key_exists('delaymins', $data['options']) && $data['options']['delaymins'] >= 1 && $data['options']['delaymins'] <= 10080) {
+          			$query .= '&deliv_time=' . $data['options']['delaymins'];
+        		}
+        
+        		// priority (Clickatell: queue)
+		        if (array_key_exists('priority', $data['options']) && $data['options']['priority'] >= 1 && $data['options']['priority'] <= 3) {
+		          $query .= '&queue=' . $data['options']['priority'];
+		        }
+		        
+        		// expiremins (Clickatell: validity)
+		        if (array_key_exists('expiremins', $data['options']) && $data['options']['expiremins'] >= 1 && $data['options']['expiremins'] <= 1440) {
+		          $query .= '&validity=' . $data['options']['expiremins'];
+		        }
+
+		        // reference (Clickatell: cliMsgId)
+		        if (array_key_exists('reference', $data['options']) && strlen($data['options']['reference']) <= 32) {
+		          $query .= '&cliMsgId=' . $data['options']['reference'];
+		        }
+        
+		        // expectreply (Clickatell: mo)
+		        if (array_key_exists('expectreply', $data['options'])) {
+		          $query .= '&mo=' . $data['options']['expectreply'];
+		        }
+		        
+      		}
+
+      		// If sender is not set and default sender exists, then apply default sender
+      		if (!isset($sender_set) && $config['sms_clickatell_from']) {
+        	  	$query .= '&from=' . $config['sms_clickatell_from'];
+      		}
+
+      	// Apply callback parameter if set
+      	if ($config['sms_clickatell_callback']) {
+          	$query .= '&callback=' . $config['sms_clickatell_callback'];
+      	}
+      	
+      	break;
+    
+      	case 'getbalance':
+      		$query = 'session_id='. $data['sid'];
+      	break;
+  	
+  	}
+  	
+  	// Run the command
+  	$http_result = drupal_http_request($scheme .'://api.clickatell.com/http/'. $command .'?'. $query);
+  	
+  	if (isset($http_result->data)) {
+  		// Check for Clickatell errors
+    	if (strpos($http_result->data, 'ERR') !== FALSE) {
+      		$result = array('status' => FALSE, 'message' => $http_result->data);
+    	} elseif ($command == 'auth') {
+      		// Add Clickatell session ID to result array.
+      		list($status, $sid) = explode(': ', $http_result->data);
+      		$result = array('status' => TRUE, 'sid' => $sid);
+    	} else {
+      		$result = array('status' => TRUE, 'data' => $http_result->data, 'cost' => $concat);
+    	}
+  	} else {
+  		$result = array('status' => FALSE, 'message' => 'Error connexion');
+  	}
+  	
+  	return $result;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+/**
+ * Implements hook_mail().
+ */
+function mc_campaign_action_mail($key, &$message, $params) {
+
+  if ($key == 'mc_campaign_key') {
+    $message['subject'] = t('Newsletter test e-mail');
+    $message['body'] = t('This is a test e-mail generated by the Drupal Newsletter module.
+      If you succesfully received this e-mail,
+      it means that your server is capable of sending e-mails.
+      Congratulations!
+      You can now create lists, templates and subscribe users to them!');
+    $message['format'] = $params['format'];
+    $message['body_format'] = 'plain_text';
+  }
+  
+  //if (variable_get('newsletter_track_open_rate')) {
+  //      $message['body'] = $message['body'] . newsletter_add_open_rate_image($subscriber->hash, $newsletter);
+  //}
+  
+  
+}
+
+
+function mc_campaign_action_uuid_generate_php() {
+  // The field names refer to RFC 4122 section 4.1.2.
+  return sprintf('%04x%04x%04x%03x4%04x%04x%04x%04x',
+    // 32 bits for "time_low".
+    mt_rand(0, 65535), mt_rand(0, 65535),
+    // 16 bits for "time_mid".
+    mt_rand(0, 65535),
+    // 12 bits before the 0100 of (version) 4 for "time_hi_and_version".
+    mt_rand(0, 4095),
+    bindec(substr_replace(sprintf('%016b', mt_rand(0, 65535)), '01', 6, 2)),
+    // 8 bits, the last two of which (positions 6 and 7) are 01, for "clk_seq_hi_res"
+    // (hence, the 2nd hex digit after the 3rd hyphen can only be 1, 5, 9 or d)
+    // 8 bits for "clk_seq_low" 48 bits for "node".
+    mt_rand(0, 65535), mt_rand(0, 65535), mt_rand(0, 65535)
+  );
+}
+

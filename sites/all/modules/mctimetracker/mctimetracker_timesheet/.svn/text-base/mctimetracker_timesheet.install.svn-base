@@ -1,0 +1,42 @@
+<?php 
+
+/**
+* Implements hook_install().
+*/ 
+function mctimetracker_timsheet_install() {
+	drupal_install_schema('mctimetracker_timsheet');
+}
+
+
+/** 
+* Implements hook_schema(). 
+*/
+function mctimetracker_timsheet_schema() {
+	
+	$schema['mctimetracker_timsheet'] = array(
+    	'description' => 'timsheet entry', 
+    	'fields' => array(
+      		'cid' => array(
+	        	'type' => 'int', 
+	        	'not null' => TRUE, 
+	        	'default' => 0, 
+	        	'description' => t('The {user}.uid of the user casting the vote.'),
+	        ),
+			'uid' => array(
+	        	'type' => 'int', 
+	        	'not null' => TRUE, 
+	        	'default' => 0, 
+	        	'description' => t('The {user}.uid of the user casting the vote.'),
+	        ),
+      	), 
+    	'indexes' => array(
+    	), 
+    	'unique keys' => array(
+    		'cid' => array('cid'),
+    	),
+    	'primary key' => array('cid'),
+  );
+  
+  return $schema;
+
+}

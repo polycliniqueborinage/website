@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/print/print_mail
+END
+print_mail.module
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/print/print_mail/print_mail.module
+END
+print_mail.install
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/print/print_mail/print_mail.install
+END
+print_mail.inc
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/print/print_mail/print_mail.inc
+END
+print_mail.info
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/print/print_mail/print_mail.info
+END
+views_handler_sort_print_mail_sentcount.inc
+K 25
+svn:wc:ra_dav:version-url
+V 145
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/print/print_mail/views_handler_sort_print_mail_sentcount.inc
+END
+print_mail.admin.inc
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/print/print_mail/print_mail.admin.inc
+END

@@ -1,0 +1,4 @@
+name = MC Tropo
+description = Tropo
+package = MC Custom
+core = 7.x

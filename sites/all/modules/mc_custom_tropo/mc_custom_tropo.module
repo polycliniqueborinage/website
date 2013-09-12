@@ -1,0 +1,210 @@
+<?php
+
+// Include Tropo classes.
+require('classes/tropo.class.php');
+  
+/**
+ * Implements hook_menu().
+ */
+function mc_custom_tropo_menu() {
+	
+  $items['tropo/sms'] = array(
+    'title' => 'SMS TRACKER',
+  	'page callback' => 'tropo_sms',
+    'access callback' => TRUE,
+  	'weight' => 4,
+    'type' => MENU_CALLBACK,
+  );
+  
+  $items['tropo/phonecall'] = array(
+    'title' => 'SMS TRACKER',
+  	'page callback' => 'tropo_phonecall',
+    'access callback' => TRUE,
+  	'weight' => 4,
+    'type' => MENU_CALLBACK,
+  );
+  
+  $items['tropo/phonecall/incomplete'] = array(
+    'title' => 'SMS TRACKER',
+  	'page callback' => 'tropo_phonecall_incomplete',
+    'access callback' => TRUE,
+  	'weight' => 4,
+    'type' => MENU_CALLBACK,
+  );
+  
+  $items['tropo/phonecall/hangup'] = array(
+    'title' => 'SMS TRACKER',
+  	'page callback' => 'tropo_phonecall_hangup',
+    'access callback' => TRUE,
+  	'weight' => 4,
+    'type' => MENU_CALLBACK,
+  );
+
+  $items['tropo/phonecall/error'] = array(
+    'title' => 'SMS TRACKER',
+  	'page callback' => 'tropo_phonecall_error',
+    'access callback' => TRUE,
+  	'weight' => 4,
+    'type' => MENU_CALLBACK,
+  );
+  
+  return $items;
+  
+}
+
+
+function tropo_sms() {
+	
+  $to = $session->getParameters("numbertodial");
+  $name = $session->getParameters("customername");
+  $msg = $session->getParameters("msg");
+	
+  $tropo = new Tropo();
+ 
+  $tropo->call("+447548589864", array('network'=>'SMS')); 
+  
+  $tropo->say("Tag, you're it!");
+ 
+  $tropo->RenderJson();
+  
+  watchdog('tropo_sms', serialize($_GET).serialize($_POST));
+	
+}
+
+
+function tropo_launchapp($options) {
+	
+  $tropo = new Tropo();
+  
+	
+  // When the the session object is created, it tries
+  // to load the json that Tropo posts when reciving or
+  // making a call. If the json doesn't exist, the 
+  // Session object throws a TropoException.
+  // This try/catch block checks to see if this code is
+  // being run as part of a session or being run directly.
+  try {
+  
+    $tropo->createSession($options['token'], $options);
+    watchdog('tropo_launchapp', serialize($tropo));
+    
+  } catch (TropoException $e) {
+    
+  }
+  
+  return '';
+	
+}
+
+
+function tropo_phonecall() {
+
+  $tropo = new Tropo();
+  
+  watchdog('tropo_phonecall_tropo', serialize($tropo));
+  
+  // When the the session object is created, it tries
+  // to load the json that Tropo posts when reciving or
+  // making a call. If the json doesn't exist, the
+  // Session object throws a TropoException.
+  // This try/catch block checks to see if this code is
+  // being run as part of a session or being run directly.
+  try {
+
+    // this next line throws an exception if the code isn't
+    // being run by Tropo. If that happens, the catch block
+    // below will run.
+    $session = new Session();
+    watchdog('tropo_phonecall_session', serialize($session));
+    
+    // GET
+    $number = $session->getParameters("number");
+    $message = $session->getParameters("message");
+    $voice = $session->getParameters("langcode");
+    $uuid = $session->getParameters("uuid");
+    
+    // SET
+    $starttime = REQUEST_TIME;
+    
+    watchdog('tropo_phonecall', $number);
+    watchdog('tropo_phonecall', $message);
+    watchdog('tropo_phonecall', $voice);
+    watchdog('tropo_phonecall', $uuid);
+    watchdog('tropo_phonecall', $starttime);
+    
+    if ($session->getParameters("action") == "create") {
+      
+      $option = array(
+        "timeout" => 30,
+      );
+      
+      $tropo->call($number,$option);
+      
+      $tropo->on(array("event" => "incomplete", "next" => "/tropo/phonecall/incomplete?uuid=" . $uuid . '&starttime=' . $starttime));
+      
+      $tropo->on(array("event" => "hangup", "next" => "/tropo/phonecall/hangup?uuid=" . $uuid . '&starttime=' . $starttime));
+      
+      $tropo->on(array("event" => "error", "next" => "/tropo/phonecall/error?uuid=" . $uuid . '&starttime=' . $starttime));
+
+      $tropo->say("<break />");
+      
+      $tropo->say($message, array("voice" => $voice));
+      
+      $tropo->say("<break />"); 
+    
+    } else {
+
+    }
+
+    $tropo->renderJSON();
+
+  } catch (TropoException $e) {
+
+    if ($e->getCode() == '1') {
+      
+      watchdog('tropo_phonecall', serialize($e));
+      
+    }
+  
+  }
+  
+  return '';
+
+}
+
+
+function tropo_phonecall_incomplete() {
+  $uuid = $_GET["uuid"];
+  $starttime = $_GET["starttime"];
+  watchdog('tropo_phonecall_incomplete_uid', $uuid);
+  watchdog('tropo_phonecall_incomplete_startime', $starttime);
+  return '';
+}
+
+function tropo_phonecall_hangup() {
+  
+  $uuid = $_GET["uuid"];
+  $starttime = $_GET["starttime"];
+  
+  watchdog('tropo_phonecall_hangup_uid', $uuid);
+  watchdog('tropo_phonecall_hangup_starttime', $starttime);
+  
+  $cost = 10 * ceil((REQUEST_TIME - $starttime) / 60);
+
+  $id = db_update('mc_campaign_notifications')
+    ->fields(array('sent' => REQUEST_TIME , 'cost' => $cost , 'credit' => 0 , 'status' => '000'))
+	->condition('uuid', $uuid)
+	->execute();
+  
+  return '';
+}
+
+function tropo_phonecall_error() {
+  $uuid = $_GET["uuid"];
+  $starttime = $_GET["starttime"];
+  watchdog('tropo_phonecall_error_uid', $uuid);
+  watchdog('tropo_phonecall_incomplete_uid', $stattime);
+  return '';
+}
+
+

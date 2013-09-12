@@ -1,0 +1,216 @@
+<?php
+
+/**
+ * @file
+ */
+
+function stormorganization_install() {
+  // get the name of our localization function for translation during install
+  $t = get_t();
+  
+  variable_set('node_options_stormorganization', array('status'));
+  // Stop node module from setting Storm permissions
+  //variable_set('node_permissions_stormorganization', 0);
+  
+  // Define the node type.  This is similar to hook_node_info() in Drupal 6
+  $content_type_stormorganization = array(
+    'type' => 'stormorganization',
+    'name' => $t('Organization'),
+    'base' => 'stormorganization',
+    //'description' => $t('This is an example node type with a few fields.'),
+    //'body_label' => $t('Example Description')
+  );
+
+  // Complete the node type definition by setting any defaults not explicitly
+  // declared above.
+  // http://api.drupal.org/api/function/node_type_set_defaults/7
+  $content_type = node_type_set_defaults($content_type_stormorganization);
+
+  // Save the content type
+  node_type_save($content_type);
+
+  // Load the instance definition for our content types body
+  // http://api.drupal.org/api/function/field_info_instance/7
+  $body_instance = field_info_instance('node', 'body', 'stormorganization');
+
+  // Save our changes to the body field instance.
+  // http://api.drupal.org/api/function/field_update_instance/7
+  field_update_instance($body_instance);
+
+  // Create fields
+  
+  // Customer
+  $field = array(
+    'field_name' => 'stormorganization_iscustomer',
+    'type' => 'list_boolean',
+  );
+  field_create_field($field);
+  
+  $instance = array(
+    'field_name' => 'stormorganization_iscustomer',
+    'object_type' => 'node',
+    'bundle' => 'stormorganization',
+    'label' => $t('Customer'),
+    'widget' => array(
+      'type' => 'options_buttons',
+      'weight' => -50,
+    ),
+  );
+  field_create_instance($instance);
+  
+  // Provider
+  $field = array(
+    'field_name' => 'stormorganization_isprovider',
+    'type' => 'list_boolean',
+    'settings' => array(
+      'allowed_values' => '1|Yes',
+    ),
+  );
+  field_create_field($field);
+  
+  $instance = array(
+    'field_name' => 'stormorganization_isprovider',
+    'object_type' => 'node',
+    'bundle' => 'stormorganization',
+    'label' => t('Provider'),
+    'widget' => array(
+      'type' => 'options_onoff',
+      'weight' => -49,
+    ),
+  );
+  field_create_instance($instance);
+  
+  // Prefix
+  $field = array(
+    'field_name' => 'stormorganization_prefix',
+    'type' => 'text',
+  );
+  field_create_field($field);
+  
+  $instance = array(
+    'field_name' => 'stormorganization_prefix',
+    'object_type' => 'node',
+    'bundle' => 'stormorganization',
+    'label' => t('Prefix'),
+    'widget' => array(
+      'type' => 'text_field',
+      'weight' => -48,
+    ),
+  );
+  field_create_instance($instance);
+  
+  // Address
+  $field = array(
+    'field_name' => 'stormorganization_address',
+    'type' => 'text',
+  );
+  field_create_field($field);
+  
+  $instance = array(
+    'field_name' => 'stormorganization_address',
+    'object_type' => 'node',
+    'bundle' => 'stormorganization',
+    'label' => t('Address'),
+    'widget' => array(
+      'type' => 'text_field',
+      'weight' => -47,
+    ),
+  );
+  field_create_instance($instance);
+  
+  // Country
+  $field = array(
+    'field_name' => 'stormorganization_country',
+    'type' => 'text',
+  );
+  field_create_field($field);
+  
+  $instance = array(
+    'field_name' => 'stormorganization_country',
+    'object_type' => 'node',
+    'bundle' => 'stormorganization',
+    'label' => t('Country'),
+    'widget' => array(
+      'type' => 'text_field',
+      'weight' => -46,
+    ),
+  );
+  field_create_instance($instance);
+  
+  // Country
+  $field = array(
+    'field_name' => 'stormorganization_zip',
+    'type' => 'text',
+  );
+  field_create_field($field);
+  
+  $instance = array(
+    'field_name' => 'stormorganization_zip',
+    'object_type' => 'node',
+    'bundle' => 'stormorganization',
+    'label' => t('ZIP'),
+    'widget' => array(
+      'type' => 'text_field',
+      'weight' => -45,
+    ),
+  );
+  field_create_instance($instance);
+}
+
+function stormorganization_disable() {
+  drupal_set_message(t('Nodes of type "Organization" have not been deleted on disabling Storm Organization. Please note that they will now have reduced functionality, and will not be protected by Storm Organization access controls.'), 'warning');
+}
+
+function stormorganization_uninstall() {
+  field_delete_field('stormorganization_iscustomer');
+  field_delete_field('stormorganization_isprovider');
+  field_delete_field('stormorganization_isactive');
+  field_delete_field('stormorganization_prefix');
+  field_delete_field('stormorganization_fullname');
+  field_delete_field('stormorganization_address');
+  field_delete_field('stormorganization_city');
+  field_delete_field('stormorganization_province');
+  field_delete_field('stormorganization_country');
+  field_delete_field('stormorganization_zip');
+  field_delete_field('stormorganization_phone');
+  field_delete_field('stormorganization_www');
+  field_delete_field('stormorganization_email');
+  field_delete_field('stormorganization_currency');
+  field_delete_field('stormorganization_pricemode');
+  field_delete_field('stormorganization_price');
+  field_delete_field('stormorganization_language');
+  field_delete_field('stormorganization_taxid');
+  
+  drupal_uninstall_schema('stormorganization');
+}
+
+function stormorganization_schema() {
+  $schema['stormorganization'] = array(
+    'fields'        => array(
+      'orglanguage' => array('type' => 'varchar', 'length' => 20),
+      'provstate'   => array('type' => 'varchar', 'length' => 50),
+      'city'        => array('type' => 'varchar', 'length' => 100),
+      'zip'         => array('type' => 'varchar', 'length' => 10),
+      'address'     => array('type' => 'varchar', 'length' => 100),
+      'taxid'       => array('type' => 'varchar', 'length' => 50),
+      'email'       => array('type' => 'varchar', 'length' => 50),
+      'www'         => array('type' => 'varchar', 'length' => 100),
+      'phone'       => array('type' => 'varchar', 'length' => 100),
+      'currency'    => array('type' => 'varchar', 'length' => 20),
+      'isprovider'  => array('type' => 'int', 'default' => 0),
+      'isactive'    => array('type' => 'int', 'default' => 1),
+      'pricemode'   => array('type' => 'varchar', 'length' => 20),
+      'price'       => array('type' => 'float'),
+    ),
+  );
+
+  return $schema;
+}
+
+function stormorganization_update_last_removed() {
+  // 6.x updates have all been removed
+  return 3;
+}
+
+/*function stormorganization_update_7100() {
+}*/

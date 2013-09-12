@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/calendar/calendar_ical
+END
+calendar-style-ical.tpl.php
+K 25
+svn:wc:ra_dav:version-url
+V 135
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/calendar/calendar_ical/calendar-style-ical.tpl.php
+END
+calendar_plugin_row_ical_node.inc
+K 25
+svn:wc:ra_dav:version-url
+V 141
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/calendar/calendar_ical/calendar_plugin_row_ical_node.inc
+END
+calendar_ical.module
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/calendar/calendar_ical/calendar_ical.module
+END
+calendar_ical.install
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/calendar/calendar_ical/calendar_ical.install
+END
+calendar_plugin_style_ical.inc
+K 25
+svn:wc:ra_dav:version-url
+V 138
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/calendar/calendar_ical/calendar_plugin_style_ical.inc
+END
+theme.inc
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/calendar/calendar_ical/theme.inc
+END
+calendar-row-ical-node.tpl.php
+K 25
+svn:wc:ra_dav:version-url
+V 138
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/calendar/calendar_ical/calendar-row-ical-node.tpl.php
+END
+calendar_ical.info
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/calendar/calendar_ical/calendar_ical.info
+END

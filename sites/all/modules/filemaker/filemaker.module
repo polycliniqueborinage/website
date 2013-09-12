@@ -1,0 +1,2587 @@
+<?php
+
+/**
+ * @file
+ * Allows Drupal to interact with FileMaker databases.
+ */
+
+
+
+
+
+/*************************************************************
+ * Menu, nodeapi, cron, and permission hooks
+ *************************************************************/
+
+
+
+
+
+/**
+ * Implementation of hook_menu().
+ */
+function filemaker_menu() {
+  $items = array();
+
+  // Settings - FileMaker authentication connections.
+
+  //List of connections to FileMaker databases.
+  $items['admin/settings/filemaker'] = array(
+    'title' =>  'FileMaker settings',
+    'description'   => 'Configure the FileMaker module. Create, edit, and delete FileMaker connections.',
+    'page callback' => 'filemaker_admin_settings_page',
+    'access callback' => 'user_access',
+    'access arguments' => array('administer filemaker'),
+    'type' => MENU_NORMAL_ITEM,
+    'file' => 'filemaker.admin.inc',
+  );
+
+  // Form to edit or insert a FileMaker connection record from settings.
+  $items['admin/settings/filemaker/connection'] = array(
+    'title' => 'FileMaker connection',
+    'description' => 'View, add, or edit FileMaker connection',
+    'page callback' => 'filemaker_admin_settings_connection_page',
+    'page arguments' => array(4),
+    'access callback' => 'user_access',
+    'access arguments' => array('administer filemaker'),
+    'type' => MENU_NORMAL_ITEM,
+    'file' => 'filemaker.admin.inc',
+  );
+
+  // Delete connection.
+  $items['admin/settings/filemaker/connection/%/delete'] = array(
+    'title' => 'Confirm deletion of FileMaker connection',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('filemaker_delete_form', 'connection', 4),
+    'access callback' => 'user_access',
+    'access arguments' => array('administer filemaker'),
+    'type' => MENU_NORMAL_ITEM,
+    'file' => 'filemaker.admin.inc',
+  );
+
+
+  // Settings - FileMaker scripts to be triggered by Drupal's cron.
+
+  //List of scripts that run at cron.
+  $items['admin/settings/filemaker/cron'] = array(
+    'title' =>  'Cron scripts',
+    'description'   => 'Configure the FileMaker module. Call FileMaker scripts via Drupal\'s cron.',
+    'page callback' => 'filemaker_admin_settings_scripts_page',
+    'access callback' => 'user_access',
+    'access arguments' => array('administer filemaker'),
+    'type' => MENU_NORMAL_ITEM,
+    'file' => 'filemaker.admin.inc',
+  );
+
+  // Form to edit or insert a FileMaker script to run via cron.
+  $items['admin/settings/filemaker/cron/script'] = array(
+    'title' => 'FileMaker script to run as cron job',
+    'description' => 'View, add, or edit FileMaker script',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array(filemaker_script_form, 5),
+    'access callback' => 'user_access',
+    'access arguments' => array('administer filemaker'),
+    'type' => MENU_CALLBACK,
+    'file' => 'filemaker.admin.inc',
+  );
+
+  // Delete script.
+  $items['admin/settings/filemaker/cron/script/%/delete'] = array(
+    'title' => 'Confirm deletion of FileMaker script',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('filemaker_delete_form', 'script', 5),
+    'access callback' => 'user_access',
+    'access arguments' => array('administer filemaker'),
+    'type' => MENU_CALLBACK,
+    'file' => 'filemaker.admin.inc',
+  );
+
+  // Tabs attached to FileMaker nodes
+
+  // FileMaker layout tab, attached to filemaker nodes.
+  $items['node/%node/layout'] = array(
+    'title' => 'Layout Mode',
+    'description' => 'FileMaker layout mode',
+    'page callback' => 'filemaker_layout_tab',
+    'page arguments' => array(1),
+    'access callback' => 'filemaker_tab_access',
+    'access arguments' => array('layout mode', 1),
+    'type' => MENU_LOCAL_TASK,
+    'weight' => 200,
+  );
+
+  // FileMaker fields tab, attached to filemaker nodes.
+  $items['node/%node/layout/fields'] = array(
+    'parent' => 'node/%/layout',
+    'title' => 'FileMaker fields',
+    'page callback' => 'filemaker_fields_tab',
+    'page arguments' => array(1),
+    'description' => 'FileMaker Webform',
+    'access callback' => 'filemaker_tab_access',
+    'access arguments' => array('layout mode', 1),
+    'type' => MENU_LOCAL_TASK,
+  );
+
+  // FileMaker fields tab, delete.
+  $items['node/%node/layout/fields/%/delete'] = array(
+    'title' => 'Confirm Deletion of FileMaker field.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('filemaker_delete_form', 'field', 4, 1),
+    'access callback' => 'filemaker_tab_access',
+    'access arguments' => array('layout mode', 1),
+    'type' => MENU_LOCAL_TASK,
+    'weight' => 200,
+  );
+
+  // FileMaker portals tab, attached to filemaker nodes.
+  $items['node/%node/layout/portals'] = array(
+    'title' => 'FileMaker portals',
+    'description' => 'FileMaker Portals',
+    'page callback' => 'filemaker_portals_tab',
+    'page arguments' => array(1),
+    'access callback' => 'filemaker_tab_access',
+    'access arguments' => array('layout mode', 1),
+    'type' => MENU_LOCAL_TASK,
+  );
+
+  // FileMaker portals tab, delete.
+  $items['node/%node/layout/portals/%/delete'] = array(
+    'title' => 'Confirm Deletion of FileMaker portal.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('filemaker_delete_form', 'portal', 4, 1),
+    'access callback' => 'filemaker_tab_access',
+    'access arguments' => array('layout mode', 1),
+    'type' => MENU_LOCAL_TASK,
+    'weight' => 200,
+  );
+
+  // FileMaker browse tab, attached to filemaker nodes.
+  $items['node/%node/browse'] = array(
+    'title' => 'Browse Mode',
+    'description' => 'FileMaker Browse Mode',
+    'page callback' => 'filemaker_browse_tab',
+    'page arguments' => array(1, 'browse', 3),
+    'access callback' => 'filemaker_tab_access',
+    'access arguments' => array('browse and find mode', 1),
+    'type' => MENU_LOCAL_TASK,
+    'weight' => 200,
+  );
+
+  // FileMaker browse tab, delete.
+  $items['node/%node/browse/%/delete'] = array(
+    'title' => 'Confirm Deletion of FileMaker record.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('filemaker_delete_form', 'record', 3, 1),
+    'access callback' => 'filemaker_tab_access',
+    'access arguments' => array('browse and find mode', 1),
+    'type' => MENU_LOCAL_TASK,
+    'weight' => 200,
+  );
+
+  // FileMaker find tab, attached to filemaker nodes.
+  $items['node/%node/find'] = array(
+    'title' => 'Find Mode',
+    'description' => 'FileMaker Find Mode',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('filemaker_record_form', 1, 'find'),
+    'access callback' => 'filemaker_tab_access',
+    'access arguments' => array('browse and find mode', 1),
+    'type' => MENU_LOCAL_TASK,
+    'weight' => 200,
+  );
+
+  // FileMaker create tab, attached to filemaker nodes.
+  $items['node/%node/create'] = array(
+    'title' => 'Create Mode',
+    'description' => 'FileMaker Create Mode',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('filemaker_record_form', 1, 'create'),
+    // 'page arguments' => array(1),
+    'access callback' => 'filemaker_tab_access',
+    'access arguments' => array('create mode', 1),
+    'type' => MENU_LOCAL_TASK,
+    'weight' => 200,
+  );
+
+  return $items;
+}
+
+
+
+
+
+/**
+ * Implementation of hook_perm().
+ */
+function filemaker_perm() {
+  return array('administer filemaker', 'create mode', 'browse and find mode', 'layout mode', 'FileMaker nodes');
+}
+
+
+
+
+/**
+ * Implementation of hook_nodeapi().
+ */
+function filemaker_nodeapi(&$node, $op, $teaser, $page) {
+  if($node->type == 'filemaker') {
+    switch($op) {
+      case 'view':
+        if ($page) {
+          filemaker_view_node($node);
+        }
+      break;
+      case 'prepare':
+        filemaker_prepare_node($node);
+      break;
+    }
+  }
+}
+
+
+
+
+
+/**
+ * Implementation of hook_cron().
+ */
+function filemaker_cron() {
+
+  $sql = "SELECT * FROM {filemaker_script} WHERE nid = 0 ORDER BY weight DESC";
+  $scripts = db_query($sql);
+
+  while ($data = db_fetch_object($scripts)) {
+
+    $fm = filemaker_object(NULL, $data->fmcid);
+    $script = $fm->newPerformScriptCommand($data->layout, $data->name, $data->parameter);
+    if (filemaker_is_error($script)) break;
+
+    $result = $script->execute();
+    filemaker_is_error($result);
+  }
+}
+
+
+
+
+/*************************************************************
+ * Token hooks
+ *************************************************************/
+
+
+
+
+
+/**
+ * Implementation of hook_token_values().
+ */
+function filemaker_token_values($type, $object = NULL, $options = array()) {
+
+  // Only supply tokens for node.
+  if ($type == "node") {
+    $node = $object;
+    $tokens['filemaker'] = $node->fmtoken;
+    return $tokens;
+  }
+}
+
+
+
+
+
+/**
+ * Implementation of hook_token_list().
+ */
+function filemaker_token_list($type = 'all') {
+  $tokens['node']['filemaker'] = t("The values of the FileMaker fields.");
+  return $tokens;
+}
+
+
+
+
+
+/*************************************************************
+ * Action/Trigger hooks
+ *************************************************************/
+
+
+
+
+
+/**
+ * Implementation of hook_hook_info().
+ */
+function filemaker_hook_info() {
+  return array(
+    'filemaker' => array(
+      'filemaker' => array(
+        'create' => array(
+          'runs when' => t('After creating a FileMaker record'),
+        ),
+        'update' => array(
+          'runs when' => t('After updating a FileMaker record'),
+        ),
+      ),
+    ),
+  );
+}
+
+
+
+
+
+/**
+ * Implementation of hook_filemaker().
+ */
+function filemaker_filemaker($op, $node) {
+
+  // Don't do anything unless the trigger module exists,
+  // to avoid a dependency.
+  if (module_exists('trigger')) {
+
+    // Collect the actions that we need to fire.
+    $aids = _trigger_get_hook_aids('filemaker', $op);
+
+    $context = array(
+      'hook' => 'filemaker',
+      'op' => $op,
+      'node' => $node,
+    );
+
+    actions_do(array_keys($aids), $node, $context);
+  }
+}
+
+
+
+
+
+/**
+ * Implementation of hook_action_info_alter().
+ */
+function filemaker_action_info_alter(&$info) {
+
+  // Loop through each action.
+  foreach ($info as $type => $data) {
+
+    // Only add our trigger to node, system, or token actions.
+    if (stripos($type, "node_") === 0 || stripos($type, "system_") === 0 || stripos($type, "token_") === 0) {
+
+      // Don't remove any triggers that are already added to the approved list.
+      if (isset($info[$type]['hooks']['application'])) {
+        $info[$type]['hooks']['filemaker'] = array_merge($info[$type]['hooks']['filemaker'], array('create', 'update'));
+      }
+
+      // Add our trigger to the approved list of hooks.
+      else {
+        $info[$type]['hooks']['filemaker'] = array('create', 'update');
+      }
+    }
+  }
+}
+
+
+
+
+
+/*************************************************************
+ * Node hooks (defines FileMaker node type).
+ *************************************************************/
+
+
+
+
+
+/**
+ * Implementation of hook_node_info().
+ */
+function filemaker_node_info() {
+  return array(
+    'filemaker' => array(
+      'name' => t('FileMaker'),
+      'module' => 'filemaker',
+      'description' => t('A web interface to a FileMaker layout.'),
+      'has_title' => TRUE,
+      'has_body' => TRUE,
+      'body_label' => t('Description of FileMaker layout'),
+      'locked' => TRUE
+    ),
+  );
+}
+
+
+
+
+
+/**
+ * Implementation of hook_view().
+ */
+function filemaker_view($node, $teaser = FALSE, $page = FALSE) {
+
+  // Default view of node.
+  $node = node_prepare($node, $teaser);
+
+  // Add selected FileMaker feature to Drupal's node view.
+
+  // Create mode.
+  if ($node->fmview == 'create_mode') {
+    $node->content['filemaker'] = array(
+      '#value' => drupal_get_form('filemaker_record_form', $node, 'create'),
+      '#weight' => 10,
+    );
+  }
+
+  // Browse mode.
+  elseif ($node->fmview == 'browse_mode') {
+    $node->content['filemaker'] = array(
+      '#value' => filemaker_browse_tab($node),
+      '#weight' => 10,
+    );
+  }
+
+  return $node;
+}
+
+
+
+
+
+/**
+ * Implementation of hook_form().
+ */
+function filemaker_form($node) {
+
+  // Get metadata for this node type (labels for title and body, defined in filemaker_node_info()).
+  $type = node_get_types('type', $node);
+
+  $form['title'] = array(
+    '#type' => 'textfield',
+    '#title' => check_plain($type->title_label),
+    '#required' => TRUE,
+    '#default_value' => $node->title,
+    '#weight' => -5,
+    '#maxlength' => 255,
+  );
+
+  $form['body_filter']['body'] = array(
+    '#type' => 'textarea',
+    '#title' => check_plain($type->body_label),
+    '#required' => FALSE,
+    '#default_value' => $node->body,
+    '#rows' => 7,
+  );
+
+  $form['body_filter']['filter'] = filter_form($node->format);
+
+  // Get $options array of connection records.
+  $options = filemaker_connections_array();
+
+  // If there are FileMaker connections to select from, show a select field.
+  if ($options) {
+    $form['fmcid'] = array(
+      '#type' => 'select',
+      '#options' => $options,
+      '#title' => t('Connection to FileMaker database'),
+      '#required' => TRUE,
+      '#default_value' => isset($node->fmcid) ? $node->fmcid : '',
+      '#weight' => 5,
+    );
+  }
+
+  // If there are not FileMaker connections, show a link to the configuration page where connections can be created.
+  else {
+    $link = l(t('Add a FileMaker Connection'), 'admin/settings/filemaker/connection');
+    $form['nofmcid'] = array(
+      '#type' => 'markup',
+      '#title' => t('No FileMaker database connections.'),
+      '#value' => $link,
+      '#weight' => 5,
+    );
+  }
+
+  // FileMaker feature to use during normal Drupal node view.
+  $options = array(
+    'none' => 'none',
+    'create_mode' => 'create mode',
+    'browse_mode' => 'browse mode',
+  );
+  $form['fmview'] = array(
+    '#type' => 'select',
+    '#options' => $options,
+    '#title' => t('FileMaker feature to use for default Drupal view'),
+    '#required' => TRUE,
+    '#default_value' => isset($node->fmview) ? $node->fmview : '',
+    '#weight' => 5,
+  );
+  
+  $form['fm_show_record_number'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Show "Record #" column in results?'),
+    '#required' => FALSE,
+    '#default_value' => isset($node->fm_show_record_number) ? $node->fm_show_record_number : 1,
+    '#weight' => 6,
+  );  
+
+  // Layout, as a hidden field.
+  // The layout is updated via the layout tab.
+  $form['layout'] = array(
+    '#type' => 'hidden',
+    '#required' => FALSE,
+    '#default_value' => isset($node->layout) ? $node->layout : '',
+    '#weight' => 5,
+  );
+
+  return $form;
+}
+
+
+
+
+
+/**
+ * Validates filemaker_form.
+ */
+function filemaker_validate(&$form, &$form_state) {
+
+  // A FileMaker connection is required.
+  if ($form_state['nofmcid']) {
+    $error_message = t('FileMaker connection is required.');
+    form_set_error('nofmcid', $error_message);
+  }
+}
+
+
+
+
+
+/**
+ * Implementation of hook_load().
+ */
+function filemaker_load(&$node) {
+
+  // Create place for FileMaker node token.
+  $node->fmtoken = '';
+
+  return db_fetch_object(db_query('SELECT fmcid, layout, fmview, fm_show_record_number FROM {filemaker} WHERE vid = %d', $node->vid));
+}
+
+
+
+
+
+/**
+ * Implementation of hook_insert().
+ */
+function filemaker_insert($node) {
+  db_query("INSERT INTO {filemaker} (nid, vid, fmcid, layout, fmview, fm_show_record_number) VALUES (%d, %d, %d, '%s', '%s', %d)", $node->nid, $node->vid, $node->fmcid, $node->layout, $node->fmview, $node->fm_show_record_number);
+}
+
+
+
+
+
+/**
+ * Implementation of hook_delete().
+ */
+function filemaker_delete($node) {
+  db_query("DELETE FROM {filemaker} WHERE nid = %d AND vid = %d", $node->nid, $node->vid);
+  db_query("DELETE FROM {filemaker_field} WHERE nid = %d", $node->nid);
+  db_query("DELETE FROM {filemaker_portal} WHERE nid = %d", $node->nid);
+}
+
+
+
+
+
+/**
+ * Implementation of hook_update().
+ */
+function filemaker_update($node) {
+
+  if ($node->revision) {
+    filemaker_insert($node);
+  }
+  else {
+    db_query("UPDATE {filemaker} SET fmcid = %d, layout = '%s', fmview = '%s', fm_show_record_number = %d WHERE vid = %d", $node->fmcid, $node->layout, $node->fmview, $node->fm_show_record_number, $node->vid);
+  }
+}
+
+
+
+
+
+/**
+ * Implementation of hook_access().
+ */
+function filemaker_access($op, $node, $account) {
+  switch ($op) {
+    case 'create':
+      return user_access('FileMaker nodes', $account);
+    case 'update':
+      return user_access('FileMaker nodes', $account);
+    case 'delete':
+      return user_access('FileMaker nodes', $account);
+  }
+}
+
+
+
+
+
+
+/*************************************************************
+ * Page callbacks
+ *************************************************************/
+
+
+
+
+
+
+/**
+ * Page callback for the 'Layout Mode' tab on a filemaker node.
+ *
+ * Form to select a FileMaker layout for the node to be based on.
+ */
+function filemaker_layout_tab($node) {
+
+  // Send user to fields tab if the node already has a layout.
+  if ($node->layout) {
+    $redirect_path = 'node/' . $node->nid . '/layout/fields';
+    drupal_goto($redirect_path);
+  }
+
+  // Display form for user to select layout for the node.
+  drupal_set_message(t('You must select a layout before you can add fields or portals.'));
+  $output .= drupal_get_form('filemaker_layout_form', $node);
+
+  return $output;
+}
+
+
+
+
+
+/**
+ * Page callback for the 'FileMaker portals' tab on a filemaker node.
+ *
+ * The 'FileMaker portals' tab is for adding portals to nodes, not displaying portals.
+ *
+ * The portal itself is displayed when editing a FileMaker record in browse mode.
+ */
+function filemaker_portals_tab($node, $fmid = NULL, $delete = NULL) {
+
+  // Layout selected? If not, send back to the layout tab.
+  if (!$node->layout) {
+    drupal_goto('node/' . $node->nid . '/layout');
+  }
+
+  // Add table of portals and form to add or edit portal.
+  $output = drupal_get_form('filemaker_portal_form', $node);
+  $output .= filemaker_portals_table($node->nid);
+
+  return $output;
+}
+
+
+
+
+
+/**
+ * Page callback for the 'Browse Mode' tab on a filemaker node.
+ *
+ * Displays a found set of FileMaker records and, optionally a form to edit a single FileMaker
+ * record, as well as all portals displaying data related to the record being edited.
+ */
+function filemaker_browse_tab($node, $tab = NULL, $fmid = NULL) {
+
+  // Normal Drupal node view. Need a found set.
+  if (empty($tab)) {
+    filemaker_default_find($node);
+  }
+
+  // If there is a record to edit, get form and portals.
+  if ($fmid) {
+
+    // Form to edit FileMaker record.
+    $output .= '<h2>' . t('Edit Chosen Record') . '</h2>';
+    $output .= drupal_get_form('filemaker_record_form', $node, 'browse', $fmid);
+
+    // Portals for this node.
+    $portals = filemaker_get_portals($node, $fmid);
+    if ($portals) {
+      $output .= '<h2>Portals</h2>';
+      $output .= $portals;
+    }
+  }
+
+  // We always need a found set of records.
+  $output .= filemaker_found_set($node->nid);
+
+  return $output;
+}
+
+
+
+
+
+/**
+ * Page callback for the 'FileMaker fields' tab on a filemaker node.
+ */
+function filemaker_fields_tab($node, $fmfid = NULL) {
+
+  $output = '';
+
+  // Layout selected? If not, send back to the layout tab.
+  if (!$node->layout) {
+    drupal_goto('node/' . $node->nid . '/layout');
+  }
+
+  // API loaded? If not, show error message via filemaker_load_api().
+  if (filemaker_load_api()) {
+
+    // Add form.
+    $output .= drupal_get_form('filemaker_field_form', $node, $fmfid);
+
+    // Add table of fields.
+    $output .= filemaker_fields_tab_table($node->nid);
+  }
+  return $output;
+}
+
+
+
+
+
+
+/*************************************************************
+ * Forms
+ *************************************************************/
+
+
+
+
+
+
+/**
+ * Callback for the filemaker_delete_form.
+ *
+ * Confirmation to delete one of the following:
+ *  - FileMaker record.
+ *  - Portal, added in layout mode.
+ *  - Field, added in layout mode.
+ * 
+ * @param $what
+ *  A string saying what to delete: record, field, or portal.
+ * @param $id
+ *  The id of the thing that is being deleted: fmid, fmfid, or fmpid.
+ */
+function filemaker_delete_form($form_state, $what, $id, $node = NULL) {
+
+  $form = array();
+  $form['#submit'][] = 'filemaker_delete_form_submit';
+
+  switch ($what) {
+
+    case 'record':
+
+      $confirm_text = t('Delete this FileMaker record?');
+      $submit_button = t('Delete Record');
+      $form['#redirect'][] = 'node/' . $node->nid . '/browse';
+      break;
+
+    case 'field':
+
+      $confirm_text = t('Remove this field from your layout?');
+      $submit_button = t('Delete Field');
+      $form['#redirect'][] = 'node/' . $node->nid . '/layout/fields';
+      break;
+
+    case 'portal':
+
+      $confirm_text = t('Remove this portal from your layout?');
+      $submit_button = t('Delete Portal');
+      $form['#redirect'][] = 'node/' . $node->nid . '/layout/portals';
+      break;
+
+    case 'connection':
+
+      $confirm_text = t('Delete this FileMaker connection?');
+      $submit_button = t('Delete Connection');
+      $form['#redirect'][] = 'admin/settings/filemaker';
+      break;
+
+    case 'script':
+
+      $confirm_text = t('Delete this FileMaker script?');
+      $submit_button = t('Delete Script');
+      $form['#redirect'][] = 'admin/settings/filemaker/cron';
+      break;
+  }
+
+  // Store nid.
+  if ($node) {
+    $form['filemaker']['nid'] = array(
+      '#type' => 'hidden',
+      '#value' => $node->nid,
+    );
+  }
+
+  // Store id. Could be fmid, fmfid, or fmpid.
+  $form['filemaker']['id'] = array(
+    '#type' => 'hidden',
+    '#value' => $id,
+  );
+
+  // Create filemaker field fieldset.
+  $form['fmnode'] = array(
+    '#title' => t('Confirm Deletion'),
+    '#type' => 'fieldset',
+  );
+
+  // Markup.
+  $form['fmnode']['markup'] = array(
+    '#type' => 'markup',
+    '#title' => t('Confirm Deletion'),
+    '#value' => $confirm_text,
+  );
+
+  // Submit button.
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => $submit_button,
+    '#weight' => 50,
+  );
+
+  return $form;
+}
+
+
+
+
+
+/**
+ * Submit function for filemaker_delete_form: FileMaker record.
+ */
+function filemaker_delete_form_submit(&$form, &$form_state) {
+
+  $node = node_load($form_state['values']['nid']);
+
+  switch ($form_state['values']['op']) {
+
+    case 'Delete Record':
+
+      filemaker_delete_record($node, $form_state['values']['id']);
+      break;
+
+    case 'Delete Field':
+
+      filemaker_delete_field($node, $form_state['values']['id']); 
+      break;
+
+    case 'Delete Portal':
+
+      filemaker_delete_portal($form_state['values']['id']);
+      break;
+
+    case 'Delete Connection':
+
+      filemaker_delete_connection($form_state['values']['id']);
+      break;
+
+    case 'Delete Script':
+
+      filemaker_delete_script($form_state['values']['id']);
+      break;
+  }
+}
+
+
+
+
+
+/**
+ * Callback for the filemaker_record_form.
+ *
+ * Creates a form to find, edit, or add a FileMaker record.
+ */
+function filemaker_record_form($form_state, $node, $tab = NULL, $fmid = NULL) {
+
+  $fm = filemaker_object($node); // FileMaker object.
+
+  $form = array();
+
+  // Are we in normal Drupal node view (not a FileMaker tab)?
+  if (empty($tab)) {
+    if ($node->fmview == 'create_mode') {
+      $tab = 'create';
+    }
+  }
+
+  if ($tab == 'create') {
+    $fieldset_title = t('Create Mode');
+    $submit_button = t('Save to FileMaker');
+    $form['#submit'][] = 'filemaker_create_submit';
+  }
+  elseif ($tab == 'find') {
+    $fieldset_title = t('Find Mode');
+    $submit_button = t('Perform Find');
+    $form['#submit'][] = 'filemaker_find_submit';
+    $form['#redirect'][] = 'node/' . $node->nid . '/browse';
+  }
+  elseif ($tab == 'browse') {
+    $fieldset_title = t('Browse Mode');
+    $submit_button = t('Save Changes to FileMaker');
+    $form['#submit'][] = 'filemaker_browse_submit';
+
+    // Load the FileMaker record to be edited.
+    $record = $fm->getRecordById($node->layout, $fmid); // FileMaker_Record object.
+    filemaker_is_error($record, $node);
+  }
+
+  // Store nid.
+  $form['filemaker']['nid'] = array(
+    '#type' => 'hidden',
+    '#value' => $node->nid,
+  );
+
+  // Store fmid
+  if ($fmid) {
+    $form['filemaker']['fmid'] = array(
+      '#type' => 'hidden',
+      '#value' => $fmid,
+    );
+  }
+
+  // Create filemaker field fieldset.
+  $form['fmnode'] = array(
+    '#title' => $fieldset_title,
+    '#type' => 'fieldset',
+  );
+
+  // Get fields attached to node.
+  $fields_sql = "SELECT * FROM {filemaker_field} WHERE nid = %d ORDER BY weight, fmfid";
+  $fields_result = db_query($fields_sql, $node->nid);
+
+  // Loop through fields, adding each one to the form.
+  while ($data = db_fetch_object($fields_result)) {
+
+    switch ($tab) {
+
+      case 'create':
+
+        $default_value = filemaker_default_value($node, $data->default_value, $data->default_create_value, 'create');
+        // Hide field if it has a dynamically generated default.
+        $widget = ($default_value == $data->default_value || $data->default_create_value == 'none') ? $data->widget : 'hidden';
+        $form['fmnode'][$data->name] = filemaker_field_for_form_array($node, $data->name, $data->label, $widget, $default_value, $data->required);
+        break;
+
+      case 'find':
+
+        $default_value = filemaker_default_value($node, $data->default_value, $data->default_find_value, 'find');
+        // Hide field if it has a dynamically generated default.
+        $widget = ($default_value == $data->default_value || $data->default_create_value == 'none') ? 'textfield' : 'hidden';
+        $form['fmnode'][$data->name] = filemaker_field_for_form_array($node, $data->name, $data->label, $widget, $default_value, FALSE);
+        break;
+
+      case 'browse':
+
+        $record_data = check_plain($record->getField($data->name));
+        $form['fmnode'][$data->name] = filemaker_field_for_form_array($node, $data->name, $data->label, $data->widget, $record_data, $data->required);
+        break;
+
+    }
+  }
+
+  // Submit button.
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => $submit_button,
+    '#weight' => 50,
+  );
+
+  return $form;
+}
+
+
+
+
+/**
+ * Submit function for filemaker_find_form.
+ *
+ * Performs a FileMaker find, formats the foundset set as a table, and places the table in the user's session.
+ *
+ * This function doesn't actually perform the find; it only adds all the fields to the find request. The actual
+ * find is performed by filemaker_perform_find(), which will executes the request.
+ *
+ * The find request itself is serialized and stored in the session, to be unserialized by the filemaker_perform_find()
+ * function. This is done so that find can be recreated as records are updated, created, or deleted.
+ */
+function filemaker_find_submit(&$form, &$form_state) {
+
+  $node = node_load($form_state['values']['nid']);
+
+  // Create FileMaker_Command_Find object.
+  $fm = filemaker_object($node); // FileMaker object.
+  $request = $fm->newFindCommand($node->layout); // FileMaker_Command_Find object.
+
+  // Get fields added to this FileMaker node.
+  $fields_sql = "SELECT name, label, widget FROM {filemaker_field} WHERE nid = %d ORDER BY weight, fmfid";
+  $fields_result = db_query($fields_sql, $node->nid);
+
+  // Loop through fields, setting each one.
+  while ($data = db_fetch_object($fields_result)) {
+    $request->addFindCriterion($data->name, $form_state['values'][$data->name]);
+  }
+
+  // Store find request in session so we can perform a new find to recreate found set if record in it is edited or deleted.
+  $_SESSION['filemaker'][$node->nid]['foundset']['request'] = serialize($request);
+
+  filemaker_perform_find($node, 'find');
+}
+
+
+
+
+
+/**
+ * Submit function for filemaker_browse_form.
+ *
+ * Edits a single FileMaker record.
+ */
+function filemaker_browse_submit(&$form, &$form_state) {
+
+  $fmid = $form_state['values']['fmid'];
+  $node = node_load($form_state['values']['nid']);
+
+  filemaker_update_record($node, $fmid, $form_state);
+
+  // Reload the current page, minus the form, to display new found set.
+  drupal_goto('node/' . $node->nid . '/browse');
+}
+
+
+
+
+/**
+ * Submit function for filemaker_record_form.
+ *
+ * Creates a single FileMaker record.
+ */
+function filemaker_create_submit(&$form, &$form_state) {
+
+  $nid = $form_state['values']['nid'];
+  $node = node_load($nid);
+
+  $fm = filemaker_object($node); // FileMaker object.
+
+  if ($node->layout) {
+    $record = $fm->createRecord($node->layout); // FileMaker_Record object.
+    if (filemaker_is_error($record, $node)) return;
+  }
+  else {
+    druapl_set_message(t('No layout selected for this node.'));
+  }
+
+  // Get list of FileMaker fields for this node.
+  $fields_sql = "SELECT name, widget FROM {filemaker_field} WHERE nid = %d";
+  $fields_result = db_query($fields_sql, $node->nid);
+
+  // Loop through fields, setting each one in the FileMaker_Record object.
+  while ($field = db_fetch_object($fields_result)) {
+
+    // Prepare data to be written to FileMaker.
+    filemaker_format_all($field, $form_state, $record);
+      
+    // Add field to our FileMaker token if we have a value.
+    filemaker_add_field_to_token($node, $field, $record->getField($field->name));
+  }
+
+  // Save the new record to the FileMaker database.
+  $result = $record->commit();
+
+  // Error or success message.
+  if (!filemaker_is_error($result, $node)) {
+
+    drupal_set_message(t('Record saved to FileMaker.'));
+    watchdog('filemaker', 'FileMaker record created', array(), WATCHDOG_INFO);
+
+    // Fire off the create trigger.
+    module_invoke_all('filemaker', 'create', $node);
+
+    // If record saved, update found set so new record is included.
+    filemaker_perform_find($node, 'create');
+  }
+}
+
+
+
+
+/**
+ * Form to choose layout for a filemaker node.
+ */
+function filemaker_layout_form($form_state, $node) {
+
+  // Exit if there is no FileMaker connection.
+  if (!$node->fmcid) {
+    drupal_set_message(t('FileMaker nodes require a connection to a FileMaker database.'), 'error');
+    return;
+  }
+
+  $form = array();
+
+  // Submit function.
+  $form['#submit'][] = 'filemaker_layout_submit';
+
+  // Store nid.
+  $form['filemaker']['nid'] = array(
+      '#type' => 'hidden',
+      '#value' => $node->nid,
+  );
+
+  // Get $options array of layouts for the current connection.
+  $fm = filemaker_object($node);
+
+  $options = filemaker_layouts_array($fm);
+
+  /*
+  $options = array();
+  $layouts = $fm->listLayouts();
+  if (filemaker_is_error($layouts, $node)) return t('Error connecting to FileMaker database.');
+
+  foreach ($layouts as $layout) {
+    $options[$layout] = $layout;
+  }
+
+  asort($options);
+  */
+
+  $form['layout'] = array(
+      '#type' => 'select',
+      '#options' => $options,
+      '#title' => t('Layout in FileMaker database'),
+      '#required' => TRUE,
+      '#default_value' => isset($node->layout) ? $node->layout : '',
+      '#weight' => 6,
+      '#maxlength' => 100,
+  );
+
+  // Submit button.
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Save layout'),
+    '#weight' => 50,
+  );
+
+  return $form;
+}
+
+
+
+
+/**
+ * Submit handler for filemaker_layout_form.
+ */
+function filemaker_layout_submit(&$form, &$form_state) {
+
+  $nid = $form_state['values']['nid'];
+  $layout = $form_state['values']['layout'];
+
+  $sql = "UPDATE {filemaker} SET layout = '%s' WHERE nid = %d";
+  db_query($sql, $layout, $nid);
+}
+
+
+
+
+/**
+ * Form to add portals to a FileMaker node.
+ */
+function filemaker_portal_form($form_state, $node) {
+
+  $fm = filemaker_object($node); // FileMaker object.
+
+  $layout = $fm->getLayout($node->layout); // FileMaker layout object.
+  if (filemaker_is_error($layout, $node)) return t('Error');
+
+  $portals = $layout->getRelatedSets(); // Array of Portals (FileMaker_RelatedSet objects).
+  if (filemaker_is_error($portals, $node)) return;
+
+  // Only create form if there are portals for the FileMaker layout the node is based on.
+  if (count($portals)) {
+
+    $form = array();
+
+    // Submit function.
+    $form['#submit'][] = 'filemaker_portal_submit';
+
+    // Store nid.
+    $form['filemaker']['nid'] = array(
+      '#type' => 'hidden',
+      '#value' => $node->nid,
+    );
+
+    // Create filemaker portal fieldset.
+    $form['fmnode'] = array(
+      '#title' => t('FileMaker portal'),
+      '#type' => 'fieldset',
+    );
+
+    // Portal name.
+    $options = array();
+    foreach ($portals as $portal) {
+      $options[$portal->getName()] = $portal->getName();
+    }
+
+    asort($options);
+
+    $form['fmnode']['fmportalname'] = array(
+      '#title' => t('Portal Name'),
+      '#type' => 'select',
+      '#options' => $options,
+      '#required' => TRUE,
+    );
+
+    // Submit button.
+    $form['submit'] = array(
+      '#type' => 'submit',
+      '#value' => t('Add portal'),
+      '#weight' => 50,
+    );
+
+    return $form;
+  }
+
+  // No portals on layout, so no form needed.
+  else {
+    drupal_set_message(t('No portals on this layout (%layout).', array('%layout' => $node->layout)));
+    return;
+  }
+}
+
+
+
+
+/**
+ * Submit handler for filemaker_portal_form.
+ */
+function filemaker_portal_submit(&$form, &$form_state) {
+
+  $portal_name = $form_state['values']['fmportalname'];
+  $nid = $form_state['values']['nid'];
+
+  $sql = "INSERT INTO {filemaker_portal} (fmpid, nid, name) VALUES (NULL, %d, '%s')";
+  db_query($sql, $nid, $portal_name);
+
+  drupal_set_message(t('FileMaker portal added to node.'));
+  watchdog('filemaker', 'FileMaker portal created', array(), WATCHDOG_INFO);
+}
+
+
+
+
+/**
+ * Creates a form to update or insert a FileMaker field.
+ *
+ * A FileMaker node can have n number of FileMaker fields, but they are limited to the fields on the
+ * FileMaker layout that the node is based on.
+ */
+function filemaker_field_form($form_state, $node, $fmfid = NULL) {
+
+  // Updating or inserting?
+  if ($fmfid) {
+    $mode = 'update';
+    $field_sql = "SELECT * FROM {filemaker_field} WHERE fmfid = %d";
+    $field_result = db_fetch_object(db_query($field_sql, $fmfid));
+  }
+  else {
+    $mode = 'insert';
+  }
+
+  // Get fields from FileMaker layout.
+  $fm = filemaker_object($node); // FileMaker object.
+  $layout = $fm->getLayout($node->layout); // FileMaker_Layout object.
+  if (filemaker_is_error($layout, $node)) {
+    drupal_set_message(t('No FileMaker layout selected.'), 'error');
+    return;
+  }
+  $fields = $layout->getFields(); // Array of FileMaker_Field objects.
+
+  // Create list of field options for the 'fmfieldname' select field.
+  $options = array();
+  foreach ($fields as $field) {
+    // Exclude calculations and container fields from the select options.
+    if ($field->getType() == 'normal' && $field->getResult() != 'container') {
+      $options[$field->getName()] = $field->getName() . ' (' . $field->getResult() . ')';
+    }
+  }
+
+  asort($options);
+
+  $form = array();
+
+  // Submit handler, which will use the mode to insert or update the field.
+  $form['#submit'][] = 'filemaker_field_submit';
+
+  // Store mode, so we know if this is an insert or update.
+  $form['filemaker']['mode'] = array(
+    '#type' => 'hidden',
+    '#value' => $mode,
+  );
+
+  // Store the nid.
+  $form['filemaker']['nid'] = array(
+    '#type' => 'hidden',
+    '#value' => $node->nid,
+  );
+
+  // Store the fmfid, so we know which field to update.
+  $form['filemaker']['fmfid'] = array(
+    '#type' => 'hidden',
+    '#value' => $fmfid,
+  );
+
+  // Create filemaker fieldset.
+  $form['fmfield'] = array(
+    '#title' => t('FileMaker Field'),
+    '#type' => 'fieldset',
+  );
+
+  // Field name.
+  $form['fmfield']['fmfieldname'] = array(
+    '#title' => t('Field Name'),
+    '#type' => 'select',
+    '#options' => $options,
+    '#required' => TRUE,
+    '#default_value' => $field_result->name,
+  );
+
+  // Field widget.
+  $options = array(
+    'textfield' => 'Text Field',
+    'textarea' => 'Text Area',
+    'date' => 'Date',
+    'hidden' => 'Hidden',
+    'select' => 'Select List',
+    'radios' => 'Radio Buttons',
+    'checkboxes' => 'Checkbox Set',
+  );
+  $form['fmfield']['fmfieldwidget'] = array(
+    '#title' => t('Widget'),
+    '#type' => 'select',
+    '#options' => $options,
+    '#required' => TRUE,
+    '#default_value' => $field_result->widget,
+  );
+
+  // Field label.
+  $form['fmfield']['fmfieldlabel'] = array(
+    '#title' => t('Field Label'),
+    '#type' => 'textfield',
+    '#required' => TRUE,
+    '#default_value' => $field_result->label,
+  );
+
+  // Default value.
+  $form['fmfield']['fmfielddefault'] = array(
+    '#title' => t('Default Value'),
+    '#type' => 'textfield',
+    '#required' => FALSE,
+    '#default_value' => $field_result->default_value,
+  );
+
+  // Options for find and create defaults.
+  $options = array(
+    'none' => 'None',
+    'default' => 'Default Value',
+    'username' => 'Drupal User Name',
+    'uid' => 'Drupal User ID (uid)',
+    'title' => 'Drupal Node Title',
+    'nid' => 'Drupal Node ID (nid)',
+  );
+
+  // Default find value.
+  $default_value = ($field_result->default_find_value) ? $field_result->default_find_value : 'default';
+  $form['fmfield']['fmfielddefaultfind'] = array(
+    '#title' => t('Default Find Value'),
+    '#type' => 'select',
+    '#options' => $options,
+    '#required' => TRUE,
+    '#default_value' => $default_value,
+  );
+
+  // Default create value.
+  $default_value = ($field_result->default_create_value) ? $field_result->default_create_value : 'default';
+  $form['fmfield']['fmfielddefaultcreate'] = array(
+    '#title' => t('Default Create Value'),
+    '#type' => 'select',
+    '#options' => $options,
+    '#required' => TRUE,
+    '#default_value' => $default_value,
+  );
+
+  // Required?
+  $form['fmfield']['fmfieldrequired'] = array(
+    '#title' => t('Required?'),
+    '#type' => 'checkbox',
+    '#required' => FALSE,
+    '#default_value' => $field_result->required,
+  );
+
+  // Weight
+  $form['fmfield']['weight'] = array(
+    '#title' => t('Weight'),
+    '#type' => 'weight',
+    '#required' => FALSE,
+    '#delta' => count($fields),
+    '#default_value' => isset($field_result->weight) ? $field_result->weight : 0,
+    '#attributes' => array('class' => 'weight'),
+  );
+
+  
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Save Field'),
+  );
+
+  return $form;
+}
+
+
+
+
+/**
+ * Submit function for the filemaker_field_form.
+ *
+ * Updates or inserts the record for a FileMaker field.
+ */
+function filemaker_field_submit(&$form, &$form_state) {
+
+  $node = node_load($form_state['values']['nid']);
+
+  $mode = $form_state['values']['mode'];
+
+  $fm = filemaker_object($node); // FileMaker object.
+  $layout = $fm->getLayout($node->layout); // FileMaker_Layout object.
+  if (filemaker_is_error($layout, $node)) return;
+  $fields = $layout->getFields(); // Array of FileMaker_Field objects.
+  if (filemaker_is_error($fields, $node)) return;
+
+  // Get information about field (field type) from FileMaker.
+  $field_name = $form_state['values']['fmfieldname'];
+  foreach ($fields as $key => $value) {
+    if ($key == $field_name) {
+      // Use result (field type) if type is set to normal (as opposed to calculation).
+      $field_type = ($value->getType() == 'normal') ? $value->getResult() : $value->getType();
+    }
+  }
+
+  if ($mode == 'insert') {
+    $sql = "INSERT INTO {filemaker_field} ";
+    $sql .= "(fmfid, nid, name, label, weight, type, widget, default_value, default_find_value, default_create_value, required) ";
+    $sql .= "VALUES (NULL, %d, '%s', '%s', %d, '%s', '%s', '%s', '%s', '%s', %d)";
+    db_query($sql,
+      $node->nid, // nid
+      $form_state['values']['fmfieldname'], // name
+      $form_state['values']['fmfieldlabel'], // label
+      $form_state['values']['weight'], // weight
+      $field_type, // type
+      $form_state['values']['fmfieldwidget'], // widget
+      $form_state['values']['fmfielddefault'], // default
+      $form_state['values']['fmfielddefaultfind'], // default find
+      $form_state['values']['fmfielddefaultcreate'], // default create
+      $form_state['values']['fmfieldrequired'] // required
+    );
+
+    drupal_set_message(t('FileMaker field added to FileMaker node.'));
+    watchdog('filemaker', 'FileMaker field created', array(), WATCHDOG_INFO);
+  }
+
+  elseif ($mode == 'update') {
+    $sql = "UPDATE {filemaker_field} SET  ";
+    $sql .= "name = '%s', ";
+    $sql .= "label = '%s', ";
+    $sql .= "weight = %d, ";
+    $sql .= "type = '%s', ";
+    $sql .= "widget = '%s', ";
+    $sql .= "default_value = '%s', ";
+    $sql .= "default_find_value = '%s', ";
+    $sql .= "default_create_value = '%s', ";
+    $sql .= "required = %d ";
+    $sql .= "WHERE fmfid = %d";
+    db_query($sql,
+      $form_state['values']['fmfieldname'], // name
+      $form_state['values']['fmfieldlabel'], // label
+      $form_state['values']['weight'], // weight
+      $field_type,  // type
+      $form_state['values']['fmfieldwidget'], // widget
+      $form_state['values']['fmfielddefault'], // default
+      $form_state['values']['fmfielddefaultfind'], // default find
+      $form_state['values']['fmfielddefaultcreate'], // default create
+      $form_state['values']['fmfieldrequired'], // required
+      $form_state['values']['fmfid'] // fmfid
+    );
+
+    watchdog('filemaker', 'FileMaker field updated', array(), WATCHDOG_INFO);
+    drupal_set_message(t('FileMaker field updated.'));
+  }
+
+  // Get a new found set table, including our new or revised field.
+  filemaker_perform_find($node, 'layout');
+
+  drupal_goto('node/' . $node->nid . '/layout/fields');
+}
+
+
+
+
+
+/*************************************************************
+ * Custom functions
+ *************************************************************/
+
+
+
+
+
+/**
+ * Checks to see if there is a layout chosen.
+ *
+ * If no layout is chosen, we gently redirect user to select layout.
+ */
+function filemaker_view_node($node) {
+  if (!$node->layout) {
+    drupal_goto('node/' . $node->nid . '/layout');
+  }
+}
+
+
+
+/**
+ * Checks to see if there are any connections.
+ *
+ * If there are no connections, we redirect user to create a connection.
+ */
+function filemaker_prepare_node($node) {
+
+  // Least expensive way of checking if a table is empty.
+  $sql = "SELECT 1 FROM {filemaker_connection} LIMIT 1";
+  $result = db_result(db_query($sql));
+
+  if (!$result) {
+    drupal_set_message(t('You must create a FileMaker connection before you can create a FileMaker node.'), 'error');
+    drupal_goto('admin/settings/filemaker/connection');
+  }
+}
+
+
+
+
+
+/**
+ * Returns an array of FileMaker connections, for the $options of a select field.
+ */
+function filemaker_connections_array() {
+  // Get $options array of connection records.
+  $connection_options_sql = "SELECT * FROM {filemaker_connection}";
+  $connection_options = db_query($connection_options_sql);
+  $options = array();
+  while ($connection = db_fetch_object($connection_options)) {
+    $option = $connection->fmdatabase . ' | username: ' . $connection->fmusername . ' | host: ' . $connection->fmhostname;
+    $options[$connection->fmcid] = $option;
+  }
+  return $options;
+}
+
+
+
+
+/**
+ * Returns an array of FileMaker layouts, for the $options of a select field.
+ */
+function filemaker_layouts_array($fm) {
+  $options = array();
+  $layouts = $fm->listLayouts();
+  filemaker_is_error($layouts);
+
+  foreach ($layouts as $layout) {
+    $options[$layout] = $layout;
+  }
+
+  asort($options);
+
+  return $options;
+}
+
+
+
+
+
+
+
+
+
+/**
+ * Performs a FileMaker find using the default values for each FileMaker field.
+ */
+function filemaker_default_find($node) {
+
+  if (filemaker_load_api()) {
+
+    // Create FileMaker_Command_Find object.
+    $fm = filemaker_object($node); // FileMaker object
+    $request = $fm->newFindCommand($node->layout); // FileMaker_Command_Find object
+
+    // Get fields added to this FileMaker node.
+    $sql = "SELECT name, label, widget, default_value, default_find_value FROM {filemaker_field} WHERE nid = %d ORDER BY weight, fmfid";
+    $result = db_query($sql, $node->nid);
+
+    // Loop through fields, setting each one with the default value.
+    while ($data = db_fetch_object($result)) {
+
+      $default_value = filemaker_default_value($node, $data->default_value, $data->default_find_value, 'find');
+      $request->addFindCriterion($data->name, $default_value);
+
+    }
+
+    // Store find request in session so we can perform another find
+    // if record is edited, created, or deleted.
+    $_SESSION['filemaker'][$node->nid]['foundset']['request'] = serialize($request);
+
+    filemaker_perform_find($node);
+  }
+}
+
+
+
+
+/**
+ * Determines the default value for a field in find, browse, or create mode.
+ *
+ * @param $default_value
+ *  User supplied default value (text) for the field.
+ *
+ * @param $default_mode_value
+ *  One of the following values: default, username, uid, title, nid, none.
+ *    If default, we use the $default_value.
+ *
+
+ * @param $mode
+ *  One of the following values: find, create.
+ *
+ * @return
+ *  Returns the appropriate default value for this field.
+ */
+function filemaker_default_value($node, $default_value, $default_mode_value, $mode) {
+
+  // User entered default as default value?
+  if (empty($default_mode_value) || $default_mode_value == 'default') {
+    return $default_value;
+  }
+
+  // Drupal username or uid as default value?
+  elseif ($default_mode_value == 'username' || $default_mode_value == 'uid') {
+
+    global $user;
+    
+    // If find mode, clean up reserved character (in case e-mail is being used for username).
+    if ($mode == 'find') {
+      $username = str_replace('@', '\@', $user->name);
+    }
+    else {
+      $username = $user->name;
+    }
+
+    $criterion = ($default_mode_value == 'username') ? $username : $user->uid;
+
+    return filemaker_exact_find_if_needed($criterion, $mode);
+  }
+
+  // Drupal node title as default value?
+  elseif ($default_mode_value == 'title') {
+    return filemaker_exact_find_if_needed($node->title, $mode);
+  }
+
+  // Drupal nid as default value?
+  elseif ($default_mode_value == 'nid') {
+    return filemaker_exact_find_if_needed($node->nid, $mode);
+  }
+
+  // No default value?
+  elseif ($default_mode_value == 'none') {
+    return '';
+  }
+}
+
+
+
+
+
+/**
+ * Might need to perform an exact find (by prefacing our criteria with '==').
+ *
+ * If we are not in find mode, we don't want the preceeding '=='.
+ *
+ * @param $criterion
+ *  Our value to use in the FileMaker field. In find mode, we search for the exact
+ *    value by prefacing '==' to our criteria.
+ *    In create mode, we just use the value.
+ *
+ * @param $mode
+ *  Either 'find' or 'create'.
+ *
+ * @return
+ *  Either '==$criterion' (find mode) or '$criteria' (create mode).
+ */
+function filemaker_exact_find_if_needed($criterion, $mode) {
+
+  if ($mode == 'find') {
+    return '==' . $criterion;
+  }
+  else {
+    return $criterion;
+  }
+}
+
+
+
+
+
+
+/**
+ * Adds field and value to token, if there is a value.
+ */
+function filemaker_add_field_to_token(&$node, $field, $value) {
+
+  if ($value) {
+    $node->fmtoken .= $field->name . ': ' . $value . "\n";
+  }
+}
+
+
+
+
+
+/**
+ * Deletes a single FileMaker record.
+ */
+function filemaker_delete_record($node, $fmid) {
+
+  $fm = filemaker_object($node); // FileMaker object.
+  $delete_command = $fm->newDeleteCommand($node->layout, $fmid); // FileMaker_Command_Delete object.
+  $result = $delete_command->execute(); // FileMaker_Result object.
+
+  // Error?
+  if (!filemaker_is_error($result, $node)) {
+
+    drupal_set_message(t('Record deleted from FileMaker.'));
+    watchdog('filemaker', 'FileMaker record deleted', array(), WATCHDOG_INFO);
+
+    // Perform new find, to exclude deleted record from our found set.
+    if ($_SESSION['filemaker'][$node->nid]['foundset']['request']) {
+      filemaker_perform_find($node, 'browse');
+    }
+  }
+}
+
+
+
+
+
+/**
+ * Deletes a single FileMaker field.
+ */
+function filemaker_delete_field($node, $fmfid) {
+
+  $sql = "DELETE FROM {filemaker_field} WHERE fmfid = %d";
+  $result = db_query($sql, $fmfid);
+
+  // Need a new found set table so we aren't showing deleted field.
+  filemaker_default_find($node);
+  drupal_set_message('Found set cleared.');
+
+  drupal_set_message(t('FileMaker field deleted from FileMaker node.'));
+  watchdog('filemaker', 'FileMaker field deleted', array(), WATCHDOG_INFO);
+
+}
+
+
+
+
+/**
+ * Deletes a single FileMaker portal.
+ */
+function filemaker_delete_portal($fmpid) {
+
+  $sql = "DELETE FROM {filemaker_portal} WHERE fmpid = %d";
+  $result = db_query($sql, $fmpid);
+
+  drupal_set_message(t('FileMaker portal deleted from FileMaker node.'));
+  watchdog('filemaker', 'FileMaker portal deleted', array(), WATCHDOG_INFO);
+}
+
+
+
+
+
+
+/**
+ * Returns a FileMaker found set in an html table, plus the x of n.
+ */
+function filemaker_found_set($nid) {
+
+  $output = '';
+
+  // First, check to see if there is a found set.
+  if (!empty($_SESSION['filemaker'][$nid]['foundset']['table'])) {
+
+    // X of N widget.
+    $foundset_count = $_SESSION['filemaker'][$nid]['foundset']['foundset_count'];
+    $record_count = $_SESSION['filemaker'][$nid]['foundset']['record_count'];
+    if ($foundset_count) {
+      $x_of_n = $foundset_count . ' of ' . $record_count;
+      $output .= '<h2>' . t('Found Set') . '</h2>';
+      $output .= $x_of_n;
+    }
+
+    // Table of records in foundset.
+    $output .= $_SESSION['filemaker'][$nid]['foundset']['table'];
+  }
+
+  else {
+    $output .= t('No found set.');
+  }
+
+  return $output;
+}
+
+
+
+
+
+/**
+ * Updates an existing FileMaker record.
+ */
+function filemaker_update_record($node, $fmid, &$form_state) {
+
+  // Create FileMaker EditCommand object.
+  $fm = filemaker_object($node);
+  $record = $fm->newEditCommand($node->layout, $fmid);
+
+  // Loop through fields, setting each one in the FileMaker_EditCommand object.
+  $fields_sql = "SELECT name, widget FROM {filemaker_field} WHERE nid = %d ORDER BY weight, fmfid";
+  $fields_result = db_query($fields_sql, $node->nid);
+  while ($field = db_fetch_object($fields_result)) {
+
+    // Prepare data to be written to FileMaker.
+    filemaker_format_all($field, $form_state, $record);
+      
+    // Add field to our FileMaker token if we have a value.
+    filemaker_add_field_to_token($node, $field, $form_state['values'][$field->name]);
+  }
+
+  // Update record.
+  $result = $record->execute();
+
+  // Success or error message.
+  if (filemaker_is_error($result, $node)) {
+    return;
+  }
+
+  else {
+
+    // Fire off the update trigger.
+    module_invoke_all('filemaker', 'update', $node);
+
+    drupal_set_message(t('Record saved to FileMaker.'));
+    watchdog('filemaker', 'FileMaker record updated', array(), WATCHDOG_INFO);
+  }
+
+  // Perform new find.
+  filemaker_perform_find($node, 'browse');
+}
+
+
+
+
+
+/**
+ * Creates a table with a list of all the portals that have been added to a node.
+ */
+function filemaker_portals_table($nid) {
+
+  $head = array('fmpid', 'Portal Name', 'Actions');
+  $rows = array();
+
+  $sql = "SELECT fmpid, name FROM {filemaker_portal} WHERE nid = %d";
+  $result = db_query($sql, $nid);
+
+  $i = 0;
+  while ($data = db_fetch_array($result)) {
+    $rows[$i] = $data;
+    $rows[$i]['actions'] = l('Delete', 'node/' . $nid . '/layout/portals/' . $data['fmpid'] . '/delete');
+  }
+
+  return theme_table($head, $rows);
+}
+
+
+
+
+
+/**
+ * Attaches all of the portals that have been added to a FileMaker node.
+ */
+function filemaker_get_portals($node, $fmid) {
+
+  $sql = "SELECT fmpid, name FROM {filemaker_portal} WHERE nid = %d";
+  $result = db_query($sql, $node->nid);
+
+  $output = '';
+
+  while ($data = db_fetch_object($result)) {
+    $output .= filemaker_get_portal($node, $data->name, $fmid);
+  }
+
+  return $output;
+}
+
+
+
+
+
+/**
+ * Returns a single portal to attach to a FileMaker node.
+ */
+function filemaker_get_portal($node, $portal_name, $fmid) {
+
+  $fm = filemaker_object($node); // FileMaker object.
+
+  $layout = $fm->getLayout($node->layout); // FileMaker_Layout object.
+  if (filemaker_is_error($layout, $node)) return;
+
+  $portal = $layout->getRelatedSet($portal_name); // FileMaker_RelatedSet object.
+  if (filemaker_is_error($portal, $node)) return;
+
+  $fields = $portal->getFields(); // Array of FileMaker_Field objects.
+  if (filemaker_is_error($fields, $node)) return;
+
+  // Create table for portal.
+  $head = array();
+  $rows = array();
+
+  // Need the full field names to loop through and get portal data. Field names will be formatted for table after we have portal data.
+  $field_names = array();
+  foreach ($fields as $key => $value) {
+    $field_names[] = $key;
+  }
+
+  // Get FileMaker record.
+  $record = $fm->getRecordById($node->layout, $fmid); // FileMaker_Record object.
+  if (filemaker_is_error($record, $node)) return;
+
+  // Get portal data from FileMaker record.
+  $portal_records = $record->getRelatedSet($portal_name); // Array of FileMaker_Record objects.
+
+  // Not using filemaker_is_error() function because we don't want to use the drupal_set_message function
+  // if there aren't any related records. Handles the error more elegantly by displaying 'No related records'.
+  if (FileMaker::isError($portal_records)) return t('No related records.');
+
+  // Loop through records and add each field to the table.
+  $i = 0;
+  foreach ($portal_records as $portal_record) {
+    foreach ($field_names as $field) {
+      $rows[$i][$field] = check_plain($portal_record->getField($field));
+    }
+    $i++;
+  }
+
+  // Format field names for table headers.
+  foreach ($field_names as $field_name) {
+    $head[] = filemaker_format_field_name($field_name);
+  }
+
+  return theme_table($head, $rows);
+}
+
+
+
+
+
+
+/**
+ * Receives an object created by the FileMaker API and checks to see if it is an error.
+ *
+ * Displays FileMaker error message if appropriate.
+ *
+ * Cleans up session data for current foundset for this node if appropriate.
+ *
+ * @param $object
+ *  An object created by the FileMaker API for PHP; may or may not be a FileMaker_Error object.
+ *
+ * @return
+ *  Returns TRUE if the object is an error and FALSE if not.
+ */
+function filemaker_is_error($object, $node = NULL) {
+
+  // There is an error, handle it.
+  if (FileMaker::isError($object)) {
+
+    // Grab FileMaker error message. Might be modified before being displayed to user.
+    $error_message = t('Error #%error_number : @error_string', array('%error_number' => $object->code, '@error_string' => $object->getErrorString()));
+
+    if (!$object->code) $error_message = t('Unkown FileMaker error');
+
+    // 401 = No records match the request.
+    if ($object->code == 401) {
+
+      // Only show this error if user just performed a find, else error messages will occur every
+      // time a record is edited, created, or deleted.
+      if (arg(2) != 'find') {   // Use of the arg() function isn't a security risk here: 
+        $error_message = '';    // Just killing error message if not called from the find tab.
+      }
+
+      // Kill foundset table since no records match this request (401).
+      $_SESSION['filemaker'][$node->nid]['foundset']['table'] = '';
+    }
+
+    // 5 = Command is invalid (for example, a Set Field script step does not have a calculation specified).
+    if ($object->code == 5) {
+
+      // This should not be displayed if the layout is missing, since the user will get redirected 
+      // to select a layout via hook_nodeapi().
+      if (!arg(2)) {            // Use of the arg() function isn't a security risk here: 
+        $error_message = '';    // Just killing error message if not called from a tab.
+      }
+    }
+
+    if ($error_message) {
+      drupal_set_message($error_message, 'error');
+      watchdog('filemaker', $error_message, array(), WATCHDOG_ERROR);
+    }
+
+    return TRUE;
+  }
+
+  // Not an error.
+  else {
+    return FALSE;
+  }
+}
+
+
+
+
+
+/**
+ * Returns a single field for a form array.
+ *
+ * This function is used for every field created that will directly interact with a
+ * FileMaker database.
+ */
+function filemaker_field_for_form_array($node, $name, $label, $widget, $default_value, $required = FALSE) {
+
+  $field = array(
+    '#title' => check_plain($label),
+    '#type' => $widget,
+    '#required' => $required,
+    '#default_value' => $default_value,
+  );
+
+  // Get options, if needed.
+  if ($widget == 'select' || $widget == 'radios' || $widget == 'checkboxes') {
+
+    // Get value list items from FileMaker.
+    $fm = filemaker_object($node);  // FileMaker object.
+    $layout = $fm->getLayout($node->layout);  // FileMaker_Layout object.
+    if (filemaker_is_error($layout, $node)) return;
+    $value_list = $layout->getField($name)->getValueList(); // Array of value list items.
+    if (filemaker_is_error($value_list, $node)) return;
+
+    // Place value list in $options array.
+    // Use the value for the key and the value.
+    $options = array();
+    foreach ($value_list as $value) {
+      $value = htmlspecialchars($value);
+      $options[$value] = $value;
+    }
+
+    $field['#options'] = $options;
+  }
+
+  // Checkboxes must have #default_value as an array.
+  if ($widget == 'checkboxes') {
+    filemaker_format_checkboxes_for_drupal($field);
+  }
+
+  // Dates must have #default_value as an array.
+  if ($widget == 'date' && !empty($field['#default_value'])) {
+
+    $field['#default_value'] = filemaker_format_date_for_drupal($field['#default_value']);
+  }
+
+  return $field;
+}
+
+
+
+
+
+/**
+ * Returns a themed HTML table of FileMaker fields added to this node.
+ */
+function filemaker_fields_tab_table($nid) {
+
+  // Table to list FileMaker fields that have been added to this node.
+  $head = array('Weight', 'fmfid', 'Name', 'Label', 'Widget', 'Type', 'Actions');
+  $rows = array();
+
+  // Fields that have been added to this FileMaker node.
+  $sql = "SELECT weight, fmfid, name, label, widget, type FROM {filemaker_field} WHERE nid = %d ORDER BY weight, fmfid";
+  $result = db_query($sql, $nid);
+
+  // Loop through records and add them to the table rows.
+  $i = 0;
+  while ($data = db_fetch_array($result)) {
+
+    $rows[$i] = $data;
+
+    $edit_link = l('Edit', 'node/' . $nid . '/layout/fields/' . $data['fmfid']);
+    $delete_link = l('Delete', 'node/' . $nid . '/layout/fields/' . $data['fmfid'] . '/delete');
+    $rows[$i]['actions'] = $edit_link . ' | ' . $delete_link;
+
+    $i++;
+  }
+
+  // Only return a table if there is data in it.
+  if ($rows) {
+    return theme_table($head, $rows);
+  }
+  else {
+    return '';
+  }
+}
+
+
+
+
+
+/**
+ * Performs a find in a FileMaker database.
+ *
+ * Retrieves a FileMaker_Command_Find object from the $_SESSION of the user.
+ *
+ * Doesn't return a value, but updates the found set in the $_SESSSION, which is used in 'Browse mode'.
+ */
+function filemaker_perform_find($node, $tab = NULL) {
+
+  // Don't perform a find if there is no saved find criteria.
+  if (!$_SESSION['filemaker'][$node->nid]['foundset']['request']) {
+    return;
+  }
+
+  // Might need to load class definition from the API to avoid error when unserializing FileMaker_Command_Find object.
+  // We do this by creating an empty FileMaker_Command_Find object.
+  $fm = filemaker_object($node); // FileMaker object
+  $request = $fm->newFindCommand($node->layout); // FileMaker_Command_Find object
+
+  // Find out if we can safely unserialize FileMaker_Command_Find object.
+  if (class_exists('FileMaker_Command_Find')) {
+    $request = unserialize($_SESSION['filemaker'][$node->nid]['foundset']['request']);
+  }
+  else {
+    drupal_set_message(t('Found set is not updated.'));
+    return;
+  }
+
+  // FileMaker results will be a table.
+  $head = array();
+  $rows = array();
+
+  // Get fields added to this FileMaker node.
+  $fields_sql = "SELECT name, label, widget FROM {filemaker_field} WHERE nid = %d ORDER BY weight, fmfid";
+  $fields_result = db_query($fields_sql, $node->nid);
+
+  // Create array of field names to loop through when adding data to table rows.
+  $field_names = array();
+  if ($node->fm_show_record_number) {
+    $head[] = array(
+      'data' => t('Record #'),
+      'class' => 'header-record-number',
+    );
+  }
+
+  // Loop through fields, adding the label to the head[] array and the name to the field_names[] array.
+  while ($data = db_fetch_object($fields_result)) {
+    $head[] = array(
+      'data' => check_plain($data->label),
+      'class' => 'header-' . $data->name,
+    );
+    $field_names[] = check_plain($data->name);
+  }
+  if (user_access('FileMaker nodes', $account)) { 
+    $head[] = t('Actions');
+  }
+
+  // Perform the find.
+  $result = $request->execute();
+  if (filemaker_is_error($result, $node)) return;
+
+  // Store find request in session so that we can perform a new find to recreate the found set if record in it is edited or deleted.
+  $_SESSION['filemaker'][$node->nid]['foundset']['request'] = serialize($request);
+
+  // Information for the x of n widget.
+  $_SESSION['filemaker'][$node->nid]['foundset']['foundset_count'] = $result->getFoundSetCount();
+  $_SESSION['filemaker'][$node->nid]['foundset']['record_count'] = $result->getTableRecordCount();
+
+  // Get the records.
+  $records = $result->getRecords();
+
+  // Place found set in table.
+
+  // Loop through each record, adding a row to the table each time.
+  $i = 1;
+  foreach ($records as $record) {
+    if ($node->fm_show_record_number) {
+      $rows[$i]['row_number'] = array(
+        'data' => $i,
+        'class' => 'cell-record-number',
+      );
+    }
+    foreach ($field_names as $field_name) {
+      $rows[$i][$field_name] = array(
+        'data' => check_plain($record->getField($field_name)), 
+        'class' => 'cell-' . $field_name,
+      );
+    }
+    
+    if (user_access('FileMaker nodes', $account)) {
+      $edit_link = l('Edit', 'node/' . $node->nid . '/browse/' . $record->getRecordId());
+      $delete_link = l('Delete', 'node/' . $node->nid . '/browse/' . $record->getRecordId() . '/delete');
+      $rows[$i]['actions'] = $edit_link . ' | ' . $delete_link;
+    }
+    $i++;
+  }
+  $results_table = theme_table($head, $rows);
+
+  // Store table of foundset in session for browse mode to display.
+  $_SESSION['filemaker'][$node->nid]['foundset']['table'] = $results_table;
+
+  // Only display success message to user if we initiated find from 'Find mode' tab.
+  if ($tab == 'find') {
+    drupal_set_message(t('FileMaker find performed.'));
+  }
+}
+
+
+
+
+
+/**
+ * Create a FileMaker object.
+ *
+ * It is important to only use this function to connect to the FileMaker API, to avoid
+ * defining the same class multiple times.
+ *
+ * @param $fmcid
+ *    The id of the FileMaker connection to use. If a node is passed, we get $fmcid via $node->fmcid.
+ *
+ * @return
+ *    A FileMaker object, authenticated using the connection in the {filemaker_connection} table.
+ */
+function filemaker_object($node = NULL, $fmcid = NULL) {
+
+  $fmcid = (empty($node)) ? $fmcid : $node->fmcid;
+
+  // This is the single point of entry to the FileMaker API for PHP.
+  if (filemaker_load_api()) {
+
+    // Select the authentication information from the Drupal database.
+    $fmc_sql = "SELECT * FROM {filemaker_connection} WHERE fmcid = %d";
+    $fmc = db_fetch_object(db_query($fmc_sql, $fmcid));
+
+    // Authenticate to FileMaker and return a FileMaker object.
+    $fm = new FileMaker($fmc->fmdatabase, $fmc->fmhostname, $fmc->fmusername, $fmc->fmpassword);
+
+    return $fm;
+  }
+}
+
+
+
+
+
+/**
+ * Loads FileMaker API if it's not loaded already.
+ *
+ * @return
+ *  TRUE if the FileMaker API is loaded, FALSE otherwise.
+ */
+function filemaker_load_api() {
+
+  if (!class_exists('FileMaker')) {
+
+    // Try using libraries module.
+    if (module_exists('libraries')) {
+
+      $libraries_path= drupal_get_path('module', 'libraries');
+      $libraries_include = $libraries_path . '/' . 'libraries.module';
+
+      include_once($libraries_include);
+
+      // Let's see if the FileMaker API is really available from libraries.
+      $filemaker_api = './' . libraries_get_path('filemakerapi') . '/FileMaker.php';
+      if (file_exists($filemaker_api)) {
+        include_once $filemaker_api;
+      }
+    }
+  }
+
+  if (!class_exists('FileMaker')) {
+    drupal_set_message(t('Can not find FileMaker API. Please place the FileMaker API at sites/all/libraries/filemakerapi/FileMaker. See README.txt for details.'), 'error');
+  }
+  
+  // Tell the caller if the FileMaker class exists.
+  return class_exists('FileMaker');
+}
+
+
+
+
+
+/**
+ * Checks user access for a tab on a FileMaker node.
+ */
+function filemaker_tab_access($permission, $node) {
+
+  global $user;
+
+  // Tab should only appear on FileMaker nodes for users with appropriate permissions.
+  if ($node->type == 'filemaker') {
+    return user_access($permission, $user);
+  }
+  else {
+    return FALSE;
+  }
+}
+
+
+
+
+
+/*************************************************************
+ * Formats data for FileMaker
+ *************************************************************/
+
+
+
+
+
+/**
+ * Formats data to be written to FileMaker.
+ */
+function filemaker_format_all($field, &$form_state, &$record) {
+
+    // Format date for FileMaker.
+    if ($field->widget == "date") {
+      $form_state['values'][$field->name] = filemaker_format_date_for_filemaker($form_state['values'][$field->name]);
+    }
+
+    // Prepare checkboxes data (which might have more than one value).
+    if ($field->widget == "checkboxes") {
+      $form_state['values'][$field->name] = filemaker_format_checkboxes_for_filemaker($form_state['values'][$field->name]);
+    }
+
+    // Update FileMaker_Record object with value from form.
+    $record->setField($field->name, $form_state['values'][$field->name]);
+}
+
+
+
+
+
+/**
+ * Formats data in Drupal checkboxes to be written to FileMaker.
+ *
+ * Turns an array of options into a string of selected options.
+ *
+ * @param $form_state_value
+ *   An array of options.
+ *   array(
+ *      'option1' => 0, // not selected.
+ *      'option2' => 'option2', // Selected.
+ *   )
+ *
+ * @return
+ *   A string, containing all of the selected values from the $form_state_value array.
+ */
+function filemaker_format_checkboxes_for_filemaker($form_state_value) {
+
+  // Only store selected values.
+  $selected = array();
+
+  foreach ($form_state_value as $value) {
+    if ($value) {
+      $selected[] = $value;
+    }
+  }
+
+  // Turn array of selected values into a string.
+  return implode("\r", $selected);
+}
+
+
+
+
+
+/**
+ * Formats a Drupal date for FileMaker.
+ *
+ * @param $date
+ *   A date value stored as an array, from Drupal form API.
+ *
+ * @return
+ *   The date as a string: mm/dd/yyyy
+ */
+function filemaker_format_date_for_filemaker($date) {
+
+  return $date['month'] . '/' . $date['day'] . '/' . $date['year'];
+}
+
+
+
+
+
+
+
+
+
+/*************************************************************
+ * Formats data for Drupal
+ *************************************************************/
+
+
+
+
+
+/**
+ * Formats a FileMaker date for a Drupal form.
+ *
+ * @param $date
+ *  A date stored as a string in the format mm/dd/yyyy.
+ *
+ * @return
+ *  A date stored as an array suitable for Drupal's form API.
+ */
+function filemaker_format_date_for_drupal($date) {
+
+  $date = array(
+    // Use ltrim() to eliminate leading zero for month and day.
+    'month' => ltrim(drupal_substr($date, 0, 2), 0),
+    'day' => ltrim(drupal_substr($date, 3, 2), 0),
+    'year' => drupal_substr($date, 6),
+  );
+
+  return $date;
+}
+
+
+
+
+
+/**
+ * Formats data from FileMaker checkboxes for a Drupal form.
+ *
+ * Receives field array with #default_value as a string and 
+ *  changes #default_value to an array.
+ *
+ * @param $field
+ *  Drupal FAPI field array.
+ */
+function filemaker_format_checkboxes_for_drupal(&$field) {
+
+    if (empty($field['#default_value'])) {
+      $field['#default_value'] = array();
+    }
+
+    else {
+      $field['#default_value'] = explode("\n", $field['#default_value']);
+    }
+}
+
+
+
+
+
+
+
+/*************************************************************
+ * Formats other data, this time just for displaying in Drupal
+ *************************************************************/
+
+
+
+
+
+
+/**
+ * Cleans up field names of related fields for display.
+ *
+ * @param $field_name
+ *  The name of a field, as a string, prefixed with the table occurance name. Formatted as 'table_name::field_name.'
+ *
+ * @return
+ *  The name of the paramater field, propper case, underscores changed to spaces, and without the table prefix.
+ */
+function filemaker_format_field_name($field_name) {
+
+  // Remove the table name.
+  $start_position = strpos($field_name, "::") + 2;
+  $field_name = drupal_substr($field_name, $start_position);
+
+  // Replace underscores with spaces.
+  $field_name = str_replace('_', ' ', $field_name);
+
+  // Uppercase first letter of each word.
+  $field_name = ucwords($field_name);
+
+  return $field_name;
+}
+
+
+
+
+
+/*************************************************************
+ * Debugging assistance
+ *************************************************************/
+
+
+
+
+
+/**
+ * Debugging output made pretty. Object-aware.
+ */
+function filemaker_ds($v) {
+  if (is_object($v)) {
+    drupal_set_message('<pre>' . print_r((array) $v, 1) . '</pre>');
+  }
+
+  else {
+    drupal_set_message('<pre>' . print_r($v, 1) . '</pre>');
+  }
+}
+
+
+
+
+
+/**
+ *  More help with debugging
+ */
+function filemaker_called() {
+  $f = debug_backtrace();
+  filemaker_ds($f[2]['function'] . '->' . $f[1]['function']);
+}

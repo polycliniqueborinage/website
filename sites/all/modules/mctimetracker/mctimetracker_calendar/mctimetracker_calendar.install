@@ -1,0 +1,42 @@
+<?php 
+
+/**
+* Implements hook_install().
+*/ 
+function mctimetracker_calendar_install() {
+	drupal_install_schema('mctimetracker_calendar');
+}
+
+
+/** 
+* Implements hook_schema(). 
+*/
+function mctimetracker_calendar_schema() {
+	
+	$schema['mctimetracker_calendar'] = array(
+    	'description' => 'calendar entry', 
+    	'fields' => array(
+      		'cid' => array(
+	        	'type' => 'int', 
+	        	'not null' => TRUE, 
+	        	'default' => 0, 
+	        	'description' => t('The {user}.uid of the user casting the vote.'),
+	        ),
+			'uid' => array(
+	        	'type' => 'int', 
+	        	'not null' => TRUE, 
+	        	'default' => 0, 
+	        	'description' => t('The {user}.uid of the user casting the vote.'),
+	        ),
+      	), 
+    	'indexes' => array(
+    	), 
+    	'unique keys' => array(
+    		'cid' => array('cid'),
+    	),
+    	'primary key' => array('cid'),
+  );
+  
+  return $schema;
+
+}

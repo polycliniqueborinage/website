@@ -1,0 +1,47 @@
+<?php if ($is_front): ?>
+
+	<ul id="slider">
+
+		<li>
+			<div class="slider-text" test='1' style="margin-left:370px">
+				<div class="left bottom">
+					<h2>Dentisterie</h2>
+					<p>
+					Le service de radiologie et d'echographie prend en charge tous les actes de radiologie courants ainsi que certains examens specialises.
+					</p>
+				</div>
+			</div>
+			<img src="/sites/all/themes/poly/images/toothbrush.jpg" alt="">
+		</li>
+
+		<li>
+			<div class="slider-text"  test='2' style="margin-left:1280px">
+				<div class="left bottom">
+					<h2>Radiologie</h2>
+					<p>
+					Le service de radiologie et d'echographie prend en charge tous les actes de radiologie courants ainsi que certains examens specialises.
+					</p>
+				</div>
+			</div>
+			<img src="/sites/all/themes/poly/images/radiology.jpg" alt="">
+		</li>
+
+		<li>
+			<div class="slider-text" test='3' style="margin-left:1280px">
+				<div class="left bottom">
+					<h2>Cardilogie</h2>
+					<p>
+					Le service de radiologie et d'echographie prend en charge tous les actes de radiologie courants ainsi que certains examens specialises.
+					</p>
+				</div>
+			</div>
+			<img src="/sites/all/themes/poly/images/cardiogram.jpg" alt="">
+		</li>
+
+	</ul>      
+	
+	<?php print ($content); ?>
+	  
+	
+<?php endif; ?>
+	

@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/notifications/notifications_tags
+END
+notifications_tags.inc
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/notifications/notifications_tags/notifications_tags.inc
+END
+notifications_tags.info
+K 25
+svn:wc:ra_dav:version-url
+V 141
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/notifications/notifications_tags/notifications_tags.info
+END
+notifications_tags.admin.inc
+K 25
+svn:wc:ra_dav:version-url
+V 146
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/notifications/notifications_tags/notifications_tags.admin.inc
+END
+notifications_tags.module
+K 25
+svn:wc:ra_dav:version-url
+V 143
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/notifications/notifications_tags/notifications_tags.module
+END
+notifications_tags.install
+K 25
+svn:wc:ra_dav:version-url
+V 144
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/notifications/notifications_tags/notifications_tags.install
+END

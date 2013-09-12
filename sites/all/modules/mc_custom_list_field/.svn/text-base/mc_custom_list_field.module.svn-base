@@ -1,0 +1,265 @@
+<?php
+
+/**
+ * @defgroup field_example Example: Field Types API
+ * @ingroup examples
+ * @{
+ *
+ * Providing a field requires:
+ * - Defining a field:
+ *   - hook_field_info()
+ *   - hook_field_schema()
+ *   - hook_field_validate()
+ *   - hook_field_is_empty()
+ *
+ * - Defining a formatter for the field (the portion that outputs the field for
+ *   display):
+ *   - hook_field_formatter_info()
+ *   - hook_field_formatter_view()
+ *
+ * - Defining a widget for the edit form:
+ *   - hook_field_widget_info()
+ *   - hook_field_widget_form()
+ *
+ */
+
+/***************************************************************
+ * Field Type API hooks
+ ***************************************************************/
+
+/**
+ * Implements hook_field_info().
+ *
+ * Provides the description of the field.
+ */
+function mc_custom_list_field_field_info() {
+  return array(
+    // We name our field as the associative name of the array.
+    'mc_custom_list_field_mc_custom_list' => array(
+      'label' => t('MC List'),
+      'description' => t('MC Agenda'),
+      'default_widget' => 'mc_custom_list_field_agendapicker',
+      'default_formatter' => 'mc_custom_list_field_simple_text',
+    ),
+  );
+}
+
+/**
+ * Implements hook_field_validate().
+ *
+ * This hook gives us a chance to validate content that's in our
+ * field. We're really only interested in the $items parameter, since
+ * it holds arrays representing content in the field we've defined.
+ * We want to verify that the items only contain RGB hex values like
+ * this: #RRGGBB. If the item validates, we do nothing. If it doesn't
+ * validate, we add our own error notification to the $errors parameter.
+ *
+ * @see mc_custom_agenda_field_field_widget_error()
+ */
+function mc_custom_list_field_field_validate($entity_type, $entity, $field, $instance, $langcode, $items, &$errors) {
+  foreach ($items as $delta => $item) {
+  }
+}
+
+
+/**
+ * Implements hook_field_is_empty().
+ *
+ * hook_field_is_emtpy() is where Drupal asks us if this field is empty.
+ * Return TRUE if it does not contain data, FALSE if it does. This lets
+ * the form API flag an error when required fields are empty.
+ */
+function mc_custom_list_field_field_is_empty($item, $field) {
+  return empty($item['mc_custom_list']);	
+}
+
+/**
+ * Implements hook_field_formatter_info().
+ *
+ * We need to tell Drupal that we have two different types of formatters
+ * for this field. One will change the text color, and the other will
+ * change the background color.
+ *
+ * @see mc_custom_agenda_field_field_formatter_view()
+ */
+function mc_custom_list_field_field_formatter_info() {
+  return array(
+    // This formatter just displays the hex value in the color indicated.
+    'mc_custom_list_field_simple_text' => array(
+      'label' => t('Simple text-based formatter'),
+      'field types' => array('mc_custom_list_field_mc_custom_list'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_field_formatter_view().
+ *
+ * Two formatters are implemented.
+ * - mc_custom_agenda_field_simple_text just outputs markup indicating the color that
+ *   was entered and uses an inline style to set the text color to that value.
+ * - mc_custom_agenda_field_color_background does the same but also changes the
+ *   background color of div.region-content.
+ *
+ * @see mc_custom_agenda_field_field_formatter_info()
+ */
+function mc_custom_list_field_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
+	
+  $element = array();
+
+  switch ($display['type']) {
+    // This formatter simply outputs the field as text and with a color.
+    case 'mc_custom_list_field_simple_text':
+      foreach ($items as $delta => $item) {
+        $element[$delta] = array(
+          '#type' => 'html_tag',
+          '#tag' => 'p',
+          '#attributes' => array(
+            'style' => 'agenda: ' . $item['mc_custom_list'],
+          ),
+          '#value' => t('Agenda : @agenda', array('@agenda' => $item['mc_custom_list'])),
+        );
+      }
+      break;
+
+  }
+
+  return $element;
+}
+
+/**
+ * Implements hook_field_widget_info().
+ *
+ * Three widgets are provided.
+ * - A simple text-only widget where the user enters the '#ffffff'.
+ * - A 3-textfield widget that gathers the red, green, and blue values
+ *   separately.
+ * - A farbtastic colorpicker widget that chooses the value graphically.
+ *
+ * These widget types will eventually show up in hook_field_widget_form,
+ * where we will have to flesh them out.
+ *
+ * @see mc_custom_agenda_field_field_widget_form()
+ */
+function mc_custom_list_field_field_widget_info() {
+  return array(
+    'mc_custom_list_field_agendapicker' => array(
+      'label' => t('Agenda Picker'),
+      'field types' => array('mc_custom_list_field_mc_custom_list'),
+    ),
+    'mc_custom_list_field_userpicker' => array(
+      'label' => t('User Picker'),
+      'field types' => array('mc_custom_list_field_mc_custom_list'),
+    ),
+    'mc_custom_list_field_categorypicker' => array(
+      'label' => t('Category Picker'),
+      'field types' => array('mc_custom_list_field_mc_custom_list'),
+    ),
+    'mc_custom_list_field_roompicker' => array(
+      'label' => t('Room Picker'),
+      'field types' => array('mc_custom_list_field_mc_custom_list'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_field_widget_form().
+ *
+ * hook_widget_form() is where Drupal tells us to create form elements for
+ * our field's widget.
+ *
+ */
+function mc_custom_list_field_field_widget_form(&$form, &$form_state, $field, $instance, $langcode, $items, $delta, $element) {
+
+  $value = isset($items[$delta]['mc_custom_list']) ? $items[$delta]['mc_custom_list'] : '';
+	
+  // Domain
+  $domain = domain_get_domain();
+	
+  $widget = $element;
+  $widget['#delta'] = $delta;
+  
+  switch ($instance['widget']['type']) {
+
+    case 'mc_custom_list_field_agendapicker':
+    	
+  	  $lists = db_query("SELECT node.nid AS nid, node.title AS node_title FROM {node} LEFT JOIN {domain_access} domain_access ON node.nid = domain_access.nid AND domain_access.realm = 'domain_id' WHERE (( (node.status = '1') AND (node.type IN  ('agenda')) AND (domain_access.gid IN  (".$domain['domain_id'].")) AND (domain_access.realm = 'domain_id')))")->fetchAllKeyed();
+  	  $widget += array(
+        '#type' => 'select',
+        '#title' => t('Selected'),
+    	'#options' => array_filter($lists, 'check_plain'),
+        '#default_value' => $value,
+      	'#description' => t('Set this to <em>Yes</em> if you would like this category to be selected by default.'),
+      );
+      
+      break;
+
+    case 'mc_custom_list_field_categorypicker':
+    	
+  	  $lists = db_query("SELECT node.nid AS nid, node.title AS node_title FROM {node} LEFT JOIN {domain_access} domain_access ON node.nid = domain_access.nid AND domain_access.realm = 'domain_id' WHERE (( (node.status = '1') AND (node.type IN  ('category')) AND (domain_access.gid IN  (".$domain['domain_id'].")) AND (domain_access.realm = 'domain_id')))")->fetchAllKeyed();
+  	  $widget += array(
+        '#type' => 'select',
+        '#title' => t('Selected'),
+    	'#options' => array_filter($lists, 'check_plain'),
+        '#default_value' => $value,
+      	'#description' => t('Set this to <em>Yes</em> if you would like this category to be selected by default.'),
+      );
+      
+      break;
+      
+    case 'mc_custom_list_field_roompicker':
+    	
+  	  $lists = db_query("SELECT node.nid AS nid, node.title AS node_title FROM {node} LEFT JOIN {domain_access} domain_access ON node.nid = domain_access.nid AND domain_access.realm = 'domain_id' WHERE (( (node.status = '1') AND (node.type IN  ('room')) AND (domain_access.gid IN  (".$domain['domain_id'].")) AND (domain_access.realm = 'domain_id')))")->fetchAllKeyed();
+  	  $widget += array(
+        '#type' => 'select',
+        '#title' => t('Selected'),
+    	'#options' => array_filter($lists, 'check_plain'),
+        '#default_value' => $value,
+      	'#description' => t('Set this to <em>Yes</em> if you would like this category to be selected by default.'),
+      );
+      
+      break;
+      
+    case 'mc_custom_list_field_userpicker':
+      
+  	  $lists = db_query("SELECT users.uid AS uid, users.name AS users_name FROM {users} LEFT JOIN {domain_editor} domain_editor ON users.uid = domain_editor.uid WHERE domain_editor.domain_id =  '".$domain['domain_id']."'")->fetchAllKeyed();
+  	  $options[''] = t('Select');
+  	  $options += array_filter($lists, 'check_plain');
+  	  $widget += array(
+        '#type' => 'select',
+        '#title' => t('Selected'),
+    	'#options' => $options,
+        '#default_value' => $value,
+  	    '#description' => t('Set this to <em>Yes</em> if you would like this category to be selected by default.'),
+      );
+      
+      break;
+      
+  }
+
+  $element['mc_custom_list'] = $widget;
+  return $element;
+}
+
+
+
+
+
+/**
+ * Implements hook_field_widget_error().
+ *
+ * hook_field_widget_error() lets us figure out what to do with errors
+ * we might have generated in hook_field_validate(). Generally, we'll just
+ * call form_error().
+ *
+ * @see mc_custom_agenda_field_field_validate()
+ * @see form_error()
+ */
+function mc_custom_list_field_field_widget_error($element, $error, $form, &$form_state) {
+  switch ($error['error']) {
+    case 'mc_custom_list_field_invalid':
+      form_error($element, $error['message']);
+      break;
+  }
+}
+

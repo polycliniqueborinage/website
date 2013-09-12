@@ -1,0 +1,87 @@
+<?php
+
+/**
+ * @file
+ * Checks user name availability on registration page.
+ */ 
+
+/**
+ * Implementation of hook_menu().
+ */
+function registration_check_menu() {
+  $items = array();
+
+  $items['registration_check/isunique'] = array(
+    'type' => MENU_CALLBACK,  
+    'page callback' => 'registration_check_callback',
+    'access arguments' => array('access content'),
+    'file' => 'registration_check.unique.inc',
+  );
+  $items['mail_check/isunique'] = array(
+    'type' => MENU_CALLBACK,  
+    'page callback' => 'mail_check_callback',
+    'access arguments' => array('access content'),
+    'file' => 'mail_check.unique.inc',
+  );
+  $items['domain_check/isunique'] = array(
+    'type' => MENU_CALLBACK,  
+    'page callback' => 'domain_check_callback',
+    'access arguments' => array('access content'),
+    'file' => 'domain_check.unique.inc',
+  );
+  $items['admin/config/system/registration_check'] = array(
+    'title' => 'Username check',
+    'type' => MENU_NORMAL_ITEM,
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('registration_check_settings'),
+    'access arguments' => array('administer site configuration'),
+    'file' => 'registration_check.admin.inc',
+  );
+
+  return $items;
+}
+
+function registration_check_form_user_register_form_alter(&$form) {
+	
+  _registration_check_load_resources();
+  
+  $form['account']['name']['#field_suffix'] = '1<span id="username-check-informer">&nbsp;</span>';
+  $form['account']['name']['#suffix'] = '<div id="username-check-message"></div>';
+  
+  $form['account']['mail']['#field_suffix'] = '2<span id="mail-check-informer">&nbsp;</span>';
+  $form['account']['mail']['#suffix'] = '<div id="mail-check-message"></div>';
+  
+  $form['field_domain']['und'][0]['value']['#field_suffix'] = '3<span id="domain-check-informer">&nbsp;</span>';
+  $form['field_domain']['und'][0]['value']['#suffix'] = '<div id="domain-check-message"></div>';
+  $form['field_domain']['und'][0]['value']['#prefix'] = 'http://';
+  
+  //dpm($form['field_domain']['und'][0]);
+  
+  
+}
+
+/**
+ * Load registration_check resources.
+ */
+function _registration_check_load_resources() {
+	
+  $module_path = drupal_get_path('module', 'registration_check');
+  
+  drupal_add_css($module_path . '/registration_check.css');
+  drupal_add_js($module_path . '/registration_check.js');
+
+  drupal_add_js(array(
+    'usernameCheck' => array(
+      'ajaxUrl' => url('username_check/isunique', array('absolute' => TRUE)),
+      'delay'   => variable_get('username_check_delay', 1),
+    ),
+  ), 'setting');
+
+  drupal_add_js(array(
+    'mailCheck' => array(
+      'ajaxUrl' => url('mail_check/isunique', array('absolute' => TRUE)),
+      'delay'   => variable_get('mail_check_delay', 1),
+    ),
+  ), 'setting');
+  
+}

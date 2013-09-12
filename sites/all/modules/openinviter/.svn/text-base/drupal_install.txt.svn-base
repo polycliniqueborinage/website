@@ -1,0 +1,3 @@
+Copy the contents of the downloaded package to /sites/all/openinviter.
+Login as Admininstrator and go to Modules. Find openinviter in that list and enable it... That all.... Have fun.
+Run postinstall.php and after that delete it.

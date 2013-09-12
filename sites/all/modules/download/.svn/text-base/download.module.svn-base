@@ -1,0 +1,186 @@
+<?php
+/**
+ * @file
+ *
+ * Handles module administration and download link
+ */
+
+
+/**
+ * Implements hook_menu().
+ */
+function download_menu() {
+  $items = array();
+  $items['admin/config/media/download'] = array(
+    'title' => 'Download settings',
+    'description' => 'Access the download settings',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('download_settings'),
+    'access arguments' => array('administer download module'),
+  );
+  $items['download/%'] = array(
+    'page callback' => 'download_download',
+    'page arguments' => array(1),
+    'access arguments' => array('see download link'),
+    'type' => MENU_CALLBACK,
+  );
+  return $items;
+}
+
+
+/**
+ * Implements hook_permission().
+ */
+function download_permission() {
+  return array(
+    'administer download module' => array(
+      'title' => t('Administer Download'),
+      'description' => t('Allow users to access settings page'),
+    ),
+    'see download link' => array(
+      'title' => t('Download link'),
+      'description' => t('Allow users to see the download link'),
+    ),
+  );
+}
+
+
+/**
+ * Constructs the settings page
+ * @see download_menu()
+ */
+function download_settings($form, &$form_state) {
+
+  $lib_path = libraries_get_path('pclzip');
+  if (!is_dir($lib_path)) {
+    drupal_set_message(t('You need to download PclZip at <a href="http://www.phpconcept.net/pclzip/pclzip-downloads">http://www.phpconcept.net/pclzip/pclzip-downloads</a> and extract content in /sites/all/libraries/pclzip in order to use the Download module.', 'warning'));
+  }
+
+  $form['download_displaymode'] = array(
+    '#title' => t('Display mode'),
+    '#type' => 'select',
+    '#options' => array(0 => 'Full node', 1 => 'Teaser', 2 => 'Both'),
+    '#default_value' => variable_get('download_displaymode', 0),
+  );
+
+  for ($weights = array(), $i = -10; count($weights) < 21; $weights[$i] = $i, $i++);
+  $form['download_weight'] = array(
+    '#title' => t('weight'),
+    '#type' => 'select',
+    '#options' => $weights,
+    '#default_value' => variable_get('download_weight', -10),
+  );
+
+  $rows = array();
+  $fields = field_info_fields();
+  $allowed_types = array('file', 'image');
+  foreach ($fields as $field_name => $field) {
+    $content_types = '';
+    foreach ($field['bundles'] as $bundle) {
+      $content_types .= implode(', ', $bundle);
+    }
+    if (in_array($field['type'], $allowed_types)) {
+      $rows[$field_name] = array(
+        $field['id'],
+        $field['field_name'],
+        $field['module'],
+        $field['type'],
+        $content_types,
+      );
+    }
+  }
+
+  $header = array('fid', 'field name', 'module', 'type', 'content type');
+
+  $form['download_fields'] = array(
+    '#type' => 'tableselect',
+    '#title' => 'Select fields to compress.',
+    '#header' => $header,
+    '#options' => $rows,
+    '#default_value' => variable_get('download_fields', array()),
+  );
+
+  return system_settings_form($form);
+}
+
+
+
+/**
+ * Implements hook_node_view().
+ */
+function download_node_view($node, $view_mode = 'full', $langcode = NULL) {
+  if (!user_access('see download link')) {
+    return;
+  }
+
+  $valid_file_found = FALSE;
+  $fields = variable_get('download_fields', array());
+  foreach ($fields as $fieldname) {
+    if (isset($node->{$fieldname})) {
+      foreach ($node->{$fieldname} as $field_array) {
+        foreach ($field_array as $field) {
+          if (file_valid_uri($field['uri'])) {
+            $valid_file_found = TRUE;
+            break;
+          }
+        }
+      }
+    }
+  }
+
+  if ($valid_file_found) {
+    $display_mode = variable_get('download_displaymode', 0);
+    $download_link = array(
+      '#markup' => l(t('Download all files'), 'download/' . $node->nid . '.zip'),
+      '#weight' => variable_get('download_weight', -10),
+    );
+    switch ($display_mode) {
+      case 0:
+        if ($view_mode == 'full') {
+          $node->content['download_field'] = $download_link;
+        }
+        break;
+      case 1:
+        if ($view_mode == 'teaser') {
+          $node->content['download_field'] = $download_link;
+        }
+        break;
+      default:
+        $node->content['download_field'] = $download_link;
+        break;
+    }
+    return;
+  }
+}
+
+
+function download_download($nid) {
+
+  $nid = array_shift(explode('.', $nid));
+
+  $lib_path = libraries_get_path('pclzip');
+  if (!is_dir($lib_path)) {
+    drupal_goto('node/' . $nid);
+  }
+
+  include $lib_path . '/pclzip.lib.php';
+  $archive = new PclZip(file_directory_temp() . '/' . $nid . '.zip');
+
+  $files = array();
+  $node = node_load($nid);
+  $fields = variable_get('download_fields', array());
+  foreach ($fields as $fieldname) {
+    if (isset($node->{$fieldname})) {
+      foreach ($node->{$fieldname} as $field_array) {
+        foreach ($field_array as $field) {
+          $files[] = drupal_realpath($field['uri']);
+        }
+      }
+    }
+  }
+  $archive->add($files, PCLZIP_OPT_REMOVE_ALL_PATH);
+  header("Content-Type: application/force-download");
+  header('Content-Description: File Transfer');
+  readfile(file_directory_temp() . '/' . $nid . '.zip');
+  exit();
+}

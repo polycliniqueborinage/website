@@ -1,0 +1,32 @@
+<?php
+
+/**
+ * Implements hook_field_schema().
+ */
+function cck_reminder_field_schema($field) {
+  return array(
+    'columns' => array(
+      'media' => array(
+          'description' => 'The type of media.',
+          'type' => 'varchar',
+          'length' => 32,
+          'not null' => TRUE,
+      ),
+      'number' => array(
+          'description' => 'The number of unit.',
+          'type' => 'int',
+          'not null' => TRUE,
+          'default' => 1,
+      ),
+      'unit' => array(
+          'description' => 'The unit.',
+          'type' => 'int',
+          'not null' => TRUE,
+          'default' => 0,
+      ),
+    ),
+    'indexes' => array(
+      'reminder' => array('media', 'number', 'unit'),
+    ),
+  );
+}

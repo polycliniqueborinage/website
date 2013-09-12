@@ -1,0 +1,19 @@
+name = FileMaker
+description = Create and manage nodes that interact with FileMaker databases.
+core = 6.x
+package = Database
+dependencies[] = libraries
+
+; Information added by drupal.org packaging script on 2011-03-11
+version = "6.x-1.0"
+core = "6.x"
+project = "filemaker"
+datestamp = "1299882969"
+
+
+; Information added by drupal.org packaging script on 2011-09-21
+version = "6.x-3.1"
+core = "6.x"
+project = "filemaker"
+datestamp = "1316626903"
+

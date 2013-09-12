@@ -1,0 +1,5 @@
+name = CCK User Notification
+description = CCK User Notification
+package = Fields
+dependencies[] = field
+core = 7.x

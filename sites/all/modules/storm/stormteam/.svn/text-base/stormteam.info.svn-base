@@ -1,0 +1,21 @@
+
+name = Storm Team
+description = "Allows recording of teams made up of Storm Organizations and Storm People."
+core = 7.x
+package = Storm
+
+dependencies[] = storm
+dependencies[] = stormorganization
+dependencies[] = stormperson
+
+files[] = stormteam.install
+files[] = stormteam.module
+files[] = stormteam.theme.inc
+files[] = stormteam_handler_field_teammembers.inc
+
+; Information added by drupal.org packaging script on 2011-02-25
+version = "7.x-1.x-dev"
+core = "7.x"
+project = "storm"
+datestamp = "1298620277"
+

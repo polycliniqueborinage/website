@@ -1,0 +1,4 @@
+/* This file will hold styles that are loaded using the same media query as the normal grid. */
+.slider-text {
+    margin: 200px 0 0 490px;
+}

@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/messaging/messaging_mail
+END
+messaging_mail.module
+K 25
+svn:wc:ra_dav:version-url
+V 131
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/messaging/messaging_mail/messaging_mail.module
+END
+messaging_mail.inc
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/messaging/messaging_mail/messaging_mail.inc
+END
+messaging_mail.info
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/messaging/messaging_mail/messaging_mail.info
+END
+messaging_mail.admin.inc
+K 25
+svn:wc:ra_dav:version-url
+V 134
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/messaging/messaging_mail/messaging_mail.admin.inc
+END

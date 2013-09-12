@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/ip_geoloc/js
+END
+ip_geoloc_gmap.js
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/ip_geoloc/js/ip_geoloc_gmap.js
+END
+ip_geoloc_current_location.js
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/ip_geoloc/js/ip_geoloc_current_location.js
+END
+ip_geoloc_gmap_multi_loc.js
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/ip_geoloc/js/ip_geoloc_gmap_multi_loc.js
+END
+ip_geoloc_gmap_current_loc.js
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/ip_geoloc/js/ip_geoloc_gmap_current_loc.js
+END

@@ -1,0 +1,81 @@
+<?php
+
+/**
+ * @file
+ * A small module that restricts access to login users by domain affiliation.
+ */
+
+/**
+ * Implementation of hook_perm()
+ * 
+ */
+function domain_bonus_login_restrict_perm() {
+  return array('login to any domain');
+}
+
+/**
+ * implementation of hook_form_alter()
+ *
+ */
+function domain_bonus_login_restrict_form_alter(&$form, $form_state, $form_id) {
+
+  //add form element on domain_configure_form
+  if ($form_id == 'domain_configure_form') {
+
+    $form['domain_bonus_login_restrict_fieldset'] = array(
+      '#type' => 'fieldset',
+      '#type' => 'fieldset',
+      '#title' => t('Restrict domain login'),
+      '#collapsible' => TRUE,
+      '#collapsed' => TRUE,
+      '#weight' => 1
+    );  
+
+    $form['domain_bonus_login_restrict_fieldset']['domain_bonus_login_restrict'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Restrict login'),
+      '#default_value' => variable_get('domain_bonus_login_restrict', 0),
+      '#description' => t('If checked allow user login by domain affiliation only.'),
+      '#weight' => 1
+    );
+    
+    //put buttons under fieldset
+    $form['buttons']['#weight'] = 2;
+    
+    return $form;
+  }
+} 
+
+/**
+ * Implementation of hook_user()
+ *
+ */
+function domain_bonus_login_restrict_user_login(&$edit, $account) {
+
+	if (variable_get('domain_bonus_login_restrict', 0) && !user_access('login to any domain')) {
+      
+	  global $user;
+	  
+      global $_domain;
+      
+      $user_domains = domain_get_user_domains($user);
+      
+	  if (!(in_array($_domain['domain_id'], $user_domains))) {
+	  	
+	  	watchdog('user', 'Session closed for %name.', array('%name' => $user->name));
+
+  		module_invoke_all('user_logout', $user);
+
+  		// Destroy the current session, and reset $user to the anonymous user.
+  		session_destroy();
+
+	  	drupal_set_message("You don't have the permission to access this domain!", "error");
+  		
+	  	drupal_goto();
+	  	
+	  } 
+	  
+	}
+
+}
+

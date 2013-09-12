@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/twilio/OpenVBX/controllers/messages
+END
+message_index.php
+K 25
+svn:wc:ra_dav:version-url
+V 138
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/twilio/OpenVBX/controllers/messages/message_index.php
+END
+inbox.php
+K 25
+svn:wc:ra_dav:version-url
+V 130
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/twilio/OpenVBX/controllers/messages/inbox.php
+END
+message_call.php
+K 25
+svn:wc:ra_dav:version-url
+V 137
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/twilio/OpenVBX/controllers/messages/message_call.php
+END
+details.php
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/twilio/OpenVBX/controllers/messages/details.php
+END
+message_text.php
+K 25
+svn:wc:ra_dav:version-url
+V 137
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/twilio/OpenVBX/controllers/messages/message_text.php
+END

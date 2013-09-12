@@ -1,0 +1,21 @@
+name = Storm Task
+description = "Allows recording of tasks for Storm Organizations and Projects"
+package = Storm
+core = 7.x
+
+dependencies[] = storm 
+dependencies[] = stormorganization
+dependencies[] = stormproject
+dependencies[] = views
+
+files[] = stormtask.admin.inc
+files[] = stormtask.install
+files[] = stormtask.module
+files[] = stormtask.theme.inc
+
+; Information added by drupal.org packaging script on 2011-02-25
+version = "7.x-1.x-dev"
+core = "7.x"
+project = "storm"
+datestamp = "1298620277"
+

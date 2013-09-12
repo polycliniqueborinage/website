@@ -1,0 +1,4 @@
+name = MC List Field
+description = Select an agenda or a user
+package = MC Custom
+core = 7.x

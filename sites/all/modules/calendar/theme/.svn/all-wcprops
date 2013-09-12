@@ -1,0 +1,95 @@
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/calendar/theme
+END
+calendar-month.tpl.php
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/calendar/theme/calendar-month.tpl.php
+END
+calendar-datebox.tpl.php
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/calendar/theme/calendar-datebox.tpl.php
+END
+calendar-month-multiple-entity.tpl.php
+K 25
+svn:wc:ra_dav:version-url
+V 138
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/calendar/theme/calendar-month-multiple-entity.tpl.php
+END
+calendar-row-node.tpl.php
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/calendar/theme/calendar-row-node.tpl.php
+END
+calendar-month-row.tpl.php
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/calendar/theme/calendar-month-row.tpl.php
+END
+calendar-week.tpl.php
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/calendar/theme/calendar-week.tpl.php
+END
+calendar-mini.tpl.php
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/calendar/theme/calendar-mini.tpl.php
+END
+calendar-item.tpl.php
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/calendar/theme/calendar-item.tpl.php
+END
+calendar-year.tpl.php
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/calendar/theme/calendar-year.tpl.php
+END
+calendar-style.tpl.php
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/calendar/theme/calendar-style.tpl.php
+END
+calendar-month-col.tpl.php
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/calendar/theme/calendar-month-col.tpl.php
+END
+calendar-week-overlap.tpl.php
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/calendar/theme/calendar-week-overlap.tpl.php
+END
+calendar-day.tpl.php
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/calendar/theme/calendar-day.tpl.php
+END
+theme.inc
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/calendar/theme/theme.inc
+END
+calendar-day-overlap.tpl.php
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/calendar/theme/calendar-day-overlap.tpl.php
+END

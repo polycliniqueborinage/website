@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/notifications/notifications_ui
+END
+notifications_ui.info
+K 25
+svn:wc:ra_dav:version-url
+V 137
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/notifications/notifications_ui/notifications_ui.info
+END
+notifications_ui.admin.inc
+K 25
+svn:wc:ra_dav:version-url
+V 142
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/notifications/notifications_ui/notifications_ui.admin.inc
+END
+notifications_ui.module
+K 25
+svn:wc:ra_dav:version-url
+V 139
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/notifications/notifications_ui/notifications_ui.module
+END
+notifications_ui.install
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/notifications/notifications_ui/notifications_ui.install
+END
+notifications_ui.pages.inc
+K 25
+svn:wc:ra_dav:version-url
+V 142
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/notifications/notifications_ui/notifications_ui.pages.inc
+END

@@ -1,0 +1,160 @@
+<?php
+/**
+* Display help and module information
+* @param path which path of the site we're displaying help
+* @param arg array that holds the current path as would be returned from arg() function
+* @return help text for the path
+*/
+function openinviter_help($path, $arg) {
+  $output = '';
+  switch ($path) {
+    case "admin/help#openinviter":
+      $output = '<p>'.  t("Allows your users to invite their friends to your site") .'</p>';
+      break;
+  }
+  return $output;
+}
+function openinviter_perm() {
+  return array('access openinviter content');
+}
+function openinviter_block($op='list', $delta=0) {
+  if ($op == "list") {
+    $block[0]["info"] = t('OpenInviter');
+    return $block;
+  }
+  elseif ($op == "view")
+  {
+     if (isset($_GET["q"])) $q = $_GET['q'];
+     else $q = "";
+     if ($q == "" or $q != "openinviter") $show = true;
+     else $show = false;
+     $block_content = "";
+     if ($show)
+     {
+     require_once('OpenInviter/frontend.php');
+  	 $block_content .= $contents;
+     $block['subject'] = 'Invite your friends';
+     $block['content'] = $block_content;
+     return $block;
+     }
+     else return "";
+  }
+}
+function openinviter_all(){
+	if (isset($_GET["q"])) $q = $_GET['q'];
+     else $q = "";
+     if ($q == "" or $q != "openinviter") $show = false;
+     else $show = true;
+	$b_content = "";
+	if ($show)
+	{
+		require_once('OpenInviter/frontend.php');
+  	 	$b_content = $contents;
+	}
+	return $b_content;	
+}
+function openinviter_menu() {
+
+  $items = array();
+  $items['openinviter'] = array(
+    'title' => 'Your contacts',
+    'page callback' => 'openinviter_all',
+    'access arguments' => array('access openinviter content'),
+    'type' => MENU_CALLBACK
+  );
+  $items['admin/settings/openinviter'] = array(
+    'title' => 'OpenInviter module settings',
+    'description' => 'OpenInviter module settings',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('openinviter_admin'),
+    'access arguments' => array('access administration pages'),
+    'type' => MENU_NORMAL_ITEM,
+   );
+
+  return $items;
+}
+function openinviter_admin() {
+  $form['openinviter_mail'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Email body'),
+    '#default_value' => variable_get('openinviter_mail', "You were invited to (your site here)... "),
+    '#rows' => 15,
+    '#cols' => 40,
+    '#description' => t("The email message to be sent to the invited contacts."),
+    '#required' => TRUE,
+  );
+  $form['openinviter_subject'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Email Subject'),
+    '#default_value' => variable_get('openinviter_subject', "You were invited to (your site here)... "),
+    '#description' => t("The email subject."),
+    '#required' => TRUE,
+  );
+  $form['openinviter_username'] = array(
+    '#type' => 'textfield',
+    '#title' => t('OpenInviter username'),
+    '#default_value' => variable_get('openinviter_username', ""),
+    '#description' => t("Your username on OpenInviter website."),
+    '#required' => FALSE,
+  );
+  $form['openinviter_p_key'] = array(
+    '#type' => 'textfield',
+    '#title' => t('OpenInviter private key'),
+    '#default_value' => variable_get('openinviter_p_key', ""),
+    '#description' => t("Your private key on OpenInviter website."),
+    '#required' => FALSE,
+  );
+  $form['openinviter_cookie_path'] = array(
+    '#type' => 'textfield',
+    '#title' => t('OpenInviter cookie path'),
+    '#default_value' => variable_get('openinviter_cookie_path', "."),
+    '#description' => t("Cookie path."),
+    '#required' => TRUE,
+  );
+  $form['openinviter_filter_emails'] = array(
+  '#type' => 'select',
+    '#title' => t('OpenInviter Filter emails'),
+    '#default_value' => variable_get('openinviter_filter_emails', 'n'),
+    '#description' => t("If openinviter should filter emails or not."),
+    '#required' => TRUE,
+    '#options' => array(
+    'y' => t('True'),
+    'n' => t('False') )
+  );
+  $form['openinviter_transport'] = array(
+  '#type' => 'select',
+    '#title' => t('OpenInviter Transport'),
+    '#default_value' => variable_get('openinviter_transport', 'curl'),
+    '#description' => t("OpenInviter transport method."),
+    '#required' => TRUE,
+    '#options' => array(
+    'curl' => t('Curl'),
+    'wget' => t('Wget') )
+  );
+  $form['openinviter_update_time'] = array(
+    '#type' => 'hidden',
+    '#default_value' => time(),
+    '#required' => TRUE,
+  );
+  $form['openinviter_remote_debug'] = array(
+  '#type' => 'select',
+    '#title' => t('OpenInviter Remote Debug'),
+    '#default_value' => variable_get('openinviter_remote_debug', 'y'),
+    '#description' => t("OpenInviter remote debuging."),
+    '#required' => TRUE,
+    '#options' => array(
+    'y' => t('True'),
+    'n' => t('False') )
+  );
+  $form['openinviter_local_debug'] = array(
+  '#type' => 'select',
+    '#title' => t('OpenInviter Local Debug'),
+    '#default_value' => variable_get('openinviter_local_debug', 'n'),
+    '#description' => t("OpenInviter local debuging."),
+    '#required' => TRUE,
+    '#options' => array(
+    'y' => t('True'),
+    'n' => t('False') )
+  );
+  return system_settings_form($form);
+}

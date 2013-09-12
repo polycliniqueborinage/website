@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/uuid/uuid_services_example
+END
+uuid_services_example.module
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/uuid/uuid_services_example/uuid_services_example.module
+END
+uuid_services_example.features.inc
+K 25
+svn:wc:ra_dav:version-url
+V 146
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/uuid/uuid_services_example/uuid_services_example.features.inc
+END
+uuid_services_example.features.user_permission.inc
+K 25
+svn:wc:ra_dav:version-url
+V 162
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/uuid/uuid_services_example/uuid_services_example.features.user_permission.inc
+END
+uuid_services_example.info
+K 25
+svn:wc:ra_dav:version-url
+V 138
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/uuid/uuid_services_example/uuid_services_example.info
+END
+uuid_services_example.services.inc
+K 25
+svn:wc:ra_dav:version-url
+V 146
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/uuid/uuid_services_example/uuid_services_example.services.inc
+END

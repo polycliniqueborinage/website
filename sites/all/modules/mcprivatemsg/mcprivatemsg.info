@@ -1,0 +1,5 @@
+name = MC Private messages
+description = Amend Private message
+package = Mail
+core = 7.x
+files[] = mcprivatemsg.module

@@ -1,0 +1,2270 @@
+# $Id$
+#
+# French translation of Drupal (general)
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+# Generated from files:
+#  mc_campaign.admin.analitycs.inc: n/a
+#  campaign.inc,v 1.10 2010/12/22 17:54:53 sun
+#  templates/mc_campaign_campaign_detail.tpl.php: n/a
+#  includes/mc_campaign.admin.config.inc: n/a
+#  includes/mc_campaign.admin.dashboard.inc: n/a
+#  includes/mc_campaign.dashboard.inc: n/a
+#  mc_campaign.module: n/a
+#  includes/mc_campaign.admin.list.inc: n/a
+#  includes/mc_campaign.billing.inc: n/a
+#  includes/mc_campaign.list.inc: n/a
+#  templates/mc_campaign_list_detail.tpl.php: n/a
+#  includes/mc_campaign.admin.credit.inc: n/a
+#  includes/mc_campaign.admin.subscriber.inc: n/a
+#  includes/mc_campaign.admin.template.inc: n/a
+#  includes/mc_campaign.user.inc: n/a
+#  templates/mc_campaign_subscriber_detail.tpl.php: n/a
+#  includes/mc_campaign.admin.campaign.inc: n/a
+#  includes/mc_campaign.admin.user.inc: n/a
+#  includes/mc_campaign.calendar.inc: n/a
+#  includes/mc_campaign.reminder.inc: n/a
+#  includes/mc_campaign.subscriber.inc: n/a
+#  mc_campaign_action/mc_campaign_action.module: n/a
+#  mc_campaign.info: n/a
+#  includes/mc_campaign.admin.sms.inc: n/a
+#  mc_campaign_action/mc_campaign_action.info: n/a
+#  includes/mc_campaign.admin.calendar.inc: n/a
+#  includes/mc_campaign.admin.notification.inc: n/a
+#  includes/mc_campaign.notification.inc: n/a
+#  includes/mc_campaign.admin.letter.inc: n/a
+#  includes/mc_campaign.admin.mail.inc: n/a
+#  includes/mc_campaign.admin.quick.inc: n/a
+#  includes/mc_campaign.functions.inc: n/a
+#  includes/mc_campaign.mail.inc: n/a
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2012-03-10 23:51+0000\n"
+"PO-Revision-Date: 2012-03-10 23:51+0000\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: French <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n>1);\n"
+
+#: mc_campaign.admin.analitycs.inc:10
+msgid "Analitycs Mail"
+msgstr ""
+
+#: mc_campaign.inc:17;33 templates/mc_campaign_campaign_detail.tpl.php:7
+msgid "Campaign Name"
+msgstr ""
+
+#: mc_campaign.inc:18
+msgid "Define content"
+msgstr ""
+
+#: mc_campaign.inc:19
+msgid "Define recipients"
+msgstr ""
+
+#: mc_campaign.inc:28;95;108 includes/mc_campaign.admin.config.inc:629 includes/mc_campaign.admin.dashboard.inc:335 includes/mc_campaign.dashboard.inc:361
+msgid "Add form"
+msgstr ""
+
+#: mc_campaign.inc:34 mc_campaign.module:286
+msgid "Sent"
+msgstr ""
+
+#: mc_campaign.inc:35
+msgid "Recipients"
+msgstr "Destinataires"
+
+#: mc_campaign.inc:36
+msgid "Opened"
+msgstr ""
+
+#: mc_campaign.inc:37
+msgid "Clicked"
+msgstr ""
+
+#: mc_campaign.inc:60 includes/mc_campaign.admin.list.inc:217;335 includes/mc_campaign.billing.inc:104;221 includes/mc_campaign.list.inc:239 templates/mc_campaign_list_detail.tpl.php:7
+msgid "List Name"
+msgstr ""
+
+#: mc_campaign.inc:61 includes/mc_campaign.admin.credit.inc:16 includes/mc_campaign.admin.list.inc:57;712 includes/mc_campaign.admin.subscriber.inc:65 includes/mc_campaign.admin.template.inc:54 includes/mc_campaign.billing.inc:15;603 includes/mc_campaign.list.inc:67;438 includes/mc_campaign.user.inc:367 templates/mc_campaign_campaign_detail.tpl.php:8 templates/mc_campaign_list_detail.tpl.php:10 templates/mc_campaign_subscriber_detail.tpl.php:9
+msgid "Created"
+msgstr "Créé"
+
+#: mc_campaign.inc:62 mc_campaign.module:676;686 includes/mc_campaign.admin.campaign.inc:28 includes/mc_campaign.admin.list.inc:49 includes/mc_campaign.admin.subscriber.inc:53 includes/mc_campaign.admin.template.inc:47 includes/mc_campaign.admin.user.inc:82 includes/mc_campaign.calendar.inc:50 includes/mc_campaign.list.inc:60 includes/mc_campaign.reminder.inc:54 includes/mc_campaign.subscriber.inc:71 includes/mc_campaign.user.inc:60 mc_campaign_action/mc_campaign_action.module:61;70;79
+msgid "Update"
+msgstr "Mettre à jour"
+
+#: mc_campaign.inc:63 mc_campaign.module:495 includes/mc_campaign.admin.list.inc:55 includes/mc_campaign.list.inc:66 templates/mc_campaign_list_detail.tpl.php:9
+msgid "Subscribers"
+msgstr ""
+
+#: mc_campaign.inc:73
+msgid "Create List"
+msgstr ""
+
+#: mc_campaign.inc:84;99 includes/mc_campaign.admin.config.inc:618;712;933 includes/mc_campaign.admin.dashboard.inc:324;418;639 includes/mc_campaign.dashboard.inc:350;444;665
+msgid "Form"
+msgstr ""
+
+#: mc_campaign.inc:85
+msgid "Latest Activity"
+msgstr ""
+
+#: mc_campaign.inc:86;101 includes/mc_campaign.admin.campaign.inc:44 includes/mc_campaign.admin.config.inc:382;525;620 includes/mc_campaign.admin.dashboard.inc:88;231;326 includes/mc_campaign.admin.list.inc:62;714 includes/mc_campaign.admin.subscriber.inc:66 includes/mc_campaign.admin.template.inc:56 includes/mc_campaign.admin.user.inc:45 includes/mc_campaign.billing.inc:605 includes/mc_campaign.calendar.inc:413 includes/mc_campaign.dashboard.inc:114;257;352 includes/mc_campaign.list.inc:70;440 includes/mc_campaign.subscriber.inc:92 includes/mc_campaign.user.inc:369
+msgid "Operations"
+msgstr "Opérations"
+
+#: mc_campaign.inc:100
+msgid "Latest Subscriber"
+msgstr ""
+
+#: mc_campaign.module:20
+msgid "View Campain"
+msgstr ""
+
+#: mc_campaign.module:21
+msgid "Allow users to access campaign"
+msgstr ""
+
+#: mc_campaign.module:24
+msgid "Edit Campain"
+msgstr ""
+
+#: mc_campaign.module:25
+msgid "Allow users to edit campaign"
+msgstr ""
+
+#: mc_campaign.module:28
+msgid "Delete Campain"
+msgstr ""
+
+#: mc_campaign.module:29
+msgid "Allow users to view campaign"
+msgstr ""
+
+#: mc_campaign.module:32
+msgid "Administer Campain"
+msgstr ""
+
+#: mc_campaign.module:33
+msgid "Allow users to administer campaign"
+msgstr ""
+
+#: mc_campaign.module:36
+msgid "Administer Campain Config"
+msgstr ""
+
+#: mc_campaign.module:37
+msgid "Allow users to admin the campaign config"
+msgstr ""
+
+#: mc_campaign.module:40
+msgid "Administer Campain Credit"
+msgstr ""
+
+#: mc_campaign.module:41
+msgid "Allow users to admin the campaign credit"
+msgstr ""
+
+#: mc_campaign.module:477
+msgid "Detail of "
+msgstr ""
+
+#: mc_campaign.module:831;410;632 mc_campaign.info:0;0 includes/mc_campaign.admin.sms.inc:98 mc_campaign_action/mc_campaign_action.info:0
+msgid "Campaign"
+msgstr ""
+
+#: mc_campaign.module:832
+msgid "Tokens related to newsletters."
+msgstr ""
+
+#: mc_campaign.module:836
+msgid "Subscriber's E-mail"
+msgstr ""
+
+#: mc_campaign.module:837
+msgid "Subscriber's e-mail"
+msgstr ""
+
+#: mc_campaign.module:840
+msgid "Subscriber's Mobile"
+msgstr ""
+
+#: mc_campaign.module:841
+msgid "Subscriber's mobile"
+msgstr ""
+
+#: mc_campaign.module:844
+msgid "Subscriber's First Name"
+msgstr ""
+
+#: mc_campaign.module:845;849
+msgid "You need to have this required in the personal info form, in order to use it efficiently"
+msgstr ""
+
+#: mc_campaign.module:848
+msgid "Subscriber's Last Name"
+msgstr ""
+
+#: mc_campaign.module:852
+msgid "Subscriber's info1"
+msgstr ""
+
+#: mc_campaign.module:856
+msgid "Subscriber's info2"
+msgstr ""
+
+#: mc_campaign.module:860
+msgid "Subscriber's info3"
+msgstr ""
+
+#: mc_campaign.module:864
+msgid "Subscriber's info4"
+msgstr ""
+
+#: mc_campaign.module:868
+msgid "Subscriber's info5"
+msgstr ""
+
+#: mc_campaign.module:872
+msgid "Subscriber's info6"
+msgstr ""
+
+#: mc_campaign.module:876
+msgid "Subscriber's info7"
+msgstr ""
+
+#: mc_campaign.module:880
+msgid "Subscriber's info8"
+msgstr ""
+
+#: mc_campaign.module:884
+msgid "Subscriber's info9"
+msgstr ""
+
+#: mc_campaign.module:888
+msgid "Subscriber's info10"
+msgstr ""
+
+#: mc_campaign.module:892
+msgid "Subscriber's Sent Time"
+msgstr ""
+
+#: mc_campaign.module:896
+msgid "Subscriber's EID"
+msgstr ""
+
+#: mc_campaign.module:900
+msgid "Subscription Time"
+msgstr ""
+
+#: mc_campaign.module:901
+msgid "The date this subscriber subscribed to your list"
+msgstr ""
+
+#: mc_campaign.module:119;309
+msgid "Dashboard"
+msgstr "Tableau de bord"
+
+#: mc_campaign.module:128
+msgid "Users"
+msgstr "Utilisateurs"
+
+#: mc_campaign.module:138
+msgid "Add users"
+msgstr ""
+
+#: mc_campaign.module:147;443
+msgid "Lists"
+msgstr "Listes"
+
+#: mc_campaign.module:157;450 includes/mc_campaign.list.inc:42 includes/mc_campaign.subscriber.inc:75
+msgid "Create list"
+msgstr "Ajout d'une liste"
+
+#: mc_campaign.module:167;174
+msgid "List detail"
+msgstr ""
+
+#: mc_campaign.module:185
+msgid "Contacts"
+msgstr ""
+
+#: mc_campaign.module:195
+msgid "Add Contact"
+msgstr ""
+
+#: mc_campaign.module:217
+msgid "Email Provider Import"
+msgstr ""
+
+#: mc_campaign.module:227
+msgid "Social Network Import"
+msgstr ""
+
+#: mc_campaign.module:266;329
+msgid "Reminders"
+msgstr ""
+
+#: mc_campaign.module:276
+msgid "Add reminders"
+msgstr ""
+
+#: mc_campaign.module:296
+msgid "Auto complete"
+msgstr ""
+
+#: mc_campaign.module:319
+msgid "Calendars"
+msgstr ""
+
+#: mc_campaign.module:359
+msgid "Json"
+msgstr ""
+
+#: mc_campaign.module:377
+msgid "Notifications"
+msgstr ""
+
+#: mc_campaign.module:387
+msgid "Credits"
+msgstr ""
+
+#: mc_campaign.module:399;400;807;808
+msgid "Config"
+msgstr ""
+
+#: mc_campaign.module:411
+msgid "Manage campaign"
+msgstr ""
+
+#: mc_campaign.module:422
+msgid "Detail"
+msgstr ""
+
+#: mc_campaign.module:423
+msgid "Global View"
+msgstr ""
+
+#: mc_campaign.module:433
+msgid "Lists/Subscribers"
+msgstr ""
+
+#: mc_campaign.module:434
+msgid "Find and manage subscriber and lists."
+msgstr ""
+
+#: mc_campaign.module:444
+msgid "Find and manage campaign lists."
+msgstr ""
+
+#: mc_campaign.module:451
+msgid "Add a new list"
+msgstr ""
+
+#: mc_campaign.module:460
+msgid "Delete List"
+msgstr ""
+
+#: mc_campaign.module:468
+msgid "Edit List"
+msgstr ""
+
+#: mc_campaign.module:496
+msgid "List subscribers."
+msgstr ""
+
+#: mc_campaign.module:505
+msgid "Add New Subscriber"
+msgstr ""
+
+#: mc_campaign.module:508
+msgid "Add new list subscriber."
+msgstr ""
+
+#: mc_campaign.module:515
+msgid "Add Subscribers (Mass)"
+msgstr ""
+
+#: mc_campaign.module:518
+msgid "Add subscribers."
+msgstr ""
+
+#: mc_campaign.module:525;533
+msgid "Delete Subscriber"
+msgstr ""
+
+#: mc_campaign.module:541;549
+msgid "Edit Subscriber"
+msgstr ""
+
+#: mc_campaign.module:561
+msgid "Templates"
+msgstr ""
+
+#: mc_campaign.module:562
+msgid "Administer newsletter templates."
+msgstr ""
+
+#: mc_campaign.module:571
+msgid "Mail Templates"
+msgstr ""
+
+#: mc_campaign.module:572
+msgid "Administer mail templates."
+msgstr ""
+
+#: mc_campaign.module:578
+msgid "Add New Mail Template"
+msgstr ""
+
+#: mc_campaign.module:579
+msgid "Add Mail templates."
+msgstr ""
+
+#: mc_campaign.module:588
+msgid "SMS Templates"
+msgstr ""
+
+#: mc_campaign.module:597
+msgid "Add New SMS Template"
+msgstr ""
+
+#: mc_campaign.module:598
+msgid "Administer SMS templates."
+msgstr ""
+
+#: mc_campaign.module:607
+msgid "Delete Templates"
+msgstr ""
+
+#: mc_campaign.module:615
+msgid "Edit Templates"
+msgstr ""
+
+#: mc_campaign.module:633
+msgid "Manage Campaign"
+msgstr ""
+
+#: mc_campaign.module:642;709 includes/mc_campaign.admin.sms.inc:89
+msgid "List"
+msgstr "Lister"
+
+#: mc_campaign.module:643;749 includes/mc_campaign.admin.config.inc:25
+msgid "List Campaign"
+msgstr ""
+
+#: mc_campaign.module:649
+msgid "Create Campaign"
+msgstr ""
+
+#: mc_campaign.module:650;660;677;687 mc_campaign_action/mc_campaign_action.module:62;71;80
+msgid "Add Campaign"
+msgstr ""
+
+#: mc_campaign.module:659 includes/mc_campaign.admin.calendar.inc:61 includes/mc_campaign.admin.campaign.inc:79 includes/mc_campaign.admin.list.inc:110;764 includes/mc_campaign.admin.subscriber.inc:110 includes/mc_campaign.billing.inc:655 includes/mc_campaign.list.inc:112;141;491 includes/mc_campaign.reminder.inc:101 includes/mc_campaign.subscriber.inc:127 includes/mc_campaign.user.inc:89;420
+msgid "View"
+msgstr "Voir"
+
+#: mc_campaign.module:699
+msgid "Notification"
+msgstr ""
+
+#: mc_campaign.module:700;710
+msgid "Manage Notification"
+msgstr ""
+
+#: mc_campaign.module:719;720;759
+msgid "Analytics"
+msgstr ""
+
+#: mc_campaign.module:738;748 includes/mc_campaign.admin.config.inc:376;378 includes/mc_campaign.admin.dashboard.inc:82;84 includes/mc_campaign.admin.user.inc:39;42 includes/mc_campaign.dashboard.inc:108;110 includes/mc_campaign.subscriber.inc:935 includes/mc_campaign.user.inc:66;67;68;69
+msgid "Mail"
+msgstr ""
+
+#: mc_campaign.module:739
+msgid "Manage Mail"
+msgstr ""
+
+#: mc_campaign.module:760
+msgid "Analytics Mail"
+msgstr ""
+
+#: mc_campaign.module:771 includes/mc_campaign.admin.config.inc:379 includes/mc_campaign.admin.dashboard.inc:85 includes/mc_campaign.admin.user.inc:43 includes/mc_campaign.dashboard.inc:111
+msgid "SMS"
+msgstr ""
+
+#: mc_campaign.module:772
+msgid "Manage SMS"
+msgstr ""
+
+#: mc_campaign.info:0
+msgid "Campaign Monitor Made by MariqueCalcus"
+msgstr ""
+
+#: includes/mc_campaign.admin.calendar.inc:13 includes/mc_campaign.admin.list.inc:54 includes/mc_campaign.admin.template.inc:53 includes/mc_campaign.calendar.inc:412 includes/mc_campaign.list.inc:65
+msgid "Title"
+msgstr "Titre"
+
+#: includes/mc_campaign.admin.calendar.inc:37 includes/mc_campaign.admin.list.inc:86 includes/mc_campaign.list.inc:95
+msgid "Add people"
+msgstr ""
+
+#: includes/mc_campaign.admin.calendar.inc:46 includes/mc_campaign.admin.list.inc:95
+msgid "Import people"
+msgstr ""
+
+#: includes/mc_campaign.admin.calendar.inc:53 includes/mc_campaign.admin.list.inc:102 includes/mc_campaign.list.inc:102
+msgid "No Reload"
+msgstr ""
+
+#: includes/mc_campaign.admin.calendar.inc:53 includes/mc_campaign.admin.list.inc:102 includes/mc_campaign.list.inc:102
+msgid "Next Reload : "
+msgstr ""
+
+#: includes/mc_campaign.admin.calendar.inc:70 includes/mc_campaign.admin.campaign.inc:88 includes/mc_campaign.admin.list.inc:119 includes/mc_campaign.admin.subscriber.inc:119 includes/mc_campaign.calendar.inc:430 includes/mc_campaign.list.inc:121 includes/mc_campaign.reminder.inc:110 includes/mc_campaign.subscriber.inc:136 includes/mc_campaign.user.inc:98
+msgid "Edit"
+msgstr "Modifier"
+
+#: includes/mc_campaign.admin.calendar.inc:79 includes/mc_campaign.admin.campaign.inc:97 includes/mc_campaign.admin.config.inc:1181 includes/mc_campaign.admin.dashboard.inc:887 includes/mc_campaign.admin.list.inc:128 includes/mc_campaign.admin.subscriber.inc:129 includes/mc_campaign.dashboard.inc:913 includes/mc_campaign.list.inc:130 includes/mc_campaign.reminder.inc:119 includes/mc_campaign.subscriber.inc:145 includes/mc_campaign.user.inc:107
+msgid "Delete"
+msgstr "Supprimer"
+
+#: includes/mc_campaign.admin.calendar.inc:94 includes/mc_campaign.admin.list.inc:143 includes/mc_campaign.admin.sms.inc:58
+msgid "Not Yet"
+msgstr ""
+
+#: includes/mc_campaign.admin.calendar.inc:106 includes/mc_campaign.admin.list.inc:155 includes/mc_campaign.calendar.inc:448 includes/mc_campaign.list.inc:169 includes/mc_campaign.subscriber.inc:945 includes/mc_campaign.user.inc:125
+msgid "No lists available."
+msgstr ""
+
+#: includes/mc_campaign.admin.campaign.inc:14 includes/mc_campaign.admin.list.inc:35 includes/mc_campaign.admin.subscriber.inc:41 includes/mc_campaign.admin.template.inc:32 includes/mc_campaign.calendar.inc:37 includes/mc_campaign.list.inc:46 includes/mc_campaign.reminder.inc:41 includes/mc_campaign.subscriber.inc:59;79 includes/mc_campaign.user.inc:46
+msgid "Options"
+msgstr "Options"
+
+#: includes/mc_campaign.admin.campaign.inc:17
+msgid "Enable the selected campaigns"
+msgstr ""
+
+#: includes/mc_campaign.admin.campaign.inc:18
+msgid "Disable the selected campaigns"
+msgstr ""
+
+#: includes/mc_campaign.admin.campaign.inc:21 includes/mc_campaign.admin.list.inc:42 includes/mc_campaign.admin.subscriber.inc:46 includes/mc_campaign.admin.template.inc:40 includes/mc_campaign.admin.user.inc:74 includes/mc_campaign.calendar.inc:43 includes/mc_campaign.list.inc:53 includes/mc_campaign.reminder.inc:47 includes/mc_campaign.subscriber.inc:64 includes/mc_campaign.user.inc:53
+msgid "Operation"
+msgstr "Opération"
+
+#: includes/mc_campaign.admin.campaign.inc:65;66;67;68;69;70;71
+msgid "N.A."
+msgstr ""
+
+#: includes/mc_campaign.admin.campaign.inc:69
+msgid "Min"
+msgstr ""
+
+#: includes/mc_campaign.admin.campaign.inc:110 includes/mc_campaign.admin.template.inc:102
+msgid "No templates available."
+msgstr ""
+
+#: includes/mc_campaign.admin.campaign.inc:143
+msgid "Campaign updated successfully"
+msgstr ""
+
+#: includes/mc_campaign.admin.campaign.inc:144;851;983 includes/mc_campaign.admin.credit.inc:103 includes/mc_campaign.admin.list.inc:205;418;476;524;563 includes/mc_campaign.admin.subscriber.inc:186;542 includes/mc_campaign.admin.template.inc:127;272;345;379 includes/mc_campaign.billing.inc:92;304;362;415;454 includes/mc_campaign.calendar.inc:149 includes/mc_campaign.list.inc:218;313;374;413 includes/mc_campaign.reminder.inc:177 includes/mc_campaign.subscriber.inc:628 includes/mc_campaign.user.inc:174;245;342
+msgid "An unknown error occured,please try again"
+msgstr ""
+
+#: includes/mc_campaign.admin.campaign.inc:147 includes/mc_campaign.admin.list.inc:208 includes/mc_campaign.admin.subscriber.inc:189 includes/mc_campaign.billing.inc:95 includes/mc_campaign.list.inc:221 includes/mc_campaign.user.inc:177
+msgid "Please Select an action to perform."
+msgstr ""
+
+#: includes/mc_campaign.admin.campaign.inc:207;306 includes/mc_campaign.subscriber.inc:805
+msgid "Previous"
+msgstr ""
+
+#: includes/mc_campaign.admin.campaign.inc:219;318 includes/mc_campaign.admin.config.inc:718 includes/mc_campaign.admin.dashboard.inc:424 includes/mc_campaign.dashboard.inc:450 includes/mc_campaign.subscriber.inc:817
+msgid "Next"
+msgstr "Suivant"
+
+#: includes/mc_campaign.admin.campaign.inc:227;326 includes/mc_campaign.admin.config.inc:859;1181 includes/mc_campaign.admin.credit.inc:78 includes/mc_campaign.admin.dashboard.inc:565;887 includes/mc_campaign.admin.list.inc:370;440;497 includes/mc_campaign.admin.subscriber.inc:317;466;588;654;760 includes/mc_campaign.admin.template.inc:235;306 includes/mc_campaign.billing.inc:256;326;388 includes/mc_campaign.dashboard.inc:591;913 includes/mc_campaign.list.inc:277;345 includes/mc_campaign.reminder.inc:378 includes/mc_campaign.subscriber.inc:366;545;687;823;1084 includes/mc_campaign.user.inc:209;279
+msgid "Cancel"
+msgstr "Annuler"
+
+#: includes/mc_campaign.admin.campaign.inc:389
+msgid "00:00"
+msgstr ""
+
+#: includes/mc_campaign.admin.campaign.inc:390
+msgid "01:00"
+msgstr ""
+
+#: includes/mc_campaign.admin.campaign.inc:391
+msgid "02:00"
+msgstr ""
+
+#: includes/mc_campaign.admin.campaign.inc:392
+msgid "03:00"
+msgstr ""
+
+#: includes/mc_campaign.admin.campaign.inc:393
+msgid "04:00"
+msgstr ""
+
+#: includes/mc_campaign.admin.campaign.inc:394
+msgid "05:00"
+msgstr ""
+
+#: includes/mc_campaign.admin.campaign.inc:395
+msgid "06:00"
+msgstr ""
+
+#: includes/mc_campaign.admin.campaign.inc:396
+msgid "07:00"
+msgstr ""
+
+#: includes/mc_campaign.admin.campaign.inc:397
+msgid "08:00"
+msgstr ""
+
+#: includes/mc_campaign.admin.campaign.inc:398
+msgid "09:00"
+msgstr ""
+
+#: includes/mc_campaign.admin.campaign.inc:399
+msgid "10:00"
+msgstr ""
+
+#: includes/mc_campaign.admin.campaign.inc:400
+msgid "11:00"
+msgstr ""
+
+#: includes/mc_campaign.admin.campaign.inc:401
+msgid "12:00"
+msgstr ""
+
+#: includes/mc_campaign.admin.campaign.inc:402
+msgid "13:00"
+msgstr ""
+
+#: includes/mc_campaign.admin.campaign.inc:403
+msgid "14:00"
+msgstr ""
+
+#: includes/mc_campaign.admin.campaign.inc:404
+msgid "15:00"
+msgstr ""
+
+#: includes/mc_campaign.admin.campaign.inc:405
+msgid "16:00"
+msgstr ""
+
+#: includes/mc_campaign.admin.campaign.inc:406
+msgid "17:00"
+msgstr ""
+
+#: includes/mc_campaign.admin.campaign.inc:407
+msgid "18:00"
+msgstr ""
+
+#: includes/mc_campaign.admin.campaign.inc:408
+msgid "19:00"
+msgstr ""
+
+#: includes/mc_campaign.admin.campaign.inc:409
+msgid "20:00"
+msgstr ""
+
+#: includes/mc_campaign.admin.campaign.inc:410
+msgid "21:00"
+msgstr ""
+
+#: includes/mc_campaign.admin.campaign.inc:411
+msgid "22:00"
+msgstr ""
+
+#: includes/mc_campaign.admin.campaign.inc:412
+msgid "23:00"
+msgstr ""
+
+#: includes/mc_campaign.admin.campaign.inc:413
+msgid "24:00"
+msgstr ""
+
+#: includes/mc_campaign.admin.campaign.inc:418
+msgid "Global Information"
+msgstr ""
+
+#: includes/mc_campaign.admin.campaign.inc:422
+msgid "Campaign name"
+msgstr ""
+
+#: includes/mc_campaign.admin.campaign.inc:434
+msgid "Which list would you like to send this campaign to?"
+msgstr ""
+
+#: includes/mc_campaign.admin.campaign.inc:443
+msgid "Mail Only"
+msgstr ""
+
+#: includes/mc_campaign.admin.campaign.inc:444
+msgid "SMS Only"
+msgstr ""
+
+#: includes/mc_campaign.admin.campaign.inc:445
+msgid "Mail and SMS"
+msgstr ""
+
+#: includes/mc_campaign.admin.campaign.inc:446
+msgid "SMS with Mail backup"
+msgstr ""
+
+#: includes/mc_campaign.admin.campaign.inc:447
+msgid "Mail with SMS backup"
+msgstr ""
+
+#: includes/mc_campaign.admin.campaign.inc:450
+msgid "Media"
+msgstr "Média"
+
+#: includes/mc_campaign.admin.campaign.inc:456
+msgid "You will only send the campaign once"
+msgstr ""
+
+#: includes/mc_campaign.admin.campaign.inc:457
+msgid "You will send this campaign recurrently"
+msgstr ""
+
+#: includes/mc_campaign.admin.campaign.inc:460
+msgid "What kind of campaign do you want to build?"
+msgstr ""
+
+#: includes/mc_campaign.admin.campaign.inc:465
+msgid "Scheduling"
+msgstr ""
+
+#: includes/mc_campaign.admin.campaign.inc:468
+msgid "Recurrent"
+msgstr ""
+
+#: includes/mc_campaign.admin.campaign.inc:474
+msgid "Sent Rate"
+msgstr ""
+
+#: includes/mc_campaign.admin.campaign.inc:476 includes/mc_campaign.admin.list.inc:264 includes/mc_campaign.billing.inc:151
+msgid "Each Cron"
+msgstr ""
+
+#: includes/mc_campaign.admin.campaign.inc:477
+msgid "15 Minutes"
+msgstr ""
+
+#: includes/mc_campaign.admin.campaign.inc:478
+msgid "30 Minutes"
+msgstr ""
+
+#: includes/mc_campaign.admin.campaign.inc:479 includes/mc_campaign.admin.list.inc:265 includes/mc_campaign.billing.inc:152
+msgid "1 Hour"
+msgstr ""
+
+#: includes/mc_campaign.admin.campaign.inc:480
+msgid "2 Hour"
+msgstr ""
+
+#: includes/mc_campaign.admin.campaign.inc:481 includes/mc_campaign.admin.list.inc:267 includes/mc_campaign.billing.inc:154
+msgid "3 Hours"
+msgstr ""
+
+#: includes/mc_campaign.admin.campaign.inc:482 includes/mc_campaign.admin.list.inc:268 includes/mc_campaign.billing.inc:155
+msgid "6 Hours"
+msgstr ""
+
+#: includes/mc_campaign.admin.campaign.inc:483 includes/mc_campaign.admin.list.inc:269 includes/mc_campaign.billing.inc:156
+msgid "12 Hours"
+msgstr ""
+
+#: includes/mc_campaign.admin.campaign.inc:484 includes/mc_campaign.admin.list.inc:270 includes/mc_campaign.billing.inc:157
+msgid "1 Day"
+msgstr ""
+
+#: includes/mc_campaign.admin.campaign.inc:489
+msgid "Start Date"
+msgstr ""
+
+#: includes/mc_campaign.admin.campaign.inc:497
+msgid "End Date"
+msgstr ""
+
+#: includes/mc_campaign.admin.campaign.inc:506
+msgid "Start Time"
+msgstr ""
+
+#: includes/mc_campaign.admin.campaign.inc:512
+msgid "End Time"
+msgstr ""
+
+#: includes/mc_campaign.admin.campaign.inc:518
+msgid "Week Day"
+msgstr ""
+
+#: includes/mc_campaign.admin.campaign.inc:520
+msgid "Monday"
+msgstr "Lundi"
+
+#: includes/mc_campaign.admin.campaign.inc:521
+msgid "Tuesday"
+msgstr "Mardi"
+
+#: includes/mc_campaign.admin.campaign.inc:522
+msgid "Wednesday"
+msgstr "Mercredi"
+
+#: includes/mc_campaign.admin.campaign.inc:523
+msgid "Thursay"
+msgstr ""
+
+#: includes/mc_campaign.admin.campaign.inc:524
+msgid "Friday"
+msgstr "Vendredi"
+
+#: includes/mc_campaign.admin.campaign.inc:525
+msgid "Saturday"
+msgstr "Samedi"
+
+#: includes/mc_campaign.admin.campaign.inc:526
+msgid "Sunday"
+msgstr "Dimanche"
+
+#: includes/mc_campaign.admin.campaign.inc:539;657
+msgid "Mail Information"
+msgstr ""
+
+#: includes/mc_campaign.admin.campaign.inc:543
+msgid "Message Subject"
+msgstr ""
+
+#: includes/mc_campaign.admin.campaign.inc:549
+msgid "From name"
+msgstr ""
+
+#: includes/mc_campaign.admin.campaign.inc:555
+msgid "Reply-to Email"
+msgstr ""
+
+#: includes/mc_campaign.admin.campaign.inc:562;604
+msgid "Template"
+msgstr ""
+
+#: includes/mc_campaign.admin.campaign.inc:571;614 includes/mc_campaign.admin.template.inc:183;194 includes/mc_campaign.reminder.inc:336
+msgid "Body"
+msgstr "Corps"
+
+#: includes/mc_campaign.admin.campaign.inc:579;619 includes/mc_campaign.admin.template.inc:168
+msgid "Replacement patterns"
+msgstr ""
+
+#: includes/mc_campaign.admin.campaign.inc:583;623 includes/mc_campaign.admin.template.inc:172
+msgid "Use [repeat] and [/repeat] for recurring items such as nodes"
+msgstr ""
+
+#: includes/mc_campaign.admin.campaign.inc:599;676
+msgid "SMS Information"
+msgstr ""
+
+#: includes/mc_campaign.admin.campaign.inc:687
+msgid "Test Information"
+msgstr ""
+
+#: includes/mc_campaign.admin.campaign.inc:692
+msgid "E-mail to send test mail to"
+msgstr ""
+
+#: includes/mc_campaign.admin.campaign.inc:700
+msgid "Mobile to send sms to"
+msgstr ""
+
+#: includes/mc_campaign.admin.campaign.inc:708 includes/mc_campaign.admin.list.inc:59 includes/mc_campaign.list.inc:71
+msgid "Active"
+msgstr "Actif"
+
+#: includes/mc_campaign.admin.campaign.inc:712
+msgid "Whether this campaign is active or not."
+msgstr ""
+
+#: includes/mc_campaign.admin.campaign.inc:718
+msgid "Test Campaign with addresses above"
+msgstr ""
+
+#: includes/mc_campaign.admin.campaign.inc:724
+msgid "Save Campaign"
+msgstr ""
+
+#: includes/mc_campaign.admin.campaign.inc:850
+msgid "Your new campaign was created !"
+msgstr ""
+
+#: includes/mc_campaign.admin.campaign.inc:919
+msgid "SMS send to "
+msgstr ""
+
+#: includes/mc_campaign.admin.campaign.inc:962
+msgid "Are you sure you want to delete the campaign? This action cannot be undone."
+msgstr ""
+
+#: includes/mc_campaign.admin.campaign.inc:963 includes/mc_campaign.admin.list.inc:29;543 includes/mc_campaign.admin.subscriber.inc:28;531 includes/mc_campaign.admin.template.inc:28;370 includes/mc_campaign.billing.inc:434 includes/mc_campaign.calendar.inc:32 includes/mc_campaign.list.inc:37;393 includes/mc_campaign.reminder.inc:32 includes/mc_campaign.subscriber.inc:40;616 includes/mc_campaign.user.inc:37;322
+msgid "Delete the following?"
+msgstr ""
+
+#: includes/mc_campaign.admin.campaign.inc:982
+msgid "Campaign deleted successfully"
+msgstr ""
+
+#: includes/mc_campaign.admin.campaign.inc:1149 includes/mc_campaign.admin.list.inc:786 includes/mc_campaign.admin.notification.inc:392 includes/mc_campaign.billing.inc:677 includes/mc_campaign.list.inc:513 includes/mc_campaign.notification.inc:399
+msgid "For graphical statistics \n      please install the <a href=@url-lib>Libraries API</a>\n      and <a href=@url-jqplot>download the jQplot library</a>."
+msgstr ""
+
+#: includes/mc_campaign.admin.campaign.inc:1160 includes/mc_campaign.admin.list.inc:797 includes/mc_campaign.admin.notification.inc:403 includes/mc_campaign.billing.inc:688 includes/mc_campaign.list.inc:524 includes/mc_campaign.notification.inc:410
+msgid "HighCharts.js library is not present in your filesystem."
+msgstr ""
+
+#: includes/mc_campaign.admin.config.inc:15
+msgid "Notifications config"
+msgstr ""
+
+#: includes/mc_campaign.admin.config.inc:19 mc_campaign_action/mc_campaign_action.module:10
+msgid "List Cron"
+msgstr ""
+
+#: includes/mc_campaign.admin.config.inc:21
+msgid "Enable List to be reload"
+msgstr ""
+
+#: includes/mc_campaign.admin.config.inc:27
+msgid "Enable Campaign to be reload"
+msgstr ""
+
+#: includes/mc_campaign.admin.config.inc:31
+msgid "Enable Email"
+msgstr ""
+
+#: includes/mc_campaign.admin.config.inc:33;49
+msgid "Enable Email Campaign to be send"
+msgstr ""
+
+#: includes/mc_campaign.admin.config.inc:37
+msgid "Enable SMS"
+msgstr ""
+
+#: includes/mc_campaign.admin.config.inc:39;55
+msgid "Enable SMS Campaign to be send"
+msgstr ""
+
+#: includes/mc_campaign.admin.config.inc:43
+msgid "Test config"
+msgstr ""
+
+#: includes/mc_campaign.admin.config.inc:47;53
+msgid "Default Test Email address"
+msgstr ""
+
+#: includes/mc_campaign.admin.config.inc:61
+msgid "Clickatell SMS Config"
+msgstr ""
+
+#: includes/mc_campaign.admin.config.inc:67
+msgid "SMS Clickatell API ID"
+msgstr ""
+
+#: includes/mc_campaign.admin.config.inc:72
+msgid "SMS Clickatell User"
+msgstr ""
+
+#: includes/mc_campaign.admin.config.inc:77
+msgid "SMS Clickatell Password"
+msgstr ""
+
+#: includes/mc_campaign.admin.config.inc:82
+msgid "SMS Clickatell FROM"
+msgstr ""
+
+#: includes/mc_campaign.admin.config.inc:87
+msgid "Status Callback (delivery receipts)"
+msgstr ""
+
+#: includes/mc_campaign.admin.config.inc:88
+msgid "Enable delivery receipts when message status changes in the gateway."
+msgstr ""
+
+#: includes/mc_campaign.admin.config.inc:91
+msgid "No message status returned"
+msgstr ""
+
+#: includes/mc_campaign.admin.config.inc:92
+msgid "Return only intermediate statuses"
+msgstr ""
+
+#: includes/mc_campaign.admin.config.inc:93
+msgid "Return only final statuses of a message"
+msgstr ""
+
+#: includes/mc_campaign.admin.config.inc:94
+msgid "Return both intermediate and final stauses of a message"
+msgstr ""
+
+#: includes/mc_campaign.admin.config.inc:102
+msgid "Tropo SMS Config"
+msgstr ""
+
+#: includes/mc_campaign.admin.config.inc:108
+msgid "Use SSL Encyption"
+msgstr ""
+
+#: includes/mc_campaign.admin.config.inc:109
+msgid "Drupal's built-in HTTP client only supports SSL on PHP 4.3 compiled with OpenSSL."
+msgstr ""
+
+#: includes/mc_campaign.admin.config.inc:114
+msgid "Messaging Token"
+msgstr ""
+
+#: includes/mc_campaign.admin.config.inc:115
+msgid "This is your Tropo application's unique identifier for firing off text messages and IMs."
+msgstr ""
+
+#: includes/mc_campaign.admin.config.inc:124
+msgid "Voice/Phone Call Options"
+msgstr ""
+
+#: includes/mc_campaign.admin.config.inc:130
+msgid "Voice Token"
+msgstr ""
+
+#: includes/mc_campaign.admin.config.inc:131
+msgid "This is your Tropo application's unique identifier for initiating phone calls."
+msgstr ""
+
+#: includes/mc_campaign.admin.config.inc:138
+msgid "Prepend to message"
+msgstr ""
+
+#: includes/mc_campaign.admin.config.inc:139
+msgid "We will add this text to the beginning of the phone call.<br />You may want to put something like 'This is a phone call from SITE.COM. The following notification has been triggered:'"
+msgstr ""
+
+#: includes/mc_campaign.admin.config.inc:146
+msgid "Append to message"
+msgstr ""
+
+#: includes/mc_campaign.admin.config.inc:147
+msgid "We will add this text to the end of the phone call.<br />You may want to put something like 'End of notification message. You can change your settings at SITE.COM. Click on my account and then mobile settings. Good bye.'"
+msgstr ""
+
+#: includes/mc_campaign.admin.config.inc:154
+msgid "Enabled Networks (Message Types)"
+msgstr ""
+
+#: includes/mc_campaign.admin.config.inc:155
+msgid "These (the ones you select) are the protocols from which your users will be able to send messages with.<br />Tropo supports all these protocols but you need to set them up with your Tropo app before they will work.<br />SMS is automatically enabled once you add a phone number to your Tropo app."
+msgstr ""
+
+#: includes/mc_campaign.admin.config.inc:163;852 includes/mc_campaign.admin.dashboard.inc:558 includes/mc_campaign.dashboard.inc:584 includes/mc_campaign.subscriber.inc:683
+msgid "Save"
+msgstr "Enregistrer"
+
+#: includes/mc_campaign.admin.config.inc:189
+msgid "Configuration Saved"
+msgstr ""
+
+#: includes/mc_campaign.admin.config.inc:335 includes/mc_campaign.admin.dashboard.inc:38 includes/mc_campaign.calendar.inc:380 includes/mc_campaign.dashboard.inc:71
+msgid "Campaign Dashboard"
+msgstr ""
+
+#: includes/mc_campaign.admin.config.inc:373 includes/mc_campaign.admin.dashboard.inc:79 includes/mc_campaign.admin.user.inc:35 includes/mc_campaign.dashboard.inc:105
+msgid "Username"
+msgstr "Nom d'utilisateur"
+
+#: includes/mc_campaign.admin.config.inc:374 includes/mc_campaign.admin.dashboard.inc:80 includes/mc_campaign.admin.list.inc:703 includes/mc_campaign.admin.subscriber.inc:59 includes/mc_campaign.admin.user.inc:37 includes/mc_campaign.billing.inc:594 includes/mc_campaign.dashboard.inc:106 includes/mc_campaign.list.inc:429 includes/mc_campaign.subscriber.inc:86 includes/mc_campaign.user.inc:358 templates/mc_campaign_subscriber_detail.tpl.php:7
+msgid "First Name"
+msgstr ""
+
+#: includes/mc_campaign.admin.config.inc:375 includes/mc_campaign.admin.dashboard.inc:81 includes/mc_campaign.admin.list.inc:704 includes/mc_campaign.admin.subscriber.inc:60 includes/mc_campaign.admin.user.inc:38 includes/mc_campaign.billing.inc:595 includes/mc_campaign.dashboard.inc:107 includes/mc_campaign.list.inc:430 includes/mc_campaign.subscriber.inc:87 includes/mc_campaign.user.inc:359 templates/mc_campaign_subscriber_detail.tpl.php:8
+msgid "Last Name"
+msgstr ""
+
+#: includes/mc_campaign.admin.config.inc:377 includes/mc_campaign.admin.dashboard.inc:83 includes/mc_campaign.admin.list.inc:707 includes/mc_campaign.admin.subscriber.inc:62 includes/mc_campaign.admin.user.inc:40 includes/mc_campaign.billing.inc:598 includes/mc_campaign.dashboard.inc:109 includes/mc_campaign.list.inc:433 includes/mc_campaign.subscriber.inc:89 includes/mc_campaign.user.inc:362 templates/mc_campaign_subscriber_detail.tpl.php:14
+msgid "Mobile"
+msgstr ""
+
+#: includes/mc_campaign.admin.config.inc:380 includes/mc_campaign.admin.dashboard.inc:86 includes/mc_campaign.admin.user.inc:44 includes/mc_campaign.dashboard.inc:112
+msgid "Letter"
+msgstr ""
+
+#: includes/mc_campaign.admin.config.inc:381 includes/mc_campaign.admin.dashboard.inc:87 includes/mc_campaign.admin.letter.inc:113 includes/mc_campaign.admin.list.inc:56 includes/mc_campaign.admin.mail.inc:109 includes/mc_campaign.admin.notification.inc:115 includes/mc_campaign.admin.sms.inc:241 includes/mc_campaign.dashboard.inc:113 templates/mc_campaign_campaign_detail.tpl.php:12 templates/mc_campaign_list_detail.tpl.php:14
+msgid "Type"
+msgstr "Type"
+
+#: includes/mc_campaign.admin.config.inc:402 includes/mc_campaign.admin.dashboard.inc:108 includes/mc_campaign.dashboard.inc:134
+msgid "blocked"
+msgstr "bloqué"
+
+#: includes/mc_campaign.admin.config.inc:402 includes/mc_campaign.admin.dashboard.inc:108 includes/mc_campaign.dashboard.inc:134
+msgid "active"
+msgstr "actif"
+
+#: includes/mc_campaign.admin.config.inc:426;551 includes/mc_campaign.admin.dashboard.inc:132;257 includes/mc_campaign.admin.template.inc:80 includes/mc_campaign.admin.user.inc:127 includes/mc_campaign.dashboard.inc:158;283
+msgid "edit"
+msgstr "modifier"
+
+#: includes/mc_campaign.admin.config.inc:434 includes/mc_campaign.admin.dashboard.inc:140 includes/mc_campaign.dashboard.inc:166
+msgid "No people available."
+msgstr "Aucune personne disponible."
+
+#: includes/mc_campaign.admin.config.inc:449 includes/mc_campaign.admin.dashboard.inc:155 includes/mc_campaign.admin.user.inc:156 includes/mc_campaign.dashboard.inc:181
+msgid "Show only users where"
+msgstr "Afficher uniquement les utilisateurs où"
+
+#: includes/mc_campaign.admin.config.inc:465 includes/mc_campaign.admin.dashboard.inc:171 includes/mc_campaign.admin.user.inc:174 includes/mc_campaign.dashboard.inc:197
+msgid "and where %property is %value"
+msgstr "et où %property est %value"
+
+#: includes/mc_campaign.admin.config.inc:468 includes/mc_campaign.admin.dashboard.inc:174 includes/mc_campaign.admin.user.inc:176 includes/mc_campaign.dashboard.inc:200
+msgid "%property is %value"
+msgstr "%property a pour valeur %value"
+
+#: includes/mc_campaign.admin.config.inc:475 includes/mc_campaign.admin.dashboard.inc:181 includes/mc_campaign.admin.user.inc:183 includes/mc_campaign.dashboard.inc:207
+msgid "and where"
+msgstr "et où"
+
+#: includes/mc_campaign.admin.config.inc:496 includes/mc_campaign.admin.dashboard.inc:202 includes/mc_campaign.admin.user.inc:207 includes/mc_campaign.dashboard.inc:228
+msgid "Refine"
+msgstr "Affiner"
+
+#: includes/mc_campaign.admin.config.inc:496 includes/mc_campaign.admin.dashboard.inc:202 includes/mc_campaign.admin.letter.inc:130;155;172;185 includes/mc_campaign.admin.mail.inc:126;151;168;181 includes/mc_campaign.admin.notification.inc:132;157;174;187 includes/mc_campaign.admin.sms.inc:111;126;135;258;283;300;313 includes/mc_campaign.admin.user.inc:207 includes/mc_campaign.dashboard.inc:228 includes/mc_campaign.notification.inc:144;164;181;194
+msgid "Filter"
+msgstr "Filtrer"
+
+#: includes/mc_campaign.admin.config.inc:501 includes/mc_campaign.admin.dashboard.inc:207 includes/mc_campaign.admin.user.inc:213 includes/mc_campaign.dashboard.inc:233
+msgid "Undo"
+msgstr "Annuler"
+
+#: includes/mc_campaign.admin.config.inc:505 includes/mc_campaign.admin.dashboard.inc:211 includes/mc_campaign.admin.letter.inc:161;193 includes/mc_campaign.admin.mail.inc:157;189 includes/mc_campaign.admin.notification.inc:163;195 includes/mc_campaign.admin.sms.inc:116;139;289;321 includes/mc_campaign.admin.user.inc:217 includes/mc_campaign.dashboard.inc:237 includes/mc_campaign.notification.inc:170;202
+msgid "Reset"
+msgstr "Réinitialiser"
+
+#: includes/mc_campaign.admin.config.inc:522 includes/mc_campaign.admin.dashboard.inc:228 includes/mc_campaign.dashboard.inc:254
+msgid "Notification ID"
+msgstr ""
+
+#: includes/mc_campaign.admin.config.inc:523 includes/mc_campaign.admin.dashboard.inc:229 includes/mc_campaign.dashboard.inc:255
+msgid "User ID"
+msgstr "Identifiant (ID) utilisateur"
+
+#: includes/mc_campaign.admin.config.inc:524 includes/mc_campaign.admin.dashboard.inc:230 includes/mc_campaign.dashboard.inc:256
+msgid "Time"
+msgstr "Heure"
+
+#: includes/mc_campaign.admin.config.inc:550 includes/mc_campaign.admin.dashboard.inc:256 includes/mc_campaign.dashboard.inc:282
+msgid "@time ago"
+msgstr "il y a @time"
+
+#: includes/mc_campaign.admin.config.inc:560 includes/mc_campaign.admin.dashboard.inc:266 includes/mc_campaign.admin.mail.inc:56 includes/mc_campaign.admin.notification.inc:62 includes/mc_campaign.admin.sms.inc:67 includes/mc_campaign.dashboard.inc:292 includes/mc_campaign.notification.inc:86
+msgid "No notification available."
+msgstr ""
+
+#: includes/mc_campaign.admin.config.inc:619;741 includes/mc_campaign.admin.dashboard.inc:325;447 includes/mc_campaign.dashboard.inc:351;473
+msgid "Protection mode"
+msgstr ""
+
+#: includes/mc_campaign.admin.config.inc:650 includes/mc_campaign.admin.dashboard.inc:356 includes/mc_campaign.dashboard.inc:382
+msgid "All available forms are protected already."
+msgstr ""
+
+#: includes/mc_campaign.admin.config.inc:666 includes/mc_campaign.admin.dashboard.inc:372 includes/mc_campaign.dashboard.inc:398
+msgid "!module: !form-title"
+msgstr ""
+
+#: includes/mc_campaign.admin.config.inc:724 includes/mc_campaign.admin.dashboard.inc:430 includes/mc_campaign.dashboard.inc:456
+msgid "Configure %form-title protection"
+msgstr ""
+
+#: includes/mc_campaign.admin.config.inc:734 includes/mc_campaign.admin.dashboard.inc:440 includes/mc_campaign.dashboard.inc:466
+msgid "Text analysis"
+msgstr ""
+
+#: includes/mc_campaign.admin.config.inc:737 includes/mc_campaign.admin.dashboard.inc:443 includes/mc_campaign.dashboard.inc:469
+msgid "CAPTCHA"
+msgstr ""
+
+#: includes/mc_campaign.admin.config.inc:768 includes/mc_campaign.admin.dashboard.inc:474 includes/mc_campaign.dashboard.inc:500
+msgid "The protection is omitted for users having any of the permissions: !permission-list"
+msgstr ""
+
+#: includes/mc_campaign.admin.config.inc:786 includes/mc_campaign.admin.dashboard.inc:492 includes/mc_campaign.dashboard.inc:518
+msgid "Analyze text for"
+msgstr ""
+
+#: includes/mc_campaign.admin.config.inc:788 includes/mc_campaign.admin.dashboard.inc:494 includes/mc_campaign.dashboard.inc:520
+msgid "Spam"
+msgstr ""
+
+#: includes/mc_campaign.admin.config.inc:789 includes/mc_campaign.admin.dashboard.inc:495 includes/mc_campaign.dashboard.inc:521
+msgid "Profanity"
+msgstr ""
+
+#: includes/mc_campaign.admin.config.inc:820 includes/mc_campaign.admin.dashboard.inc:526 includes/mc_campaign.dashboard.inc:552
+msgid "Text fields to analyze"
+msgstr ""
+
+#: includes/mc_campaign.admin.config.inc:832 includes/mc_campaign.admin.dashboard.inc:538 includes/mc_campaign.dashboard.inc:564
+msgid "When text analysis identifies spam"
+msgstr ""
+
+#: includes/mc_campaign.admin.config.inc:835 includes/mc_campaign.admin.dashboard.inc:541 includes/mc_campaign.dashboard.inc:567
+msgid "Automatically discard the post"
+msgstr ""
+
+#: includes/mc_campaign.admin.config.inc:836 includes/mc_campaign.admin.dashboard.inc:542 includes/mc_campaign.dashboard.inc:568
+msgid "Retain the post for manual moderation"
+msgstr ""
+
+#: includes/mc_campaign.admin.config.inc:890 includes/mc_campaign.admin.dashboard.inc:596 includes/mc_campaign.dashboard.inc:622
+msgid "At least one text analysis check is required."
+msgstr ""
+
+#: includes/mc_campaign.admin.config.inc:893 includes/mc_campaign.admin.dashboard.inc:599 includes/mc_campaign.dashboard.inc:625
+msgid "At least one field is required for text analysis."
+msgstr ""
+
+#: includes/mc_campaign.admin.config.inc:917 includes/mc_campaign.admin.dashboard.inc:623 includes/mc_campaign.dashboard.inc:649
+msgid "The form protection has been added."
+msgstr ""
+
+#: includes/mc_campaign.admin.config.inc:920 includes/mc_campaign.admin.dashboard.inc:626 includes/mc_campaign.dashboard.inc:652
+msgid "The form protection has been updated."
+msgstr ""
+
+#: includes/mc_campaign.admin.config.inc:942 includes/mc_campaign.admin.dashboard.inc:648 includes/mc_campaign.dashboard.inc:674
+msgid "Are you sure you want to unprotect this form?"
+msgstr ""
+
+#: includes/mc_campaign.admin.config.inc:944 includes/mc_campaign.admin.dashboard.inc:650 includes/mc_campaign.dashboard.inc:676
+msgid "campaign will no longer protect this form from spam."
+msgstr ""
+
+#: includes/mc_campaign.admin.config.inc:954 includes/mc_campaign.admin.dashboard.inc:660 includes/mc_campaign.dashboard.inc:686
+msgid "The form protection has been removed."
+msgstr ""
+
+#: includes/mc_campaign.admin.config.inc:970 includes/mc_campaign.admin.dashboard.inc:676 includes/mc_campaign.dashboard.inc:702
+msgid "All fields"
+msgstr ""
+
+#: includes/mc_campaign.admin.config.inc:971 includes/mc_campaign.admin.dashboard.inc:677 includes/mc_campaign.dashboard.inc:703
+msgid "Links"
+msgstr ""
+
+#: includes/mc_campaign.admin.config.inc:972 includes/mc_campaign.admin.dashboard.inc:678 includes/mc_campaign.dashboard.inc:704
+msgid "Author name"
+msgstr ""
+
+#: includes/mc_campaign.admin.config.inc:975 includes/mc_campaign.admin.dashboard.inc:681 includes/mc_campaign.dashboard.inc:707
+msgid "contains"
+msgstr ""
+
+#: includes/mc_campaign.admin.config.inc:976 includes/mc_campaign.admin.dashboard.inc:682 includes/mc_campaign.dashboard.inc:708
+msgid "exact"
+msgstr ""
+
+#: includes/mc_campaign.admin.config.inc:1005 includes/mc_campaign.admin.dashboard.inc:711 includes/mc_campaign.admin.template.inc:89 includes/mc_campaign.dashboard.inc:737
+msgid "delete"
+msgstr "supprimer"
+
+#: includes/mc_campaign.admin.config.inc:1024;1108 includes/mc_campaign.admin.dashboard.inc:730;814 includes/mc_campaign.dashboard.inc:756;840
+msgid "Context"
+msgstr "Contexte"
+
+#: includes/mc_campaign.admin.config.inc:1026;1034 includes/mc_campaign.admin.dashboard.inc:732;740 includes/mc_campaign.dashboard.inc:758;766
+msgid "- Any -"
+msgstr ""
+
+#: includes/mc_campaign.admin.config.inc:1032 includes/mc_campaign.admin.dashboard.inc:738 includes/mc_campaign.dashboard.inc:764
+msgid "Match"
+msgstr ""
+
+#: includes/mc_campaign.admin.config.inc:1040;1110 includes/mc_campaign.admin.dashboard.inc:746;816 includes/mc_campaign.dashboard.inc:772;842
+msgid "Text"
+msgstr "Texte"
+
+#: includes/mc_campaign.admin.config.inc:1060 includes/mc_campaign.admin.dashboard.inc:766 includes/mc_campaign.admin.subscriber.inc:313;462;584 includes/mc_campaign.dashboard.inc:792 includes/mc_campaign.subscriber.inc:362;541
+msgid "Add"
+msgstr "Ajouter"
+
+#: includes/mc_campaign.admin.config.inc:1085 includes/mc_campaign.admin.dashboard.inc:791 includes/mc_campaign.dashboard.inc:817
+msgid "The entry was added to the blacklist."
+msgstr ""
+
+#: includes/mc_campaign.admin.config.inc:1093 includes/mc_campaign.admin.dashboard.inc:799 includes/mc_campaign.dashboard.inc:825
+msgid "An error occurred upon trying to add the text to the blacklist."
+msgstr ""
+
+#: includes/mc_campaign.admin.config.inc:1109 includes/mc_campaign.admin.dashboard.inc:815 includes/mc_campaign.dashboard.inc:841
+msgid "Matches"
+msgstr ""
+
+#: includes/mc_campaign.admin.config.inc:1178 includes/mc_campaign.admin.dashboard.inc:884 includes/mc_campaign.dashboard.inc:910
+msgid "Are you sure you want to delete %text from the blacklist?"
+msgstr ""
+
+#: includes/mc_campaign.admin.config.inc:1180 includes/mc_campaign.admin.dashboard.inc:886 includes/mc_campaign.admin.list.inc:28 includes/mc_campaign.admin.subscriber.inc:27 includes/mc_campaign.admin.template.inc:27 includes/mc_campaign.calendar.inc:31 includes/mc_campaign.dashboard.inc:912 includes/mc_campaign.list.inc:36 includes/mc_campaign.reminder.inc:31 includes/mc_campaign.subscriber.inc:39 includes/mc_campaign.user.inc:36
+msgid "This action cannot be undone."
+msgstr "Cette action est irréversible."
+
+#: includes/mc_campaign.admin.config.inc:1202 includes/mc_campaign.admin.dashboard.inc:908 includes/mc_campaign.dashboard.inc:934
+msgid "The entry was removed from the blacklist."
+msgstr ""
+
+#: includes/mc_campaign.admin.config.inc:1210 includes/mc_campaign.admin.dashboard.inc:916 includes/mc_campaign.dashboard.inc:942
+msgid "An error occurred upon trying to remove the item from the blacklist."
+msgstr ""
+
+#: includes/mc_campaign.admin.config.inc:1239 includes/mc_campaign.admin.dashboard.inc:945 includes/mc_campaign.dashboard.inc:971
+msgid "campaign servers verified your keys. The services are operating correctly."
+msgstr ""
+
+#: includes/mc_campaign.admin.config.inc:1245 includes/mc_campaign.admin.dashboard.inc:951 includes/mc_campaign.dashboard.inc:977
+msgid "Access keys"
+msgstr ""
+
+#: includes/mc_campaign.admin.config.inc:1246 includes/mc_campaign.admin.dashboard.inc:952 includes/mc_campaign.dashboard.inc:978
+msgid "To use campaign, you need a public and private key. To obtain your keys, <a href=\"@campaign-login-url\">register and login on campaign.com</a>, and <a href=\"@campaign-manager-add-url\">create a subscription</a> for your site. Once you created a subscription, copy your private and public access keys from the <a href=\"@campaign-manager-url\">site manager</a> into the form fields below, and you are ready to go."
+msgstr ""
+
+#: includes/mc_campaign.admin.config.inc:1259 includes/mc_campaign.admin.dashboard.inc:965 includes/mc_campaign.dashboard.inc:991
+msgid "Public key"
+msgstr "Clé publique"
+
+#: includes/mc_campaign.admin.config.inc:1261 includes/mc_campaign.admin.dashboard.inc:967 includes/mc_campaign.dashboard.inc:993
+msgid "Used to uniquely identify you."
+msgstr ""
+
+#: includes/mc_campaign.admin.config.inc:1265 includes/mc_campaign.admin.dashboard.inc:971 includes/mc_campaign.dashboard.inc:997
+msgid "Private key"
+msgstr "Clé privée"
+
+#: includes/mc_campaign.admin.config.inc:1267 includes/mc_campaign.admin.dashboard.inc:973 includes/mc_campaign.dashboard.inc:999
+msgid "Used to prevent someone else from hijacking your requests. Similar to a password, it should never be shared with anyone."
+msgstr ""
+
+#: includes/mc_campaign.admin.config.inc:1272 includes/mc_campaign.admin.dashboard.inc:978 includes/mc_campaign.dashboard.inc:1004
+msgid "When campaign is down or unreachable"
+msgstr ""
+
+#: includes/mc_campaign.admin.config.inc:1276 includes/mc_campaign.admin.dashboard.inc:982 includes/mc_campaign.dashboard.inc:1008
+msgid "Block all form submissions"
+msgstr ""
+
+#: includes/mc_campaign.admin.config.inc:1277 includes/mc_campaign.admin.dashboard.inc:983 includes/mc_campaign.dashboard.inc:1009
+msgid "Accept all form submissions"
+msgstr ""
+
+#: includes/mc_campaign.admin.config.inc:1279 includes/mc_campaign.admin.dashboard.inc:985 includes/mc_campaign.dashboard.inc:1011
+msgid "In case the campaign services are unreachable, no text analysis can be performed and no CAPTCHAs can be generated. Subscribers to <a href=\"@pricing-url\">campaign Plus</a> receive access to <a href=\"@sla-url\">campaign's high-availability backend infrastructure</a>, not available to free users, reducing potential downtime."
+msgstr ""
+
+#: includes/mc_campaign.admin.config.inc:1287 includes/mc_campaign.admin.dashboard.inc:993 includes/mc_campaign.dashboard.inc:1019
+msgid "Link to campaign's privacy policy on forms protected by textual analysis"
+msgstr ""
+
+#: includes/mc_campaign.admin.config.inc:1290 includes/mc_campaign.admin.dashboard.inc:996 includes/mc_campaign.dashboard.inc:1022
+msgid "Displays a link to the recommended <a href=\"@privacy-policy-url\">privacy policy on campaign.com</a> on all forms that are protected via <a href=\"@help-url\">textual analysis</a>. When disabling this option, you are required to inform visitors about data privacy through other means, as stated in the <a href=\"@terms-of-service-url\">terms of service</a>."
+msgstr ""
+
+#: includes/mc_campaign.admin.config.inc:1299 includes/mc_campaign.admin.dashboard.inc:1005 includes/mc_campaign.dashboard.inc:1031
+msgid "Enable testing mode"
+msgstr ""
+
+#: includes/mc_campaign.admin.config.inc:1301 includes/mc_campaign.admin.dashboard.inc:1007 includes/mc_campaign.dashboard.inc:1033
+msgid "Submitting \"ham\", \"unsure\", or \"spam\" on a protected form will trigger the corresponding behavior, and similarly, word verifications will only respond to \"correct\" and \"incorrect\", instead of the actual characters asked for. This option should be disabled in production environments."
+msgstr ""
+
+#: includes/mc_campaign.admin.config.inc:1327 includes/mc_campaign.admin.dashboard.inc:1033 includes/mc_campaign.dashboard.inc:1059
+msgid "Statistics"
+msgstr "Statistiques"
+
+#: includes/mc_campaign.admin.credit.inc:13 includes/mc_campaign.admin.list.inc:702 includes/mc_campaign.admin.template.inc:52 includes/mc_campaign.billing.inc:593 includes/mc_campaign.list.inc:428 includes/mc_campaign.user.inc:357
+msgid "ID"
+msgstr ""
+
+#: includes/mc_campaign.admin.credit.inc:14;60 includes/mc_campaign.billing.inc:13
+msgid "Amount"
+msgstr ""
+
+#: includes/mc_campaign.admin.credit.inc:15;64
+msgid "Expiration Date"
+msgstr ""
+
+#: includes/mc_campaign.admin.credit.inc:17 includes/mc_campaign.admin.list.inc:58;713 includes/mc_campaign.admin.template.inc:55 includes/mc_campaign.billing.inc:16;604 includes/mc_campaign.list.inc:68;439 includes/mc_campaign.user.inc:368 templates/mc_campaign_campaign_detail.tpl.php:9 templates/mc_campaign_list_detail.tpl.php:11 templates/mc_campaign_subscriber_detail.tpl.php:10
+msgid "Updated"
+msgstr "Mis à jour"
+
+#: includes/mc_campaign.admin.credit.inc:45
+msgid "No Credit available."
+msgstr ""
+
+#: includes/mc_campaign.admin.credit.inc:74
+msgid "Add Credit"
+msgstr ""
+
+#: includes/mc_campaign.admin.credit.inc:102
+msgid "Your new credit has been added."
+msgstr ""
+
+#: includes/mc_campaign.admin.letter.inc:60
+msgid "No letter available."
+msgstr ""
+
+#: includes/mc_campaign.admin.letter.inc:173 includes/mc_campaign.admin.mail.inc:169 includes/mc_campaign.admin.notification.inc:175 includes/mc_campaign.admin.sms.inc:127;301 includes/mc_campaign.notification.inc:182
+msgid "You must select something to filter by."
+msgstr "Vous devez sélectionnez un critère de filtrage."
+
+#: includes/mc_campaign.admin.letter.inc:205;212 includes/mc_campaign.admin.mail.inc:201;208 includes/mc_campaign.admin.notification.inc:207;214 includes/mc_campaign.admin.sms.inc:333;340 includes/mc_campaign.notification.inc:214;221
+msgid "Clear log messages"
+msgstr "Effacer les messages du journal"
+
+#: includes/mc_campaign.admin.letter.inc:206 includes/mc_campaign.admin.mail.inc:202 includes/mc_campaign.admin.notification.inc:208 includes/mc_campaign.admin.sms.inc:334 includes/mc_campaign.notification.inc:215
+msgid "This will permanently remove the log messages from the database."
+msgstr ""
+"Cela supprimera définitivement les messages du journal stockés dans "
+"la base de données."
+
+#: includes/mc_campaign.admin.letter.inc:223 includes/mc_campaign.admin.mail.inc:219 includes/mc_campaign.admin.notification.inc:225 includes/mc_campaign.admin.sms.inc:351 includes/mc_campaign.notification.inc:232
+msgid "Database log cleared."
+msgstr "Les entrées du journal de la base de donées ont été effacés."
+
+#: includes/mc_campaign.admin.list.inc:21 includes/mc_campaign.list.inc:29 includes/mc_campaign.user.inc:29
+msgid "Are you sure you want to delete the following newsletter lists?"
+msgstr ""
+
+#: includes/mc_campaign.admin.list.inc:38 includes/mc_campaign.list.inc:49 includes/mc_campaign.user.inc:49
+msgid "Enable the selected lists"
+msgstr ""
+
+#: includes/mc_campaign.admin.list.inc:39 includes/mc_campaign.list.inc:50 includes/mc_campaign.user.inc:50
+msgid "Disable the selected lists"
+msgstr ""
+
+#: includes/mc_campaign.admin.list.inc:60
+msgid "Last Reload"
+msgstr ""
+
+#: includes/mc_campaign.admin.list.inc:61 includes/mc_campaign.list.inc:69
+msgid "Actions"
+msgstr "Actions"
+
+#: includes/mc_campaign.admin.list.inc:204 includes/mc_campaign.billing.inc:91 includes/mc_campaign.list.inc:217 includes/mc_campaign.user.inc:173
+msgid "Lists updated successfully"
+msgstr ""
+
+#: includes/mc_campaign.admin.list.inc:219;337 includes/mc_campaign.billing.inc:106;223 includes/mc_campaign.list.inc:241
+msgid " Good example: \"Employees, Friends, Patients\" - Bad example: \"Bla_bla_11_11_2011\" "
+msgstr ""
+
+#: includes/mc_campaign.admin.list.inc:223;341 includes/mc_campaign.billing.inc:14;110;227 includes/mc_campaign.list.inc:245 templates/mc_campaign_list_detail.tpl.php:8
+msgid "Description"
+msgstr "Description"
+
+#: includes/mc_campaign.admin.list.inc:226 includes/mc_campaign.billing.inc:113
+msgid "Manual"
+msgstr ""
+
+#: includes/mc_campaign.admin.list.inc:227;239 includes/mc_campaign.billing.inc:114;126
+msgid "Request"
+msgstr ""
+
+#: includes/mc_campaign.admin.list.inc:228;308 includes/mc_campaign.billing.inc:115;194
+msgid "Filemaker"
+msgstr ""
+
+#: includes/mc_campaign.admin.list.inc:229;320 includes/mc_campaign.admin.subscriber.inc:266 includes/mc_campaign.billing.inc:116;206 includes/mc_campaign.subscriber.inc:288
+msgid "Facebook"
+msgstr ""
+
+#: includes/mc_campaign.admin.list.inc:233 includes/mc_campaign.billing.inc:120
+msgid "What kind of list do you want to build?"
+msgstr ""
+
+#: includes/mc_campaign.admin.list.inc:242 includes/mc_campaign.billing.inc:129
+msgid "request"
+msgstr ""
+
+#: includes/mc_campaign.admin.list.inc:248 includes/mc_campaign.billing.inc:135
+msgid "Data Base"
+msgstr ""
+
+#: includes/mc_campaign.admin.list.inc:250 includes/mc_campaign.billing.inc:137
+msgid "Drupal"
+msgstr "Drupal"
+
+#: includes/mc_campaign.admin.list.inc:251 includes/mc_campaign.billing.inc:138
+msgid "Poly"
+msgstr ""
+
+#: includes/mc_campaign.admin.list.inc:256 includes/mc_campaign.billing.inc:143
+msgid "SQL"
+msgstr ""
+
+#: includes/mc_campaign.admin.list.inc:257 includes/mc_campaign.billing.inc:144
+msgid "Need to return : sid (key for subscriber), firstname, lastname, email, mobile, fixedline, im, skype, twitter, facebook.<br/>Need to return : lid (key for list), sent_time, eid, info1, info2, info3..."
+msgstr ""
+
+#: includes/mc_campaign.admin.list.inc:257 includes/mc_campaign.billing.inc:144
+msgid "Need to be ordered if you need to limit your query"
+msgstr ""
+
+#: includes/mc_campaign.admin.list.inc:261 includes/mc_campaign.billing.inc:148 templates/mc_campaign_campaign_detail.tpl.php:14 templates/mc_campaign_list_detail.tpl.php:16
+msgid "Frequency"
+msgstr ""
+
+#: includes/mc_campaign.admin.list.inc:263 includes/mc_campaign.billing.inc:150 templates/mc_campaign_list_detail.tpl.php:16;19
+msgid "Never"
+msgstr "Jamais"
+
+#: includes/mc_campaign.admin.list.inc:266 includes/mc_campaign.billing.inc:153
+msgid "2 Hours"
+msgstr ""
+
+#: includes/mc_campaign.admin.list.inc:271 includes/mc_campaign.billing.inc:158
+msgid "1 Week"
+msgstr ""
+
+#: includes/mc_campaign.admin.list.inc:272 includes/mc_campaign.billing.inc:159
+msgid "1 Month"
+msgstr ""
+
+#: includes/mc_campaign.admin.list.inc:277 includes/mc_campaign.billing.inc:164 templates/mc_campaign_list_detail.tpl.php:17
+msgid "Limit"
+msgstr ""
+
+#: includes/mc_campaign.admin.list.inc:279 includes/mc_campaign.billing.inc:166
+msgid "No Limit"
+msgstr ""
+
+#: includes/mc_campaign.admin.list.inc:280 includes/mc_campaign.billing.inc:167
+msgid "0 (Handy to test the query)"
+msgstr ""
+
+#: includes/mc_campaign.admin.list.inc:281 includes/mc_campaign.billing.inc:168
+msgid "1"
+msgstr ""
+
+#: includes/mc_campaign.admin.list.inc:282
+msgid "5"
+msgstr ""
+
+#: includes/mc_campaign.admin.list.inc:283 includes/mc_campaign.billing.inc:169
+msgid "10"
+msgstr ""
+
+#: includes/mc_campaign.admin.list.inc:284 includes/mc_campaign.billing.inc:170
+msgid "20"
+msgstr ""
+
+#: includes/mc_campaign.admin.list.inc:285 includes/mc_campaign.billing.inc:171
+msgid "50"
+msgstr ""
+
+#: includes/mc_campaign.admin.list.inc:286 includes/mc_campaign.billing.inc:172
+msgid "100"
+msgstr ""
+
+#: includes/mc_campaign.admin.list.inc:287 includes/mc_campaign.billing.inc:173
+msgid "200"
+msgstr ""
+
+#: includes/mc_campaign.admin.list.inc:289 includes/mc_campaign.billing.inc:175
+msgid "How many subscibers to add by reload"
+msgstr ""
+
+#: includes/mc_campaign.admin.list.inc:292 includes/mc_campaign.billing.inc:178 templates/mc_campaign_list_detail.tpl.php:19
+msgid "Next Reload"
+msgstr ""
+
+#: includes/mc_campaign.admin.list.inc:301 includes/mc_campaign.billing.inc:187
+msgid "Whether this list is active or not."
+msgstr ""
+
+#: includes/mc_campaign.admin.list.inc:311 includes/mc_campaign.billing.inc:197
+msgid "filemaker"
+msgstr ""
+
+#: includes/mc_campaign.admin.list.inc:323 includes/mc_campaign.billing.inc:209
+msgid "facebook"
+msgstr ""
+
+#: includes/mc_campaign.admin.list.inc:360 includes/mc_campaign.billing.inc:246 includes/mc_campaign.list.inc:267 includes/mc_campaign.user.inc:199
+msgid "Update your list"
+msgstr ""
+
+#: includes/mc_campaign.admin.list.inc:366 includes/mc_campaign.billing.inc:252 includes/mc_campaign.list.inc:273 includes/mc_campaign.user.inc:205
+msgid "Update List"
+msgstr ""
+
+#: includes/mc_campaign.admin.list.inc:417 includes/mc_campaign.admin.template.inc:344 includes/mc_campaign.billing.inc:303 includes/mc_campaign.list.inc:312 includes/mc_campaign.user.inc:244
+msgid "Your list has been updated!"
+msgstr ""
+
+#: includes/mc_campaign.admin.list.inc:430 includes/mc_campaign.billing.inc:316;378
+msgid "Set up your new list"
+msgstr ""
+
+#: includes/mc_campaign.admin.list.inc:436;493 includes/mc_campaign.billing.inc:322;384 includes/mc_campaign.list.inc:341
+msgid "Add List"
+msgstr ""
+
+#: includes/mc_campaign.admin.list.inc:450 includes/mc_campaign.billing.inc:336
+msgid "The next reload time must be in the future"
+msgstr ""
+
+#: includes/mc_campaign.admin.list.inc:475 includes/mc_campaign.billing.inc:361;414
+msgid "Your new list was created! Your new list by default will store email, first name, and last name, but you can add more fields if you like."
+msgstr ""
+
+#: includes/mc_campaign.admin.list.inc:523 includes/mc_campaign.list.inc:373
+msgid "Your new list was created!"
+msgstr ""
+
+#: includes/mc_campaign.admin.list.inc:542 includes/mc_campaign.billing.inc:433 includes/mc_campaign.list.inc:392 includes/mc_campaign.user.inc:321
+msgid "Are you sure you want to delete the list? This action cannot be undone."
+msgstr ""
+
+#: includes/mc_campaign.admin.list.inc:562 includes/mc_campaign.billing.inc:453 includes/mc_campaign.list.inc:412 includes/mc_campaign.user.inc:341
+msgid "List deleted successfully"
+msgstr ""
+
+#: includes/mc_campaign.admin.list.inc:565 includes/mc_campaign.billing.inc:456 includes/mc_campaign.list.inc:415 includes/mc_campaign.user.inc:344
+msgid " subscribers unlinked from this list"
+msgstr ""
+
+#: includes/mc_campaign.admin.list.inc:705 includes/mc_campaign.billing.inc:596 includes/mc_campaign.list.inc:431 includes/mc_campaign.user.inc:360
+msgid "EID"
+msgstr ""
+
+#: includes/mc_campaign.admin.list.inc:706 includes/mc_campaign.admin.subscriber.inc:61 includes/mc_campaign.billing.inc:597 includes/mc_campaign.list.inc:432 includes/mc_campaign.subscriber.inc:88 includes/mc_campaign.user.inc:361 templates/mc_campaign_subscriber_detail.tpl.php:13
+msgid "Email"
+msgstr "Courriel"
+
+#: includes/mc_campaign.admin.list.inc:708 includes/mc_campaign.billing.inc:599 includes/mc_campaign.list.inc:434 includes/mc_campaign.user.inc:363
+msgid "Info1"
+msgstr ""
+
+#: includes/mc_campaign.admin.list.inc:709 includes/mc_campaign.billing.inc:600 includes/mc_campaign.list.inc:435 includes/mc_campaign.user.inc:364
+msgid "Info2"
+msgstr ""
+
+#: includes/mc_campaign.admin.list.inc:710 includes/mc_campaign.billing.inc:601 includes/mc_campaign.list.inc:436 includes/mc_campaign.user.inc:365
+msgid "Info3"
+msgstr ""
+
+#: includes/mc_campaign.admin.list.inc:711 includes/mc_campaign.billing.inc:602 includes/mc_campaign.list.inc:437 includes/mc_campaign.user.inc:366
+msgid "Status"
+msgstr "Statut"
+
+#: includes/mc_campaign.admin.list.inc:757 includes/mc_campaign.billing.inc:648 includes/mc_campaign.list.inc:484 includes/mc_campaign.user.inc:413
+msgid "Disable"
+msgstr "Désactiver"
+
+#: includes/mc_campaign.admin.list.inc:757 includes/mc_campaign.billing.inc:648 includes/mc_campaign.list.inc:484 includes/mc_campaign.user.inc:413
+msgid "Enable"
+msgstr "Activer"
+
+#: includes/mc_campaign.admin.list.inc:777 includes/mc_campaign.admin.subscriber.inc:153 includes/mc_campaign.billing.inc:668 includes/mc_campaign.list.inc:504 includes/mc_campaign.subscriber.inc:167 includes/mc_campaign.user.inc:433
+msgid "No subscribers yet."
+msgstr ""
+
+#: includes/mc_campaign.admin.quick.inc:13
+msgid "Quick SMS"
+msgstr ""
+
+#: includes/mc_campaign.admin.quick.inc:18
+msgid "Mobiles"
+msgstr ""
+
+#: includes/mc_campaign.admin.quick.inc:20
+msgid "Enter one mobile per line. Format : 447548589864"
+msgstr ""
+
+#: includes/mc_campaign.admin.quick.inc:24
+msgid "Message"
+msgstr "Message"
+
+#: includes/mc_campaign.admin.quick.inc:30
+msgid "Sent message"
+msgstr ""
+
+#: includes/mc_campaign.admin.quick.inc:47
+msgid "Check your numbers"
+msgstr ""
+
+#: includes/mc_campaign.admin.quick.inc:81
+msgid "Message send to "
+msgstr ""
+
+#: includes/mc_campaign.admin.sms.inc:81
+msgid "Filter SMS"
+msgstr ""
+
+#: includes/mc_campaign.admin.subscriber.inc:20
+msgid "Are you sure you want to delete the following newsletter subscribers?"
+msgstr ""
+
+#: includes/mc_campaign.admin.subscriber.inc:34 includes/mc_campaign.subscriber.inc:49
+msgid "Add to list : "
+msgstr ""
+
+#: includes/mc_campaign.admin.subscriber.inc:35
+msgid "Delete from list : "
+msgstr ""
+
+#: includes/mc_campaign.admin.subscriber.inc:63 includes/mc_campaign.subscriber.inc:90 templates/mc_campaign_subscriber_detail.tpl.php:15
+msgid "Fixed Line"
+msgstr ""
+
+#: includes/mc_campaign.admin.subscriber.inc:64 includes/mc_campaign.subscriber.inc:91
+msgid "Subscribed to"
+msgstr ""
+
+#: includes/mc_campaign.admin.subscriber.inc:185
+msgid "Lists deleted successfully"
+msgstr ""
+
+#: includes/mc_campaign.admin.subscriber.inc:212 includes/mc_campaign.subscriber.inc:226
+msgid "Global Info"
+msgstr ""
+
+#: includes/mc_campaign.admin.subscriber.inc:218 includes/mc_campaign.subscriber.inc:232
+msgid "First name"
+msgstr ""
+
+#: includes/mc_campaign.admin.subscriber.inc:222 includes/mc_campaign.subscriber.inc:237
+msgid "Last name"
+msgstr ""
+
+#: includes/mc_campaign.admin.subscriber.inc:226;454;627;733 includes/mc_campaign.subscriber.inc:242;533;865;928;1057
+msgid "Select Lists"
+msgstr ""
+
+#: includes/mc_campaign.admin.subscriber.inc:234 includes/mc_campaign.subscriber.inc:250
+msgid "Email Address"
+msgstr ""
+
+#: includes/mc_campaign.admin.subscriber.inc:238 includes/mc_campaign.subscriber.inc:255
+msgid "Mobile number"
+msgstr ""
+
+#: includes/mc_campaign.admin.subscriber.inc:239
+msgid "Format : +32078123123"
+msgstr ""
+
+#: includes/mc_campaign.admin.subscriber.inc:243 includes/mc_campaign.subscriber.inc:261
+msgid "Fixed Landline number"
+msgstr ""
+
+#: includes/mc_campaign.admin.subscriber.inc:244
+msgid "Format : +3265454532"
+msgstr ""
+
+#: includes/mc_campaign.admin.subscriber.inc:248 includes/mc_campaign.subscriber.inc:267
+msgid "Social connexion"
+msgstr ""
+
+#: includes/mc_campaign.admin.subscriber.inc:254 includes/mc_campaign.subscriber.inc:273
+msgid "IM"
+msgstr ""
+
+#: includes/mc_campaign.admin.subscriber.inc:258 includes/mc_campaign.subscriber.inc:278
+msgid "Skype"
+msgstr ""
+
+#: includes/mc_campaign.admin.subscriber.inc:262 includes/mc_campaign.subscriber.inc:283
+msgid "Twitter"
+msgstr ""
+
+#: includes/mc_campaign.admin.subscriber.inc:270
+msgid "Additional Info"
+msgstr ""
+
+#: includes/mc_campaign.admin.subscriber.inc:276
+msgid "Info 1"
+msgstr ""
+
+#: includes/mc_campaign.admin.subscriber.inc:277;282;287
+msgid "Example : Birthdate, Appointment Time"
+msgstr ""
+
+#: includes/mc_campaign.admin.subscriber.inc:281
+msgid "Info 2"
+msgstr ""
+
+#: includes/mc_campaign.admin.subscriber.inc:286
+msgid "Info 3"
+msgstr ""
+
+#: includes/mc_campaign.admin.subscriber.inc:308;579
+msgid "Add a list member"
+msgstr ""
+
+#: includes/mc_campaign.admin.subscriber.inc:326;327 includes/mc_campaign.subscriber.inc:378;379
+msgid "Enter at least the email address or mobile number"
+msgstr ""
+
+#: includes/mc_campaign.admin.subscriber.inc:330 includes/mc_campaign.subscriber.inc:382
+msgid "Enter a valid email address"
+msgstr ""
+
+#: includes/mc_campaign.admin.subscriber.inc:353;490 includes/mc_campaign.subscriber.inc:573;990 mc_campaign_action/mc_campaign_action.module:190
+msgid "Subscriber already exist"
+msgstr ""
+
+#: includes/mc_campaign.admin.subscriber.inc:355 mc_campaign_action/mc_campaign_action.module:192
+msgid "Subscriber does not exist"
+msgstr ""
+
+#: includes/mc_campaign.admin.subscriber.inc:390;499 includes/mc_campaign.subscriber.inc:582;1000 mc_campaign_action/mc_campaign_action.module:232
+msgid "Subscriber already linked to this list"
+msgstr ""
+
+#: includes/mc_campaign.admin.subscriber.inc:394;502 includes/mc_campaign.subscriber.inc:585;1003 mc_campaign_action/mc_campaign_action.module:236
+msgid "Subscriber not already linked to this list"
+msgstr ""
+
+#: includes/mc_campaign.admin.subscriber.inc:444 includes/mc_campaign.subscriber.inc:523
+msgid "Add Subscribers"
+msgstr ""
+
+#: includes/mc_campaign.admin.subscriber.inc:448;650;756 includes/mc_campaign.subscriber.inc:527;834;1080
+msgid "Import"
+msgstr "Importer"
+
+#: includes/mc_campaign.admin.subscriber.inc:450 includes/mc_campaign.subscriber.inc:529
+msgid "Enter one subscriber per line.To add additional info, use the following format using 0 or FALSE to omit a value: %format"
+msgstr ""
+
+#: includes/mc_campaign.admin.subscriber.inc:493 includes/mc_campaign.subscriber.inc:576;993
+msgid "Subscriber created successfully"
+msgstr ""
+
+#: includes/mc_campaign.admin.subscriber.inc:530 includes/mc_campaign.subscriber.inc:615
+msgid "Are you sure you want to delete the subscriber ? This action cannot be undone."
+msgstr ""
+
+#: includes/mc_campaign.admin.subscriber.inc:541 includes/mc_campaign.subscriber.inc:627
+msgid "Subscriber deleted successfully"
+msgstr ""
+
+#: includes/mc_campaign.admin.subscriber.inc:621 includes/mc_campaign.subscriber.inc:859
+msgid "Email Provider"
+msgstr ""
+
+#: includes/mc_campaign.admin.subscriber.inc:633;739 includes/mc_campaign.subscriber.inc:871;1063
+msgid "Your email address"
+msgstr ""
+
+#: includes/mc_campaign.admin.subscriber.inc:641;747 includes/mc_campaign.subscriber.inc:879;1071
+msgid "Password"
+msgstr "Mot de passe"
+
+#: includes/mc_campaign.admin.subscriber.inc:643;749 includes/mc_campaign.subscriber.inc:881;1073
+msgid "Will not be saved."
+msgstr ""
+
+#: includes/mc_campaign.admin.subscriber.inc:665;771 includes/mc_campaign.subscriber.inc:893;1095
+msgid "The email address %email is not valid."
+msgstr ""
+
+#: includes/mc_campaign.admin.subscriber.inc:727 includes/mc_campaign.subscriber.inc:1051
+msgid "Social Network"
+msgstr ""
+
+#: includes/mc_campaign.admin.template.inc:20
+msgid "Are you sure you want to delete the following templates?"
+msgstr ""
+
+#: includes/mc_campaign.admin.template.inc:36
+msgid "Delete the selected templates"
+msgstr ""
+
+#: includes/mc_campaign.admin.template.inc:126
+msgid "Templates deleted successfully"
+msgstr ""
+
+#: includes/mc_campaign.admin.template.inc:163
+msgid "Subject"
+msgstr "Sujet"
+
+#: includes/mc_campaign.admin.template.inc:165
+msgid "This will also used as newsletter subject and title."
+msgstr ""
+
+#: includes/mc_campaign.admin.template.inc:216
+msgid "Add new Mail Template"
+msgstr ""
+
+#: includes/mc_campaign.admin.template.inc:224
+msgid "Add new SMS Template"
+msgstr ""
+
+#: includes/mc_campaign.admin.template.inc:231
+msgid "Add Template"
+msgstr ""
+
+#: includes/mc_campaign.admin.template.inc:271
+msgid "Template created successfully"
+msgstr ""
+
+#: includes/mc_campaign.admin.template.inc:283
+msgid "Update your Mail Template"
+msgstr ""
+
+#: includes/mc_campaign.admin.template.inc:291
+msgid "Update your SMS Template"
+msgstr ""
+
+#: includes/mc_campaign.admin.template.inc:302
+msgid "Update Template"
+msgstr ""
+
+#: includes/mc_campaign.admin.template.inc:369
+msgid "Are you sure you want to delete the following template? This action cannot be undone."
+msgstr ""
+
+#: includes/mc_campaign.admin.template.inc:378
+msgid "Template deleted successfully"
+msgstr ""
+
+#: includes/mc_campaign.admin.user.inc:36
+msgid "Roles"
+msgstr "Rôles"
+
+#: includes/mc_campaign.admin.user.inc:41
+msgid "Address"
+msgstr ""
+
+#: includes/mc_campaign.admin.user.inc:65
+msgid "Update options"
+msgstr "Options de mise à jour"
+
+#: includes/mc_campaign.admin.user.inc:135
+msgid "No user available."
+msgstr ""
+
+#: includes/mc_campaign.admin.user.inc:238
+msgid "role"
+msgstr "rôle"
+
+#: includes/mc_campaign.admin.user.inc:241
+msgid "any"
+msgstr "tous"
+
+#: includes/mc_campaign.billing.inc:44
+msgid "No credits available."
+msgstr ""
+
+#: includes/mc_campaign.calendar.inc:13;309;404 includes/mc_campaign.list.inc:13 includes/mc_campaign.notification.inc:17 includes/mc_campaign.reminder.inc:13 includes/mc_campaign.subscriber.inc:18 includes/mc_campaign.user.inc:13
+msgid "Hey buddy ! <a href=\"/user/me/edit\">Activate your account</a> with the activation code you have received on your mobile."
+msgstr ""
+
+#: includes/mc_campaign.calendar.inc:29 includes/mc_campaign.reminder.inc:29
+msgid "Are you sure you want to delete the following reminders?"
+msgstr ""
+
+#: includes/mc_campaign.calendar.inc:40 includes/mc_campaign.reminder.inc:44
+msgid "Delete the selected reminders"
+msgstr ""
+
+#: includes/mc_campaign.calendar.inc:103 includes/mc_campaign.notification.inc:77
+msgid "Not yet"
+msgstr ""
+
+#: includes/mc_campaign.calendar.inc:115 includes/mc_campaign.reminder.inc:143
+msgid "No reminder yet."
+msgstr ""
+
+#: includes/mc_campaign.calendar.inc:145 includes/mc_campaign.reminder.inc:173
+msgid "Please select an action"
+msgstr ""
+
+#: includes/mc_campaign.calendar.inc:148 includes/mc_campaign.reminder.inc:176
+msgid "Reminder(s) deleted successfully"
+msgstr ""
+
+#: includes/mc_campaign.calendar.inc:152 includes/mc_campaign.reminder.inc:180
+msgid "Please select a least one reminder."
+msgstr ""
+
+#: includes/mc_campaign.functions.inc:348;401
+msgid "db_insert failed. Message = %message, query= %query"
+msgstr ""
+
+#: includes/mc_campaign.functions.inc:367;415 mc_campaign_action/mc_campaign_action.module:817;856;887
+msgid "db_update failed. Message = %message, query= %query"
+msgstr ""
+
+#: includes/mc_campaign.list.inc:234
+msgid "Create a new list"
+msgstr ""
+
+#: includes/mc_campaign.list.inc:334 includes/mc_campaign.reminder.inc:256 includes/mc_campaign.subscriber.inc:345;515;778;1041 includes/mc_campaign.user.inc:266
+msgid "First you need to <a href=\"/user/me/edit\">activate your account</a> with the activation code you have received on your mobile."
+msgstr ""
+
+#: includes/mc_campaign.mail.inc:89
+msgid "Newsletter sent."
+msgstr ""
+
+#: includes/mc_campaign.mail.inc:93
+msgid "Newsletter pending."
+msgstr ""
+
+#: includes/mc_campaign.mail.inc:148
+msgid "Test newsletter sent to user %recipient."
+msgstr ""
+
+#: includes/mc_campaign.mail.inc:152
+msgid "Test newsletter sent to anonymous %recipient."
+msgstr ""
+
+#: includes/mc_campaign.mail.inc:224
+msgid "Sent via Mime Mail"
+msgstr ""
+
+#: includes/mc_campaign.mail.inc:316
+msgid "Cron throttle setting"
+msgstr ""
+
+#: includes/mc_campaign.mail.inc:228;231;259;316;325;328
+msgid "campaign"
+msgstr ""
+
+#: includes/mc_campaign.mail.inc:228
+msgid "Outgoing email. Message type: %type<br />Subject: %subject<br />Recipient: %to %mimemail"
+msgstr ""
+
+#: includes/mc_campaign.mail.inc:231
+msgid "Outgoing email failed. Message type: %type<br />Subject: %subject<br />Recipient: %to %mimemail"
+msgstr ""
+
+#: includes/mc_campaign.mail.inc:259
+msgid "Newsletter not send: newsletter issue does not exist (nid = @nid; vid = @vid)."
+msgstr ""
+
+#: includes/mc_campaign.mail.inc:316
+msgid "Sending interrupted: PHP maximum execution time almost exceeded. Remaining newsletters will be sent during the next cron run. If this warning occurs regularly you should reduce the !cron_throttle_setting."
+msgstr ""
+
+#: includes/mc_campaign.mail.inc:325
+msgid "%success emails sent in %sec seconds, %fail failed sending."
+msgstr ""
+
+#: includes/mc_campaign.mail.inc:328
+msgid "%success emails sent, %fail failed."
+msgstr ""
+
+#: includes/mc_campaign.notification.inc:71 mc_campaign_action/mc_campaign_action.module:487;587
+msgid "Reminder"
+msgstr ""
+
+#: includes/mc_campaign.notification.inc:151 includes/mc_campaign.reminder.inc:305
+msgid "How"
+msgstr ""
+
+#: includes/mc_campaign.reminder.inc:37
+msgid "Create reminder"
+msgstr ""
+
+#: includes/mc_campaign.reminder.inc:215
+msgid "Contact: "
+msgstr ""
+
+#: includes/mc_campaign.reminder.inc:228
+msgid "List: "
+msgstr ""
+
+#: includes/mc_campaign.reminder.inc:286
+msgid "Who"
+msgstr ""
+
+#: includes/mc_campaign.reminder.inc:293
+msgid "When (date and time)"
+msgstr ""
+
+#: includes/mc_campaign.reminder.inc:295
+msgid "now ; today, 15:15 ; tomorrow, 8am ; next week, 12:00 ; 11/10/2012 11:13 ; next monday"
+msgstr ""
+
+#: includes/mc_campaign.reminder.inc:321;351;368
+msgid "What"
+msgstr ""
+
+#: includes/mc_campaign.reminder.inc:374
+msgid "Create"
+msgstr "Créer"
+
+#: includes/mc_campaign.reminder.inc:388
+msgid "Enter the date ad time you want to send the message"
+msgstr ""
+
+#: includes/mc_campaign.reminder.inc:455
+msgid "Reminder created"
+msgstr ""
+
+#: includes/mc_campaign.reminder.inc:458
+msgid "Contact detail missing"
+msgstr ""
+
+#: includes/mc_campaign.subscriber.inc:32
+msgid "Are you sure you want to delete the subscribers?"
+msgstr ""
+
+#: includes/mc_campaign.subscriber.inc:46
+msgid "Select"
+msgstr ""
+
+#: includes/mc_campaign.subscriber.inc:47
+msgid "Delete contact"
+msgstr "Supprimer le contact"
+
+#: includes/mc_campaign.subscriber.inc:50
+msgid "Remove from list : "
+msgstr ""
+
+#: includes/mc_campaign.subscriber.inc:55
+msgid "Add contact"
+msgstr ""
+
+#: includes/mc_campaign.subscriber.inc:202
+msgid "Please select an action to perform."
+msgstr ""
+
+#: includes/mc_campaign.subscriber.inc:256
+msgid "Do not forget the country prefix ! - Format : +32078123123"
+msgstr ""
+
+#: includes/mc_campaign.subscriber.inc:262
+msgid "Do not forget the country prefix ! Format : +3265454532"
+msgstr ""
+
+#: includes/mc_campaign.subscriber.inc:293
+msgid "Other"
+msgstr ""
+
+#: includes/mc_campaign.subscriber.inc:302
+msgid "Birthday"
+msgstr ""
+
+#: includes/mc_campaign.subscriber.inc:307
+msgid "Permissions"
+msgstr "Droits"
+
+#: includes/mc_campaign.subscriber.inc:313
+msgid "Email Allowed."
+msgstr ""
+
+#: includes/mc_campaign.subscriber.inc:318
+msgid "Mobile Allowed."
+msgstr ""
+
+#: includes/mc_campaign.subscriber.inc:323
+msgid "Fixedline Allowed."
+msgstr ""
+
+#: includes/mc_campaign.subscriber.inc:415
+msgid "Subscriber update"
+msgstr ""
+
+#: includes/mc_campaign.subscriber.inc:417
+msgid "Subscriber added"
+msgstr ""
+
+#: includes/mc_campaign.subscriber.inc:678
+msgid "Edit a list member"
+msgstr ""
+
+#: includes/mc_campaign.subscriber.inc:936
+msgid "Name"
+msgstr "Nom"
+
+#: includes/mc_campaign.user.inc:42
+msgid "Add user"
+msgstr "Ajouter un utilisateur"
+
+#: includes/mc_campaign.user.inc:65
+msgid "Login"
+msgstr ""
+
+#: includes/mc_campaign.user.inc:275
+msgid "Add User"
+msgstr ""
+
+#: mc_campaign_action/mc_campaign_action.module:859;890
+msgid "t :uid"
+msgstr ""
+
+#: mc_campaign_action/mc_campaign_action.module:1059
+msgid "Newsletter test e-mail"
+msgstr ""
+
+#: mc_campaign_action/mc_campaign_action.module:1060
+msgid "This is a test e-mail generated by the Drupal Newsletter module.\n      If you succesfully received this e-mail,\n      it means that your server is capable of sending e-mails.\n      Congratulations!\n      You can now create lists, templates and subscribe users to them!"
+msgstr ""
+
+#: mc_campaign_action/mc_campaign_action.module:18
+msgid "Campaign Cron"
+msgstr ""
+
+#: mc_campaign_action/mc_campaign_action.module:26
+msgid "Pool SMS"
+msgstr ""
+
+#: mc_campaign_action/mc_campaign_action.module:27
+msgid "Send Pending SMS"
+msgstr ""
+
+#: mc_campaign_action/mc_campaign_action.module:35
+msgid "Pool Email"
+msgstr ""
+
+#: mc_campaign_action/mc_campaign_action.module:36
+msgid "Send Pending Email"
+msgstr ""
+
+#: mc_campaign_action/mc_campaign_action.module:44
+msgid "Pool Call"
+msgstr ""
+
+#: mc_campaign_action/mc_campaign_action.module:45
+msgid "Send Pending Call"
+msgstr ""
+
+#: mc_campaign_action/mc_campaign_action.module:53
+msgid "SMS TRACKER"
+msgstr ""
+
+#: mc_campaign_action/mc_campaign_action.info:0
+msgid "Campaign action"
+msgstr ""
+
+#: mc_campaign_action/mc_campaign_action.info:0
+msgid "Provide actions for Campaign."
+msgstr ""
+
+#: templates/mc_campaign_campaign_detail.tpl.php:15
+msgid "Next Execution"
+msgstr ""
+
+#: templates/mc_campaign_list_detail.tpl.php:18
+msgid "Max Size"
+msgstr ""
+

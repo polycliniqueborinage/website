@@ -1,0 +1,65 @@
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/simplenews/includes/views/handlers
+END
+simplenews_handler_filter_newsletter_status.inc
+K 25
+svn:wc:ra_dav:version-url
+V 167
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/simplenews/includes/views/handlers/simplenews_handler_filter_newsletter_status.inc
+END
+simplenews_handler_field_category_new_account.inc
+K 25
+svn:wc:ra_dav:version-url
+V 169
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/simplenews/includes/views/handlers/simplenews_handler_field_category_new_account.inc
+END
+simplenews_handler_filter_category_new_account.inc
+K 25
+svn:wc:ra_dav:version-url
+V 170
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/simplenews/includes/views/handlers/simplenews_handler_filter_category_new_account.inc
+END
+simplenews_handler_field_category_hyperlinks.inc
+K 25
+svn:wc:ra_dav:version-url
+V 168
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/simplenews/includes/views/handlers/simplenews_handler_field_category_hyperlinks.inc
+END
+simplenews_handler_filter_category_hyperlinks.inc
+K 25
+svn:wc:ra_dav:version-url
+V 169
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/simplenews/includes/views/handlers/simplenews_handler_filter_category_hyperlinks.inc
+END
+simplenews_handler_field_category_opt_inout.inc
+K 25
+svn:wc:ra_dav:version-url
+V 167
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/simplenews/includes/views/handlers/simplenews_handler_field_category_opt_inout.inc
+END
+simplenews_handler_field_newsletter_priority.inc
+K 25
+svn:wc:ra_dav:version-url
+V 168
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/simplenews/includes/views/handlers/simplenews_handler_field_newsletter_priority.inc
+END
+simplenews_handler_field_newsletter_status.inc
+K 25
+svn:wc:ra_dav:version-url
+V 166
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/simplenews/includes/views/handlers/simplenews_handler_field_newsletter_status.inc
+END
+simplenews_handler_filter_category_opt_inout.inc
+K 25
+svn:wc:ra_dav:version-url
+V 168
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/simplenews/includes/views/handlers/simplenews_handler_filter_category_opt_inout.inc
+END
+simplenews_handler_filter_newsletter_priority.inc
+K 25
+svn:wc:ra_dav:version-url
+V 169
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/simplenews/includes/views/handlers/simplenews_handler_filter_newsletter_priority.inc
+END

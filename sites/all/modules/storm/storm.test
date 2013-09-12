@@ -1,0 +1,35 @@
+<?php
+
+/**
+ * @file
+ * Tests for the Storm module
+ */
+class StormTestCase extends DrupalWebTestCase {
+  public static function getInfo() {
+    return array(
+      'name' => 'Storm functionality',
+      'description' => 'Test the functionality of the Storm base module',
+      'group' => 'Storm',
+    );
+  }
+
+  public function setUp() {
+    parent::setUp('storm');
+  }
+
+  public function testStormAccess() {
+    $this->drupalGet('storm');
+    $this->assertResponse(403, t('Make sure access is denied to Storm dashboard for anonymous user'));
+    
+    $basic_user = $this->drupalCreateUser();
+    $this->drupalLogin($basic_user);
+    $this->drupalGet('storm');
+    $this->assertResponse(403, t('Make sure access is denied to Storm dashboard for basic user'));
+
+    $privileged_user = $this->drupalCreateUser(array('Storm: access dashboard'));
+    $this->drupalLogin($privileged_user);
+    $this->drupalGet('storm');
+    $this->assertText(t('Storm Dashboard'), t('Make sure the correct page has been displayed by checking that the title is "Storm Dashboard".'));
+  }
+}
+

@@ -1,0 +1,10 @@
+<?php
+
+
+/**
+ * Implementation of hook_menu_alter().
+ */
+function mcprivatemsg_menu_alter(&$items) {
+  $items['messages']['menu_name'] = 'main-menu';
+  $items['messages']['weight'] = 10;
+}

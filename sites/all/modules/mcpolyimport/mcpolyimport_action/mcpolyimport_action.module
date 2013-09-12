@@ -1,0 +1,255 @@
+<?php
+
+
+/**
+ * Implementation of hook_cron().
+ */
+function mcpolyimport_cron() {
+	
+	// GET PATIENT
+	db_set_active('poly');
+	$result = db_query("SELECT * FROM {patients} WHERE exported = 0 Limit 10");
+	db_set_active('default');
+	
+	foreach ($result as $record) {
+		
+      	$roles 				= array(DRUPAL_AUTHENTICATED_RID,6);
+      	
+      	$uid 				= 100000+$record->id;
+      	$name 				= 'patient_'.$uid;
+      	$mail 				= $record->mail;
+      	
+      	$country			= 'BE';
+      	$postal_code  		= $record->code_postal;
+      	$locality 			= $record->commune;
+      	$name_line 			= $record->rue;
+
+      	$accept_mail 		= 1;
+      	$accept_sms 		= 1;
+      	$accept_letter 		= 1;
+      	
+      	$user = user_load($uid);
+      	
+      	// check email
+		if (!valid_email_address($mail)) {
+    		$mail 			= $name.'@polycliniqueborinage.org';
+    		$accept_mail	= 0;
+  		}
+  		
+  		// check phone number
+  		$mobile_phone = clean_phone_number($record->gsm);
+  		if (!valid_phone_number($mobile_phone)) {
+    		$accept_sms		= 0;
+  		}
+  		
+  		// UPDATE USER
+      	if ($user && $user->uid) {
+      		
+      		drupal_set_message(t('Update user'));
+      		
+      		$edit = array(
+	        	'uid'     => $uid,
+	        	'name'    => $name,
+	      		'mail'    => $mail,
+	      		'init'    => $mail,
+	      		'status'  => 1,
+	        	'roles' 	=> drupal_map_assoc($roles),
+	      	);
+	      	
+	      	$edit['field_user_first_name']['und'][0]['value'] 			= $record->prenom;
+	      	$edit['field_user_last_name']['und'][0]['value'] 			= $record->nom;
+	      	
+	      	$edit['field_user_mobile_phone']['und'][0]['number'] 		= $mobile_phone;
+	      	$edit['field_user_mobile_phone']['und'][0]['country_codes']	= "be";
+
+	      	$edit['field_user_address']['und'][0]['country'] 			= $country;
+	      	$edit['field_user_address']['und'][0]['postal_code'] 		= $postal_code;
+	      	$edit['field_user_address']['und'][0]['locality'] 			= $locality;
+	      	$edit['field_user_address']['und'][0]['name_line'] 			= $name_line;
+	      	
+	      	$edit['field_user_accept_mail']['und'][0]['value'] 			= $accept_mail;
+	      	$edit['field_user_accept_sms']['und'][0]['value'] 			= $accept_sms;
+	      	$edit['field_user_accept_letter']['und'][0]['value'] 		= $accept_letter;
+	      	
+	      	$account = user_load($user->uid);
+	      	$account = user_save($account, $edit);
+	      	
+	      	//UPDATE POLY CALENDAR
+	      	//$entry['uid'] = $uid;
+	      	//$entry['name'] = 'polyclinique';
+	      	//$entry['locked'] = 1;
+	      	//mctimetracker_calendar_entry_insert($entry);
+	      		      	
+  		// ADD USER
+      	} else {
+      		
+			drupal_set_message(t('Create new user'));
+      		
+	      	$edit = array(
+	        	'uid'     => $uid,
+	        	'name'    => $name,
+	        	'pass'    => user_password(),
+	      		'mail'    => $mail,
+	      		'init'    => $mail,
+	      		'status'  => 1,
+	        	'created' => REQUEST_TIME,
+	        	'roles' 	=> drupal_map_assoc($roles),
+	      	);
+	      	
+	      	$edit['field_user_first_name']['und'][0]['value'] 			= $record->prenom;
+	      	$edit['field_user_last_name']['und'][0]['value'] 			= $record->nom;
+	      	
+	      	$edit['field_user_mobile_phone']['und'][0]['number'] 		= $mobile_phone;
+	      	$edit['field_user_mobile_phone']['und'][0]['country_codes']	= "be";
+
+	      	$edit['field_user_address']['und'][0]['country'] 			= $country;
+	      	$edit['field_user_address']['und'][0]['postal_code'] 		= $postal_code;
+	      	$edit['field_user_address']['und'][0]['locality'] 			= $locality;
+	      	$edit['field_user_address']['und'][0]['name_line'] 			= $name_line;
+	      	
+	      	$edit['field_user_accept_mail']['und'][0]['value'] 			= $accept_mail;
+	      	$edit['field_user_accept_sms']['und'][0]['value'] 			= $accept_sms;
+	      	$edit['field_user_accept_letter']['und'][0]['value'] 		= $accept_letter;
+	      	
+	      	$account = user_save(NULL, $edit);
+
+	      	//ADD POLY CALENDAR
+	      	$entry['uid'] = $uid;
+	      	$entry['name'] = 'polyclinique';
+	      	$entry['description'] = 'Polyclinique du Borinage';
+	      	$entry['locked'] = 1;
+	      	mctimetracker_calendar_entry_insert($entry);
+	      	
+      	}
+      	
+      	db_set_active('poly');
+      	db_update('patients')->fields(array('exported' => 1))->condition('id', $record->id)->execute();
+		db_set_active('default');
+		
+	}
+	
+	
+	// GET MEDECIN
+    db_set_active('poly');
+	$result = db_query("SELECT * FROM {medecins} WHERE inami != '' AND type='interne' AND exported = 0 Limit 1");
+	db_set_active('default');
+
+    foreach ($result as $record) {
+		
+      	$roles = array(DRUPAL_AUTHENTICATED_RID,4);
+      	
+      	$uid = 10000000+$record->id;
+      	$mail = $record->mail;
+      	$inami = $record->inami;
+      	
+      	$country			= 'BE';
+      	$postal_code  		= $record->code_postal;
+      	$locality 			= $record->commune;
+      	$name_line 			= $record->rue;
+      	
+      	$accept_mail 		= 1;
+      	$accept_sms 		= 1;
+      	$accept_letter 		= 1;
+      	
+      	$user = user_load($uid);
+       
+      	// check email
+		if (!valid_email_address($mail)) {
+    		$mail = $uid.'@polycliniqueborinage.org';
+    		$accept_mail	= 0;
+		}
+      	
+  		// check phone number
+  		$mobile_phone = clean_phone_number($record->telephone_mobile);
+  		if (!valid_phone_number($mobile_phone)) {
+    		$accept_sms		= 0;
+  		}
+		
+      	if ($user && $user->uid) {
+  		      		
+      		drupal_set_message(t('update doctor'));
+      		
+      		$edit = array(
+	        	'uid'     => $uid,
+	        	'name'    => $inami,
+	      		'mail'    => $mail,
+	      		'init'    => $mail,
+	      		'status'  => 1,
+	        	'roles' => drupal_map_assoc($roles),
+	      	);
+
+	      	$edit['field_user_first_name']['und'][0]['value'] 			= $record->prenom;
+	      	$edit['field_user_last_name']['und'][0]['value'] 			= $record->nom;
+	      	
+	      	$edit['field_user_mobile_phone']['und'][0]['number'] 		= $mobile_phone;
+	      	$edit['field_user_mobile_phone']['und'][0]['country_codes']	= "be";
+	      	
+	      	$edit['field_user_address']['und'][0]['country'] 			= $country;
+	      	$edit['field_user_address']['und'][0]['postal_code'] 		= $postal_code;
+	      	$edit['field_user_address']['und'][0]['locality'] 			= $locality;
+	      	$edit['field_user_address']['und'][0]['name_line'] 			= $name_line;
+	      	
+	      	$edit['field_user_accept_mail']['und'][0]['value'] 			= $accept_mail;
+	      	$edit['field_user_accept_sms']['und'][0]['value'] 			= $accept_sms;
+	      	$edit['field_user_accept_letter']['und'][0]['value'] 		= $accept_letter;
+	      	
+	      	$account = user_save(NULL, $edit);      		
+	      	
+      	} else {
+      		
+      		drupal_set_message(t('create new doctor'));
+
+      		$edit = array(
+	        	'uid'     => $uid,
+	        	'name'    => $inami,
+	        	'pass'    => user_password(),
+	      		'mail'    => $mail,
+	      		'init'    => $mail,
+	      		'status'  => 1,
+	        	'created' => REQUEST_TIME,
+	        	'roles' => drupal_map_assoc($roles),
+	      	);
+
+	      	$edit['field_user_first_name']['und'][0]['value'] 			= $record->prenom;
+	      	$edit['field_user_last_name']['und'][0]['value'] 			= $record->nom;
+	      	
+	      	$edit['field_user_mobile_phone']['und'][0]['number'] 		= $mobile_phone;
+	      	$edit['field_user_mobile_phone']['und'][0]['country_codes']	= "be";
+	      	
+	      	$edit['field_user_address']['und'][0]['country'] 			= $country;
+	      	$edit['field_user_address']['und'][0]['postal_code'] 		= $postal_code;
+	      	$edit['field_user_address']['und'][0]['locality'] 			= $locality;
+	      	$edit['field_user_address']['und'][0]['name_line'] 			= $name_line;
+	      	
+	      	$edit['field_user_accept_mail']['und'][0]['value'] 			= $accept_mail;
+	      	$edit['field_user_accept_sms']['und'][0]['value'] 			= $accept_sms;
+	      	$edit['field_user_accept_letter']['und'][0]['value'] 		= $accept_letter;
+	      	
+	      	$account = user_save(NULL, $edit);
+	      	
+	      	//ADD POLY CALENDAR
+	      	$entry['uid'] = $uid;
+	      	$entry['name'] = 'polyclinique';
+	      	$entry['locked'] = 1;
+	      	mctimetracker_calendar_entry_insert($entry);
+      		
+      	}
+		
+      	db_set_active('poly');
+      	db_update('medecins')->fields(array('exported' => 1))->condition('inami', $record->inami)->execute();
+		db_set_active('default');
+		
+	}
+		
+}
+
+function valid_phone_number($mobile_phone) {
+	return strlen($mobile_phone)==9;
+}
+
+function clean_phone_number($mobile_phone) {
+	$mobile_phone = preg_replace("/^[+][3][2]/", "", $mobile_phone);
+	$mobile_phone = preg_replace("/[^0-9]/", "", $mobile_phone);
+	$mobile_phone = preg_replace("/^[0]/", "", $mobile_phone);
+	return $mobile_phone;
+}

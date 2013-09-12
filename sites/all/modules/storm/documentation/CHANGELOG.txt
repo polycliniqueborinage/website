@@ -1,0 +1,9 @@
+
+Version 7.x-1.x-dev:
+- Port from Drupal 6 version (major changes):
+  - Storm now uses Field API for fields.
+  - Storm now uses the Views module for list views.
+    Unfortunately this means however that all modules now have a dependency on Views.
+  - Storm Attribute module has gone, and the allowed field values are now managed as part of Field API.
+
+

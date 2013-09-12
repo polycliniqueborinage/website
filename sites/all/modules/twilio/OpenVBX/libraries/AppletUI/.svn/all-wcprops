@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/twilio/OpenVBX/libraries/AppletUI
+END
+AudioSpeechPickerWidget.php
+K 25
+svn:wc:ra_dav:version-url
+V 146
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/twilio/OpenVBX/libraries/AppletUI/AudioSpeechPickerWidget.php
+END
+UserGroupPickerWidget.php
+K 25
+svn:wc:ra_dav:version-url
+V 144
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/twilio/OpenVBX/libraries/AppletUI/UserGroupPickerWidget.php
+END
+TimeRangeWidget.php
+K 25
+svn:wc:ra_dav:version-url
+V 138
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/twilio/OpenVBX/libraries/AppletUI/TimeRangeWidget.php
+END
+init.php
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/twilio/OpenVBX/libraries/AppletUI/init.php
+END
+DropZoneWidget.php
+K 25
+svn:wc:ra_dav:version-url
+V 137
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/twilio/OpenVBX/libraries/AppletUI/DropZoneWidget.php
+END
+AppletUIWidget.php
+K 25
+svn:wc:ra_dav:version-url
+V 137
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/twilio/OpenVBX/libraries/AppletUI/AppletUIWidget.php
+END

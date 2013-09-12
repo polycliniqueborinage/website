@@ -1,0 +1,14 @@
+name = Commerce Credits
+description = Provides Credits for Drupal Commerce
+dependencies[] = commerce_product
+package = Commerce
+core = 7.x
+
+
+
+; Information added by drupal.org packaging script on 2011-08-23
+version = "7.x-1.x-dev"
+core = "7.x"
+project = "commerce_credits"
+datestamp = "1314101352"
+

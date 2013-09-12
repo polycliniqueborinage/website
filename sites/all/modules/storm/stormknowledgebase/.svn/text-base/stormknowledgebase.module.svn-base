@@ -1,0 +1,193 @@
+<?php
+
+/**
+ * @file
+ * Contains hooks and functions for the Storm Knowledge Base module
+ *
+ * Contents:
+ * 1) General hooks: help, menu, permission, theme
+ * 2) Node hooks: node_info, node_access
+ */
+
+/**
+ * @function
+ * Implementation of hook_help
+ */
+function stormknowledgebase_help($path, $arg) {
+  $o = '';
+
+  switch ($path) {
+    case "admin/help#stormknowledgebase":
+      $o = '<p>'. t('Provides knowledgebase support for Storm') .'</p>';
+      break;
+  }
+
+  return $o;
+}
+
+/**
+ * @function
+ * Implementation of hook_permission
+ */
+function stormknowledgebase_permission() {
+  $perms = array(
+    'Storm Knowledgebase: access' => array(
+      'title' => 'Access Storm Knowledge Base',
+    )
+  );
+  $perms += node_list_permissions('stormknowledgebase');
+  return $perms;
+}
+
+/**
+ * @function
+ * Implementation of hook_theme
+ */
+function stormknowledgebase_theme() {
+  return array(
+    'stormknowledgebase_view' => array(
+      'file'      => 'stormknowledgebase.theme.inc',
+      'arguments' => array('node', 'teaser', 'page'),
+    ),
+  );
+}
+
+/**
+ * @function
+ * Implementation of hook_views_api
+ */
+function stormknowledgebase_views_api() {
+  return array(
+    'api' => 3,
+    'path' => drupal_get_path('module', 'stormknowledgebase'),
+  );
+}
+
+/**
+ * @function
+ * Implementation of hook_node_info
+ */
+function stormknowledgebase_node_info() {
+  return array(
+    'stormknowledgebase' => array(
+      'name' => t('Knowledge base'),
+      'base' => 'stormknowledgebase',
+      'description' => t('A knowledgebase article for Storm.'),
+    )
+  );
+}
+
+/**
+ * @function
+ * Implementation of hook_options_list
+ */
+function stormknowledgebase_options_list($field) {
+  $options = array(
+    0 => t('-- Linux'),
+    'Ubuntu'=> '-- Ubuntu',
+    'DB' => 'Databases',
+    'MySQL'=>'-- MySQL',
+    'PostgreSQL'=>'-- PostgreSQL',
+  );
+  return $options;
+}
+
+/**
+ * @function
+ * Implementation of hook_node_access
+ */
+function stormknowledgebase_node_access($node, $op, $account=NULL) {
+  $type = is_string($node) ? $node : $node->type;
+  
+  if (empty($account)) {
+    global $user;
+    $account = $user;
+  }
+
+  if ($op == 'create' && user_access('Storm knowledgebase: add', $account)) {
+    return NODE_ACCESS_ALLOW;
+  }
+
+  if (is_numeric($node)) {
+    $node = node_load($node);
+  }
+
+  if ($op == 'delete') {
+    if (user_access('Storm knowledgebase: delete all', $account)) {
+      return NODE_ACCESS_ALLOW;
+    }
+    else if (user_access('Storm knowledgebase: delete own', $account) && ($account->uid == $node->uid)) {
+      return NODE_ACCESS_ALLOW;
+    }
+  }
+
+  if ($op == 'update') {
+    if (user_access('Storm knowledgebase: edit all', $account)) {
+      return NODE_ACCESS_ALLOW;
+    }
+    else if (user_access('Storm knowledgebase: edit own', $account) && ($account->uid == $node->uid)) {
+      return NODE_ACCESS_ALLOW;
+    }
+  }
+
+  if ($op == 'view') {
+    if (user_access('Storm knowledgebase: view all', $account)) {
+      return NODE_ACCESS_ALLOW;
+    }
+    else if (user_access('Storm knowledgebase: view own', $account) && ($account->uid == $node->uid)) {
+      return NODE_ACCESS_ALLOW;
+    }
+  }
+}
+
+// LEGACY ACCESS FUNCTIONS, NEEDS CHANGEOVER TO GRANTS
+function stormknowledgebase_access_sql($sql, $where = array()) {
+  if (user_access('Storm knowledgebase: view all')) {
+    $where[] = "'storm_access'='storm_access'";
+    return storm_rewrite_sql($sql, $where);
+  }
+
+  global $user;
+
+  $cond = '';
+  if (user_access('Storm knowledgebase: view own')) {
+    $cond .= 'n.uid='. $user->uid;
+  }
+  if (empty($cond)) $cond = '0=1';
+  $where[] = $cond;
+
+  $where[] = "'storm_access'='storm_access'";
+  return storm_rewrite_sql($sql, $where);
+}
+
+function stormknowledgebase_storm_rewrite_where_sql($query, $primary_table, $account) {
+  static $conds = array();
+
+  if ($conds[$primary_table][$account->uid]) {
+    return $conds[$primary_table][$account->uid];
+  }
+
+  if (preg_match("/'storm_access'='storm_access'/", $query)) {
+    $cond = '';
+  }
+  else {
+    if (user_access('Storm knowledgebase: view all', $account)) {
+      return '';
+    }
+
+    $cond = '';
+    if (user_access('Storm knowledgebase: view own', $account)) {
+      $cond .= " ${primary_table}.uid=". $account->uid;
+    }
+    if ($cond) {
+      $cond = " WHEN 'stormknowledgebase' THEN IF($cond,1,0) ";
+    }
+    else {
+      $cond = " WHEN 'stormknowledgebase' THEN 0 ";
+    }
+  }
+
+  $conds[$primary_table][$account->uid] = $cond;
+  return $cond;
+}
+

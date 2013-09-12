@@ -1,0 +1,7 @@
+name = Campaign action
+description = Provide actions for Campaign.
+dependencies[] = mc_campaign
+dependencies[] = trigger
+package = Campaign
+core = 7.x
+files[] = mc_campaign_action.module

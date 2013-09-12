@@ -1,0 +1,748 @@
+<?php
+
+/**
+ * @file
+ *   Defines menu items for newsletter administration,
+ *   permissions and basic drupal hooks.
+ */
+
+// Loads functions needed. Used seperate files for organization purposes.
+require_once 'includes/newsletter.user.inc';
+require_once 'includes/newsletter.functions.inc';
+
+/**
+ * Implements hook_menu().
+ */
+function newsletter_menu() {
+  $items = array();
+  $items['admin/config/media/newsletter'] = array(
+    'title' => 'Newsletters',
+    'description' => 'Manage newsletters, subscribers, and settings.',
+    'access arguments' => array('administer newsletters'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('newsletter_stats'),
+    'file' => 'includes/newsletter.admin.inc',
+    'weight' => -8,
+  );
+  $items['admin/config/media/newsletter/stats'] = array(
+    'title' => 'Statistics',
+    'access arguments' => array('access newsletter statistics'),
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+    'weight' => 0,
+  );
+  $items['admin/config/media/newsletter/stats/general'] = array(
+    'title' => 'General',
+    'description' => 'Watch general statistics.',
+    'access arguments' => array('access newsletter statistics'),
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+  );
+  $items['admin/config/media/newsletter/stats/graphic'] = array(
+    'title' => 'Graphic',
+    'description' => 'Watch advanced JQuery statistics.',
+    'access arguments' => array('access newsletter statistics'),
+    'type' => MENU_LOCAL_TASK,
+    'page callback' => 'newsletter_stats_graphic',
+    'file' => 'includes/newsletter.admin.inc',
+  );
+  $items['admin/config/media/newsletter/create-send'] = array(
+    'title' => 'Create/Send',
+    'access arguments' => array('administer newsletters'),
+    'type' => MENU_LOCAL_TASK,
+    'page callback' => 'newsletter_draft_manual_list',
+    'file' => 'includes/newsletter.admin.inc',
+    'weight' => 1,
+  );
+  $items['admin/config/media/newsletter/create-send/draft/%newsletter_nid'] = array(
+    'title' => 'Send A Draft Newsletter',
+    'access arguments' => array('administer newsletters'),
+    'type' => MENU_CALLBACK,
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('newsletter_form_send_draft', 6),
+    'file' => 'includes/newsletter.admin.inc',
+  );
+  $items['admin/config/media/newsletter/create-send/draft/delete/%newsletter_nid'] = array(
+    'title' => 'Delete A Draft Newsletter',
+    'access arguments' => array('administer newsletters'),
+    'type' => MENU_CALLBACK,
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('newsletter_form_delete_draft', 7),
+    'file' => 'includes/newsletter.admin.inc',
+  );
+  $items['admin/config/media/newsletter/create-send/newsletter/delete/%newsletter_nid'] = array(
+    'title' => 'Delete A Draft Newsletter',
+    'access arguments' => array('administer newsletters'),
+    'type' => MENU_CALLBACK,
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('newsletter_form_delete_newsletter', 7),
+    'file' => 'includes/newsletter.admin.inc',
+  );
+  $items['admin/config/media/newsletter/create-send/new'] = array(
+    'title' => 'Create and Send a Custom Newsletter',
+    'access arguments' => array('administer newsletters'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('newsletter_create_send'),
+    'file' => 'includes/newsletter.admin.inc',
+    'type' => MENU_LOCAL_ACTION,
+  );
+  $items['admin/config/media/newsletter/create-send/send/%newsletter_lid'] = array(
+    'title' => 'Send a Manual Newsletter',
+    'access arguments' => array('administer newsletters'),
+    'page callback' => 'newsletter_manual_send',
+    'page arguments' => array(6),
+    'file' => 'includes/newsletter.admin.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['admin/config/media/newsletter/lists'] = array(
+    'title' => 'Lists/Subscribers',
+    'description' => 'Find and manage newsletter lists.',
+    'access arguments' => array('administer newsletters'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('newsletter_list'),
+    'file' => 'includes/newsletter.admin.inc',
+    'type' => MENU_LOCAL_TASK,
+    'weight' => 2,
+  );
+  $items['admin/config/media/newsletter/lists/lists'] = array(
+    'title' => 'Lists',
+    'description' => 'Find and manage newsletter lists.',
+    'access arguments' => array('administer newsletters'),
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+  );
+  $items['admin/config/media/newsletter/lists/subscribers'] = array(
+    'title' => 'Subscribers',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('newsletter_subscriber_list'),
+    'description' => 'List subscribers.',
+    'access arguments' => array('administer newsletters'),
+    'type' => MENU_LOCAL_TASK,
+    'file' => 'includes/newsletter.admin.inc',
+  );
+  $items['admin/config/media/newsletter/lists/list/add'] = array(
+    'title' => 'Add New List',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('newsletter_list_add'),
+    'description' => 'Add new newsletter list.',
+    'access arguments' => array('administer newsletters'),
+    'type' => MENU_LOCAL_ACTION,
+    'file' => 'includes/newsletter.admin.inc',
+  );
+  $items['admin/config/media/newsletter/lists/subscribers/add'] = array(
+    'title' => 'Add New Subscriber',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('newsletter_subscriber_add'),
+    'description' => 'Add new list subscriber.',
+    'access arguments' => array('administer newsletters'),
+    'type' => MENU_LOCAL_ACTION,
+    'file' => 'includes/newsletter.admin.inc',
+  );
+  $items['admin/config/media/newsletter/lists/subscribers/add-mass'] = array(
+    'title' => 'Add Subscribers (Mass)',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('newsletter_subscriber_add_mass'),
+    'description' => 'Add subscribers.',
+    'access arguments' => array('administer newsletters'),
+    'type' => MENU_LOCAL_ACTION,
+    'file' => 'includes/newsletter.admin.inc',
+  );
+  $items['admin/config/media/newsletter/lists/lists/delete/%newsletter_lid'] = array(
+    'title' => 'Delete Newsletter List',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('newsletter_list_delete', 7),
+    'access arguments' => array('administer newsletters'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/newsletter.admin.inc',
+  );
+  $items['admin/config/media/newsletter/lists/lists/edit/%newsletter_lid'] = array(
+    'title' => 'Edit Newsletter List',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('newsletter_list_edit', 7),
+    'access arguments' => array('administer newsletters'),
+    'file' => 'includes/newsletter.admin.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['admin/config/media/newsletter/lists/subscribers/edit/%newsletter_sid'] = array(
+    'title' => 'Edit Newsletter Subscriber',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('newsletter_subscriber_edit', 7),
+    'access arguments' => array('administer newsletters'),
+    'file' => 'includes/newsletter.admin.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['admin/config/media/newsletter/lists/subscribers/delete/%newsletter_sid'] = array(
+    'title' => 'Delete Subscriber',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('newsletter_subscriber_delete', 7),
+    'access arguments' => array('administer newsletters'),
+    'file' => 'includes/newsletter.admin.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['admin/config/media/newsletter/templates'] = array(
+    'title' => 'Templates',
+    'description' => 'Administer newsletter templates.',
+    'access arguments' => array('administer newsletters'),
+    'type' => MENU_LOCAL_TASK,
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('newsletter_template_list'),
+    'file' => 'includes/newsletter.admin.inc',
+    'weight' => 3,
+  );
+  $items['admin/config/media/newsletter/templates/mail'] = array(
+    'title' => 'Mail Templates',
+    'description' => 'Administer mail templates.',
+    'access arguments' => array('administer newsletters'),
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+    'weight' => 0,
+  );
+  $items['admin/config/media/newsletter/templates/mail/add'] = array(
+    'title' => 'Add new mail Template',
+    'description' => 'Administer mail templates.',
+    'access arguments' => array('administer newsletters'),
+    'type' => MENU_LOCAL_ACTION,
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('newsletter_template_add'),
+    'file' => 'includes/newsletter.admin.inc',
+  );
+  $items['admin/config/media/newsletter/templates/delete/%newsletter_tid'] = array(
+    'title' => 'Delete Newsletter Templates',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('newsletter_template_delete', 6),
+    'access arguments' => array('administer newsletters'),
+    'file' => 'includes/newsletter.admin.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['admin/config/media/newsletter/templates/edit/%newsletter_tid'] = array(
+    'title' => 'Edit Newsletter Templates',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('newsletter_template_edit', 6),
+    'access arguments' => array('administer newsletters'),
+    'file' => 'includes/newsletter.admin.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['admin/config/media/newsletter/templates/confirmation'] = array(
+    'title' => 'Confirmation',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('newsletter_basic_template_edit', '1'),
+    'access arguments' => array('administer newsletters'),
+    'file' => 'includes/newsletter.admin.inc',
+    'type' => MENU_LOCAL_TASK,
+    'weight' => 1,
+  );
+  $items['admin/config/media/newsletter/templates/welcome'] = array(
+    'title' => 'Welcome',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('newsletter_basic_template_edit', '2'),
+    'access arguments' => array('administer newsletters'),
+    'file' => 'includes/newsletter.admin.inc',
+    'type' => MENU_LOCAL_TASK,
+    'weight' => 2,
+  );
+  $items['admin/config/media/newsletter/templates/unsubscribe'] = array(
+    'title' => 'Unsubscribe',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('newsletter_basic_template_edit', '3'),
+    'access arguments' => array('administer newsletters'),
+    'file' => 'includes/newsletter.admin.inc',
+    'type' => MENU_LOCAL_TASK,
+    'weight' => 3,
+  );
+  $items['admin/config/media/newsletter/configure'] = array(
+    'title' => 'Settings',
+    'description' => 'Configure newsletter lists.',
+    'access arguments' => array('administer newsletters'),
+    'type' => MENU_LOCAL_TASK,
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('newsletter_configure'),
+    'file' => 'includes/newsletter.admin.inc',
+    'weight' => 4,
+  );
+  $items['newsletter/subscribe'] = array(
+    'title' => 'Subscribe',
+    'description' => 'Subscribe to our newsletters.',
+    'access arguments' => array('subscribe newsletters'),
+    'page arguments' => array('newsletter_subscribe_advanced'),
+    'type' => MENU_CALLBACK,
+    'page callback' => 'drupal_get_form',
+    'file' => 'includes/newsletter.user.inc',
+  );
+  $items['newsletter/confirm'] = array(
+    'title' => 'Confirm Subscription',
+    'description' => 'Confirm your subscription to our newsletters.',
+    'access arguments' => array('subscribe newsletters'),
+    'type' => MENU_CALLBACK,
+    'page callback' => 'newsletter_confirm',
+    'file' => 'includes/newsletter.user.inc',
+  );
+  $items['newsletter/unsubscribe'] = array(
+    'title' => 'Unsubscribe',
+    'description' => 'Confirm that you want to unsubscribe from our newsletters.',
+    'access arguments' => array('subscribe newsletters'),
+    'type' => MENU_CALLBACK,
+    'page callback' => 'newsletter_unsubscribe',
+    'file' => 'includes/newsletter.user.inc',
+  );
+  $items['newsletter/statistics'] = array(
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+    'page callback' => 'newsletter_statistics_open',
+    'file' => 'includes/newsletter.user.inc',
+  );
+  $items['user/%user/newsletter'] = array(
+    'title' => 'Newsletter Subscriptions',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('newsletter_manage_subscriptions_form', 1),
+    'access callback' => 'newsletter_edit_subsdcriber_access',
+    'access arguments' => array(1),
+    'type' => MENU_LOCAL_TASK,
+    'file' => 'includes/newsletter.user.inc',
+  );
+
+  return $items;
+}
+
+/**
+ * Implements hook_permission().
+ */
+function newsletter_permission() {
+  $permissions = array();
+  $permissions['administer newsletters'] = array(
+    'title' => t('Administer newsletters'),
+    'description' => t('Access the newsletter administration pages.'),
+  );
+  $permissions['subscribe newsletters'] = array(
+    'title' => t('Subscribe newsletters'),
+    'description' => t('Can subscribe to various newsletter lists.'),
+  );
+  $permissions['access newsletter statistics'] = array(
+    'title' => t('Access newsletter statistics'),
+    'description' => t('Access the newsletter statistics pages.'),
+  );
+  return $permissions;
+}
+
+/**
+ * Implements hook_taxonomy_term_delete().
+ */
+function newsletter_taxonomy_term_delete($term) {
+  db_delete('newsletter_index')
+    ->condition('tid', $term->tid)
+    ->execute();
+}
+
+/**
+ * Implements hook_cron().
+ */
+function newsletter_cron() {
+  $status = array();
+  $lids_sent = array();
+
+  // Custom Newsletters
+  $custom_queues = variable_get('newsletter_custom_for_next_cron', array());
+  if (!empty($custom_queues)) {
+    foreach ($custom_queues as $num => $custom_queue) {
+      $data = newsletter_create($custom_queue['subscribers'], $custom_queue['template_id'], $custom_queue['newsletter_id'])
+        ->send();
+      $status = array_merge($status, $data['status']);
+      $subscribers_left = $data['subscribers_left'];
+      if (!empty($subscribers_left)) {
+        $custom_queues[$num]['subscribers'] = $subscribers_left;
+      }
+      else {
+        unset($custom_queues[$num]);
+      }
+    }
+    variable_set('newsletter_custom_for_next_cron', $custom_queues);
+  }
+
+  // Nesletters with remaining subscribers or Manual queued
+  $remaining = variable_get('newsletter_for_next_cron', array());
+  if (!empty($remaining)) {
+    foreach ($remaining as $lid => $data) {
+      if ($data === TRUE) {
+        // There is a new Manual newsletter in the queue
+        $remaining[$lid] = array();
+        variable_set('newsletter_for_next_cron', $remaining);
+        $result = newsletter_create($lid)->send();
+        $status = array_merge($status, $result);
+        $lids_sent[] = $lid;
+      }
+      elseif (!empty($data)) {
+        // There are remaining subscribers in one already sent newsletter
+        $result = newsletter_create($lid)->send();
+        $status = array_merge($status, $result);
+        $lids_sent[] = $lid;
+      }
+    }
+  }
+  // Automated Newsletter lists that didn't have remaining for this cron run
+  $cron_lists = db_query("SELECT id FROM {newsletter_lists}
+    WHERE send_again = CURDATE()
+    OR send_again IS NULL
+    AND (send_rate = 'Daily' OR send_rate = 'Weekly' OR send_rate = 'Monthly')")
+    ->fetchAll();
+
+  if (is_array($cron_lists)) {
+    foreach ($cron_lists as $cron_list) {
+      if (!in_array($cron_list->id, $lids_sent, TRUE)) {
+        $result = newsletter_create($cron_list->id)->send();
+        $status = array_merge($status, $result);
+      }
+    }
+  }
+  newsletter_feedback($status);
+}
+
+/**
+ * Implements hook_node_insert().
+ */
+function newsletter_node_insert($node) {
+  $status = array();
+  $custom_send_rate_lists=newsletter_custom_send_rate_lists();
+
+  foreach ($custom_send_rate_lists as $list) {
+    $newsletter = newsletter_create($list->id);
+    if ($newsletter->checkCustom()) {
+      $status = array_merge($status, $newsletter->send());
+    }
+  }
+  newsletter_feedback($status);
+}
+
+/**
+ * Implements hook_block_info().
+ */
+function newsletter_block_info() {
+  $blocks['newsletter_subscribe'] = array(
+    'info' => t('Newsletter: Subscribe'),
+  );
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function newsletter_block_view($delta='') {
+  switch ($delta) {
+    case 'newsletter_subscribe':
+      if (user_access('subscribe newsletters') && (!newsletter_is_subscribed() || variable_get('newsletter_always_show_subscribe_block', FALSE))) {
+        //add js file and settings
+        drupal_add_js(drupal_get_path('module', 'newsletter') . '/js/newsletter.js');
+        $lists = newsletter_get_subscribe_form_lists();
+        drupal_add_js(array( 'exposed' => $lists['1']), 'setting');
+
+        $block['subject'] = t('Subscribe to our Newsletters');
+        $block['content'] = drupal_get_form('newsletter_subscribe_form');
+      }
+      else {
+        $block = array();
+      }
+      break;
+  }
+  return $block;
+}
+
+/**
+ * Implements hook_colorbox_form_access().
+ */
+function newsletter_colorbox_form_access($form_id) {
+  $form = explode('?', $form_id);
+  return ($form[0]=='newsletter_subscribe_advanced')
+    ? user_access('subscribe newsletters')
+    : FALSE;
+}
+
+/**
+ * Implements hook_node_view().
+ */
+function newsletter_node_view($node, $view_mode, $langcode) {
+  if (isset($_GET['source'])) {
+    $newsletter_id = (int) $_GET['source'];
+    db_query("UPDATE {newsletter_newsletters}
+      SET clicks = clicks + 1
+      WHERE id = :id",
+      array(':id' => $newsletter_id));
+  }
+}
+
+/**
+ * Implements hook_token_info().
+ */
+function newsletter_token_info() {
+  $type = array(
+    'name' => t('Newsletter'),
+    'description' => t('Tokens related to newsletters.'),
+    'needs-data' => 'newsletter',
+  );
+  $newsletter['confirmation_url'] = array(
+    'name' => t('Confirmation URL'),
+    'description' => t('The url with the generated hash where the subscriber confirms subscription'),
+  );
+  $newsletter['subscription_ip'] = array(
+    'name' => t('Subscription IP'),
+    'description' => t('The url with the generated hash where the subscriber confirms subscription'),
+  );
+  $newsletter['unsubscribe_url'] = array(
+    'name' => t('Unsubscribe URL'),
+    'description' => t('The URL that unsubscribes the current user from subscribed newsletters'),
+  );
+  $newsletter['subscriber_firstname'] = array(
+    'name' => t("Subscriber's First Name"),
+    'description' => t('You need to have this required in the personal info form, in order to use it efficiently'),
+  );
+  $newsletter['subscriber_lastname'] = array(
+    'name' => t("Subscriber's Last Name"),
+    'description' => t('You need to have this required in the personal info form, in order to use it efficiently'),
+  );
+  $newsletter['subscriber_email'] = array(
+    'name' => t("Subscriber's e-mail"),
+    'description' => t("Subscriber's e-mail"),
+  );
+  $newsletter['subscription_time'] = array(
+    'name' => t('Subscription Time'),
+    'description' => t('The date this subscriber subscribed to your list'),
+  );
+  $newsletter['list_name'] = array(
+    'name' => t('List name'),
+    'description' => t('The newsletter list name'),
+  );
+
+  return array(
+    'types' => array('newsletter' => $type),
+    'tokens' => array('newsletter' => $newsletter),
+  );
+}
+
+/**
+ * Implements hook_tokens().
+ */
+function newsletter_tokens($type, $tokens, array $data = array(), array $options = array()) {
+  $sanitize = !empty($options['sanitize']);
+  $replacements = array();
+  if ($type == 'newsletter' && isset($data['newsletter_list'])) {
+    foreach ($tokens as $name => $original) {
+      switch ($name) {
+        case 'list_name':
+          $replacements[$original] = $sanitize ? filter_xss($data['newsletter_list']->title) : $data['newsletter_list']->title;
+          break;
+      }
+    }
+  }
+  if ($type == 'newsletter' && isset($data['newsletter_subscriber'])) {
+    foreach ($tokens as $name => $original) {
+      switch ($name) {
+        case 'confirmation_url':
+          $params = array(
+            'absolute' => TRUE,
+            'query' => array('hash' => $data['newsletter_subscriber']->hash),
+          );
+          $replacements[$original] = url('newsletter/confirm', $params);
+          break;
+        case 'subscription_ip':
+          $replacements[$original] = $sanitize ? filter_xss($data['newsletter_subscriber']->ip) : $data['newsletter_subscriber']->ip;
+          break;
+        case 'unsubscribe_url':
+          $params = array(
+            'absolute' => TRUE,
+            'query' => array('hash' => $data['newsletter_subscriber']->hash),
+          );
+          $replacements[$original] = url('newsletter/unsubscribe', $params);
+          break;
+        case 'subscriber_firstname':
+          $replacements[$original] = $sanitize ? filter_xss($data['newsletter_subscriber']->firstname) : $data['newsletter_subscriber']->firstname;
+          break;
+        case 'subscriber_lastname':
+          $replacements[$original] = $sanitize ? filter_xss($data['newsletter_subscriber']->lastname) : $data['newsletter_subscriber']->lastname;
+          break;
+        case 'subscriber_email':
+          $replacements[$original] = $sanitize ? filter_xss($data['newsletter_subscriber']->email) : $data['newsletter_subscriber']->email;
+          break;
+        case 'subscription_time':
+          $replacements[$original] = format_date($data['newsletter_subscriber']->created, 'long');
+          break;
+      }
+    }
+  }
+
+  return $replacements;
+}
+
+/**
+ * Implements hook_tokens_alter().
+ */
+function newsletter_tokens_alter(array &$replacements, array $context) {
+  if ($context['type'] == 'node' && !empty($context['data']['node']) && isset($context['data']['node']->newsletter_url)) {
+    $node = $context['data']['node'];
+
+    // Alter the [node:url] token, and replace it with the newsletter version
+    // which contains the query that allows newsletter to gather statistics.
+    $replacements[$context['tokens']['url']] = $node->newsletter_url;
+  }
+}
+
+/**
+ * Implements hook_mail().
+ */
+function newsletter_mail($key, &$message, $params) {
+  $template = isset($params['template']) ? $params['template'] : array();
+  $subscriber = isset($params['subscriber']) ? $params['subscriber'] : array();
+  $nodes = isset($params['nodes']) ? $params['nodes'] : array();
+  $list = isset($params['list']) ? $params['list'] : array();
+  $format = isset($params['format']) ? $params['format'] : '';
+  $newsletter = isset($params['newsletter']) ? $params['newsletter'] : array();
+  $options = array('clear' => TRUE);
+  switch($key) {
+    case 'test':
+      $message['subject'] = t('Newsletter test e-mail');
+      $message['body'] = t('This is a test e-mail generated by the Drupal Newsletter module.
+      If you succesfully received this e-mail,
+      it means that your server is capable of sending e-mails.
+      Congratulations!
+      You can now create lists, templates and subscribe users to them!');
+      $message['format'] = $params['format'];
+      $message['body_format'] = 'plain_text';
+      break;
+    case 'basic':
+      $body = token_replace($template->body, array('newsletter_subscriber' => $subscriber), $options);
+      $message['subject'] = token_replace($template->subject,array(), $options);
+      $message['body'] = $body;
+      $message['body_format'] = $template->format;
+      $message['format'] = isset($subscriber->receive_format) ? $subscriber->receive_format : $format;
+      break;
+    case 'automated':
+      if (strpos($template->body, '[repeat]') && strpos($template->body, '[/repeat]')) {
+        $body = explode('[repeat]', $template->body);
+        $head = $body[0];
+        $body = explode('[/repeat]', $body[1]);
+        $foot = $body[1];
+
+        $items = array();
+        foreach ($nodes as $node) {
+          $q = array(
+            'absolute' => TRUE,
+            'query' => array('source' => $newsletter->id),
+          );
+          $node->newsletter_url = url("node/{$node->nid}", $q);
+          $items[] = token_replace($body[0], array('node' => $node), $options);
+        }
+
+        $body = implode('<br />', $items);
+        $body = $head . $body . $foot;
+      }
+      else {
+        $body = $template->body;
+      }
+      $body = token_replace($body, array('newsletter_subscriber' => $subscriber, 'newsletter_list' => $list), $options);
+
+      $message['subject'] = token_replace($template->subject, array(), $options);
+
+      $message['body'] = $body;
+      $message['format'] = isset($subscriber->receive_format) ? $subscriber->receive_format : $format;
+      $message['body_format'] = $template->format;
+
+      if (variable_get('newsletter_track_open_rate')) {
+        $message['body'] = $message['body'] . newsletter_add_open_rate_image($subscriber->hash, $newsletter);
+      }
+      break;
+    case 'custom':
+      $body = token_replace($template->body, array('newsletter_subscriber' => $subscriber, 'newsletter_list' => $list), $options);
+      $message['subject'] = token_replace($template->subject, array(), $options);
+      $message['body'] = $body;
+      $message['format'] = isset($subscriber->receive_format) ? $subscriber->receive_format : $format;
+      $message['body_format'] = $template->format;
+
+      if (variable_get('newsletter_track_open_rate')) {
+        $message['body'] = $message['body'] . newsletter_add_open_rate_image($subscriber->hash, $newsletter);
+      }
+      break;
+  }
+}
+
+/**
+ * @return
+ *   An array of newsletter lists
+ *   seperated by exposed status for the frontend subscribe form.
+ */
+function newsletter_get_subscribe_form_lists() {
+  $not_exposed = array();
+  $exposed = array();
+  $lists = db_query('SELECT list.id AS id, list.title AS title, template.exposed AS exposed
+    FROM {newsletter_lists} list
+    INNER JOIN {newsletter_templates} template ON template.id = list.template_id
+    WHERE (template.basic = 0)')
+    ->fetchAll();
+
+  foreach ($lists as $list) {
+    if ($list->exposed) {
+      $exposed[$list->id] = check_plain($list->title);
+    }
+    else {
+      $not_exposed[$list->id] = check_plain($list->title);
+    }
+  }
+  return array('0' => $not_exposed, '1' => $exposed);
+}
+
+/**
+ * @return
+ *   An array of newsletter lists that are set to send with custom schedule.
+ */
+function newsletter_custom_send_rate_lists() {
+  $lists = db_query('SELECT id, send_rate FROM {newsletter_lists}')->fetchAll();
+  foreach ($lists as $list) {
+    if (is_numeric($list->send_rate)) {
+      $custom_lists[]=$list;
+    }
+  }
+  return isset($custom_lists) ? $custom_lists : array();
+}
+
+/**
+ * Feedback to site administrator depending on newsletter send status.
+ *
+ * @param $statuses
+ *   An array containing status values set when a newsletter mail was sent.
+ */
+function newsletter_feedback($statuses) {
+  if (is_array($statuses) && !empty($statuses)) {
+
+    $success = 0;
+    $error = 0;
+    $no_items = 0;
+    $no_subs = 0;
+
+    foreach ($statuses as $status) {
+      $status = ($status === 1 || $status === TRUE) ? 'success' : $status;
+      switch ($status) {
+        case 'No subscribers':
+          $no_subs++;
+          break;
+        case 'No items':
+          $no_items++;
+          break;
+        case 'success':
+          $success++;
+          break;
+        default:
+          $error++;
+      }
+    }
+
+    if ($no_subs) {
+      watchdog('newsletter', '%no_subs Newsletter Lists failed to send because no subscribers found subscribed to them',
+        array('%no_subs' => $no_subs));
+    }
+    if ($no_items) {
+      watchdog('newsletter', '%no_items Newsletter Lists failed to send because no published nodes found for their terms',
+        array('%no_items' => $no_items));
+    }
+    if ($success) {
+      watchdog('newsletter', '%success Newsletter Lists sent',
+        array('%success' => $success));
+    }
+    if ($error) {
+      watchdog('newsletter', '%error Newsletter Lists failed to send.Check previous watchdog notices for more info',
+        array('%error' => $error), WATCHDOG_ERROR);
+    }
+
+  }
+  return;
+}

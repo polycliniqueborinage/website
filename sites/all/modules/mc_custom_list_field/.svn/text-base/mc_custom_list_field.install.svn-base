@@ -1,0 +1,28 @@
+<?php
+/**
+ * @file
+ * Install, update, and uninstall functions for the field_example module.
+ */
+
+/**
+ * Implements hook_field_schema().
+ *
+ * Defines the database schema of the field, using the format used by the
+ * Schema API.
+ *
+ * All implementations of hook_field_schema() must be in the module's
+ * .install file.
+ *
+ */
+function mc_custom_list_field_field_schema($field) {
+  $columns = array(
+    'mc_custom_list' => array('type' => 'int', 'length' => 11, 'not null' => FALSE),
+  );
+  $indexes = array(
+    'mc_custom_list' => array('mc_custom_list'),
+  );
+  return array(
+    'columns' => $columns,
+    'indexes' => $indexes,
+  );
+}

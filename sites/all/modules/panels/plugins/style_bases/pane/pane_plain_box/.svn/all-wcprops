@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 131
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/panels/plugins/style_bases/pane/pane_plain_box
+END
+pane-plain-box.css
+K 25
+svn:wc:ra_dav:version-url
+V 150
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/panels/plugins/style_bases/pane/pane_plain_box/pane-plain-box.css
+END
+pane_plain_box.inc
+K 25
+svn:wc:ra_dav:version-url
+V 150
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/panels/plugins/style_bases/pane/pane_plain_box/pane_plain_box.inc
+END
+icon.png
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/panels/plugins/style_bases/pane/pane_plain_box/icon.png
+END
+pane-plain-box.tpl.php
+K 25
+svn:wc:ra_dav:version-url
+V 154
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/panels/plugins/style_bases/pane/pane_plain_box/pane-plain-box.tpl.php
+END

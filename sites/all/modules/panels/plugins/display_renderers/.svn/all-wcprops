@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/panels/plugins/display_renderers
+END
+simple.inc
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/panels/plugins/display_renderers/simple.inc
+END
+panels_renderer_standard.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 152
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/panels/plugins/display_renderers/panels_renderer_standard.class.php
+END
+panels_renderer_editor.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 150
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/panels/plugins/display_renderers/panels_renderer_editor.class.php
+END
+standard.inc
+K 25
+svn:wc:ra_dav:version-url
+V 130
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/panels/plugins/display_renderers/standard.inc
+END
+panels_renderer_simple.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 150
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/panels/plugins/display_renderers/panels_renderer_simple.class.php
+END
+editor.inc
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/svn/mariquecalcus/!svn/ver/307/trunk/drupal-poly/drupal-poly-7.12/sites/all/modules/panels/plugins/display_renderers/editor.inc
+END
