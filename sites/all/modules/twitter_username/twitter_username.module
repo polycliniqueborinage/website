@@ -22,7 +22,6 @@ function twitter_username_element_info() {
 function twitter_username_field_process($element, $form_state, $complete_form) {
   $element['twitter_username'] = array(
     '#type' => 'textfield',
-    '#description' => $element['#description'],
     '#default_value' => isset($element['#value']['twitter_username']) ? check_plain($element['#value']['twitter_username']) : NULL,
     '#required' => $element['#required'],
     '#maxlength' => TWITTER_USERNAME_MAX_LENGTH,
@@ -45,7 +44,7 @@ function twitter_username_field_info() {
       'settings' => array('max_length' => TWITTER_USERNAME_MAX_LENGTH),
       'instance_settings' => array('text_processing' => 0),
       'default_widget' => 'twitter_username',
-      'default_formatter' => 'default',
+      'default_formatter' => 'twitter_username_default',
       'instance_settings' => array(
         'validate_existance' => FALSE,
       ),
@@ -75,9 +74,13 @@ function twitter_username_field_validate($entity_type, $entity, $field, $instanc
       }
       // Ensure the username is actually registered.
       elseif ($instance['settings']['validate_existance']) {
-        // Query the Twitter API.
-        $url = url('http://twitter.com/users/show.xml', array('external' => TRUE, 'query' => array('screen_name' => $item['twitter_username'])));
-        $response = drupal_http_request($url);
+        // Query the Twitter User page.
+        // Since v1.1, we could not request the API with OAuth token.
+        $url = url(
+          'https://twitter.com/' .$item['twitter_username'],
+          array('external' => TRUE)
+        );
+        $response = drupal_http_request($url, array('method'=>'HEAD'));
 
         // HTTP status code 404 means the username doesn't exist.
         if ($response->code == 404) {
@@ -151,11 +154,11 @@ function twitter_username_field_instance_settings_form($field, $instance) {
  */
 function twitter_username_field_formatter_info() {
   return array(
-    'default' => array(
+    'twitter_username_default' => array(
       'label' => t("Twitter username, as plain text"),
       'field types' => array('twitter_username'),
     ),
-    'link' => array(
+    'twitter_username_link' => array(
       'label' => t("Twitter username, as link"),
       'field types' => array('twitter_username'),
     ),
@@ -179,21 +182,21 @@ function twitter_username_field_formatter_view($entity_type, $entity, $field, $i
  */
 function twitter_username_theme() {
   return array(
-    'twitter_username_formatter_default' => array(
+    'twitter_username_formatter_twitter_username_default' => array(
       'variables' => array('element' => NULL),
     ),
-    'twitter_username_formatter_link' => array(
+    'twitter_username_formatter_twitter_username_link' => array(
       'variables' => array('element' => NULL),
     ),
   );
 }
 
-function theme_twitter_username_formatter_default($vars) {
+function theme_twitter_username_formatter_twitter_username_default($vars) {
   $twitter_username = check_plain($vars['element']['twitter_username']);
   return "@" . $twitter_username;
 }
 
-function theme_twitter_username_formatter_link($vars) {
+function theme_twitter_username_formatter_twitter_username_link($vars) {
   $twitter_username = check_plain($vars['element']['twitter_username']);
   return l("@" . $twitter_username, 'http://twitter.com/' . $twitter_username);
 }

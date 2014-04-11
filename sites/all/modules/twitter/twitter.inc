@@ -6,7 +6,6 @@
  */
 
 module_load_include('php', 'oauth_common', 'lib/OAuth');
-require_once('twitter.lib.php');
 
 /**
  * Connect to the Twitter API.
@@ -69,15 +68,20 @@ function twitter_account_save($twitter_user, $save_auth = FALSE) {
 /**
  * Load a Twitter account from {twitter_account}.
  *
- * @param $id
- *   Twitter UID
+ * @param mixed $id
+ *   int Twitter User id or string Twitter user screen name.
  *
  * @return
  *   TwitterUser object or NULL.
- *
  */
 function twitter_account_load($id) {
-  if ($values = db_query("SELECT * FROM {twitter_account} WHERE twitter_uid = :twitter_uid", array(':twitter_uid' => $id))->fetchAssoc()) {
+  $values = db_query('SELECT *
+                      FROM {twitter_account}
+                      WHERE twitter_uid = :id_1
+                      OR screen_name  = :id_2',
+                      array(':id_1' => $id, ':id_2' => $id))
+              ->fetchAssoc();
+  if (!empty($values)) {
     $values['id'] = $values['twitter_uid'];
     $account = new TwitterUser($values);
     $account->set_auth($values);
@@ -99,7 +103,7 @@ function twitter_account_load_all() {
   $accounts = array();
   $result = db_query('SELECT twitter_uid
                       FROM {twitter_account}
-                      WHERE added_by_uid <> 0
+                      WHERE uid <> 0
                       ORDER BY screen_name');
   foreach ($result as $account) {
     $accounts[] = twitter_account_load($account->twitter_uid);
@@ -122,6 +126,20 @@ function twitter_load_authenticated_accounts() {
     }
   }
   return $auth_accounts;
+}
+
+/**
+ * Load a Twitter status.
+ *
+ * @param $status_id
+ *   The status id of this tweet.
+ *
+ * @return
+ *   An instance of stdClass object with the Tweet data or FALSE.
+ */
+function twitter_status_load($status_id) {
+  return db_query("SELECT * FROM {twitter} WHERE twitter_id = :status_id",
+           array(':status_id' => $status_id))->fetchObject();
 }
 
 /**
@@ -204,6 +222,27 @@ function twitter_fetch_mentions_timeline($id) {
     }
     twitter_status_save($status);
   }
+}
+
+/**
+ * Pulls tweets from the database.
+ *
+ * @param string $screen_name
+ *   Optionally provide a screen_name to filter.
+ */
+function twitter_tweets($screen_name = NULL) {
+  $query = db_select('twitter', 't')
+    ->fields('t');
+  if (isset($screen_name)) {
+    $query->condition('t.screen_name', $screen_name);
+  }
+  $result = $query->execute();
+
+  $tweets = array();
+  foreach ($result as $row) {
+    $tweets[] = $row;
+  }
+  return $tweets;
 }
 
 /**

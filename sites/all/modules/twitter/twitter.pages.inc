@@ -80,30 +80,44 @@ function twitter_admin_form($form, &$form_state) {
 
 /**
  * Form builder that lists Twitter accounts.
+ *
+ * @param object $account
+ *   Optional user account.
+ * @return
+ *   A list of Twitter accounts and a form to add more.
  */
-function twitter_user_settings() {
+function twitter_user_settings($account = NULL) {
   // Verify OAuth keys.
   if (!twitter_api_keys()) {
-    $output = t('<p>You need to authenticate at least one Twitter account in order to use the Twitter API. Please fill out the OAuth fields at <a href="/admin/config/services/twitter/settings">Twitter Settings</a> and then return here.</p>');
+    $variables = array('@twitter-settings' => url('admin/config/services/twitter/settings'));
+    $output = '<p>' . t('You need to authenticate at least one Twitter account in order to use the Twitter API. Please fill out the OAuth fields at <a href="@twitter-settings">Twitter Settings</a> and then return here.', $variables) . '</p>';
   }
   else {
     module_load_include('inc', 'twitter');
-    $twitter_accounts = twitter_account_load_all();
+    if (!$account) {
+      $twitter_accounts = twitter_account_load_all();
+    }
+    else {
+      $twitter_accounts = twitter_twitter_accounts($account);
+    }
 
     $output = array();
     if (count($twitter_accounts)) {
       // List Twitter accounts.
-      $output['header'] = array(
-        '#markup' => t('<p>Tweets are pulled from Twitter by ' .
-            '<a href="/admin/reports/status/run-cron?destination=admin/config/services/twitter">running cron</a>. ' .
-            'You can view the full list of tweets at the <a href="/tweets">Tweets</a> view.</p>'),
-      );
+      $output['header']['#markup'] = '<p>';
+      if (user_access('administer site configuration')) {
+        $variables = array('@run-cron' => url('admin/reports/status/run-cron', array('query' => array('destination' => 'admin/config/services/twitter'))));
+        $output['header']['#markup'] .= t('Tweets are pulled from Twitter by <a href="@run-cron">running cron</a>.', $variables) . ' ';
+      }
+      $variables = array('@tweets' => url('tweets'));
+      $output['header']['#markup'] .= t('You can view the full list of tweets at the <a href="@tweets">Tweets</a> view.', $variables);
+      $output['header']['#markup'] .= '</p>';
       $output['list_form'] = drupal_get_form('twitter_account_list_form', $twitter_accounts);
     }
     else {
       // No accounts added. Inform about how to add one.
       $output['header'] = array(
-        '#markup' => t('<p>No Twitter accounts have been added yet. Click on the following button to add one.</p>'),
+        '#markup' => '<p>' . t('No Twitter accounts have been added yet. Click on the following button to add one.') . '</p>',
       );
     }
 
@@ -168,12 +182,19 @@ function _twitter_account_list_row($account) {
   );
 
   $form['visible_name'] = array(
-    '#markup' => l($account->screen_name, 'http://www.twitter.com/' . $account->screen_name),
+    '#markup' => _twitter_user_profile($account->screen_name),
   );
 
   $form['description'] = array(
     '#markup' => filter_xss($account->description),
   );
+
+  if (user_access('administer twitter accounts')) {
+    $user = user_load($account->uid);
+    $form['user'] = array(
+      '#markup' => l($user->name, 'user/' . $account->uid),
+    );
+  }
 
   $form['auth'] = array(
     '#markup' => $account->is_auth() ? t('Yes') : t('No'),
@@ -220,12 +241,17 @@ function theme_twitter_account_list_form($variables) {
     '',
     t('Name'),
     t('Description'),
+  );
+  if (user_access('administer twitter accounts')) {
+    $header[] = t('Added by');
+  }
+  $header = array_merge($header, array(
     t('Auth'),
     t('Private'),
     t('Tweets'),
     t('Mentions'),
     t('Delete'),
-  );
+  ));
 
   $rows = array();
   foreach (element_children($form['accounts']) as $key) {
@@ -235,12 +261,17 @@ function theme_twitter_account_list_form($variables) {
       drupal_render($element['id']) . drupal_render($element['screen_name']) .
         drupal_render($element['visible_name']),
       drupal_render($element['description']),
+    );
+    if (user_access('administer twitter accounts')) {
+      $row[] = drupal_render($element['user']);
+    }
+    $row = array_merge($row, array(
       drupal_render($element['auth']),
       drupal_render($element['protected']),
       drupal_render($element['import']),
       drupal_render($element['mentions']),
       drupal_render($element['delete']),
-    );
+    ));
     $rows[] = $row;
   }
 
@@ -390,7 +421,8 @@ function twitter_oauth_callback_form_validate($form, &$form_state) {
   module_load_include('inc', 'twitter');
 
   if ($twitter = new Twitter($key, $secret, $token['oauth_token'], $token['oauth_token_secret'])) {
-    if ($response = $twitter->get_access_token()) {
+    //Collect oauth_verifier from url
+    if ($response = $twitter->get_access_token($_GET['oauth_verifier'])) {
       $form_state['twitter_oauth']['response'] = $response;
     }
     else {
@@ -421,7 +453,7 @@ function twitter_oauth_callback_form_submit($form, &$form_state) {
   // Save the new Twitter account and set the user's uid who added it.
   $twitter_account->set_auth($response);
   global $user;
-  $twitter_account->added_by_uid = $user->uid;
+  $twitter_account->uid = $user->uid;
   twitter_account_save($twitter_account, TRUE);
 
   $form_state['programmed'] = FALSE;
@@ -449,6 +481,17 @@ function twitter_non_auth_account_form($form, $form_state) {
 }
 
 /**
+ * Form validation for adding a new non-authenticated Twitter account.
+ */
+function twitter_non_auth_account_form_validate($form, &$form_state) {
+  $screen_name = $form_state['values']['screen_name'];
+  if (twitter_account_load($screen_name)) {
+    form_set_error('screen_name', t('The Twitter account <em>@screen_name</em> has been added already.',
+      array('@screen_name' => $screen_name)));
+  }
+}
+
+/**
  * Submit form handler to add a non-authenticated Twitter account.
  */
 function twitter_non_auth_account_form_submit($form, &$form_state) {
@@ -461,7 +504,7 @@ function twitter_non_auth_account_form_submit($form, &$form_state) {
   }
   else {
     global $user;
-    $twitter_account->added_by_uid = $user->uid;
+    $twitter_account->uid = $user->uid;
     twitter_account_save($twitter_account, FALSE);
     drupal_set_message(t('Twitter account added successfully'));
   }
