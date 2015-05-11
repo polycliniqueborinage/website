@@ -1,4 +1,0 @@
-name = MC CUSTOM ACTION
-package = MC CUSTOM
-core = 7.x
-dependencies[] = trigger
