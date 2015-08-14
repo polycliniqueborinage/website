@@ -5,6 +5,7 @@ sites/*/settings*.php
 sites/*/files
 sites/*/private
 
+.DS_Store
 */.DS_Store
 .DS_Store
 .idea/*
