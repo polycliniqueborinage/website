@@ -1286,7 +1286,6 @@ div.anythingSlider, div.anythingSlider .anythingWindow, div.anythingSlider .anyt
 .s_widget_holder {
     float: right;
     padding: 10px 0;
-    position: absolute;
     top: 0;
 }
 .s_widget_holder iframe{
